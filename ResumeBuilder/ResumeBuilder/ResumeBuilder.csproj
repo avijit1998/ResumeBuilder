@@ -184,8 +184,12 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\FormStyle.css" />
+    <Content Include="Content\home.css" />
+    <Content Include="Content\Images\Resume-Background.jpg" />
+    <Content Include="Content\Images\signup-bg.jpg" />
     <Content Include="Content\Images\Summary-icon.png" />
     <Content Include="Content\Images\User-icon.png" />
+    <Content Include="Content\register.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
