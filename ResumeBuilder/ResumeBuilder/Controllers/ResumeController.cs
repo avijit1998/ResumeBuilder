@@ -13,5 +13,10 @@ namespace ResumeBuilder.Controllers
         {
             return View();
         }
+
+        public ActionResult Form()
+        {
+            return View();
+        }
     }
 }
