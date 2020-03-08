@@ -1,15 +1,13 @@
-﻿.note
-{
+﻿.note{
     text-align: center;
     height: 80px;
     background: -webkit-linear-gradient(left, #0072ff, #8811c5);
     color: #fff;
-    padding-top:2px;
-    margin: 2% 20% 2% 20%;
+    margin: 2% 20%;
+    padding-top:0.5%;
 
 }
-body
-{
+body{
     font-size: 14px;
     line-height: 1.8;
     color: #222;
@@ -21,8 +19,7 @@ body
     padding: 115px 0;
 }
 
-.form-content
-{
+.form-content{
     background:#fff;
     padding: 5%;
     border: 1px solid #ced4da;
@@ -31,8 +28,11 @@ body
 .form-control{
     border-radius:1.5rem;
 }
-.btnSubmit
-{
+
+#btnDiv{
+    text-align:center;
+}
+#btnSubmit{
     border:none;
     border-radius:1.5rem;
     padding: 1%;
