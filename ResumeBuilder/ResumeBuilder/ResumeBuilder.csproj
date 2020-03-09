@@ -180,12 +180,25 @@
     <Compile Include="Migrations\202003090952426_DeleteRegistratioModelAndUpdatedUserModel.Designer.cs">
       <DependentUpon>202003090952426_DeleteRegistratioModelAndUpdatedUserModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003091145578_ChangedPasswordField.cs" />
+    <Compile Include="Migrations\202003091145578_ChangedPasswordField.Designer.cs">
+      <DependentUpon>202003091145578_ChangedPasswordField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003091151064_updatedpasswordfield.cs" />
+    <Compile Include="Migrations\202003091151064_updatedpasswordfield.Designer.cs">
+      <DependentUpon>202003091151064_updatedpasswordfield.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003091213555_ContextUpdated.cs" />
+    <Compile Include="Migrations\202003091213555_ContextUpdated.Designer.cs">
+      <DependentUpon>202003091213555_ContextUpdated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\EducationalDetails.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Languages.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ResumeBuilderConnection.cs" />
     <Compile Include="Models\Skills.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UsersLanguage.cs" />
@@ -296,6 +309,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003090952426_DeleteRegistratioModelAndUpdatedUserModel.resx">
       <DependentUpon>202003090952426_DeleteRegistratioModelAndUpdatedUserModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003091145578_ChangedPasswordField.resx">
+      <DependentUpon>202003091145578_ChangedPasswordField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003091151064_updatedpasswordfield.resx">
+      <DependentUpon>202003091151064_updatedpasswordfield.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003091213555_ContextUpdated.resx">
+      <DependentUpon>202003091213555_ContextUpdated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

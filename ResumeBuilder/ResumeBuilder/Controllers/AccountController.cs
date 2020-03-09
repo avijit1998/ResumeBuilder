@@ -148,7 +148,7 @@ namespace ResumeBuilder.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(User model)
+        public ActionResult Register(User model)
         {
             byte[] salt;
             new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
@@ -161,7 +161,7 @@ namespace ResumeBuilder.Controllers
 
             if (ModelState.IsValid)
             {
-                ApplicationDbContext db = new ApplicationDbContext();
+                ResumeBuilderConnection db = new ResumeBuilderConnection();
                 User user = new User
                 {
                     Username = model.Username,
