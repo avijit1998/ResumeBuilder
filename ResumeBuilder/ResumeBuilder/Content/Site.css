@@ -22,3 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.css-navbar{
+    background-color: #044b54;
+}
+
+.navbar-brand{
+    color:white;
+}
