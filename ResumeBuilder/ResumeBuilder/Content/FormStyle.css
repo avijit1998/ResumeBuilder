@@ -13,8 +13,8 @@
 
 .div-design{
     border-radius:5px;
-     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
-     transition: all 0.2s ease-in-out;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+     
 }
 .image-position{
     margin-top:-25px;
@@ -24,8 +24,4 @@ a{
     color:white;
 }
 
- .div-design:hover{      
-        width: 23%;
-        height: 160px;
-      
-    }
+ 
