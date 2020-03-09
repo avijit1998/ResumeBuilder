@@ -27,7 +27,7 @@
         {
             @Html.AntiForgeryToken()
             <div class="note">
-                <h3>Register Here</h3>
+                Create a new account.
             </div>
             <div class="form-content">
                 <div class="form-group">
@@ -59,14 +59,11 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-10">
-                        <input type="submit" id="btnSubmit" class="btn btn-default" value="Register" />
+                        <input type="submit" id="btnSubmit" value="Register" />
                     </div>
                 </div>
             </div>
         }
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Resume Builder</p>
-        </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
