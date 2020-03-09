@@ -12,13 +12,19 @@ namespace ResumeBuilder.Models
         [Key]
         public int UserID { get; set; }
 
-        [ForeignKey("StudentID")]
-        public StudentsRegistration StudentsRegistration { get; set; }
+        [Required]
+        public string Username { get; set; }
 
-        public int StudentID { get; set; }
+        [Required]
+        public string Password { get; set; }
+
+        [Required]
+        public string ConfirmPassword { get; set; }
+
+        public string Summary { get; set; }
 
         [Display(Name = "Phone Number")]
-        public int PhoneNumber { get; set; }
+        public int? PhoneNumber { get; set; }
 
         [Display(Name = "Date of Birth")]
         public DateTime? DateOfBirth { get; set; }

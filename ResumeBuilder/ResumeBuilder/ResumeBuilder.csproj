@@ -176,6 +176,10 @@
     <Compile Include="Migrations\202003090638563_AddedTablesForUser.Designer.cs">
       <DependentUpon>202003090638563_AddedTablesForUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003090952426_DeleteRegistratioModelAndUpdatedUserModel.cs" />
+    <Compile Include="Migrations\202003090952426_DeleteRegistratioModelAndUpdatedUserModel.Designer.cs">
+      <DependentUpon>202003090952426_DeleteRegistratioModelAndUpdatedUserModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\EducationalDetails.cs" />
@@ -183,10 +187,10 @@
     <Compile Include="Models\Languages.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Skills.cs" />
-    <Compile Include="Models\StudentsRegistration.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UsersLanguage.cs" />
     <Compile Include="Models\UsersSkill.cs" />
+    <Compile Include="Models\WorkExperience.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -289,6 +293,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003090638563_AddedTablesForUser.resx">
       <DependentUpon>202003090638563_AddedTablesForUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003090952426_DeleteRegistratioModelAndUpdatedUserModel.resx">
+      <DependentUpon>202003090952426_DeleteRegistratioModelAndUpdatedUserModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
