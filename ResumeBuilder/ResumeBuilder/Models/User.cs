@@ -16,10 +16,11 @@ namespace ResumeBuilder.Models
         public string Username { get; set; }
 
         [Required]
+        [RegularExpression("^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}$")]
         public string Password { get; set; }
 
         [Required]
-        [Compare("Password"), RegularExpression("^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}$")]
+        [Compare("Password")] 
         public string ConfirmPassword { get; set; }
 
         public string Summary { get; set; }
