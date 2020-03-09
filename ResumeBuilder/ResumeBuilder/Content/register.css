@@ -1,0 +1,43 @@
+﻿.note{
+    text-align: center;
+    height: 80px;
+    background: -webkit-linear-gradient(left, #0072ff, #8811c5);
+    color: #fff;
+    margin: 2% 20%;
+    padding-top:0.5%;
+
+}
+body{
+    font-size: 14px;
+    line-height: 1.8;
+    color: #222;
+    font-weight: 400;
+    font-family: 'Montserrat';
+    background-image: url("../Content/Images/signup-bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 115px 0;
+}
+
+.form-content{
+    background:#fff;
+    padding: 5%;
+    border: 1px solid #ced4da;
+    margin: 0 20% 5%;
+}
+.form-control{
+    border-radius:1.5rem;
+}
+
+#btnDiv{
+    text-align:center;
+}
+#btnSubmit{
+    border:none;
+    border-radius:1.5rem;
+    padding: 1%;
+    width: 20%;
+    cursor: pointer;
+    background: #0062cc;
+    color: #fff;
+}

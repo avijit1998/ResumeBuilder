@@ -48,6 +48,8 @@ namespace ResumeBuilder.Models
 
     public class LoginViewModel
     {
+        public int LoginViewModelId { get; set; }
+
         [Required]
         [Display(Name = "Email")]
         [EmailAddress]
@@ -64,6 +66,8 @@ namespace ResumeBuilder.Models
 
     public class RegisterViewModel
     {
+        public int RegisterViewModelId { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

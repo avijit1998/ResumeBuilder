@@ -6,16 +6,12 @@ using System.Web.Mvc;
 
 namespace ResumeBuilder.Controllers
 {
-    public class ResumeController : Controller
+    public class LoginController : Controller
     {
-        // GET: Resume
-        public ActionResult Index()
+        // GET: Login
+        public ActionResult Login()
         {
-            return View();
-        }
 
-        public ActionResult Form()
-        {
             return View();
         }
     }
