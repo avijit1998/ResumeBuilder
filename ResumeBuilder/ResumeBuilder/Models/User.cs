@@ -17,10 +17,11 @@ namespace ResumeBuilder.Models
 
         [Required]
         [RegularExpression("^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}$")]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
         public string Password { get; set; }
 
         [Required]
-        [Compare("Password")] 
+        [Compare("Password")]
         public string ConfirmPassword { get; set; }
 
         public string Summary { get; set; }
