@@ -198,6 +198,10 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\FormStyle.css" />
+    <Content Include="Content\Images\Education.png" />
+    <Content Include="Content\Images\Project.png" />
+    <Content Include="Content\Images\Skill.png" />
+    <Content Include="Content\Images\Work Experience.png" />
     <Content Include="Content\home.css" />
     <Content Include="Content\Images\Resume-Background.jpg" />
     <Content Include="Content\Images\signup-bg.jpg" />
