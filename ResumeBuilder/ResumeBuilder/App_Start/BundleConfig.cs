@@ -28,6 +28,8 @@ namespace ResumeBuilder
                       "~/Content/login.css",
                       "~/Content/site.css",
                       "~/Content/bootstrap.css",
+                      "~/Content/FormStyle.css",
+                      "~/Content/home.css",
                       "~/Content/Site.css"));
         }
     }

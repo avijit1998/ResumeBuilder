@@ -1,4 +1,9 @@
 ﻿body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: white;
+    background-color: #333;
 }
 
 #userIcon{
@@ -24,4 +29,10 @@ a{
     color:white;
 }
 
- 
+label{
+    color:black;
+}
+.modal-title{
+    color:darkblue;
+}
+

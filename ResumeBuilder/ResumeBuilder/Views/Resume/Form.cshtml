@@ -1,19 +1,16 @@
 ﻿
 @{
     ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
 @section Styles {
     <link href="@Url.Content("~/Content/FormStyle.css")" rel="stylesheet" type="text/css" />
+    
 }
 
 
-<div class="welcome-user">
-    <h2>Hello User!!</h2>
-</div>
-
-<hr/>
 
 <div class="box">
     <div class="container">
@@ -53,7 +50,7 @@
             </a>
             
             @*Educational Details*@
-            <a href="#" data-toggle="modal" data-target="#modaleducationdetails">
+            <a href="#" data-toggle="modal" data-target="#modalEducationDetails">
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 basic-info div-design">
 
                     <div class="box-part text-center">
@@ -74,7 +71,7 @@
         <div class="row">
 
             @*Skills*@
-            <a href="#" data-toggle="modal" data-target="#modalSummary">
+            <a href="#" data-toggle="modal" data-target="#modalSkills">
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 basic-info div-design">
 
                     <div class="box-part text-center">
@@ -91,7 +88,7 @@
 
 
             @*Projects*@
-            <a href="#" data-toggle="modal" data-target="#modalBasicInfo">
+            <a href="#" data-toggle="modal" data-target="#modalProject">
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 basic-info div-design">
 
                     <div class="box-part text-center">
@@ -108,7 +105,7 @@
 
 
             @*Work Experience*@
-            <a href="#">
+            <a href="#" data-toggle="modal" data-target="#modalWorkExperience">
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 basic-info div-design">
 
                     <div class="box-part text-center">
@@ -116,7 +113,7 @@
                         <img id="userIcon" alt="BasicInformation" class="image-position" src="@Url.Content("~/Content/Images/Work Experience.png")" />
 
                         <div class="title">
-                            <h3>Work Experirnce</h3>
+                            <h3>Work Experience</h3>
                         </div>
 
                     </div>
@@ -160,8 +157,12 @@
                             </div>
                             <div class="form-group">
                                 <label>Gender</label>
-                                <input type="radio" class="form-control" name="radioGender" value="Male">Male
-                                <input type="radio" class="form-control" name="radioGender" value="Female">Female
+                                <label class="radio-inline">
+                                    <input type="radio" name="" checked value="Male">Male
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="optradio" value="Female">Female
+                                </label>
                             </div>
                             <div class="form-group">
                                 <label>Date of Birth</label>
@@ -265,23 +266,142 @@
                 <div class="row">
                     <div class="col-md-12">
                         <form>
+                            <label class="radio-inline">
+                                <input type="radio" name="courseOption" value="10th" >10th
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="courseOption" value="12th">12th
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="courseOption" value="Graduation">Graduation
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="courseOption" value="Post-Graduation">Post-Graduation
+                            </label>
 
-                            <label class="radio-inline">
-                                <input type="radio" name="" checked>10th
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="optradio">12th
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="optradio">Graduation
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="optradio">Post-Graduation
-                            </label>
+                            <div class="tenth-form" style="display:none;">
+                                <div class="form-group">
+                                    <label>Year Of Passing:</label>
+                                    <input type="text" class="form-control" name="">
+                                </div>
+                                <div class="form-group">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="" >CGPA Scored
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="marksOption">Percentage Scored
+                                    </label>
+                                </div>
+                                <div>
+                                    <label>Marks Scored:</label>
+                                    <input type="text" class="form-control" name="marksOption" placeholder="Enter CGPA">
+                                </div>
+                            </div>
 
+                            <div class="all-other" style="display:none;">
+                                <div class="form-group">
+                                    <label>Stream:</label>
+                                    <input type="text" class="form-control" name="">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Year Of Passing:</label>
+                                    <input type="text" class="form-control" name="">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="marksOption" checked>CGPA Scored
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="marksOption">Percentage Scored
+                                    </label>
+                                </div>
+                                <div>
+                                    <label>Marks Scored:</label>
+                                    <input type="text" class="form-control" name="" placeholder="Enter CGPA">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default pull-right">Save </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*Work Experience*@
+<div id="modalWorkExperience" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">ADD WORK EXPERIENCE</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form>
                             <div class="form-group">
-                                <label>Summary:</label>
-                                <textarea class="form-control"></textarea>
+                                <label>Company Name:</label>
+                                <input type="text" class="form-control" name="">
+                            </div>
+                            <div class="form-group">
+                                <label>Designation</label>
+                                <input type="text" class="form-control" name="">
+                            </div>
+                            <div class="form-group">
+                                <label>Duration</label>
+                                
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Start Month:</label>
+                                    <select class="form-control">
+                                        <option class="form-control">Select Month</option>
+                                    </select>
+                                </div>
+                                </div>
+                                <div class="col-lg-6">
+
+                                    <div class="form-group">
+                                        <label>Start Year:</label>
+                                        <select class="form-control">
+                                            <option class="form-control">Select Year</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            <div class="col-lg-6 end-duration">
+                                <div class="form-group">
+                                    <label>End Month:</label>
+                                    <select class="form-control">
+                                        <option class="form-control">Select Month</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 end-duration">
+
+                                <div class="form-group">
+                                    <label>End Year:</label>
+                                    <select class="form-control">
+                                        <option class="form-control">Select Year</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" class="checkbox-inline" name="workingCheck" id="workingCheck">
+                                <label for="workingCheck">Currently Working</label>
                             </div>
 
                         </form>
@@ -299,3 +419,92 @@
         </div>
     </div>
 </div>
+
+@*Project*@
+<div id="modalProject" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">ADD PROJECT</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form>
+                            <div class="form-group">
+                                <label>Title:</label>
+                                <input type="text" class="form-control" name="">
+                            </div>
+                            <div class="form-group">
+                                <label>Role</label>
+                                <input type="text" class="form-control" name="">
+                            </div>
+                            <div class="form-group">
+                                <label>Duration(In Months)</label>
+                                <input type="text" class="form-control" name="">
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea class="form-control"></textarea>
+                            </div>
+                                                    
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default pull-right">Save </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Skills*@
+<div id="modalSkills" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">ADD TECHNICAL SKILLS</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form>
+
+                            <div class="form-group">
+                                <label>Select Skill:</label>
+                                <select class="form-control">
+                                    <option class="form-control">Select Skill</option>
+                                </select>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default pull-right">Save </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="@Url.Content("https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js")"></script>
+   <script type="text/javascript" src="@Url.Content("~/Scripts/ModelScripts/FormScript.js")"></script>
+}
