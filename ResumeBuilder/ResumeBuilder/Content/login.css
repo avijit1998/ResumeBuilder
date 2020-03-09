@@ -1,10 +1,6 @@
 
-/* BASIC */
-
 body {
     font-family: "Poppins", sans-serif;
-    height: 100vh;
-    /*background: linear-gradient(to left, #81D4FA, #039BE5);*/
 }
 
 underlineHoverForgotPassword {
@@ -148,7 +144,7 @@ h2.active {
 }
 /* FORM TYPOGRAPHY*/
 
-.loginButton, .registerButton {
+.loginButton, #registerButton {
     background-color: #56baed;
     border: none;
     color: white;
@@ -183,34 +179,13 @@ h2.active {
     background-color: #e73939;
  }
 
-.loginButton:active, .registerButton:active {
+.loginButton:active, #registerButton:active {
     -moz-transform: scale(0.95);
     -webkit-transform: scale(0.95);
     -o-transform: scale(0.95);
     -ms-transform: scale(0.95);
     transform: scale(0.95);
 }
-
-/*.userNameField,.passwordField {
-    background-color: #f6f6f6;
-    border: none;
-    color: #0d0d0d;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-top:20px;
-    width: 85%;
-    border: 2px solid #f6f6f6;
-    -webkit-transition: all 0.5s ease-in-out;
-    -moz-transition: all 0.5s ease-in-out;
-    -ms-transition: all 0.5s ease-in-out;
-    -o-transition: all 0.5s ease-in-out;
-    transition: all 0.5s ease-in-out;
-    -webkit-border-radius: 5px 5px 5px 5px;
-    border-radius: 5px 5px 5px 5px;
-  }*/
 
 .userNameField:focus, .passwordField:focus {
     background-color: rgb(235, 245, 247);
@@ -342,15 +317,6 @@ h2.active {
     content: "";
     transition: width 0.2s;
 }
-
-/*.underlineHoverForgotPassword:hover {
-    color: #0d0d0d;
-}
-
-    .underlineHoverForgotPassword:hover:after {
-        width: 100%;
-    }*/
-
 
 
 /* OTHERS */
