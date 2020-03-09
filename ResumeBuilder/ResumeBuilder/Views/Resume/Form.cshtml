@@ -17,7 +17,10 @@
 
 <div class="box">
     <div class="container">
+
+        @*1st Row*@
         <div class="row">
+            @*Personal Summary*@
             <a href="#" data-toggle="modal" data-target="#modalSummary">
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 basic-info div-design">
 
@@ -32,6 +35,8 @@
                 </div>
             </div>
             </a>
+
+            @*Basic Information*@
             <a href="#" data-toggle="modal" data-target="#modalBasicInfo">
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 basic-info div-design">
 
@@ -47,15 +52,16 @@
                 </div>
             </a>
             
-            <a href="#">
+            @*Educational Details*@
+            <a href="#" data-toggle="modal" data-target="#modaleducationdetails">
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 basic-info div-design">
 
                     <div class="box-part text-center">
 
-                        <img id="userIcon" alt="BasicInformation" class="image-position" src="@Url.Content("~/Content/Images/User-icon.png")" />
+                        <img id="userIcon" alt="BasicInformation" class="image-position" src="@Url.Content("~/Content/Images/Education.png")" />
 
                         <div class="title">
-                            <h3>Basic Information</h3>
+                            <h3>Educational Details</h3>
                         </div>
 
                     </div>
@@ -63,18 +69,73 @@
             </a>	
         </div>
 
+
+        @*2nd Row*@
+        <div class="row">
+
+            @*Skills*@
+            <a href="#" data-toggle="modal" data-target="#modalSummary">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 basic-info div-design">
+
+                    <div class="box-part text-center">
+
+                        <img id="userIcon" alt="BasicInformation" class="image-position" src="@Url.Content("~/Content/Images/Skill.png")" />
+
+                        <div class="title">
+                            <h3>Technical Skills</h3>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+
+
+            @*Projects*@
+            <a href="#" data-toggle="modal" data-target="#modalBasicInfo">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 basic-info div-design">
+
+                    <div class="box-part text-center">
+
+                        <img id="userIcon" alt="BasicInformation" class="image-position" src="@Url.Content("~/Content/Images/Project.png")" />
+
+                        <div class="title">
+                            <h3>Projects</h3>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+
+
+            @*Work Experience*@
+            <a href="#">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 basic-info div-design">
+
+                    <div class="box-part text-center">
+
+                        <img id="userIcon" alt="BasicInformation" class="image-position" src="@Url.Content("~/Content/Images/Work Experience.png")" />
+
+                        <div class="title">
+                            <h3>Work Experirnce</h3>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+        </div>
     </div>
 
 </div>
 
 
+@*Basic Information Form*@
 <div id="modalBasicInfo" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">ADD BASIC INFO</h4>
+                <h2 class="modal-title">ADD BASIC INFO</h2>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -155,6 +216,8 @@
     </div>
 </div>
 
+
+@*Summary Form*@
 <div id="modalSummary" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
@@ -173,6 +236,54 @@
                                 <textarea class="form-control"></textarea>
                             </div>
                             
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default pull-right">Save </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Education Details Form*@
+<div id="modalEducationDetails" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">ADD EDUCATIONAL DETAILS</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form>
+
+                            <label class="radio-inline">
+                                <input type="radio" name="" checked>10th
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="optradio">12th
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="optradio">Graduation
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="optradio">Post-Graduation
+                            </label>
+
+                            <div class="form-group">
+                                <label>Summary:</label>
+                                <textarea class="form-control"></textarea>
+                            </div>
+
                         </form>
                     </div>
                 </div>
