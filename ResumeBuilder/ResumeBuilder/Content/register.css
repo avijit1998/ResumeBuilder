@@ -16,23 +16,37 @@
         margin-left: 139px;
         margin-top: -27px;
     }
+
+    .divValidationErrorText {
+        margin-left: 10%;
+        margin-top: -1%;
+    }
 }
-.divValidationErrorText{
+
+@media (min-width: 992px) {
+    .divValidationErrorText {
+        margin-left: 29%;
+        margin-top: -1%;
+    }
+}
+
+/*.divValidationErrorText {
     margin-left: 25%;
     margin-top: -1%;
-}
-@media (min-width: 992px){
+}*/
+
+@media (min-width: 992px) {
     #btnSubmit {
-    border: none;
-    border-radius: 1.5rem;
-    padding: 1%;
-    width: 20%;
-    cursor: pointer;
-    background: #0062cc;
-    color: #fff;
-    margin-left: 49%;
-    background: -webkit-linear-gradient(left, #0072ff, #8811c5);
-}
+        border: none;
+        border-radius: 1.5rem;
+        padding: 1%;
+        width: 20%;
+        cursor: pointer;
+        background: #0062cc;
+        color: #fff;
+        margin-left: 45%;
+        background: -webkit-linear-gradient(left, #0072ff, #8811c5);
+    }
 }
 
 body {
@@ -57,10 +71,6 @@ body {
 .form-control {
     border-radius: 1.5rem;
 }
-
-/*#btnDiv{
-    text-align:center;
-}*/
 
 #btnSubmit {
     border: none;
