@@ -60,6 +60,11 @@ body {
         margin-left: 139px;
         margin-top: -27px;
     }
+  
+    .divValidationErrorText {
+        margin-left: 29%;
+        margin-top: -1%;
+    }
 }
 
 @media (max-width: 545px) {

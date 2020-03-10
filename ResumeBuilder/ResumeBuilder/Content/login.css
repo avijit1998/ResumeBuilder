@@ -9,15 +9,7 @@ underlineHoverForgotPassword {
     text-decoration: none;
     font-weight: 400;
 }
-/*#loginHeader{
-    background: #2596F1;
-    position: relative;
-    height: 100px;
-    width: 100%;
-    margin-bottom: 30px;
-}*/
 #loginText {
-    /*color:#CFD8DC;*/
     color:#444444;
     font:26px Roboto,sans-serif;
     margin: 12px 0px 0px 18px;
@@ -83,19 +75,6 @@ underlineHoverForgotPassword {
 }
 
 
-
-/* TABS */
-
-/*h2.inactive {
-    color: #cccccc;
-}
-
-h2.active {
-    color: #0d0d0d;
-    border-bottom: 2px solid #5fbae9;
-}*/
-
-
 .userNameField {
     background-color: #f6f6f6;
     border: none;
@@ -107,8 +86,6 @@ h2.active {
     width: 85%;
     max-width: 316px;
     font-size: 16px;
-    /*-webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);*/
-    /*box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);*/
     -webkit-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
     margin: 33px 20px 20px 20px;
@@ -129,10 +106,7 @@ h2.active {
     display: inline-block;
     width: 85%;
     max-width: 316px;
-    /*text-transform: uppercase;*/
     font-size: 16px;
-    /*-webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
-    box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);*/
     -webkit-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
     margin: 10px 20px 20px 20px;
