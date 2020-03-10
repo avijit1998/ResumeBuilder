@@ -72,14 +72,12 @@ body {
         font-size:20px;
         padding-top: 5%;
     }
-}
-
-@media (max-width: 545px) {
 
     #btnSubmit {
         font-size: x-small;
     }
 }
+
 
 @media (max-width: 992px) {
     #btnSubmit {
