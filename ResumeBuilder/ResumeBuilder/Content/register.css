@@ -13,6 +13,10 @@
     margin-top: -1%;
 }
 
+html{
+    min-height: 100%;
+}
+
 body {
     font-size: 14px;
     line-height: 1.8;
@@ -20,7 +24,7 @@ body {
     font-weight: 400;
     background-image: url("../Content/Images/signup-bg.jpg");
     background-repeat: no-repeat;
-    background-size:auto;
+    background-size:cover;
     background-position:top center;
     padding: 115px 0;
 }
