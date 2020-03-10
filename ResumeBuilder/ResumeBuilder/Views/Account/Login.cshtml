@@ -1,5 +1,4 @@
-﻿@using ResumeBuilder.Models
-@model LoginViewModel
+﻿@model ResumeBuilder.Models.User
 @{
     ViewBag.Title = "Log in";
     Layout = null;
@@ -16,40 +15,34 @@
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
 </head>
 
-<div class="wrapper fadeInDown">
-    <div id="formContent">
-        <div id="loginHeader">
-            <div id="divLoginText"><h1 id="loginText">Login</h1></div>
-        </div>
-        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-        {
-            @Html.AntiForgeryToken()
-
-            @Html.TextBoxFor(m => m.Email, new { @placeholder = "User Name", @class = "fadeIn second userNameField" })
-            <div>
-                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+<body>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <div id="loginHeader">
+                <div id="divLoginText"><h1 id="loginText">Login</h1></div>
             </div>
-            
-            @Html.PasswordFor(m => m.Password, new { @placeholder = "Password", @class = "fadeIn third passwordField" })
-            <div>
-                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.TextBoxFor(m => m.Username, new { @placeholder = "User Name", @class = "fadeIn second userNameField" })
+                <div>
+                    @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+                </div>
+
+                @Html.PasswordFor(m => m.Password, new { @placeholder = "Password", @class = "fadeIn third passwordField" })
+                <div>
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+                <input type="submit" class="fadeIn fourth loginButton" value="Log In">
+                <a href="~/Account/Register"><input id="registerButton" type="button" class="fadeIn fourth" value="Register"></a>
+
+            }
+            <div id="formFooter">
+                <div>
+                    <b>Welcome to Resume Builder</b>
+                </div>
             </div>
-            <input type="submit" class="fadeIn fourth loginButton" value="Log In">
-            <a href="~/Account/Register"><input id="registerButton" type="button" class="fadeIn fourth" value="Register"></a>
-
-        }
-        <div id="formFooter">
-            <div class="underlineHoverForgotPassword">New User! Register above</div>
         </div>
-
-
     </div>
-</div>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    @*<script>
-        if (location.reload()) {
-
-        }
-    </script>*@
-}
+</body>

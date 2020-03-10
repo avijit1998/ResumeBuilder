@@ -5,14 +5,14 @@ namespace ResumeBuilder.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ResumeBuilder.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ResumeBuilder.Models.ResumeBuilderConnection>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(ResumeBuilder.Models.ApplicationDbContext context)
+        protected override void Seed(ResumeBuilder.Models.ResumeBuilderConnection context)
         {
             //  This method will be called after migrating to the latest version.
 
