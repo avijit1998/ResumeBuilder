@@ -28,6 +28,9 @@
                     Create a new account.
                 </div>
                 <div class="form-content">
+                    <div>
+                        @Html.ValidationSummary()
+                    </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.Username, "Email", new { @class = "col-md-2 control-label registerLabelSpacing" })
                         <div class="col-md-10">

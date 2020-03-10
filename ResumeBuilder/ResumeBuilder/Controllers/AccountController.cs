@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ResumeBuilder.Models;
 using System.Security.Cryptography;
+using ResumeBuilder.ViewModels;
 
 namespace ResumeBuilder.Controllers
 {
@@ -56,9 +57,8 @@ namespace ResumeBuilder.Controllers
         //
         // GET: /Account/Login
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public ActionResult Login()
         {
-            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
@@ -67,29 +67,41 @@ namespace ResumeBuilder.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public ActionResult Login(LoginViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
+            else
             {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                try
+                {
+                    ResumeBuilderConnection dbContext = new ResumeBuilderConnection();
+                    var user = dbContext.Users.Where(m => m.Username == model.UserName).FirstOrDefault();
+                    string savedPasswordHash = user.Password;
+                    byte[] hashBytes = Convert.FromBase64String(savedPasswordHash);
+                    byte[] salt = new byte[16];
+                    Array.Copy(hashBytes, 0, salt, 0, 16);
+                    var pbkdf2 = new Rfc2898DeriveBytes(model.Password, salt, 10000);
+                    byte[] hash = pbkdf2.GetBytes(20);
+                    for (int i = 0; i < 20; i++)
+                    {
+                        if (hashBytes[i + 16] != hash[i])
+                        {
+                            throw new UnauthorizedAccessException();                            
+                        }
+                    }
+                    return RedirectToAction("Form", "Resume", user);
+           
+                }
+                catch(Exception)
+                {
+                    ModelState.AddModelError("","Invalid Username or Password.");
                     return View(model);
+                }
             }
+
         }
 
         //
@@ -150,6 +162,13 @@ namespace ResumeBuilder.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(User model)
         {
+            ResumeBuilderConnection dbContext = new ResumeBuilderConnection();
+            User u = dbContext.Users.Where(m => m.Username == model.Username).FirstOrDefault();
+            if (u != null)
+            {
+                ModelState.AddModelError("", "User already exists.");
+                return View(model);
+            }
             byte[] salt;
             new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
             var pbkdf1 = new Rfc2898DeriveBytes(model.Password, salt, 10000);
@@ -170,7 +189,7 @@ namespace ResumeBuilder.Controllers
                 };
                 db.Users.Add(user);
                 db.SaveChanges();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Account");
             }
 
             // If we got this far, something failed, redisplay form

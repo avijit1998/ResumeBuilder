@@ -16,7 +16,6 @@ namespace ResumeBuilder.Models
         public string Username { get; set; }
 
         [Required]
-
         [RegularExpression("((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!+-_=]).{8,})")] 
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
         public string Password { get; set; }
@@ -24,6 +23,8 @@ namespace ResumeBuilder.Models
         [Required]
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
+
+        public string Name { get; set; }
 
         public string Summary { get; set; }
 

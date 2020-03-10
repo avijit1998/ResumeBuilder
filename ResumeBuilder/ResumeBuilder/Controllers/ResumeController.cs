@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ResumeBuilder.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,7 +15,7 @@ namespace ResumeBuilder.Controllers
             return View();
         }
 
-        public ActionResult Form()
+        public ActionResult Form(User user)
         {
             return View();
         }
