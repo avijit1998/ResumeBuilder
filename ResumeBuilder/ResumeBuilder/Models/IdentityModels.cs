@@ -18,21 +18,12 @@ namespace ResumeBuilder.Models
         }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    //public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : DbContext
     {
-        public DbSet<Skills> Skills { get; set; }
-        public DbSet<Languages> Languages { get; set; }
-        public DbSet<StudentsRegistration> StudentsRegistration { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<UsersSkill> UsersSkills { get; set; }
-        public DbSet<UsersLanguage> UsersLanguage { get; set; }
-        public DbSet<EducationalDetails> EducationalDetails { get; set; }
 
-        public DbSet<LoginViewModel> Logins { get; set; }
-        public DbSet<RegisterViewModel> Registers { get; set; } 
 
         public ApplicationDbContext()
-            : base("ResumeBuilderConnection", throwIfV1Schema: false)
         {
         }
 

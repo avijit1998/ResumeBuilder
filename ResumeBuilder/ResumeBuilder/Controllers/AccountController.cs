@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ResumeBuilder.Models;
+using System.Security.Cryptography;
 
 namespace ResumeBuilder.Controllers
 {
@@ -147,25 +148,29 @@ namespace ResumeBuilder.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public ActionResult Register(User model)
         {
+            byte[] salt;
+            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
+            var pbkdf1 = new Rfc2898DeriveBytes(model.Password, salt, 10000);
+            byte[] hash = pbkdf1.GetBytes(20);
+            byte[] hashBytes = new byte[36];
+            Array.Copy(salt, 0, hashBytes, 0, 16);
+            Array.Copy(hash, 0, hashBytes, 16, 20);
+            string savedPasswordHash = Convert.ToBase64String(hashBytes);
+
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                ResumeBuilderConnection db = new ResumeBuilderConnection();
+                User user = new User
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                    return RedirectToAction("Index", "Home");
-                }
-                AddErrors(result);
+                    Username = model.Username,
+                    Password = savedPasswordHash,
+                    ConfirmPassword = savedPasswordHash
+                };
+                db.Users.Add(user);
+                db.SaveChanges();
+                return RedirectToAction("Index", "Home");
             }
 
             // If we got this far, something failed, redisplay form

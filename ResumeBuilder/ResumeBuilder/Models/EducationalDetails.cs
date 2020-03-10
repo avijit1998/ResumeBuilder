@@ -12,10 +12,10 @@ namespace ResumeBuilder.Models
         [Key]
         public int EducationalDetailID { get; set; }
 
-        [ForeignKey("StudentID")]
-        public StudentsRegistration StudentsRegistration { get; set; }
+        [ForeignKey("UserId")]
+        public User User { get; set; }
 
-        public int StudentID { get; set; }
+        public int UserId { get; set; }
 
         public string Course { get; set; }
 
