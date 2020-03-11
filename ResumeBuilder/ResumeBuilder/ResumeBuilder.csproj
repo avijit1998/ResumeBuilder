@@ -226,6 +226,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\PublicProfileViewModel.cs" />
+    <Compile Include="ViewModels\UI Models\EducationUIModel.cs" />
+    <Compile Include="ViewModels\UI Models\ProjectUIModel.cs" />
+    <Compile Include="ViewModels\UI Models\WorkExUIModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-lumen-v3.css" />

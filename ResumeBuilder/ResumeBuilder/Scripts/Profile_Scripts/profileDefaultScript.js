@@ -13,9 +13,4 @@ $(document).ready(function () {
     $(function () {
         onResize();
     });
-
-    if (ViewBag.education)
-        console.log('Inside Js');
-    else
-        console.log('Outside Js');
 });

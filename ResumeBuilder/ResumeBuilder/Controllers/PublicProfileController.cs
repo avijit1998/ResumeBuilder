@@ -1,4 +1,5 @@
 ﻿using ResumeBuilder.Models;
+using ResumeBuilder.ViewModels;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -6,39 +7,41 @@ namespace ResumeBuilder.Controllers
 {
     public class PublicProfileController : Controller
     {
-        private ResumeBuilderConnection _context;   
+        private ResumeBuilderConnection _context;
+        private PublicProfileViewModel _uiModel;
 
         public PublicProfileController()
         {
             _context = new ResumeBuilderConnection();
+            _uiModel = new PublicProfileViewModel();
         }
 
         // GET: PublicProfile/Index/id
         public ActionResult Index(int id)
         {
             // User Name
-            ViewBag.profName = _context.Users.FirstOrDefault(a => a.UserID == id).Name;
+            _uiModel.Name = _context.Users.FirstOrDefault(a => a.UserID == id).Name;
 
             // User Role
-            ViewBag.profRole = "Web Developer";
+            _uiModel.UserRole = "Web Developer";
             
             // User Phone
-            ViewBag.profPhone = _context.Users.FirstOrDefault(a => a.UserID == id).PhoneNumber;
+            _uiModel.PhoneNumber = _context.Users.FirstOrDefault(a => a.UserID == id).PhoneNumber;
 
             // User E-mail
-            ViewBag.profEmail = _context.Users.FirstOrDefault(a => a.UserID == id).Username;
+            _uiModel.Email = _context.Users.FirstOrDefault(a => a.UserID == id).Username;
 
             //User Linkedin Link
-            ViewBag.profLinkedin = "https://www.linkedin.com/user";
+            _uiModel.LinkedinLink = "https://www.linkedin.com/user";
 
             // User Summary
-            ViewBag.profSummary = "Oh, I misunderstood the problem. ResumeBuilder ResumeBuilder Setting a padding on, ResumeBuilder ResumeBuilder bin the padding won't help you.";
+            _uiModel.Summary = "Oh, I misunderstood the problem. ResumeBuilder ResumeBuilder Setting a padding on, ResumeBuilder ResumeBuilder bin the padding won't help you.";
             
             //Education Details
             ViewBag.education = 1;
             
             
-            return View();
+            return View(_uiModel);
             //var data = _context.Users.ToList(),return Json(data, JsonRequestBehavior.AllowGet);
         }
     }
