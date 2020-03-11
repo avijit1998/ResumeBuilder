@@ -27,10 +27,12 @@ namespace ResumeBuilder.Controllers
             ViewBag.profPhone = _context.Users.FirstOrDefault(a => a.UserID == id).PhoneNumber;
             // User E-mail
             ViewBag.profEmail = _context.Users.FirstOrDefault(a => a.UserID == id).Username;
+            //User Linkedin Link
             ViewBag.profLinkedin = "https://www.linkedin.com/user";
+            // User Summary
+            ViewBag.profSummary = "Oh, I misunderstood the problem. ResumeBuilder ResumeBuilder Setting a padding on, ResumeBuilder ResumeBuilder bin the padding won't help you.";
             return View();
-            var data = _context.Users.ToList();
-            //return Json(data, JsonRequestBehavior.AllowGet);
+            //var data = _context.Users.ToList(),return Json(data, JsonRequestBehavior.AllowGet);
         }
     }
 }
