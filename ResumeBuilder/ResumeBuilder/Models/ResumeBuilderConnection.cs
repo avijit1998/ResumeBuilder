@@ -15,5 +15,6 @@ namespace ResumeBuilder.Models
         public DbSet<UsersLanguage> UsersLanguage { get; set; }
         public DbSet<EducationalDetails> EducationalDetails { get; set; }
         public DbSet<WorkExperience> WorkExperiences { get; set; }
+        public DbSet<Course> Courses { get; set; }
     }
 }

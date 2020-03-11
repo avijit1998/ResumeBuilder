@@ -196,8 +196,13 @@
     <Compile Include="Migrations\202003100854271_AddedName.Designer.cs">
       <DependentUpon>202003100854271_AddedName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003110722076_Added Course model and courseid properties in educationaldetails.cs" />
+    <Compile Include="Migrations\202003110722076_Added Course model and courseid properties in educationaldetails.Designer.cs">
+      <DependentUpon>202003110722076_Added Course model and courseid properties in educationaldetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Course.cs" />
     <Compile Include="Models\EducationalDetails.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Languages.cs" />
@@ -2018,6 +2023,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003100854271_AddedName.resx">
       <DependentUpon>202003100854271_AddedName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003110722076_Added Course model and courseid properties in educationaldetails.resx">
+      <DependentUpon>202003110722076_Added Course model and courseid properties in educationaldetails.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
