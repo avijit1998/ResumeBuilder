@@ -17,7 +17,10 @@ namespace ResumeBuilder.Controllers
 
         public ActionResult Form(User user)
         {
-            return View();
+            if (Session["UserID"] != null)
+                return View(user);
+
+            return RedirectToAction("Login","Account");
         }
     }
 }

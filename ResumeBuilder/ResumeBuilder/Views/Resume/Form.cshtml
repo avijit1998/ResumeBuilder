@@ -1,28 +1,38 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Form";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    string str="test";
 }
 
 <div class="box">
     <div class="container">
 
+        @if (Session["UserName"] != null)
+        {
+            str = Session["UserName"].ToString();
+        }
+        
+        <fieldset>
+        <legend> User DashBoard </legend>
+        <text>Welcome @str </text>
+        </fieldset>
+
         @*1st Row*@
         <div class="row">
             @*Personal Summary*@
             <a href="#" data-toggle="modal" data-target="#modalSummary">
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 basic-info div-design">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 basic-info div-design">
 
-                <div class="box-part text-center">
+                    <div class="box-part text-center">
 
-                    <img id="userIcon" alt="BasicInformation" class="image-position" src="@Url.Content("~/Content/Images/Summary-icon.png")" />
+                        <img id="userIcon" alt="BasicInformation" class="image-position" src="@Url.Content("~/Content/Images/Summary-icon.png")" />
 
-                    <div class="title">
-                        <h3>Professional Summary</h3>
+                        <div class="title">
+                            <h3>Professional Summary</h3>
+                        </div>
+
                     </div>
-
                 </div>
-            </div>
             </a>
 
             @*Basic Information*@
@@ -40,7 +50,7 @@
                     </div>
                 </div>
             </a>
-            
+
             @*Educational Details*@
             <a href="#" data-toggle="modal" data-target="#modalEducationDetails">
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 basic-info div-design">
@@ -55,7 +65,7 @@
 
                     </div>
                 </div>
-            </a>	
+            </a>
         </div>
 
 
@@ -130,7 +140,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <form>
-                            
+
                             <div class="form-group">
                                 <label>First Name:</label>
                                 <input type="text" class="form-control" name="txtFirstName">
@@ -192,7 +202,7 @@
                                 <label>ZipCode</label>
                                 <input type="text" class="form-control" name="txtPin">
                             </div>
-                            
+
                         </form>
                     </div>
                 </div>
@@ -228,7 +238,7 @@
                                 <label>Summary:</label>
                                 <textarea class="form-control"></textarea>
                             </div>
-                            
+
                         </form>
                     </div>
                 </div>
@@ -259,7 +269,7 @@
                     <div class="col-md-12">
                         <form>
                             <label class="radio-inline">
-                                <input type="radio" name="courseOption" value="10th" >10th
+                                <input type="radio" name="courseOption" value="10th">10th
                             </label>
                             <label class="radio-inline">
                                 <input type="radio" name="courseOption" value="12th">12th
@@ -278,7 +288,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="radio-inline">
-                                        <input type="radio" name="" >CGPA Scored
+                                        <input type="radio" name="">CGPA Scored
                                     </label>
                                     <label class="radio-inline">
                                         <input type="radio" name="marksOption">Percentage Scored
@@ -354,7 +364,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Duration</label>
-                                
+
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
@@ -363,16 +373,16 @@
                                         <option class="form-control">Select Month</option>
                                     </select>
                                 </div>
-                                </div>
-                                <div class="col-lg-6">
+                            </div>
+                            <div class="col-lg-6">
 
-                                    <div class="form-group">
-                                        <label>Start Year:</label>
-                                        <select class="form-control">
-                                            <option class="form-control">Select Year</option>
-                                        </select>
-                                    </div>
+                                <div class="form-group">
+                                    <label>Start Year:</label>
+                                    <select class="form-control">
+                                        <option class="form-control">Select Year</option>
+                                    </select>
                                 </div>
+                            </div>
 
                             <div class="col-lg-6 end-duration">
                                 <div class="form-group">
@@ -441,7 +451,7 @@
                                 <label>Description</label>
                                 <textarea class="form-control"></textarea>
                             </div>
-                                                    
+
                         </form>
                     </div>
                 </div>
