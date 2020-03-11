@@ -127,7 +127,7 @@
 
 </div>
 
-
+<div id="close-modal">
 @*Basic Information Form*@
 <div id="modalBasicInfo" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -141,7 +141,10 @@
                 <div class="row">
                     <div class="col-md-12">
                         <form>
+                            <div>
+                                <input type="hidden" name="UserID" id="userId" value="@Model.UserID" />
 
+                            </div>
                             <div class="form-group">
                                 <label>Full Name:</label>
                                 <input type="text" class="form-control" name="Name" id="txtFullName">
@@ -171,15 +174,16 @@
                                 <label>Phone Number</label>
                                 <input type="text" class="form-control" name="PhoneNumber" id="txtPhoneNumber">
                             </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                                    <button type="submit" id="btnSaveBasicInfo" class="btn btn-default pull-right">Save </button>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-default pull-right">Save </button>
-                    </div>
-                </div>
+               
             </div>
             <div class="modal-footer">
             </div>
@@ -203,7 +207,7 @@
                         <form action="/Resume/SaveBasicInfo" method="post">
                             <div>
                                 <input type="hidden" name="UserID" id="userId" value="@Model.UserID"/>
-                                <input type="hidden" name="UserID" value="@Model.UserID" />
+                               
                             </div>
 
                             <div class="form-group">
@@ -214,7 +218,7 @@
                                 <div class="col-md-12">
                                     <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-default pull-right" id="btnSaveSummary">Save </button>
-                                    <button type="submit" class="btn btn-default pull-right">Save </button>
+                                    
                                 </div>
                             </div>
                         </form>
@@ -410,34 +414,34 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <form>
-                            <input type="hidden" name="UserID"/>
+                            <input type="hidden" name="UserID" value="@Model.UserID"/>
 
                             <div class="form-group">
                                 <label>Project Title:</label>
-                                <input type="text" class="form-control" name="Title">
+                                <input type="text" class="form-control" name="Title" id="txtTitle">
                             </div>
                             <div class="form-group">
                                 <label>Role</label>
-                                <input type="text" class="form-control" name="Role">
+                                <input type="text" class="form-control" name="Role" id="txtProjectRole">
                             </div>
                             <div class="form-group">
                                 <label>Duration(In Months)</label>
-                                <input type="text" class="form-control" name="Duration">
+                                <input type="text" class="form-control" name="Duration" id="txtDuration">
                             </div>
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea class="form-control" name="Description"></textarea>
+                                <textarea class="form-control" name="Description" id="txtDescription"></textarea>
                             </div>
-
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                                    <button type="button" id="btnSaveProjectDetials" class="btn btn-default pull-right">Save </button>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-default pull-right">Save </button>
-                    </div>
-                </div>
+                
             </div>
             <div class="modal-footer">
             </div>
@@ -484,15 +488,27 @@
     </div>
 </div>
 
+</div>
 @section scripts{
     <script src="~/Scripts/ModelScripts/FormScript.js"></script>
     <script>
         $(document).ready(function () {
-
-            $("#summary").on('hidden.bs.modal', function () {
-                $("#txtSummary").val("");
+            //empty auto fill data
+            $("body").on('click','hidden.bs.modal', function () {
+                //$("#txtSummary").val("");
+                //$("#txtFullName").val("");
+                //$("#optradio").val("");
+                //$("#dateDOB").val("");
+                //$("#txtPhoneNumber").val("");
+                $("#userId").val();
+                project.Title = $("#txtTitle").val();
+                project.Role = $('#txtProjectRole').val();
+                project.Duration = $("#txtDuration").val();
+                project.Description = $("#txtDescription").val();
             });
 
+
+            
             $('input[type=radio][name=courseOption]').change(function () {
                 if ($(this).val() == '10th') {
                     //alert("tenth details is there!");
@@ -506,11 +522,40 @@
                 }
             });
 
-
+            //save summary of user
             $("body").on("click", "#btnSaveSummary", function () {
                 var user = {};
                 user.Summary = $("#txtSummary").val();
                 user.UserID = $("#userId").val();
+                $.ajax({
+                    type: "POST",
+                    url: '/Resume/SaveSummary',
+                    data: '{user: ' + JSON.stringify(user) + '}',
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function () {
+                        //$('#modalSummary').attr('disabled:disabled');
+                        $("#modalSummary").modal("hide");
+                        bootbox.alert("Summary successfully saved!");
+                    },
+                    error: function () {
+                        bootbox.alert("Error!");
+
+                    }
+                });
+                return false;
+            });
+
+
+            //save basic info of user
+            $("body").on("click", "#btnSaveBasicInfo", function () {
+                var user = {};
+                user.UserID = $("#userId").val();
+                user.Name = $("#txtFullName").val();
+                user.Gender = $('input[name="Gender"]:checked').val();
+                user.DateOfBirth = $("#dateDOB").val();
+                user.PhoneNumber = $("#txtPhoneNumber").val();
+               
                 $.ajax({
                     type: "POST",
                     url: '/Resume/SaveBasicInformation',
@@ -518,7 +563,35 @@
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     success: function () {
+                        $("#modalBasicInfo").modal("hide");
+                        bootbox.alert("Basic Info successfully saved!");
+                    },
+                    error: function () {
                         bootbox.alert("Error!");
+
+                    }
+                });
+                return false;
+            });
+
+            //save projects info of user
+            $("body").on("click", "#btnSaveProjectDetials", function () {
+                var project = {};
+                project.UserID = $("#userId").val();
+                project.Title = $("#txtTitle").val();
+                project.Role = $('#txtProjectRole').val();
+                project.Duration = $("#txtDuration").val();
+                project.Description = $("#txtDescription").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: '/Resume/SaveProjectDetails',
+                    data: '{project: ' + JSON.stringify(project) + '}',
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function () {
+                        $("#modalProject").modal("hide");
+                        bootbox.alert("Project Details successfully saved!");
                     },
                     error: function () {
                         bootbox.alert("Error!");
