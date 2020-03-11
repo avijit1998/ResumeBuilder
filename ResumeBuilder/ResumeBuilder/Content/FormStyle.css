@@ -36,3 +36,7 @@ label{
     color:darkblue;
 }
 
+#txtSummary{
+    width:100%;
+    resize:none;
+}
