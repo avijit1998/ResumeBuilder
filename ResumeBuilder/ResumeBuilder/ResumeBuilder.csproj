@@ -200,6 +200,10 @@
     <Compile Include="Migrations\202003110722076_Added Course model and courseid properties in educationaldetails.Designer.cs">
       <DependentUpon>202003110722076_Added Course model and courseid properties in educationaldetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003110856470_Added Project model.cs" />
+    <Compile Include="Migrations\202003110856470_Added Project model.Designer.cs">
+      <DependentUpon>202003110856470_Added Project model.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Course.cs" />
@@ -207,6 +211,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Languages.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Project.cs" />
     <Compile Include="Models\ResumeBuilderConnection.cs" />
     <Compile Include="Models\Skills.cs" />
     <Compile Include="Models\User.cs" />
@@ -2026,6 +2031,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003110722076_Added Course model and courseid properties in educationaldetails.resx">
       <DependentUpon>202003110722076_Added Course model and courseid properties in educationaldetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003110856470_Added Project model.resx">
+      <DependentUpon>202003110856470_Added Project model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
