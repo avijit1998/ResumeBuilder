@@ -1,4 +1,6 @@
-﻿@{
+﻿@model ResumeBuilder.Models.User
+
+@{
     ViewBag.Title = "Form";
     Layout = "~/Views/Shared/_Layout.cshtml";
     string str="test";
@@ -201,23 +203,23 @@
                     <div class="col-md-12">
                         <form>
                             <div>
-                                <input type="hidden" name="UserID"/>
+                                <input type="hidden" name="UserID" id="userId" value="@Model.UserID"/>
                             </div>
 
                             <div class="form-group">
                                 <label>Summary:</label>
                                 <textarea class="form-control" name="Summary" id="txtSummary"></textarea>
                             </div>
-
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-default pull-right" id="btnSaveSummary">Save </button>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-default pull-right">Save </button>
-                    </div>
-                </div>
+               
             </div>
             <div class="modal-footer">
             </div>
@@ -483,4 +485,40 @@
 
 @section scripts{
     <script src="~/Scripts/ModelScripts/FormScript.js"></script>
+    <script>
+
+        $('input[type=radio][name=courseOption]').change(function () {
+            if ($(this).val() == '10th') {
+                //alert("tenth details is there!");
+                $(".tenth-form").show();
+                $(".all-other").hide();
+            }
+            else {
+                // alert("everythin else is there!!");
+                $(".all-other").show();
+                $(".tenth-form").hide();
+            }
+        });
+
+        $("body").on("click", "#btnSaveSummary", function () {
+                var user = {};
+                user.Summary = $("#txtSummary").val();
+                user.UserID = $("#userId").val();
+                $.ajax({
+                    type: "POST",
+                    url: '/Resume/SaveBasicInformation',
+                    data: '{user: ' + JSON.stringify(user) + '}',
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function () {
+                        bootbox.alert("Error!");
+                    },
+                    error: function () {
+                        bootbox.alert("Error!");
+
+                    }
+                });
+                return false;
+     });
+     </script>
 }
