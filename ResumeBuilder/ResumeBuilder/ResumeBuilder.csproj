@@ -204,6 +204,10 @@
     <Compile Include="Migrations\202003110856470_Added Project model.Designer.cs">
       <DependentUpon>202003110856470_Added Project model.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003110902525_Added gender in users.cs" />
+    <Compile Include="Migrations\202003110902525_Added gender in users.Designer.cs">
+      <DependentUpon>202003110902525_Added gender in users.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Course.cs" />
@@ -2034,6 +2038,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003110856470_Added Project model.resx">
       <DependentUpon>202003110856470_Added Project model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003110902525_Added gender in users.resx">
+      <DependentUpon>202003110902525_Added gender in users.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -26,6 +26,8 @@ namespace ResumeBuilder.Models
 
         public string Name { get; set; }
 
+        public string Gender { get; set; }
+
         public string Summary { get; set; }
 
         [Display(Name = "Phone Number")]
