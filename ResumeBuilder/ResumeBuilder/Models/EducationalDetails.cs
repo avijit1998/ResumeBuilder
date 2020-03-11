@@ -17,10 +17,13 @@ namespace ResumeBuilder.Models
 
         public int UserId { get; set; }
 
-        public string Course { get; set; }
+        [ForeignKey("CourseId")]
+        public Course Course { get; set; }
+
+        public int CourseId { get; set; }
 
         public int PassingYear { get; set; }
 
         public int CGPAOrPercentage { get; set; }
     }
-}
+}   
