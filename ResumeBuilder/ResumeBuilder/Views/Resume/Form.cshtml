@@ -22,7 +22,7 @@
         @*1st Row*@
         <div class="row">
             @*Personal Summary*@
-            <a href="#" data-toggle="modal" data-target="#modalSummary">
+            <a href="#" data-toggle="modal" data-target="#modalSummary" id="summary">
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 basic-info div-design">
 
                     <div class="box-part text-center">
@@ -150,7 +150,7 @@
                            
                             <div class="form-group">
                                 <label>Email ID:</label>
-                                <input type="email" class="form-control" name="Username" id="txtEmail" readonly>
+                                <input type="email" class="form-control" name="Username" id="txtEmail" value="@Model.Username" readonly>
                             </div>
 
                             <div class="form-group">
@@ -486,21 +486,27 @@
 @section scripts{
     <script src="~/Scripts/ModelScripts/FormScript.js"></script>
     <script>
+        $(document).ready(function () {
 
-        $('input[type=radio][name=courseOption]').change(function () {
-            if ($(this).val() == '10th') {
-                //alert("tenth details is there!");
-                $(".tenth-form").show();
-                $(".all-other").hide();
-            }
-            else {
-                // alert("everythin else is there!!");
-                $(".all-other").show();
-                $(".tenth-form").hide();
-            }
-        });
+            $("#summary").on('hidden.bs.modal', function () {
+                $("#txtSummary").val("");
+            });
 
-        $("body").on("click", "#btnSaveSummary", function () {
+            $('input[type=radio][name=courseOption]').change(function () {
+                if ($(this).val() == '10th') {
+                    //alert("tenth details is there!");
+                    $(".tenth-form").show();
+                    $(".all-other").hide();
+                }
+                else {
+                    // alert("everythin else is there!!");
+                    $(".all-other").show();
+                    $(".tenth-form").hide();
+                }
+            });
+
+
+            $("body").on("click", "#btnSaveSummary", function () {
                 var user = {};
                 user.Summary = $("#txtSummary").val();
                 user.UserID = $("#userId").val();
@@ -519,6 +525,7 @@
                     }
                 });
                 return false;
-     });
+            });
+        });
      </script>
 }
