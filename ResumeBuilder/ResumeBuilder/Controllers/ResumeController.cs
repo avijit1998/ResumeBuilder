@@ -26,18 +26,25 @@ namespace ResumeBuilder.Controllers
         {
             //var summary = user.Summary;
             if (Session["UserID"] != null)
-            {
-               
+            {  
                 int id;
                 var re = Int32.TryParse(Session["UserID"] as String, out id);
                 var user = dbContext.Users.Where(m => m.UserID == id).FirstOrDefault();
                 return View(user);                               
             }
-
             return RedirectToAction("Login","Account");
         }
 
         [HttpPost]
+        public ActionResult SaveBasicInformation(User user)
+        {
+            var userFromDb=db.Users.FirstOrDefault(u=>u.UserID==user.UserID);
+            userFromDb.Summary = user.Summary;
+            db.SaveChanges();
+            string message = "SUCCESS";
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+        
         public ActionResult SaveBasicInfo(User user)
         {
             try
