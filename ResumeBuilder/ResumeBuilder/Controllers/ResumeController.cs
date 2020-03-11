@@ -14,20 +14,25 @@ namespace ResumeBuilder.Controllers
         {
             db = new ResumeBuilderConnection();
         }
+        
         // GET: Resume
         public ActionResult Index()
         {
             return View();
         }
+        
+        public ActionResult Form()
 
-        //[HttpPost]
-        public ActionResult Form(User user)
         {
             //var summary = user.Summary;
             if (Session["UserID"] != null)
-
-                //var usr = getEntryBYid(Session["UserID"]);
-                return View(user);
+            {
+               
+                int id;
+                var re = Int32.TryParse(Session["UserID"] as String, out id);
+                var user = dbContext.Users.Where(m => m.UserID == id).FirstOrDefault();
+                return View(user);                               
+            }
 
             return RedirectToAction("Login","Account");
         }

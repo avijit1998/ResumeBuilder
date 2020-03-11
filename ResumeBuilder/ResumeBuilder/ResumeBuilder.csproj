@@ -164,6 +164,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PublicProfileController.cs" />
     <Compile Include="Controllers\ResumeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1876,6 +1877,17 @@
     <Content Include="Content\plugins\toastr\toastr.css" />
     <Content Include="Content\plugins\toastr\toastr.min.css" />
     <Content Include="Content\plugins\toastr\toastr.min.js" />
+    <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\css\bootstrap-grid.css" />
+    <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\css\bootstrap-grid.min.css" />
+    <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\css\bootstrap-reboot.css" />
+    <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\css\bootstrap-reboot.min.css" />
+    <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\css\bootstrap.css" />
+    <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\css\bootstrap.min.css" />
+    <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\js\bootstrap.bundle.js" />
+    <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\js\bootstrap.bundle.min.js" />
+    <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\js\bootstrap.js" />
+    <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\js\bootstrap.min.js" />
+    <Content Include="Content\Profile_Data\css\style.css" />
     <Content Include="Content\register.css" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
@@ -1975,6 +1987,16 @@
     <Content Include="Content\plugins\summernote\summernote.js.map" />
     <Content Include="Content\plugins\sweetalert2-theme-bootstrap-4\bootstrap-4.scss" />
     <Content Include="Content\plugins\toastr\toastr.js.map" />
+    <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\css\bootstrap-grid.css.map" />
+    <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\css\bootstrap-grid.min.css.map" />
+    <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\css\bootstrap-reboot.css.map" />
+    <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\css\bootstrap.css.map" />
+    <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\css\bootstrap.min.css.map" />
+    <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\js\bootstrap.bundle.js.map" />
+    <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\js\bootstrap.js.map" />
+    <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\js\bootstrap.min.js.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -2023,6 +2045,7 @@
     <Content Include="Views\Resume\Index.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Resume\Form.cshtml" />
+    <Content Include="Views\PublicProfile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

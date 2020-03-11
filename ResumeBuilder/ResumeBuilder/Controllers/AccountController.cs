@@ -76,7 +76,7 @@ namespace ResumeBuilder.Controllers
         {  
             if (Session["UserID"] != null)  
             {  
-                return RedirectToAction("Form", "Resume", user);  
+                return RedirectToAction("Form", "Resume");  
             } else  
             {  
                 return RedirectToAction("Login");  
