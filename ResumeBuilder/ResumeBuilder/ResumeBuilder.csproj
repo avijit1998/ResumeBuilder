@@ -221,6 +221,14 @@
     <Compile Include="Migrations\202003110914186_Added duration in project.Designer.cs">
       <DependentUpon>202003110914186_Added duration in project.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003111035225_added role field in user model.cs" />
+    <Compile Include="Migrations\202003111035225_added role field in user model.Designer.cs">
+      <DependentUpon>202003111035225_added role field in user model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003111040493_added role field in user model and made phone number field string.cs" />
+    <Compile Include="Migrations\202003111040493_added role field in user model and made phone number field string.Designer.cs">
+      <DependentUpon>202003111040493_added role field in user model and made phone number field string.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Course.cs" />
@@ -2085,6 +2093,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003110914186_Added duration in project.resx">
       <DependentUpon>202003110914186_Added duration in project.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003111035225_added role field in user model.resx">
+      <DependentUpon>202003111035225_added role field in user model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003111040493_added role field in user model and made phone number field string.resx">
+      <DependentUpon>202003111040493_added role field in user model and made phone number field string.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
