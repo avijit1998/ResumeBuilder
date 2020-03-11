@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace ResumeBuilder.Models
 
         [Required]
         [Compare("Password")]
-        public string ConfirmPassword { get; set; }
+        public virtual string ConfirmPassword { get; set; }
 
         public string Name { get; set; }
 
@@ -31,9 +32,17 @@ namespace ResumeBuilder.Models
         public string Summary { get; set; }
 
         [Display(Name = "Phone Number")]
-        public int? PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         [Display(Name = "Date of Birth")]
         public DateTime? DateOfBirth { get; set; }
+
+
+        public string Role { get; set; }
+
+        public User()
+        {
+            Role = "Candidate";
+        }
     }
 }
