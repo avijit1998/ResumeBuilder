@@ -1,8 +1,6 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -64,23 +62,23 @@
                 <div class="p-4 bg-dark text-white">
                     <div class="row">
                         <div class="col-lg-9 col-md-7 col-sm-6">
-                            <h1 class="display-5 d-block">John Doe</h1>
-                            <h6 class="display-5" style="opacity: .5;">Web Developer</h6>
+                            <h1 class="display-5 d-block">@ViewBag.profName</h1>
+                            <h6 class="display-5" style="opacity: .5;">@ViewBag.profRole</h6>
                         </div>
                         <div class="col-lg-3 col-md-5 col-sm-6" style="opacity: .65;">
                             <div class="row">
                                 <a href="#" class="text-white">
-                                    <i class="fa fa-phone"> +91-1234567890</i>
+                                    <i class="fa fa-phone"> @ViewBag.profPhone</i>
                                 </a>
                             </div>
                             <div class="row">
                                 <a href="http://gmail.com" class="text-white">
-                                    <i class="fa fa-envelope"> abcdef@gmail.com</i>
+                                    <i class="fa fa-envelope"> @ViewBag.profEmail</i>
                                 </a>
                             </div>
                             <div class="row">
                                 <a href="https://in.linkedin.com/in/dummy-link-775982111" class="text-white">
-                                    <i class="fa fa-linkedin"> https://www.linkedin.com/user</i>
+                                    <i class="fa fa-linkedin"> @ViewBag.profLinkedin</i>
                                 </a>
                             </div>
                         </div>
