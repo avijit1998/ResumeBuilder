@@ -229,6 +229,10 @@
     <Compile Include="Migrations\202003111040493_added role field in user model and made phone number field string.Designer.cs">
       <DependentUpon>202003111040493_added role field in user model and made phone number field string.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003111213049_added stream field in educational details.cs" />
+    <Compile Include="Migrations\202003111213049_added stream field in educational details.Designer.cs">
+      <DependentUpon>202003111213049_added stream field in educational details.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Course.cs" />
@@ -2099,6 +2103,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003111040493_added role field in user model and made phone number field string.resx">
       <DependentUpon>202003111040493_added role field in user model and made phone number field string.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003111213049_added stream field in educational details.resx">
+      <DependentUpon>202003111213049_added stream field in educational details.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
