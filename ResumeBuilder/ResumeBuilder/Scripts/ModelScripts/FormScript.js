@@ -11,6 +11,13 @@
             $(".all-other").show();
         }
     });
+
+
+    $(body).on("click", "#workingCheck", function () {
+        if ($('#workingCheck').is(":checked")) {
+            $(".end-duration").hide();
+        }
+    });
 });
 
 
