@@ -17,14 +17,19 @@ namespace ResumeBuilder.Models
 
         public int UserID { get; set; }
 
-        public DateTime StartDate { get; set; }
+        public int StartMonth { get; set; }
 
-        public DateTime EndDate { get; set; }
+        public int StartYear { get; set; }
+
+        public int EndMonth { get; set; }
+
+        public int EndYear { get; set; }
 
         public string OrganizationName { get; set; }
 
         public string Role { get; set; }
 
+        public bool CurrentlyWorking { get; set; }
 
     }
 }
