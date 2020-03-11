@@ -17,10 +17,11 @@ namespace ResumeBuilder.Models
 
         public string Title { get; set; }
 
-        public DateTime StartDate { get; set; }
+        public int Duration { get; set; }
 
-        public DateTime EndDate { get; set; }
+        public string Role { get; set; }
 
         public string Description { get; set; }
+
     }
 }

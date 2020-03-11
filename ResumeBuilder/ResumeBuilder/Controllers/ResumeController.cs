@@ -14,18 +14,24 @@ namespace ResumeBuilder.Controllers
         {
             db = new ResumeBuilderConnection();
         }
+        
         // GET: Resume
         public ActionResult Index()
         {
             return View();
         }
+        
+        public ActionResult Form()
 
-        public ActionResult Form(User user)
         {
+            //var summary = user.Summary;
             if (Session["UserID"] != null)
-
-                return View(user);
-
+            {  
+                int id;
+                var re = Int32.TryParse(Session["UserID"] as String, out id);
+                var user = dbContext.Users.Where(m => m.UserID == id).FirstOrDefault();
+                return View(user);                               
+            }
             return RedirectToAction("Login","Account");
         }
 
@@ -37,6 +43,24 @@ namespace ResumeBuilder.Controllers
             db.SaveChanges();
             string message = "SUCCESS";
             return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+        
+        public ActionResult SaveBasicInfo(User user)
+        {
+            try
+            {
+                var usr = db.Users.SingleOrDefault(u => u.UserID == user.UserID);
+                usr.Summary = user.Summary;
+
+                //db.Users.Add(user);
+                db.SaveChanges();
+                return RedirectToAction("Form", "Resume");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return RedirectToAction("Login", "Account");
         }
     }
 }

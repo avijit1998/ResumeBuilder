@@ -1,5 +1,4 @@
 ﻿@model ResumeBuilder.Models.User
-
 @{
     ViewBag.Title = "Form";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -201,9 +200,10 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <form>
+                        <form action="/Resume/SaveBasicInfo" method="post">
                             <div>
                                 <input type="hidden" name="UserID" id="userId" value="@Model.UserID"/>
+                                <input type="hidden" name="UserID" value="@Model.UserID" />
                             </div>
 
                             <div class="form-group">
@@ -214,12 +214,13 @@
                                 <div class="col-md-12">
                                     <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-default pull-right" id="btnSaveSummary">Save </button>
+                                    <button type="submit" class="btn btn-default pull-right">Save </button>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
-               
+                
             </div>
             <div class="modal-footer">
             </div>
@@ -239,8 +240,8 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <form>
-                            <label class="radio-inline" >
+                        <form action="/ResumeContoller/Form" method="get">
+                            <label class="radio-inline">
                                 <input type="radio" name="courseOption" value="10th">10th
                             </label>
                             <label class="radio-inline">
