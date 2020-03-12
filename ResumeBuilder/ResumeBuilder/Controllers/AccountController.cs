@@ -124,7 +124,19 @@ namespace ResumeBuilder.Controllers
                     Password = savedPasswordHash,
                     ConfirmPassword = savedPasswordHash
                 };
+                UserSetting ob = new UserSetting
+                {
+                    UserID = user.UserID,
+                    User=user,
+                    setContact=-1,
+                    setEducation=-1,
+                    setProject=-1,
+                    setSkills=-1,
+                    setWorkex=-1,
+
+                };
                 db.Users.Add(user);
+                db.settings.Add(ob);
                 db.SaveChanges();
                 return RedirectToAction("Login", "Account");
             }
