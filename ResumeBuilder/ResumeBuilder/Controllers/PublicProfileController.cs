@@ -2,6 +2,8 @@
 using ResumeBuilder.ViewModels;
 using System.Linq;
 using System.Web.Mvc;
+using System.Collections.Generic;
+using System;
 
 namespace ResumeBuilder.Controllers
 {
@@ -37,12 +39,52 @@ namespace ResumeBuilder.Controllers
             // User Summary
             _uiModel.Summary = "Oh, I misunderstood the problem. ResumeBuilder ResumeBuilder Setting a padding on, ResumeBuilder ResumeBuilder bin the padding won't help you.";
             
-            //Education Details
-            ViewBag.education = 1;
+            // Education Details
+            _uiModel.EducationStatus = true;
+            _uiModel.EducationList = new List<EducationUIModel>()
+            {
+                new EducationUIModel{ CourseName = "+2", PassingYear = 2014, CGPAOrPercentage = 90 },
+                new EducationUIModel{ CourseName = "+2", PassingYear = 2014, CGPAOrPercentage = 70 },
+                new EducationUIModel{ CourseName = "+2", PassingYear = 2014, CGPAOrPercentage = 95 },
+                new EducationUIModel{ CourseName = "+2", PassingYear = 2014, CGPAOrPercentage = 80 }
+            };
+
+            // Skills
+            _uiModel.SkillStatus = true;
+            _uiModel.SkillList = new List<string>()
+            {
+                "HTML",
+                "CSS",
+                "JavaScript",
+                "C#"
+            };
+
+            // Project Details
+            _uiModel.ProjectStatus = true;
+            _uiModel.ProjectList = new List<ProjectUIModel>()
+            {
+                new ProjectUIModel{ Title = "Random Title", Description ="Random Desc.", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) },
+                new ProjectUIModel{ Title = "Random Title", Description ="Random Desc.", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) },
+                new ProjectUIModel{ Title = "Random Title", Description ="Random Desc.", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) },
+                new ProjectUIModel{ Title = "Random Title", Description ="Random Desc.", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) }
+            };
+
+            // Work Ex.
+            _uiModel.WorkExStatus = true;
+            _uiModel.WorkExList = new List<WorkExUIModel>()
+            {
+                new WorkExUIModel{ OrganizationName = "Mindfire Solutions", Role = "Developer", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) },
+                new WorkExUIModel{ OrganizationName = "Mindfire Solutions", Role = "Developer", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) },
+                new WorkExUIModel{ OrganizationName = "Mindfire Solutions", Role = "Developer", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) },
+                new WorkExUIModel{ OrganizationName = "Mindfire Solutions", Role = "Developer", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) }
+            };
+
+            // 
+            
             
             
             return View(_uiModel);
-            //var data = _context.Users.ToList(),return Json(data, JsonRequestBehavior.AllowGet);
+            //var data = _context.Users.ToList();return Json(_uiModel, JsonRequestBehavior.AllowGet);
         }
     }
 }
