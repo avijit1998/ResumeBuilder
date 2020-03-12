@@ -75,6 +75,17 @@ namespace ResumeBuilder.Controllers
 
             return Json(new { Message = message, JsonRequestBehavior.AllowGet });
         }
+
+        [HttpPost]
+        public ActionResult SaveWorkExperience(WorkExperience workExperience)
+        {
+            db.WorkExperiences.Add(workExperience);
+            db.SaveChanges();
+
+            string message = "SUCCESS";
+
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
         //public ActionResult SaveBasicInfo(User user)
         //{
         //    try
