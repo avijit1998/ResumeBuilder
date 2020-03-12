@@ -321,6 +321,32 @@
                 <div class="modal-footer">
                 </div>
             </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form>
+                           <input type="hidden" name="UserID" value="@Model.UserID"/>
+
+                            <div class="form-group">
+                                <label>Company Name:</label>
+                                <input type="text" class="form-control" name="OrganizationName" id="txtCompanyName">
+                            </div>
+                            <div class="form-group">
+                                <label>Designation</label>
+                                <input type="text" class="form-control" name="Role" id="txtRole">
+                            </div>
+                            <div class="form-group">
+                                <label>Duration</label>
+
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Start Month:</label>
+                                    <select class="form-control" name="StartMonth" id="selectStartMonth">
+                                        <option class="form-control">Select Month</option>
+                                        <option class="form-control" value="1">January</option>
+                                        <option class="form-control" value="2">February</option>
+                                    </select>
         </div>
     </div>
 
@@ -345,10 +371,22 @@
                                     <input type="text" class="form-control" name="OrganizationName" id="txtCompanyName">
                                 </div>
                                 <div class="form-group">
+                                    <label>Start Year:</label>
+                                    <select class="form-control" name="StartYear" id="selectStartYear">
+                                        <option class="form-control">Select Year</option>
+                                        <option class="form-control" value="2020">2020</option>
+                                        <option class="form-control" value="2019">2019</option>
+                                    </select>
                                     <label>Designation</label>
                                     <input type="text" class="form-control" name="Role" id="txtRole">
                                 </div>
                                 <div class="form-group">
+                                    <label>End Month:</label>
+                                    <select class="form-control" name="EndMonth" id="selectEndMonth">
+                                        <option class="form-control">Select Month</option>
+                                        <option class="form-control" value="1">January</option>
+                                        <option class="form-control" value="2">February</option>
+                                    </select>
                                     <label>Duration</label>
 
                                 </div>
@@ -388,6 +426,30 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label>End Year:</label>
+                                    <select class="form-control" name="EndYear" id="selectEndYear">
+                                        <option class="form-control">Select Year</option>
+                                        <option class="form-control" value="2020">2020</option>
+                                        <option class="form-control" value="2019">2019</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" class="checkbox-inline" name="CurrentlyWorking" id="checkWorking">
+                                <label for="checkWorking">Currently Working</label>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-default pull-right" id="btnSaveWorkExperience">Save </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
                                     <input type="checkbox" class="checkbox-inline" name="CurrentlyWorking" id="checkWorking">
                                     <label for="checkWorking">Currently Working</label>
                                 </div>
@@ -456,6 +518,40 @@
         </div>
     </div>
 
+@*Skills*@
+<div id="modalSkills" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">ADD TECHNICAL SKILLS</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form>
+                            <input type="hidden" name="UserID" value="@Model.UserID"/>
+                            <div class="form-group">
+                                <label>Select Skill:</label>
+                                <select class="form-control">
+                                    <option class="form-control">Select Skill</option>
+                                    <option class="form-control" value="1">C#</option>
+                                    <option class="form-control" value="2">ASP .NET MVC</option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-default pull-right">Save </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
     @*Skills*@
     <div id="modalSkills" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -600,6 +696,39 @@
                     success: function () {
                         $("#modalProject").modal("hide");
                         bootbox.alert("Project Details successfully saved!");
+                    },
+                    error: function () {
+                        bootbox.alert("Error!");
+
+                    }
+                });
+                return false;
+            });
+
+            $("body").on("click", "#btnSaveWorkExperience", function () {
+                var project = {};
+                project.UserID = $("#userId").val();
+                project.StartMonth = $("#selectStartMonth").val();
+                project.EndMonth = $('#selectEndMonth').val();
+                project.StartYear = $("#selectStartYear").val();
+                project.EndYear = $("#selectEndYear").val();
+                project.OrganizationName = $("#txtCompanyName").val();
+                project.Role = $('#txtRole').val();
+                if ($("#checkWorking").prop('checked') == true)
+                    project.CurrentlyWorking = true;
+                else
+                    project.CurrentlyWorking = false;
+
+                $.ajax({
+                    type: "POST",
+                    url: '/Resume/SaveWorkExperience',
+                    data: '{workExperience: ' + JSON.stringify(project) + '}',
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function () {
+                        $("#modalWorkExperience").modal("hide");
+                        bootbox.alert("Work Experience Details successfully saved!");
+                        
                     },
                     error: function () {
                         bootbox.alert("Error!");
