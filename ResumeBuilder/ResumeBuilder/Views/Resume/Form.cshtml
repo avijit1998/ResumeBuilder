@@ -321,11 +321,24 @@
                 <div class="modal-footer">
                 </div>
             </div>
+            </div>
+        </div>
+
+
+    @*Work Experience*@
+    <div id="modalWorkExperience" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">ADD WORK EXPERIENCE</h4>
+            </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-12">
                         <form>
-                           <input type="hidden" name="UserID" value="@Model.UserID"/>
+                            <input type="hidden" name="UserID" />
 
                             <div class="form-group">
                                 <label>Company Name:</label>
@@ -337,103 +350,42 @@
                             </div>
                             <div class="form-group">
                                 <label>Duration</label>
-
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Start Month:</label>
                                     <select class="form-control" name="StartMonth" id="selectStartMonth">
                                         <option class="form-control">Select Month</option>
-                                        <option class="form-control" value="1">January</option>
-                                        <option class="form-control" value="2">February</option>
                                     </select>
-        </div>
-    </div>
-
-
-    @*Work Experience*@
-    <div id="modalWorkExperience" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">ADD WORK EXPERIENCE</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <form>
-                                <input type="hidden" name="UserID" />
-
-                                <div class="form-group">
-                                    <label>Company Name:</label>
-                                    <input type="text" class="form-control" name="OrganizationName" id="txtCompanyName">
                                 </div>
+                            </div>
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Start Year:</label>
                                     <select class="form-control" name="StartYear" id="selectStartYear">
                                         <option class="form-control">Select Year</option>
-                                        <option class="form-control" value="2020">2020</option>
-                                        <option class="form-control" value="2019">2019</option>
                                     </select>
-                                    <label>Designation</label>
-                                    <input type="text" class="form-control" name="Role" id="txtRole">
                                 </div>
+                            </div>
+
+                            <div class="col-lg-6 end-duration">
                                 <div class="form-group">
                                     <label>End Month:</label>
                                     <select class="form-control" name="EndMonth" id="selectEndMonth">
                                         <option class="form-control">Select Month</option>
-                                        <option class="form-control" value="1">January</option>
-                                        <option class="form-control" value="2">February</option>
                                     </select>
-                                    <label>Duration</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 end-duration">
 
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Start Month:</label>
-                                        <select class="form-control" name="StartMonth" id="selectStartMonth">
-                                            <option class="form-control">Select Month</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-
-                                    <div class="form-group">
-                                        <label>Start Year:</label>
-                                        <select class="form-control" name="StartYear" id="selectStartYear">
-                                            <option class="form-control">Select Year</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6 end-duration">
-                                    <div class="form-group">
-                                        <label>End Month:</label>
-                                        <select class="form-control" name="EndMonth" id="selectEndMonth">
-                                            <option class="form-control">Select Month</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 end-duration">
-
-                                    <div class="form-group">
-                                        <label>End Year:</label>
-                                        <select class="form-control" name="EndYear" id="selectEndYear">
-                                            <option class="form-control">Select Year</option>
-                                        </select>
-                                    </div>
-                                </div>
                                 <div class="form-group">
                                     <label>End Year:</label>
                                     <select class="form-control" name="EndYear" id="selectEndYear">
                                         <option class="form-control">Select Year</option>
-                                        <option class="form-control" value="2020">2020</option>
-                                        <option class="form-control" value="2019">2019</option>
                                     </select>
                                 </div>
                             </div>
+                           
                             <div class="form-group">
                                 <input type="checkbox" class="checkbox-inline" name="CurrentlyWorking" id="checkWorking">
                                 <label for="checkWorking">Currently Working</label>
@@ -447,25 +399,8 @@
                         </form>
                     </div>
                 </div>
-                
-            </div>
-            <div class="modal-footer">
-                                    <input type="checkbox" class="checkbox-inline" name="CurrentlyWorking" id="checkWorking">
-                                    <label for="checkWorking">Currently Working</label>
-                                </div>
-
-                            </form>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-default pull-right">Save </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                </div>
+              </div>
+                <div class="modal-footer"></div>
             </div>
         </div>
     </div>
@@ -518,40 +453,6 @@
         </div>
     </div>
 
-@*Skills*@
-<div id="modalSkills" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">ADD TECHNICAL SKILLS</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <form>
-                            <input type="hidden" name="UserID" value="@Model.UserID"/>
-                            <div class="form-group">
-                                <label>Select Skill:</label>
-                                <select class="form-control">
-                                    <option class="form-control">Select Skill</option>
-                                    <option class="form-control" value="1">C#</option>
-                                    <option class="form-control" value="2">ASP .NET MVC</option>
-                                </select>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-default pull-right">Save </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                
-            </div>
-            <div class="modal-footer">
     @*Skills*@
     <div id="modalSkills" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -565,7 +466,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <form>
-
+                                <input type="hidden" name="UserID" value="@Model.UserID" />
                                 <div class="form-group">
                                     <label>Select Skill:</label>
                                     <select class="form-control">
@@ -574,24 +475,23 @@
                                         <option class="form-control" value="2">ASP .NET MVC</option>
                                     </select>
                                 </div>
-
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-default pull-right">Save </button>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-default pull-right">Save </button>
-                        </div>
-                    </div>
+
                 </div>
-                <div class="modal-footer">
-                </div>
+                <div class="modal-footer"></div>
             </div>
         </div>
     </div>
-
 </div>
+
 @section scripts{
     <script src="~/Scripts/ModelScripts/FormScript.js"></script>
     <script>
@@ -728,7 +628,7 @@
                     success: function () {
                         $("#modalWorkExperience").modal("hide");
                         bootbox.alert("Work Experience Details successfully saved!");
-                        
+
                     },
                     error: function () {
                         bootbox.alert("Error!");
