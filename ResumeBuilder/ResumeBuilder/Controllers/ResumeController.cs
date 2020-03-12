@@ -1,4 +1,5 @@
 ﻿using ResumeBuilder.Models;
+using ResumeBuilder.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,13 @@ namespace ResumeBuilder.Controllers
     public class ResumeController : Controller
     {
         private ResumeBuilderConnection db;
+        private PublicProfileViewModel _uiModel;
         public ResumeController()
         {
+            _uiModel = new PublicProfileViewModel();
             db = new ResumeBuilderConnection();
         }
-        
+
         // GET: Resume
         public ActionResult Index()
         {
@@ -38,6 +41,36 @@ namespace ResumeBuilder.Controllers
         public ActionResult Preview()
         {
             return PartialView("~/Views/PartialViews/PreviewPartial.cshtml");
+        }
+
+        public ActionResult PreviewUser(int id)
+        {
+            // User Name
+            _uiModel.Name = db.Users.FirstOrDefault(a => a.UserID == id).Name;
+
+            // User Role
+            _uiModel.UserRole = "Web Developer";
+
+            // User Phone
+            _uiModel.PhoneNumber = db.Users.FirstOrDefault(a => a.UserID == id).PhoneNumber;
+
+            // User E-mail
+            _uiModel.Email = db.Users.FirstOrDefault(a => a.UserID == id).Username;
+
+            //User Linkedin Link
+            _uiModel.LinkedinLink = "https://www.linkedin.com/user";
+
+            // User Summary
+            _uiModel.Summary = "Oh, I misunderstood the problem. ResumeBuilder ResumeBuilder Setting a padding on, ResumeBuilder ResumeBuilder bin the padding won't help you.";
+
+            //Education Details
+            ViewBag.education = 1;
+            var data = db.Users.Where(m=>m.UserID==id).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+            //return Json("Success", JsonRequestBehavior.AllowGet);
+
+            //return View(_uiModel);
+            
         }
 
         [HttpPost]
