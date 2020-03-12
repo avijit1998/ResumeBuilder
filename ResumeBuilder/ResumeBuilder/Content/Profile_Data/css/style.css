@@ -11,6 +11,13 @@
 {
     background-color: #af3c47;
 }
+
+.bg-summary{
+    background-color: #252f3a;
+}
+.css-summary {
+    font-size: 20px;
+}
 body{
     background-color: lightblue;
 }

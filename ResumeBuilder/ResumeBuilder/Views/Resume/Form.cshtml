@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Form";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    string str="test";
+    string str = "test";
 }
 
 
@@ -13,10 +13,17 @@
         {
             str = Session["UserName"].ToString();
         }
-        
+
         <fieldset>
-        <h3 id="welcomeUser">Welcome @str </h3>
+            <h3 id="welcomeUser">Welcome @str </h3>
         </fieldset>
+
+        @if (Model.Role == "Admin")
+        {
+            <script>
+                document.getElementById("btnSearchNav").style.display = "block";
+            </script>
+        }
 
         @*1st Row*@
         <div class="row">
@@ -128,204 +135,191 @@
 </div>
 
 <div id="close-modal">
-@*Basic Information Form*@
-<div id="modalBasicInfo" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h2 class="modal-title">ADD BASIC INFO</h2>
+    @*Basic Information Form*@
+    <div id="modalBasicInfo" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h2 class="modal-title">ADD BASIC INFO</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form>
+                                <div>
+                                    <input type="hidden" name="UserID" id="userId" value="@Model.UserID" />
+
+                                </div>
+                                <div class="form-group">
+                                    <label>Full Name:</label>
+                                    <input type="text" class="form-control" name="Name" id="txtFullName">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Email ID:</label>
+                                    <input type="email" class="form-control" name="Username" id="txtEmail" value="@Model.Username" readonly>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Gender</label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="Gender" id="optradio" checked value="Male">Male
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="Gender" id="optradio" value="Female">Female
+                                    </label>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Date of Birth</label>
+                                    <input type="date" class="form-control" name="DateOfBirth" id="dateDOB">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input type="text" class="form-control" name="PhoneNumber" id="txtPhoneNumber">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                                        <button type="submit" id="btnSaveBasicInfo" class="btn btn-default pull-right">Save </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                </div>
             </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <form>
-                            <div>
-                                <input type="hidden" name="UserID" id="userId" value="@Model.UserID" />
+        </div>
+    </div>
 
-                            </div>
-                            <div class="form-group">
-                                <label>Full Name:</label>
-                                <input type="text" class="form-control" name="Name" id="txtFullName">
-                            </div>
-                           
-                            <div class="form-group">
-                                <label>Email ID:</label>
-                                <input type="email" class="form-control" name="Username" id="txtEmail" value="@Model.Username" readonly>
-                            </div>
 
-                            <div class="form-group">
-                                <label>Gender</label>
+    @*Summary Form*@
+    <div id="modalSummary" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">ADD PROFESSIONAL SUMMARY</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form action="/Resume/SaveBasicInfo" method="post">
+                                <div>
+                                    <input type="hidden" name="UserID" id="userId" value="@Model.UserID" />
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Summary:</label>
+                                    <textarea class="form-control" name="Summary" id="txtSummary"></textarea>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-default pull-right" id="btnSaveSummary">Save </button>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*Education Details Form*@
+    <div id="modalEducationDetails" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">ADD EDUCATIONAL DETAILS</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form action="/ResumeContoller/Form" method="get">
                                 <label class="radio-inline">
-                                    <input type="radio" name="Gender" id="optradio" checked value="Male">Male
+                                    <input type="radio" name="courseOption" value="10th">10th
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="Gender" id="optradio" value="Female">Female
+                                    <input type="radio" name="courseOption" value="12th">12th
                                 </label>
-                            </div>
+                                <label class="radio-inline">
+                                    <input type="radio" name="courseOption" value="Graduation">Graduation
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="courseOption" value="Post-Graduation">Post-Graduation
+                                </label>
 
-                            <div class="form-group">
-                                <label>Date of Birth</label>
-                                <input type="date" class="form-control" name="DateOfBirth" id="dateDOB">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Phone Number</label>
-                                <input type="text" class="form-control" name="PhoneNumber" id="txtPhoneNumber">
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
-                                    <button type="submit" id="btnSaveBasicInfo" class="btn btn-default pull-right">Save </button>
+                                <div class="tenth-form" style="display:none;">
+                                    <div class="form-group">
+                                        <label>Year Of Passing:</label>
+                                        <input type="text" class="form-control" name="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="">CGPA Scored
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="marksOption">Percentage Scored
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label>Marks Scored:</label>
+                                        <input type="text" class="form-control" name="marksOption" placeholder="Enter CGPA">
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+
+                                <div class="all-other" style="display:none;">
+                                    <div class="form-group">
+                                        <label>Stream:</label>
+                                        <input type="text" class="form-control" name="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Year Of Passing:</label>
+                                        <input type="text" class="form-control" name="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="marksOption" checked>CGPA Scored
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="marksOption">Percentage Scored
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label>Marks Scored:</label>
+                                        <input type="text" class="form-control" name="" placeholder="Enter CGPA">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default pull-right">Save </button>
+                        </div>
                     </div>
                 </div>
-               
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div>
-
-
-@*Summary Form*@
-<div id="modalSummary" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">ADD PROFESSIONAL SUMMARY</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <form action="/Resume/SaveBasicInfo" method="post">
-                            <div>
-                                <input type="hidden" name="UserID" id="userId" value="@Model.UserID"/>
-                               
-                            </div>
-
-                            <div class="form-group">
-                                <label>Summary:</label>
-                                <textarea class="form-control" name="Summary" id="txtSummary" ></textarea>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-default pull-right" id="btnSaveSummary">Save </button>
-                                    
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                <div class="modal-footer">
                 </div>
-                
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div>
-
-@*Education Details Form*@
-<div id="modalEducationDetails" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">ADD EDUCATIONAL DETAILS</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <form action="/ResumeContoller/Form" method="get">
-                            <label class="radio-inline">
-                                <input type="radio" name="courseOption" value="10th">10th
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="courseOption" value="12th">12th
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="courseOption" value="Graduation">Graduation
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="courseOption" value="Post-Graduation">Post-Graduation
-                            </label>
-
-                            <div class="tenth-form" style="display:none;">
-                                <div class="form-group">
-                                    <label>Year Of Passing:</label>
-                                    <input type="text" class="form-control" name="">
-                                </div>
-                                <div class="form-group">
-                                    <label class="radio-inline">
-                                        <input type="radio" name="">CGPA Scored
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="marksOption">Percentage Scored
-                                    </label>
-                                </div>
-                                <div>
-                                    <label>Marks Scored:</label>
-                                    <input type="text" class="form-control" name="marksOption" placeholder="Enter CGPA">
-                                </div>
-                            </div>
-
-                            <div class="all-other" style="display:none;">
-                                <div class="form-group">
-                                    <label>Stream:</label>
-                                    <input type="text" class="form-control" name="">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Year Of Passing:</label>
-                                    <input type="text" class="form-control" name="">
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="radio-inline">
-                                        <input type="radio" name="marksOption" checked>CGPA Scored
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="marksOption">Percentage Scored
-                                    </label>
-                                </div>
-                                <div>
-                                    <label>Marks Scored:</label>
-                                    <input type="text" class="form-control" name="" placeholder="Enter CGPA">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-default pull-right">Save </button>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div>
-
-
-@*Work Experience*@
-<div id="modalWorkExperience" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">ADD WORK EXPERIENCE</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -353,10 +347,29 @@
                                         <option class="form-control" value="1">January</option>
                                         <option class="form-control" value="2">February</option>
                                     </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
+        </div>
+    </div>
 
+
+    @*Work Experience*@
+    <div id="modalWorkExperience" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">ADD WORK EXPERIENCE</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form>
+                                <input type="hidden" name="UserID" />
+
+                                <div class="form-group">
+                                    <label>Company Name:</label>
+                                    <input type="text" class="form-control" name="OrganizationName" id="txtCompanyName">
+                                </div>
                                 <div class="form-group">
                                     <label>Start Year:</label>
                                     <select class="form-control" name="StartYear" id="selectStartYear">
@@ -364,10 +377,9 @@
                                         <option class="form-control" value="2020">2020</option>
                                         <option class="form-control" value="2019">2019</option>
                                     </select>
+                                    <label>Designation</label>
+                                    <input type="text" class="form-control" name="Role" id="txtRole">
                                 </div>
-                            </div>
-
-                            <div class="col-lg-6 end-duration">
                                 <div class="form-group">
                                     <label>End Month:</label>
                                     <select class="form-control" name="EndMonth" id="selectEndMonth">
@@ -375,10 +387,44 @@
                                         <option class="form-control" value="1">January</option>
                                         <option class="form-control" value="2">February</option>
                                     </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 end-duration">
+                                    <label>Duration</label>
 
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Start Month:</label>
+                                        <select class="form-control" name="StartMonth" id="selectStartMonth">
+                                            <option class="form-control">Select Month</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+
+                                    <div class="form-group">
+                                        <label>Start Year:</label>
+                                        <select class="form-control" name="StartYear" id="selectStartYear">
+                                            <option class="form-control">Select Year</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 end-duration">
+                                    <div class="form-group">
+                                        <label>End Month:</label>
+                                        <select class="form-control" name="EndMonth" id="selectEndMonth">
+                                            <option class="form-control">Select Month</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 end-duration">
+
+                                    <div class="form-group">
+                                        <label>End Year:</label>
+                                        <select class="form-control" name="EndYear" id="selectEndYear">
+                                            <option class="form-control">Select Year</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label>End Year:</label>
                                     <select class="form-control" name="EndYear" id="selectEndYear">
@@ -404,58 +450,73 @@
                 
             </div>
             <div class="modal-footer">
-            </div>
-        </div>
-    </div>
-</div>
-
-@*Project*@
-<div id="modalProject" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">ADD PROJECT</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <form>
-                            <input type="hidden" name="UserID" value="@Model.UserID"/>
-
-                            <div class="form-group">
-                                <label>Project Title:</label>
-                                <input type="text" class="form-control" name="Title" id="txtTitle">
-                            </div>
-                            <div class="form-group">
-                                <label>Role</label>
-                                <input type="text" class="form-control" name="Role" id="txtProjectRole">
-                            </div>
-                            <div class="form-group">
-                                <label>Duration(In Months)</label>
-                                <input type="text" class="form-control" name="Duration" id="txtDuration">
-                            </div>
-                            <div class="form-group">
-                                <label>Description</label>
-                                <textarea class="form-control" name="Description" id="txtDescription"></textarea>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
-                                    <button type="button" id="btnSaveProjectDetials" class="btn btn-default pull-right">Save </button>
+                                    <input type="checkbox" class="checkbox-inline" name="CurrentlyWorking" id="checkWorking">
+                                    <label for="checkWorking">Currently Working</label>
                                 </div>
-                            </div>
-                        </form>
+
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default pull-right">Save </button>
+                        </div>
                     </div>
                 </div>
-                
-            </div>
-            <div class="modal-footer">
+                <div class="modal-footer">
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+    @*Project*@
+    <div id="modalProject" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">ADD PROJECT</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form>
+                                <input type="hidden" name="UserID" value="@Model.UserID" />
+
+                                <div class="form-group">
+                                    <label>Project Title:</label>
+                                    <input type="text" class="form-control" name="Title" id="txtTitle">
+                                </div>
+                                <div class="form-group">
+                                    <label>Role</label>
+                                    <input type="text" class="form-control" name="Role" id="txtProjectRole">
+                                </div>
+                                <div class="form-group">
+                                    <label>Duration(In Months)</label>
+                                    <input type="text" class="form-control" name="Duration" id="txtDuration">
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea class="form-control" name="Description" id="txtDescription"></textarea>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                                        <button type="button" id="btnSaveProjectDetials" class="btn btn-default pull-right">Save </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
 
 @*Skills*@
 <div id="modalSkills" class="modal fade" role="dialog">
@@ -491,18 +552,53 @@
                 
             </div>
             <div class="modal-footer">
+    @*Skills*@
+    <div id="modalSkills" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">ADD TECHNICAL SKILLS</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form>
+
+                                <div class="form-group">
+                                    <label>Select Skill:</label>
+                                    <select class="form-control">
+                                        <option class="form-control">Select Skill</option>
+                                        <option class="form-control" value="1">C#</option>
+                                        <option class="form-control" value="2">ASP .NET MVC</option>
+                                    </select>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default pull-right">Save </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 </div>
 @section scripts{
     <script src="~/Scripts/ModelScripts/FormScript.js"></script>
     <script>
+
         $(document).ready(function () {
             //empty auto fill data
-            $("body").on('click','hidden.bs.modal', function () {
+            $("body").on('click', 'hidden.bs.modal', function () {
                 //$("#txtSummary").val("");
                 //$("#txtFullName").val("");
                 //$("#optradio").val("");
@@ -516,7 +612,7 @@
             });
 
 
-            
+
             $('input[type=radio][name=courseOption]').change(function () {
                 if ($(this).val() == '10th') {
                     //alert("tenth details is there!");
@@ -563,7 +659,7 @@
                 user.Gender = $('input[name="Gender"]:checked').val();
                 user.DateOfBirth = $("#dateDOB").val();
                 user.PhoneNumber = $("#txtPhoneNumber").val();
-               
+
                 $.ajax({
                     type: "POST",
                     url: '/Resume/SaveBasicInformation',
@@ -642,5 +738,5 @@
                 return false;
             });
         });
-     </script>
+    </script>
 }

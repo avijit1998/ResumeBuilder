@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ResumeBuilder.ViewModels.PublicProfileViewModel
+@{
     Layout = null;
 }
 
@@ -55,33 +56,37 @@
         </div>
     </div>
     <!-- Basic Information -->
-
     <div class="container pseudo-element" id="basicInfo">
         <div class="no-gutters">
             <div class="col-lg-12 col-md-12">
                 <div class="p-4 bg-dark text-white">
                     <div class="row">
                         <div class="col-lg-9 col-md-7 col-sm-6">
-                            <h1 class="display-5 d-block">@ViewBag.profName</h1>
-                            <h6 class="display-5" style="opacity: .5;">@ViewBag.profRole</h6>
+                            <h1 class="display-5 d-block">@Model.Name</h1>
+                            <h6 class="display-5" style="opacity: .5;">@Model.UserRole</h6>
                         </div>
                         <div class="col-lg-3 col-md-5 col-sm-6" style="opacity: .65;">
                             <div class="row">
                                 <a href="#" class="text-white">
-                                    <i class="fa fa-phone"> @ViewBag.profPhone</i>
+                                    <i class="fa fa-phone"> @Model.PhoneNumber</i>
                                 </a>
                             </div>
                             <div class="row">
                                 <a href="http://gmail.com" class="text-white">
-                                    <i class="fa fa-envelope"> @ViewBag.profEmail</i>
+                                    <i class="fa fa-envelope"> @Model.Email</i>
                                 </a>
                             </div>
                             <div class="row">
                                 <a href="https://in.linkedin.com/in/dummy-link-775982111" class="text-white">
-                                    <i class="fa fa-linkedin"> @ViewBag.profLinkedin</i>
+                                    <i class="fa fa-linkedin"> @Model.LinkedinLink</i>
                                 </a>
                             </div>
-                        </div>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 bg-summary">
+                    <div class="text-white-50 text-center p-2  css-summary">
+                        @Model.Summary
                     </div>
                 </div>
             </div>
@@ -95,7 +100,7 @@
             </div>
             <!-- Cards Here -->
             <div class="col-md-12 col-lg-12 bg-light">
-                <div class="row">
+                <div id="educationConnectionId" class="row">
                     <div class="col-lg-4 mb-2 mt-2 text-center text-white">
                         <div class="card col-md-9 col-lg-11 offset-lg-1 offset-md-2 bg-card">
                             <div class="card-header">+3</div>
@@ -324,22 +329,29 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> -->
     <script type="text/javascript" src="~/Content/Profile_Data/bootstrap-4.3.1-dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="~/Scripts/Profile_Scripts/profileDefaultScript.js"></script>
+    <!-- Internal JavaScript Code -->
     <script type="text/javascript">
-        $(document).ready(function(){
+    $(document).ready(function () {
+        var educationWrapper = $('#educationConnectionId');
+            function addf()
+            {
+                var division = document.createElement('DIV');
+                division.innerHTML = DynamicElement("");
+                $(educationWrapper).append(division);
+            }
+            function DynamicElement(value)
+            {
+                return '<div class="card col-md-9 col-lg-11 offset-lg-1 offset-md-2 bg-card"><div class="card-header">+3</div><div class="card-body"><h4>VSSUT University</h4><h5>Anill Percentage<label>110%</label></h5></div><div class="card-footer">Passing Year - 1997</div></div>';
+            }
 
-            var onResize = function() {
-            // apply dynamic padding at the top of the body according to the fixed navbar height
-                $("body").css("padding-top", $(".fixed-top").height());
-            };
 
-            // attach the function to the window resize event
-            $(window).resize(onResize);
-
-            // call it also when the page is ready after load or reload
-            $(function() {
-                onResize();
-            });
-        });
+            if (@Model.PhoneNumber == 1234567890)
+        {
+                addf();
+                $('#educationConnectionId').children().eq(4).addClass("col-lg-4 mb-2 mt-2 text-center text-white")
+        }
+    });
     </script>
 
 </body>

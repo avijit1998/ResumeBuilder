@@ -23,7 +23,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Logout</a></li>
+                        <li>@Html.ActionLink("Logout", "LogOff")</li>
                         @*<li><a href="#">Settings</a></li>
                         <li><a href="#">Profile</a></li>
                         <li><a href="#">Help</a></li>*@
@@ -41,6 +41,7 @@
                     <li><a href="#">Preview</a></li>
                     <li><a href="#">Settings</a></li>
                     <li><a href="#">Public Profile</a></li>
+                    <li id="btnSearchNav" style="display:none;"><a href="#">Search</a></li>
                 </ul>
             </div>
             <div class="col-sm-9 col-md-10 main" >

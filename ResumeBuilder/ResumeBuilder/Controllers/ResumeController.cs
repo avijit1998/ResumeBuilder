@@ -103,5 +103,16 @@ namespace ResumeBuilder.Controllers
         //    }
         //    return RedirectToAction("Login", "Account");
         //}
+
+        public ActionResult LogOff()
+        {
+            if (Session["UserID"] != null)
+            {
+                Session.Remove("UserID");
+                Session.RemoveAll();
+            }
+
+            return RedirectToAction("Login", "Account");
+        }
     }
 }
