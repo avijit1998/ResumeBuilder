@@ -36,6 +36,15 @@ label{
     color:darkblue;
 }
 
+#mainDivModal{
+    position:absolute;
+}
+
+#divPreview{
+    position:absolute;
+    display:none;
+}
+
 #txtSummary{
     width:100%;
     resize:none;

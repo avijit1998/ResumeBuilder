@@ -35,6 +35,11 @@ namespace ResumeBuilder.Controllers
             return RedirectToAction("Login","Account");
         }
 
+        public ActionResult Preview()
+        {
+            return PartialView("~/Views/PartialViews/PreviewPartial.cshtml");
+        }
+
         [HttpPost]
         public ActionResult SaveSummary(User user)
         {
