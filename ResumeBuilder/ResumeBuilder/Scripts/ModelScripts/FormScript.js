@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    $(body).on("click", "#educationDetails", function () {
+    $("body").on("click", "#educationDetails", function () {
         var radioValue = $('input[name="courseOption"]:checked').val();
         if (radioValue == "10th") {
             $(".tenth-form").show();
@@ -13,7 +13,7 @@
     });
 
 
-    $(body).on("click", "#workingCheck", function () {
+    $('body').on("click", "#workingCheck", function () {
         if ($('#workingCheck').is(":checked")) {
             $(".end-duration").hide();
         }

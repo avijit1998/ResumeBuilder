@@ -36,3 +36,13 @@ label{
     color:darkblue;
 }
 
+
+#mainDivModal{
+    position:absolute;
+}
+
+#divPreview{
+    position:absolute;
+    display:none;
+}
+

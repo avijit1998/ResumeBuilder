@@ -1852,6 +1852,7 @@
     <Content Include="Content\plugins\toastr\toastr.css" />
     <Content Include="Content\plugins\toastr\toastr.min.css" />
     <Content Include="Content\plugins\toastr\toastr.min.js" />
+    <Content Include="Content\preview.css" />
     <Content Include="Content\register.css" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
@@ -1958,6 +1959,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\ModelScripts\FormScript.js" />
+    <Content Include="Scripts\ModelScripts\PreviewScript.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -1999,6 +2001,8 @@
     <Content Include="Views\Resume\Index.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Resume\Form.cshtml" />
+    <Content Include="Views\Resume\Preview.cshtml" />
+    <Content Include="Views\PartialViews\PreviewPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
