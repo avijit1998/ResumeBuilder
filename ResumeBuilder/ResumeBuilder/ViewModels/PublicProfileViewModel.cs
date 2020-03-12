@@ -6,7 +6,7 @@ namespace ResumeBuilder.ViewModels
     {
         // Basic Details
         public string Name { get; set; }
-        public int? PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string LinkedinLink { get; set; }
         public string UserRole { get; set; }
