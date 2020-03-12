@@ -76,7 +76,7 @@ namespace ResumeBuilder.Controllers
         {  
             if (Session["UserID"] != null)  
             {  
-                return RedirectToAction("Form", "Resume", user);  
+                return RedirectToAction("Form", "Resume");  
             } else  
             {  
                 return RedirectToAction("Login");  
@@ -131,24 +131,6 @@ namespace ResumeBuilder.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
-        }
-
-        //
-        // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult LogOff()
-        {
-            //AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
-        }
-
-        //
-        // GET: /Account/ExternalLoginFailure
-        [AllowAnonymous]
-        public ActionResult ExternalLoginFailure()
-        {
-            return View();
         }
 
         protected override void Dispose(bool disposing)

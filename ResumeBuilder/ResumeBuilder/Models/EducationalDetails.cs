@@ -25,5 +25,7 @@ namespace ResumeBuilder.Models
         public int PassingYear { get; set; }
 
         public int CGPAOrPercentage { get; set; }
+
+        public string Stream { get; set; }
     }
 }   

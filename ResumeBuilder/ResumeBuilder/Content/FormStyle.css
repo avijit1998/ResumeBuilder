@@ -36,7 +36,6 @@ label{
     color:darkblue;
 }
 
-
 #mainDivModal{
     position:absolute;
 }
@@ -46,3 +45,7 @@ label{
     display:none;
 }
 
+#txtSummary{
+    width:100%;
+    resize:none;
+}
