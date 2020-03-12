@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="@Url.Content("~/Content/settings.css")" rel="stylesheet" type="text/css" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @RenderSection("Styles", false)
@@ -38,12 +39,98 @@
                     <li class="active"><a href="#"><strong> Name </strong><span class="sr-only">(current)</span></a></li>
                     <li><a href="#">Edit Form</a></li>
                     <li><a href="#">My Resume</a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#myModal" id="settingsBtn">Settings</a></li>
                     <li><a id="preview" href="#previewDiv" data-url="/Resume/Preview">Preview</a></li>
-                    <li><a href="#">Settings</a></li>
                     <li><a href="#">Public Profile</a></li>
                     <li id="btnSearchNav" style="display:none;"><a href="#">Search</a></li>
                 </ul>
             </div>
+            <div id="modal">
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                <h4 class="modal-title">Settings</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div id="divWorkex" class="[ form-group ]">
+                                    <!-- checkbox -->
+                                    <input type="checkbox" name="workex" id="workex" autocomplete="off" />
+                                    <div class="[ btn-group ]">
+                                        <label for="workex" class="[ btn btn-default ]">
+                                            <span class="[ glyphicon glyphicon-ok ]"></span>
+                                            <span></span>
+                                        </label>
+                                        <label for="workex" class="[ btn btn-default active ]">
+                                            Work Experience
+                                        </label>
+
+                                    </div>
+                                </div><!-- checkbox -->
+                                <div id="divProjects" class="[ form-group ]">
+                                    <!-- checkbox -->
+                                    <input type="checkbox" name="projects" id="projects" autocomplete="off" />
+                                    <div class="[ btn-group ]">
+                                        <label for="projects" class="[ btn btn-default ]">
+                                            <span class="[ glyphicon glyphicon-ok ]"></span>
+                                            <span> </span>
+                                        </label>
+                                        <label for="projects" class="[ btn btn-default active ]">
+                                            Projects
+                                        </label>
+                                    </div>
+                                </div><!-- checkbox -->
+                                <div class="[ form-group ]">
+                                    <!-- checkbox -->
+                                    <input type="checkbox" name="education" id="education" autocomplete="off" />
+                                    <div class="[ btn-group ]">
+                                        <label for="education" class="[ btn btn-default ]">
+                                            <span class="[ glyphicon glyphicon-ok ]"></span>
+                                            <span> </span>
+                                        </label>
+                                        <label for="education" class="[ btn btn-default active ]">
+                                            Educational Details
+                                        </label>
+                                    </div>
+                                </div><!-- checkbox -->
+                                <div class="[ form-group ]">
+                                    <!-- checkbox -->
+                                    <input type="checkbox" name="skills" id="skills" autocomplete="off" />
+                                    <div class="[ btn-group ]">
+                                        <label for="skills" class="[ btn btn-default ]">
+                                            <span class="[ glyphicon glyphicon-ok ]"></span>
+                                            <span> </span>
+                                        </label>
+                                        <label for="skills" class="[ btn btn-default active ]">
+                                            Skills
+                                        </label>
+                                    </div>
+                                </div><!-- checkbox -->
+                                <div class="[ form-group ]">
+                                    <!-- checkbox -->
+                                    <input type="checkbox" name="contact" id="contact" autocomplete="off" />
+                                    <div class="[ btn-group ]">
+                                        <label for="contact" class="[ btn btn-default ]">
+                                            <span class="[ glyphicon glyphicon-ok ]"></span>
+                                            <span> </span>
+                                        </label>
+                                        <label for="contact" class="[ btn btn-default active ]">
+                                            Contact Details
+                                        </label>
+                                    </div>
+                                </div><!-- checkbox -->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" id="btnSave">Save changes</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+
+            </div>
+
             <div class="col-sm-9 col-md-10 main" >
                 @RenderBody()
             </div>
@@ -56,8 +143,10 @@
     @*<footer>
                 <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>*@
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="@Url.Content("~/Scripts/settings.js")"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
