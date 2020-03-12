@@ -240,6 +240,9 @@
     <Compile Include="Migrations\202003120851031_linked users table with usrsetting.cs" />
     <Compile Include="Migrations\202003120851031_linked users table with usrsetting.Designer.cs">
       <DependentUpon>202003120851031_linked users table with usrsetting.cs</DependentUpon>
+    <Compile Include="Migrations\202003111213049_added stream field in educational details.cs" />
+    <Compile Include="Migrations\202003111213049_added stream field in educational details.Designer.cs">
+      <DependentUpon>202003111213049_added stream field in educational details.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -259,6 +262,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\PublicProfileViewModel.cs" />
+    <Compile Include="ViewModels\UI Models\EducationUIModel.cs" />
+    <Compile Include="ViewModels\UI Models\ProjectUIModel.cs" />
+    <Compile Include="ViewModels\UI Models\WorkExUIModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-lumen-v3.css" />
@@ -1890,6 +1897,7 @@
     <Content Include="Content\plugins\toastr\toastr.css" />
     <Content Include="Content\plugins\toastr\toastr.min.css" />
     <Content Include="Content\plugins\toastr\toastr.min.js" />
+    <Content Include="Content\preview.css" />
     <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\css\bootstrap-grid.css" />
     <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\css\bootstrap-grid.min.css" />
     <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\css\bootstrap-reboot.css" />
@@ -2018,7 +2026,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\ModelScripts\FormScript.js" />
+    <Content Include="Scripts\ModelScripts\PreviewScript.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Profile_Scripts\profileDefaultScript.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\settings.js" />
@@ -2060,6 +2070,8 @@
     <Content Include="Views\Resume\Index.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Resume\Form.cshtml" />
+    <Content Include="Views\Resume\Preview.cshtml" />
+    <Content Include="Views\PartialViews\PreviewPartial.cshtml" />
     <Content Include="Views\PublicProfile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -2123,6 +2135,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003120851031_linked users table with usrsetting.resx">
       <DependentUpon>202003120851031_linked users table with usrsetting.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003111213049_added stream field in educational details.resx">
+      <DependentUpon>202003111213049_added stream field in educational details.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

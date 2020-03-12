@@ -24,12 +24,12 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Logout</a></li>
+                        <li>@Html.ActionLink("Logout", "LogOff")</li>
                         @*<li><a href="#">Settings</a></li>
                         <li><a href="#">Profile</a></li>
                         <li><a href="#">Help</a></li>*@
                     </ul>
-            </div>
+            </div> 
         </div>
     </nav>
     <div class="container-fluid">
@@ -39,9 +39,10 @@
                     <li class="active"><a href="#"><strong> Name </strong><span class="sr-only">(current)</span></a></li>
                     <li><a href="#">Edit Form</a></li>
                     <li><a href="#">My Resume</a></li>
-                    <li><a href="#">Preview</a></li>
                     <li><a href="#" data-toggle="modal" data-target="#myModal" id="settingsBtn">Settings</a></li>
+                    <li><a id="preview" href="#previewDiv" data-url="/Resume/Preview">Preview</a></li>
                     <li><a href="#">Public Profile</a></li>
+                    <li id="btnSearchNav" style="display:none;"><a href="#">Search</a></li>
                 </ul>
             </div>
             <div id="modal">
@@ -132,6 +133,9 @@
 
             <div class="col-sm-9 col-md-10 main" >
                 @RenderBody()
+            </div>
+            <div id="previewDiv">
+
             </div>
         </div>
     </div>  

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ResumeBuilder.ViewModels.PublicProfileViewModel
+@{
     Layout = null;
 }
 
@@ -8,7 +9,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/Content/Profile_Data/bootstrap-4.3.1-dist/css/bootstrap.css" type="text/css">
     <link rel="stylesheet" href="~/Content/Profile_Data/css/style.css" type="text/css">
@@ -56,32 +56,38 @@
     </div>
     <!-- Basic Information -->
 
+
     <div class="container pseudo-element" id="basicInfo">
         <div class="no-gutters">
             <div class="col-lg-12 col-md-12">
                 <div class="p-4 bg-dark text-white">
                     <div class="row">
                         <div class="col-lg-9 col-md-7 col-sm-6">
-                            <h1 class="display-5 d-block">@ViewBag.profName</h1>
-                            <h6 class="display-5" style="opacity: .5;">@ViewBag.profRole</h6>
+                            <h1 class="display-5 d-block">@Model.Name</h1>
+                            <h6 class="display-5" style="opacity: .5;">@Model.UserRole</h6>
                         </div>
                         <div class="col-lg-3 col-md-5 col-sm-6" style="opacity: .65;">
                             <div class="row">
                                 <a href="#" class="text-white">
-                                    <i class="fa fa-phone"> @ViewBag.profPhone</i>
+                                    <i class="fa fa-phone"> @Model.PhoneNumber</i>
                                 </a>
                             </div>
                             <div class="row">
                                 <a href="http://gmail.com" class="text-white">
-                                    <i class="fa fa-envelope"> @ViewBag.profEmail</i>
+                                    <i class="fa fa-envelope"> @Model.Email</i>
                                 </a>
                             </div>
                             <div class="row">
                                 <a href="https://in.linkedin.com/in/dummy-link-775982111" class="text-white">
-                                    <i class="fa fa-linkedin"> @ViewBag.profLinkedin</i>
+                                    <i class="fa fa-linkedin"> @Model.LinkedinLink</i>
                                 </a>
                             </div>
-                        </div>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 bg-summary">
+                    <div class="text-white-50 text-center p-2  css-summary">
+                        @Model.Summary
                     </div>
                 </div>
             </div>
@@ -96,46 +102,19 @@
             <!-- Cards Here -->
             <div class="col-md-12 col-lg-12 bg-light">
                 <div class="row">
-                    <div class="col-lg-4 mb-2 mt-2 text-center text-white">
-                        <div class="card col-md-9 col-lg-11 offset-lg-1 offset-md-2 bg-card">
-                            <div class="card-header">+3</div>
-                            <div class="card-body">
-                                <h4>Utkal University</h4>
-                                <h5>Percentage<label>80%</label></h5>
+                    @foreach (var data in Model.EducationList)
+                    {
+                        <div class="col-lg-4 mb-2 mt-2 text-center text-white">
+                            <div class="card col-md-9 col-lg-11 offset-lg-1 offset-md-2 bg-card">
+                                <div class="card-header">@data.CourseName</div>
+                                <div class="card-body">
+                                    <h4>Utkal University</h4>
+                                    <h5>Percentage :<label>@data.CGPAOrPercentage%</label></h5>
+                                </div>
+                                <div class="card-footer">Passing Year - @data.PassingYear</div>
                             </div>
-                            <div class="card-footer">Passing Year - 2017</div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 mb-2 mt-2 text-center text-white">
-                        <div class="card col-md-9 col-lg-11 offset-lg-1 offset-md-2 bg-card">
-                            <div class="card-header">+2</div>
-                            <div class="card-body">
-                                <h4>Utkal University</h4>
-                                <h5>Percentage<label>80%</label></h5>
-                            </div>
-                            <div class="card-footer">Passing Year - 2017</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 mb-2 mt-2 text-center text-white">
-                        <div class="card col-md-9 col-lg-11 offset-lg-1 offset-md-2 bg-card">
-                            <div class="card-header">10th</div>
-                            <div class="card-body">
-                                <h4>Utkal University</h4>
-                                <h5>Percentage<label>80%</label></h5>
-                            </div>
-                            <div class="card-footer">Passing Year - 2017</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 mb-2 mt-2 text-center text-white">
-                        <div class="card col-md-9 col-lg-11 offset-lg-1 offset-md-2 bg-card">
-                            <div class="card-header">UG</div>
-                            <div class="card-body">
-                                <h4>Utkal University</h4>
-                                <h5>Percentage<label>80%</label></h5>
-                            </div>
-                            <div class="card-footer">Passing Year - 2017</div>
-                        </div>
-                    </div>
+                    }
                 </div>
             </div>
         </div>
@@ -147,35 +126,14 @@
                 <h2>Skills</h2>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="row p-3 bg-light">
-                    <div class="col-md-6 col-lg-6">
-                        <h4>HTML</h4>
-                        <progress class="progress progress-bar mb-3" id="progBar" value="75" max="100" style="width: 100%"></progress>
-                    </div>
-                    <div class="col-md-6 col-lg-6">
-                        <h4>CSS</h4>
-                        <progress class="progress progress-bar mb-3" id="progBar" value="55" max="100" style="width: 100%"></progress>
-                    </div>
-                    <div class="col-md-6 col-lg-6">
-                        <h4>JavaScript</h4>
-                        <progress class="progress progress-bar mb-3" id="progBar" value="95" max="100" style="width: 100%"></progress>
-                    </div>
-                    <div class="col-md-6 col-lg-6">
-                        <h4>jQuery</h4>
-                        <progress class="progress progress-bar mb-3" id="progBar" value="70" max="100" style="width: 100%"></progress>
-                    </div>
-                    <div class="col-md-6 col-lg-6">
-                        <h4>BootStrap</h4>
-                        <progress class="progress progress-bar mb-3" id="progBar" value="45" max="100" style="width: 100%"></progress>
-                    </div>
-                    <div class="col-md-6 col-lg-6">
-                        <h4>C#</h4>
-                        <progress class="progress progress-bar mb-3" id="progBar" value="65" max="100" style="width: 100%"></progress>
-                    </div>
-                    <div class="col-md-6 col-lg-6">
-                        <h4>ASP.NET MVC</h4>
-                        <progress class="progress progress-bar mb-3" id="progBar" value="90" max="100" style="width: 100%"></progress>
-                    </div>
+                <div id="" class="row p-3 bg-light">
+                    @foreach (var data in Model.SkillList)
+                    {
+                        <div class="col-md-6 col-lg-6">
+                            <h4>@data</h4>
+                            <progress class="progress progress-bar mb-3" id="progBar" value="75" max="100" style="width: 100%"></progress>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
@@ -187,43 +145,16 @@
                 <h2>My Projects</h2>
             </div>
             <div class="p-3 bg-light">
-                <div class="timeline">
-                    <div class="container-timeline timeline-left">
-                        <div class="content bg-success text-white">
-                            <h2>2017</h2>
-                            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+                <div id="projectTimelineId" class="timeline">
+                    @foreach (var data in Model.ProjectList)
+                    {
+                        <div class="container-timeline">
+                            <div class="content bg-success text-white">
+                                <h2>@data.StartDate - @data.EndDate</h2>
+                                <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="container-timeline timeline-right">
-                        <div class="content bg-success text-white">
-                            <h2>2016</h2>
-                            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-                        </div>
-                    </div>
-                    <div class="container-timeline timeline-left">
-                        <div class="content bg-success text-white">
-                            <h2>2015</h2>
-                            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-                        </div>
-                    </div>
-                    <div class="container-timeline timeline-right">
-                        <div class="content bg-success text-white">
-                            <h2>2012</h2>
-                            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-                        </div>
-                    </div>
-                    <div class="container-timeline timeline-left">
-                        <div class="content bg-success text-white">
-                            <h2>2011</h2>
-                            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-                        </div>
-                    </div>
-                    <div class="container-timeline timeline-right">
-                        <div class="content bg-success text-white">
-                            <h2>2007</h2>
-                            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-                        </div>
-                    </div>
+                    }
                 </div>
             </div>
         </div>
@@ -235,43 +166,17 @@
                 <h2>Work Experiences</h2>
             </div>
             <div class="p-3 bg-light">
-                <div class="timeline">
-                    <div class="container-timeline timeline-left">
-                        <div class="content bg-purple text-white">
-                            <h2>2017</h2>
-                            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+                <div id="workExTimelineId" class="timeline">
+                    @foreach (var data in Model.WorkExList)
+                    {
+                        <div class="container-timeline">
+                            <div class="content bg-purple text-white text-center">
+                                <h2>@data.OrganizationName</h2>
+                                <div>Role : @data.Role</div>
+                                <h4>@data.StartDate - @data.EndDate</h4>
+                            </div>
                         </div>
-                    </div>
-                    <div class="container-timeline timeline-right">
-                        <div class="content bg-purple text-white">
-                            <h2>2016</h2>
-                            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-                        </div>
-                    </div>
-                    <div class="container-timeline timeline-left">
-                        <div class="content bg-purple text-white">
-                            <h2>2015</h2>
-                            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-                        </div>
-                    </div>
-                    <div class="container-timeline timeline-right">
-                        <div class="content bg-purple text-white">
-                            <h2>2012</h2>
-                            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-                        </div>
-                    </div>
-                    <div class="container-timeline timeline-left">
-                        <div class="content bg-purple text-white">
-                            <h2>2011</h2>
-                            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-                        </div>
-                    </div>
-                    <div class="container-timeline timeline-right">
-                        <div class="content bg-purple text-white">
-                            <h2>2007</h2>
-                            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-                        </div>
-                    </div>
+                    }
                 </div>
             </div>
         </div>
@@ -281,22 +186,11 @@
         <div id="contact" class="bg-light-gray pseudo-element">
             <div class="p-3 text-white bg-warning">
                 <h2>My Resume</h2>
-                <p>
-                    vscode-random - Visual Studio Marketplacemarketplace.visualstudio.com › items › itemName=jrebocho.vscode-ra...Sep 29, 2019 - Install. Launch the Command Pallete (Cmd+Shift+P / Ctrl+Shift+P) and type Extensions: Install Extensions . Type vscode-random in the Side Bar search input. Click the Extensions icon in the View Bar. Type vscode-random in the Side Bar search input. Launch VS Code Quick Open (Cmd+P / Ctrl+P).
-                </p>
+                
             </div>
         </div>
     </div>
     <!-- Footer -->
-    <!-- <div class="container">
-        <footer class="p-3 bg-dark text-center">
-            <button class="btn btn-success">
-                <i class="fa fa-download"></i> Download Resume
-            </button>
-        </footer>
-    </div> -->
-
-
     <footer>
         <div class="container">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 bg-dark p-2">
@@ -322,25 +216,59 @@
     <!-- CDN / Script Links -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> -->
     <script type="text/javascript" src="~/Content/Profile_Data/bootstrap-4.3.1-dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="~/Scripts/Profile_Scripts/profileDefaultScript.js"></script>
+    <!-- Internal JavaScript Code -->
     <script type="text/javascript">
-        $(document).ready(function(){
+    $(document).ready(function () {
 
-            var onResize = function() {
-            // apply dynamic padding at the top of the body according to the fixed navbar height
-                $("body").css("padding-top", $(".fixed-top").height());
-            };
+        var projectCount = @Model.ProjectList.Count;
+        for(var i =0; i< projectCount; i++)
+        {
+            if(i % 2 === 0)
+                $('#projectTimelineId').children().eq(i).addClass("timeline-left");
+            else
+                $('#projectTimelineId').children().eq(i).addClass("timeline-right");
+        }
 
-            // attach the function to the window resize event
-            $(window).resize(onResize);
+        var projectCount = @Model.WorkExList.Count;
+        for(var i =0; i< projectCount; i++)
+        {
+            if(i % 2 === 0)
+                $('#workExTimelineId').children().eq(i).addClass("timeline-left");
+            else
+                $('#workExTimelineId').children().eq(i).addClass("timeline-right");
+        }
 
-            // call it also when the page is ready after load or reload
-            $(function() {
-                onResize();
-            });
-        });
-    </script>
+
+        @*function addf() {
+            var division = document.createElement('DIV');
+            division.innerHTML = DynamicElement("");
+            $(educationWrapper).append(division);
+        }
+        function DynamicElement(value) {
+            return '<div class="card col-md-9 col-lg-11 offset-lg-1 offset-md-2 bg-card"><div class="card-header">+3</div><div class="card-body"><h4>VSSUT University</h4><h5>Anill Percentage<label>110%</label></h5></div><div class="card-footer">Passing Year - 1997</div></div>';
+        }
+
+
+
+        var educationCount = @Model.EducationList.Count;
+
+        console.log(educationCount);
+
+        if (0)
+        {
+            addf();
+            $('#educationConnectionId').children().eq(4).addClass("col-lg-4 mb-2 mt-2 text-center text-white")
+        }*@
+
+
+
+
+
+
+    });
+</script>
 
 </body>
 </html>
