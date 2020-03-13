@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "GetAllData";
     List<ResumeBuilder.Models.Project> projects = ViewBag.Projects;
+    List<ResumeBuilder.Models.WorkExperience> workExperiences = ViewBag.WorkExperiences;
 }
 
 
@@ -43,6 +44,33 @@
     </div>
 }
 
+<hr />
+
+<h3>Work Experience Details</h3>
+
+@foreach (var w in workExperiences)
+{
+    <div>
+        <p>
+            <b>Organisation Name: @w.OrganizationName</b>
+            <button type="button" value="Edit" class="btn btn-info pull-right js-edit-workex" data-workex-id="@w.WorkExperienceid">Edit</button>
+            <button type="button" class="btn btn-danger pull-right js-delete-workex" value="Delete" data-workex-id="@w.WorkExperienceid">Delete</button>
+        </p>
+        <div class="left-margin">
+            <p>Role: @w.Role</p>
+            <p>From: @w.StartMonth / @w.StartYear</p>
+            @if(@w.CurrentlyWorking)
+            {
+                <p>Currently Working</p>
+            }
+            else
+            {
+                <p>To: @w.EndMonth / @w.EndYear</p>
+            }
+        </div>
+    </div>
+}
+<hr />
 
 
 
@@ -95,39 +123,88 @@
     </div>
 </div>
 
-
+@*WorkExperience Form*@
+<div id="modalWorkExperience" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">ADD WORK EXPERIENCE</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form>
+                            <<input type="hidden" name="WorkExperienceid" />
+                            <div class="form-group">
+                                <label>Company Name:</label>
+                                <input type="text" class="form-control" name="OrganizationName" id="txtCompanyName">
+                            </div>
+                            <div class="form-group">
+                                <label>Designation</label>
+                                <input type="text" class="form-control" name="Role" id="txtRole">
+                            </div>
+                            <div class="form-group">
+                                <label>Duration</label>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Start Month:</label>
+                                    <select class="form-control" name="StartMonth" id="selectStartMonth">
+                                        <option class="form-control">Select Month</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Start Year:</label>
+                                    <select class="form-control" name="StartYear" id="selectStartYear">
+                                        <option class="form-control">Select Year</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="hide-if-currently-working">
+                                <div class="col-lg-6 end-duration">
+                                    <div class="form-group">
+                                        <label>End Month:</label>
+                                        <select class="form-control" name="EndMonth" id="selectEndMonth">
+                                            <option class="form-control">Select Month</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 end-duration">
+                                    <div class="form-group">
+                                        <label>End Year:</label>
+                                        <select class="form-control" name="EndYear" id="selectEndYear">
+                                            <option class="form-control">Select Year</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" class="checkbox-inline" name="CurrentlyWorking" id="checkWorking">
+                                <label for="checkWorking">Currently Working</label>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-default pull-right js-save-workex" id="btnSaveWorkExperience">Save </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer"></div>
+    </div>
+</div>
 
 @section scripts{
     <script src="~ /scripts/bootbox.js"></script>
 
     <script>
-
-
-        //$(document).ready(function () {
-            //console.log("document ready");
-        //    $.ajax({
-        //        type: 'GET',
-        //        url: 'GetAllData',
-        //        success: function (data) {
-        //            $.each(data.ProjectInfo, function (i, item) {
-        //                console.log(item.Title);
-        //                //var rows = "<p>"
-        //                //    + "<span><b>Project Title :</b></span><span>" + item.Title + "</span>"
-        //                //    + "<button type='submit' id='delProjectBtn' class='btn btn-xs btn-danger js-delete-project' value='Delete' data-project-id=" + item.ProjectId + ">Delete</button>"
-        //                //    + " <button type='submit' id='editProjectBtn' class='btn btn-xs btn-success js-edit-project' value='Edit' data-project-id=" + item.ProjectId + ">Edit</button></td>"
-        //                //    + "</p>"
-        //                //    + "<p><span><b>Role :</b></span><span>" + item.Role + "</span></p>"
-        //                //    + "<p><span><b>Duration :</b></span><span>" + item.Duration + "</span></p>"
-        //                //    + "<p><span><b>Description :</b></span><span>" + item.Description + "</span></p>"
-
-        //                //$('#project-details').append(rows);
-        //            });
-        //        },
-        //        error: function (ex) {
-        //            console.log(ex);
-        //        }
-        //    });
-        //});
 
         $('body').on('click', '.js-edit-project', function (e) {
             e.preventDefault();
@@ -141,7 +218,7 @@
                     console.log(result);
                     $('input[name="ProjectId"]').val(result.ProjectId);
                     $('input[name="Title"]').val(result.Title);
-                    $('input[name="Role"]').val(result.Role);
+                    $('input[name="ProjectRole"]').val(result.ProjectRole);
                     $('input[name="Duration"]').val(result.Duration);
                     $('textarea[name="Description"]').val(result.Description);
                     $('#modalProject').find('.modal-title').html('UPDATE PROJECT DETAILS');
@@ -192,6 +269,79 @@
                         url: "DeleteProject",
                         method: "POST",
                         data: { projectID: projectID },
+                        success: function (result) {
+                            location.reload(true);
+                        },
+                        error: function (error) {
+                            bootbox.alert("Error!");
+                        }
+                    })
+                }
+            });
+        });
+
+        $('body').on('click', '.js-edit-workex', function (e) {
+            e.preventDefault();
+            var $button = $(this);
+            var workExperienceId = $button.data("workex-id");
+            $.ajax({
+                url: "GetWorkExperienceById/" + workExperienceId,
+                method: "GET",
+                success: function (result) {
+                    console.log(result);
+                    $('input[name="WorkExperienceid"]').val(result.WorkExperienceid);
+                    $('input[name="OrganizationName"]').val(result.OrganizationName);
+                    $('input[name="Role"]').val(result.Role);
+                    $('input[name="StartMonth"]').val(result.StartMonth);
+                    $('input[name="StartYear"]').val(result.StartYear);
+                    $('input[name="EndMonth"]').val(result.EndMonth);
+                    $('input[name="EndYear"]').val(result.EndYear);
+                    $('#modalWorkExperience').find('.modal-title').html('UPDATE WORK EXPERIENCE DETAILS');
+                    $('#modalWorkExperience').modal('show');
+                },
+                error: function (error) {
+                    console.log(error);
+                    alert("Sorry ! Unable to edit WorkEx");
+                }
+            });
+        });
+
+        $('body').on('click', '.js-save-workex', function (e) {
+            e.preventDefault();
+            var formData = {
+                "WorkExperienceid" : $('input[name="WorkExperienceid"]').val(),
+                "OrganizationName" : $('input[name="OrganizationName"]').val(),
+                "Role" : $('input[name="Role"]').val(),
+            };
+            $.ajax({
+                url: "UpdateWorkExperience",
+                method: "POST",
+                data: formData,
+                success: function (result) {
+                    console.log(result);
+                    $('#modalWorkExperience').modal('hide');
+                    location.reload(true);
+                    //$empDataTable.ajax.reload();
+                },
+                error: function (error) {
+                    console.log(error);
+                    alert("Sorry ! Unable to update details");
+                }
+            });
+
+        });
+
+        $('body').on('click', '.js-delete-workex', function (e) {
+            e.preventDefault();
+            var $button = $(this);
+
+            var workExId = $button.data("workex-id");
+            bootbox.confirm("<p style='color:black;'>Are you sure to delete this Project Record?</p>", function (result) {
+                if (result) {
+                    $.ajax({
+                        url: "DeleteProject",
+                        method: "POST",
+                        data: { workExId: workExId },
                         success: function (result) {
                             location.reload(true);
                         },
