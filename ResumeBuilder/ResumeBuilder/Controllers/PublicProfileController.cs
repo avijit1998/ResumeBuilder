@@ -46,6 +46,7 @@ namespace ResumeBuilder.Controllers
                 new EducationUIModel{ CourseName = "+2", PassingYear = 2014, CGPAOrPercentage = 90 },
                 new EducationUIModel{ CourseName = "+2", PassingYear = 2014, CGPAOrPercentage = 70 },
                 new EducationUIModel{ CourseName = "+2", PassingYear = 2014, CGPAOrPercentage = 95 },
+                new EducationUIModel{ CourseName = "+2", PassingYear = 2014, CGPAOrPercentage = 95 },
                 new EducationUIModel{ CourseName = "+2", PassingYear = 2014, CGPAOrPercentage = 80 }
             };
 
@@ -79,9 +80,14 @@ namespace ResumeBuilder.Controllers
                 new WorkExUIModel{ OrganizationName = "Mindfire Solutions", Role = "Developer", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) }
             };
 
-            // 
-            
-            
+            // Languages 
+            _uiModel.Languages = new List<string>()
+            {
+                "English",
+                "Hindi",
+                "Odia",
+                "Bengoli"
+            };
             
             return View(_uiModel);
             //var data = _context.Users.ToList();return Json(_uiModel, JsonRequestBehavior.AllowGet);
