@@ -244,6 +244,26 @@
     <Compile Include="Migrations\202003111213049_added stream field in educational details.Designer.cs">
       <DependentUpon>202003111213049_added stream field in educational details.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003120628448_Added grade or percent value.cs" />
+    <Compile Include="Migrations\202003120628448_Added grade or percent value.Designer.cs">
+      <DependentUpon>202003120628448_Added grade or percent value.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003120629525_deleted grade or percent value.cs" />
+    <Compile Include="Migrations\202003120629525_deleted grade or percent value.Designer.cs">
+      <DependentUpon>202003120629525_deleted grade or percent value.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003120632013_Added CGPAOrPercent and CGPAOrPercentageValue.cs" />
+    <Compile Include="Migrations\202003120632013_Added CGPAOrPercent and CGPAOrPercentageValue.Designer.cs">
+      <DependentUpon>202003120632013_Added CGPAOrPercent and CGPAOrPercentageValue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003120651568_rename role to project role in project model.cs" />
+    <Compile Include="Migrations\202003120651568_rename role to project role in project model.Designer.cs">
+      <DependentUpon>202003120651568_rename role to project role in project model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003121005348_added board field in Educational table.cs" />
+    <Compile Include="Migrations\202003121005348_added board field in Educational table.Designer.cs">
+      <DependentUpon>202003121005348_added board field in Educational table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Course.cs" />
@@ -335,6 +355,12 @@
     <Content Include="Content\Images\signup-bg.jpg" />
     <Content Include="Content\Images\Summary-icon.png" />
     <Content Include="Content\Images\User-icon.png" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\jquery-ui.min.css" />
+    <Content Include="Content\jquery-ui.structure.css" />
+    <Content Include="Content\jquery-ui.structure.min.css" />
+    <Content Include="Content\jquery-ui.theme.css" />
+    <Content Include="Content\jquery-ui.theme.min.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
     <Content Include="Content\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.min.css" />
@@ -1915,6 +1941,8 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
@@ -2021,6 +2049,8 @@
     <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\js\bootstrap.min.js.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -2137,6 +2167,21 @@
       <DependentUpon>202003120851031_linked users table with usrsetting.cs</DependentUpon>
     <EmbeddedResource Include="Migrations\202003111213049_added stream field in educational details.resx">
       <DependentUpon>202003111213049_added stream field in educational details.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003120628448_Added grade or percent value.resx">
+      <DependentUpon>202003120628448_Added grade or percent value.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003120629525_deleted grade or percent value.resx">
+      <DependentUpon>202003120629525_deleted grade or percent value.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003120632013_Added CGPAOrPercent and CGPAOrPercentageValue.resx">
+      <DependentUpon>202003120632013_Added CGPAOrPercent and CGPAOrPercentageValue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003120651568_rename role to project role in project model.resx">
+      <DependentUpon>202003120651568_rename role to project role in project model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003121005348_added board field in Educational table.resx">
+      <DependentUpon>202003121005348_added board field in Educational table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

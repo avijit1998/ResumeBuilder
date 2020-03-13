@@ -38,6 +38,7 @@ namespace ResumeBuilder.Models
         public DateTime? DateOfBirth { get; set; }
 
 
+
         public string Role { get; set; }
 
         public User()
