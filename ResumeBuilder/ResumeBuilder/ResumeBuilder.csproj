@@ -2166,6 +2166,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003120851031_linked users table with usrsetting.resx">
       <DependentUpon>202003120851031_linked users table with usrsetting.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003111213049_added stream field in educational details.resx">
       <DependentUpon>202003111213049_added stream field in educational details.cs</DependentUpon>
     </EmbeddedResource>
