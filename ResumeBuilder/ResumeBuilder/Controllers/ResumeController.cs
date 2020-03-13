@@ -30,6 +30,9 @@ namespace ResumeBuilder.Controllers
                 int id;
                 var re = Int32.TryParse(Session["UserID"] as String, out id);
                 var user = db.Users.Where(m => m.UserID == id).FirstOrDefault();
+
+                ViewBag.Courses = db.Courses.ToList();
+
                 return View(user);                               
             }
             return RedirectToAction("Login","Account");
@@ -86,23 +89,17 @@ namespace ResumeBuilder.Controllers
 
             return Json(new { Message = message, JsonRequestBehavior.AllowGet });
         }
-        //public ActionResult SaveBasicInfo(User user)
-        //{
-        //    try
-        //    {
-        //        var usr = db.Users.SingleOrDefault(u => u.UserID == user.UserID);
-        //        usr.Summary = user.Summary;
 
-        //        //db.Users.Add(user);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Form", "Resume");
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e);
-        //    }
-        //    return RedirectToAction("Login", "Account");
-        //}
+        [HttpPost]
+        public ActionResult SaveEducationalDetails(EducationalDetails educationalDetails)
+        {
+            db.EducationalDetails.Add(educationalDetails);
+            db.SaveChanges();
+
+            string message = "SUCCESS";
+
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
 
         public ActionResult LogOff()
         {
@@ -113,6 +110,15 @@ namespace ResumeBuilder.Controllers
             }
 
             return RedirectToAction("Login", "Account");
+        }
+
+        public JsonResult GetSkill(string term)
+        {
+            List<string> skills;
+
+            skills = db.Skills.Where(x => x.Skill.StartsWith(term)).Select(y => y.Skill).ToList();
+
+            return Json(skills, JsonRequestBehavior.AllowGet);
         }
     }
 }
