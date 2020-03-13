@@ -1,0 +1,207 @@
+﻿@model ResumeBuilder.Models.User
+@{
+    ViewBag.Title = "GetAllData";
+    List<ResumeBuilder.Models.Project> projects = ViewBag.Projects;
+}
+
+
+@section Styles{
+    <style>
+        .left-margin{
+            padding-left:10px;
+        }
+    </style>
+    
+}
+
+
+<h3>User Details</h3>
+
+@*<p>UserName:<span>@Model.Username</span></p>*@
+
+<hr />
+
+<h3>Project Details</h3>
+
+@*<div class="project-details">
+    
+</div>*@
+
+@foreach (var p in projects)
+{
+    <div>
+        <p>
+            <b>Project Title: @p.Title</b>
+            <button type="button" value="Edit" class="btn btn-info pull-right js-edit-project" data-project-id="@p.ProjectId">Edit</button>  
+            <button type="button" class="btn btn-danger pull-right js-delete-project" value="Delete" data-project-id="@p.ProjectId">Delete</button>
+        </p>
+        <div class="left-margin">
+            <p>Role: @p.ProjectRole</p>
+            <p>Description: @p.Description</p>
+            <p>Duration: @p.Duration</p>
+        </div>
+    </div>
+}
+
+
+
+
+
+@*Project Form*@
+<div id="modalProject" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">ADD PROJECT</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form>
+                            <input type="hidden" name="ProjectId" />
+
+                            <div class="form-group">
+                                <label>Project Title:</label>
+                                <input type="text" class="form-control" name="Title" id="txtTitle">
+                            </div>
+                            <div class="form-group">
+                                <label>Role</label>
+                                <input type="text" class="form-control" name="Role" id="txtProjectRole">
+                            </div>
+                            <div class="form-group">
+                                <label>Duration(In Months)</label>
+                                <input type="text" class="form-control" name="Duration" id="txtDuration">
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea class="form-control" name="Description" id="txtDescription"></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-default pull-right js-save-project">Save </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script src="~ /scripts/bootbox.js"></script>
+
+    <script>
+
+
+        //$(document).ready(function () {
+            //console.log("document ready");
+        //    $.ajax({
+        //        type: 'GET',
+        //        url: 'GetAllData',
+        //        success: function (data) {
+        //            $.each(data.ProjectInfo, function (i, item) {
+        //                console.log(item.Title);
+        //                //var rows = "<p>"
+        //                //    + "<span><b>Project Title :</b></span><span>" + item.Title + "</span>"
+        //                //    + "<button type='submit' id='delProjectBtn' class='btn btn-xs btn-danger js-delete-project' value='Delete' data-project-id=" + item.ProjectId + ">Delete</button>"
+        //                //    + " <button type='submit' id='editProjectBtn' class='btn btn-xs btn-success js-edit-project' value='Edit' data-project-id=" + item.ProjectId + ">Edit</button></td>"
+        //                //    + "</p>"
+        //                //    + "<p><span><b>Role :</b></span><span>" + item.Role + "</span></p>"
+        //                //    + "<p><span><b>Duration :</b></span><span>" + item.Duration + "</span></p>"
+        //                //    + "<p><span><b>Description :</b></span><span>" + item.Description + "</span></p>"
+
+        //                //$('#project-details').append(rows);
+        //            });
+        //        },
+        //        error: function (ex) {
+        //            console.log(ex);
+        //        }
+        //    });
+        //});
+
+        $('body').on('click', '.js-edit-project', function (e) {
+            e.preventDefault();
+            var $button = $(this);
+
+            var projectId = $button.data("project-id");
+            $.ajax({
+                url: "GetProjectById/" + projectId,
+                method: "GET",            
+                success: function (result) {
+                    console.log(result);
+                    $('input[name="ProjectId"]').val(result.ProjectId);
+                    $('input[name="Title"]').val(result.Title);
+                    $('input[name="Role"]').val(result.Role);
+                    $('input[name="Duration"]').val(result.Duration);
+                    $('textarea[name="Description"]').val(result.Description);
+                    $('#modalProject').find('.modal-title').html('UPDATE PROJECT DETAILS');
+                    $('#modalProject').modal('show');
+                },
+                error: function (error) {
+                    console.log(error);
+                    alert("Sorry ! Unable to edit employee");
+                }
+            });
+        });
+
+        $('body').on('click', '.js-save-project', function (e) {
+            e.preventDefault();
+            var formData = {
+                "ProjectId": $('input[name="ProjectId"]').val(),
+                "Title": $('input[name="Title"]').val(),
+                'Role': $('input[name="Role"]').val(),
+                "Duration": $('input[name="Duration"]').val(),
+                "Description": $('textarea[name="Description"]').val()
+            };
+            $.ajax({
+                url: "UpdateProject",
+                method: "POST",
+                data: formData,
+                success: function (result) {
+                    console.log(result);
+                    $('#modalProject').modal('hide');
+                    location.reload(true);
+                    //$empDataTable.ajax.reload();
+                },
+                error: function (error) {
+                    console.log(error);
+                    alert("Sorry ! Unable to delete employee");
+                }
+            });
+
+        });
+
+        $('body').on('click', '.js-delete-project', function (e) {
+            e.preventDefault();
+            var $button = $(this);
+
+            var projectID = $button.data("project-id");
+            bootbox.confirm("<p style='color:black;'>Are you sure to delete this Project Record?</p>", function (result) {
+                if (result) {
+                    $.ajax({
+                        url: "DeleteProject",
+                        method: "POST",
+                        data: { projectID: projectID },
+                        success: function (result) {
+                            location.reload(true);
+                        },
+                        error: function (error) {
+                            bootbox.alert("Error!");
+                        }
+                    })
+                }
+            });
+        });
+
+    </script>
+}

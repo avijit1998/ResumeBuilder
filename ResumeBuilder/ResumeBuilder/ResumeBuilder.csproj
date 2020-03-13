@@ -169,6 +169,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CustomMapper.cs" />
     <Compile Include="Migrations\202003071630567_AddedUserAndRolesAndOtherTables.cs" />
     <Compile Include="Migrations\202003071630567_AddedUserAndRolesAndOtherTables.Designer.cs">
       <DependentUpon>202003071630567_AddedUserAndRolesAndOtherTables.cs</DependentUpon>
@@ -245,6 +246,10 @@
     <Compile Include="Migrations\202003111213049_added stream field in educational details.Designer.cs">
       <DependentUpon>202003111213049_added stream field in educational details.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003121424222_updated role to userrole and projectrole.cs" />
+    <Compile Include="Migrations\202003121424222_updated role to userrole and projectrole.Designer.cs">
+      <DependentUpon>202003121424222_updated role to userrole and projectrole.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\202003120628448_Added grade or percent value.cs" />
     <Compile Include="Migrations\202003120628448_Added grade or percent value.Designer.cs">
       <DependentUpon>202003120628448_Added grade or percent value.cs</DependentUpon>
@@ -282,6 +287,7 @@
     <Compile Include="Models\WorkExperience.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AllInformation.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\PublicProfileViewModel.cs" />
     <Compile Include="ViewModels\UI Models\EducationUIModel.cs" />
@@ -2104,6 +2110,7 @@
     <Content Include="Views\Resume\Preview.cshtml" />
     <Content Include="Views\PartialViews\PreviewPartial.cshtml" />
     <Content Include="Views\PublicProfile\Index.cshtml" />
+    <Content Include="Views\Resume\ShowData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2169,6 +2176,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003111213049_added stream field in educational details.resx">
       <DependentUpon>202003111213049_added stream field in educational details.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003121424222_updated role to userrole and projectrole.resx">
+      <DependentUpon>202003121424222_updated role to userrole and projectrole.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003120628448_Added grade or percent value.resx">
       <DependentUpon>202003120628448_Added grade or percent value.cs</DependentUpon>
