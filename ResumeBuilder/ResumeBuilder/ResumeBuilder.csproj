@@ -229,6 +229,17 @@
     <Compile Include="Migrations\202003111040493_added role field in user model and made phone number field string.Designer.cs">
       <DependentUpon>202003111040493_added role field in user model and made phone number field string.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003111252223_addedSettingsTable.cs" />
+    <Compile Include="Migrations\202003111252223_addedSettingsTable.Designer.cs">
+      <DependentUpon>202003111252223_addedSettingsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003111255024_addedSettingsTable1.cs" />
+    <Compile Include="Migrations\202003111255024_addedSettingsTable1.Designer.cs">
+      <DependentUpon>202003111255024_addedSettingsTable1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003120851031_linked users table with usrsetting.cs" />
+    <Compile Include="Migrations\202003120851031_linked users table with usrsetting.Designer.cs">
+      <DependentUpon>202003120851031_linked users table with usrsetting.cs</DependentUpon>
     <Compile Include="Migrations\202003111213049_added stream field in educational details.cs" />
     <Compile Include="Migrations\202003111213049_added stream field in educational details.Designer.cs">
       <DependentUpon>202003111213049_added stream field in educational details.cs</DependentUpon>
@@ -264,6 +275,7 @@
     <Compile Include="Models\ResumeBuilderConnection.cs" />
     <Compile Include="Models\Skills.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserSetting.cs" />
     <Compile Include="Models\UsersLanguage.cs" />
     <Compile Include="Models\UsersSkill.cs" />
     <Compile Include="Models\WorkExperience.cs" />
@@ -1911,6 +1923,7 @@
     <Content Include="Content\plugins\toastr\toastr.css" />
     <Content Include="Content\plugins\toastr\toastr.min.css" />
     <Content Include="Content\plugins\toastr\toastr.min.js" />
+    <Content Include="Content\preview.css" />
     <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\css\bootstrap-grid.css" />
     <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\css\bootstrap-grid.min.css" />
     <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\css\bootstrap-reboot.css" />
@@ -1922,6 +1935,7 @@
     <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\js\bootstrap.js" />
     <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\js\bootstrap.min.js" />
     <Content Include="Content\Profile_Data\css\style.css" />
+    <Content Include="Content\settings.css" />
     <Content Include="Content\register.css" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
@@ -2042,10 +2056,12 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\ModelScripts\FormScript.js" />
+    <Content Include="Scripts\ModelScripts\PreviewScript.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\Profile_Scripts\profileDefaultScript.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\settings.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -2084,6 +2100,8 @@
     <Content Include="Views\Resume\Index.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Resume\Form.cshtml" />
+    <Content Include="Views\Resume\Preview.cshtml" />
+    <Content Include="Views\PartialViews\PreviewPartial.cshtml" />
     <Content Include="Views\PublicProfile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -2139,6 +2157,14 @@
     <EmbeddedResource Include="Migrations\202003111040493_added role field in user model and made phone number field string.resx">
       <DependentUpon>202003111040493_added role field in user model and made phone number field string.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003111252223_addedSettingsTable.resx">
+      <DependentUpon>202003111252223_addedSettingsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003111255024_addedSettingsTable1.resx">
+      <DependentUpon>202003111255024_addedSettingsTable1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003120851031_linked users table with usrsetting.resx">
+      <DependentUpon>202003120851031_linked users table with usrsetting.cs</DependentUpon>
     <EmbeddedResource Include="Migrations\202003111213049_added stream field in educational details.resx">
       <DependentUpon>202003111213049_added stream field in educational details.cs</DependentUpon>
     </EmbeddedResource>
