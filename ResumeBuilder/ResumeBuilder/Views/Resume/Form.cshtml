@@ -18,7 +18,7 @@
             <h3 id="welcomeUser">Welcome @str </h3>
         </fieldset>
 
-        @if (Model.Role == "Admin")
+        @if (Model.UserRole == "Admin")
         {
             <script>
                 document.getElementById("btnSearchNav").style.display = "block";
@@ -131,7 +131,6 @@
             </a>
         </div>
     </div>
-
 </div>
 
 <div id="close-modal">
@@ -165,10 +164,10 @@
                                 <div class="form-group">
                                     <label>Gender</label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="Gender" id="optradio" checked value="Male">Male
+                                        <input type="radio" name="Gender" id="optRadioMale" checked value="Male">Male
                                     </label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="Gender" id="optradio" value="Female">Female
+                                        <input type="radio" name="Gender" id="optRadioFemale" value="Female">Female
                                     </label>
                                 </div>
 
@@ -595,7 +594,7 @@
                     contentType: "application/json; charset=utf-8",
                     success: function () {
                         $("#modalProject").modal("hide");
-                        bootbox.alert("Project Details successfully saved!");
+                        bootbox.alert("<p style='color:black'>Project Details successfully saved!</p>");
                     },
                     error: function () {
                         bootbox.alert("Error!");
@@ -605,6 +604,7 @@
                 return false;
             });
 
+            //save work experience of a user
             $("body").on("click", "#btnSaveWorkExperience", function () {
                 var project = {};
                 project.UserID = $("#userId").val();

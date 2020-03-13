@@ -169,6 +169,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CustomMapper.cs" />
     <Compile Include="Migrations\202003071630567_AddedUserAndRolesAndOtherTables.cs" />
     <Compile Include="Migrations\202003071630567_AddedUserAndRolesAndOtherTables.Designer.cs">
       <DependentUpon>202003071630567_AddedUserAndRolesAndOtherTables.cs</DependentUpon>
@@ -233,6 +234,10 @@
     <Compile Include="Migrations\202003111213049_added stream field in educational details.Designer.cs">
       <DependentUpon>202003111213049_added stream field in educational details.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003121424222_updated role to userrole and projectrole.cs" />
+    <Compile Include="Migrations\202003121424222_updated role to userrole and projectrole.Designer.cs">
+      <DependentUpon>202003121424222_updated role to userrole and projectrole.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Course.cs" />
@@ -249,6 +254,7 @@
     <Compile Include="Models\WorkExperience.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AllInformation.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\PublicProfileViewModel.cs" />
     <Compile Include="ViewModels\UI Models\EducationUIModel.cs" />
@@ -1901,6 +1907,8 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
@@ -2055,6 +2063,7 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Resume\Form.cshtml" />
     <Content Include="Views\PublicProfile\Index.cshtml" />
+    <Content Include="Views\Resume\ShowData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2111,6 +2120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003111213049_added stream field in educational details.resx">
       <DependentUpon>202003111213049_added stream field in educational details.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003121424222_updated role to userrole and projectrole.resx">
+      <DependentUpon>202003121424222_updated role to userrole and projectrole.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
