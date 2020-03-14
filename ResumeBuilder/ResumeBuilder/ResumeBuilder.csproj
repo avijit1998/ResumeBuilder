@@ -290,6 +290,10 @@
     <Compile Include="Migrations\202003131046588_added settingstable-again.Designer.cs">
       <DependentUpon>202003131046588_added settingstable-again.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003141535134_made few changes.cs" />
+    <Compile Include="Migrations\202003141535134_made few changes.Designer.cs">
+      <DependentUpon>202003141535134_made few changes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Course.cs" />
@@ -2231,6 +2235,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003131046588_added settingstable-again.resx">
       <DependentUpon>202003131046588_added settingstable-again.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003141535134_made few changes.resx">
+      <DependentUpon>202003141535134_made few changes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

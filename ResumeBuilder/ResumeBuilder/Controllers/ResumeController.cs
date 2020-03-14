@@ -356,7 +356,7 @@ namespace ResumeBuilder.Controllers
 
                 var re = Int32.TryParse(Session["UserID"] as String, out id);
             }
-            var ob = db.settings.SingleOrDefault(user => user.UserSettingId == id);
+            var ob = db.settings.Where(user => user.UserID == id).FirstOrDefault();
             ob.setWorkex = finalresult[0];
             ob.setProject = finalresult[1];
             ob.setEducation = finalresult[2];

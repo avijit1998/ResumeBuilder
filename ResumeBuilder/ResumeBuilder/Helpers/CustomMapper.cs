@@ -115,7 +115,7 @@ namespace ResumeBuilder.Helpers
             else
                 return new SkillInfoVM
                 {
-                    Skill = skills.Skill
+                    Skill = skills.SkillName
                 };
         }
     }

@@ -43,15 +43,15 @@ namespace ResumeBuilder.Models
 
         public string UserRole { get; set; }
 
-        public virtual IList<Project> Projects { get; set; }
+        //public virtual IList<Project> Projects { get; set; }
 
-        public virtual IList<WorkExperience> WorkExperiences { get; set; }
+        //public virtual IList<WorkExperience> WorkExperiences { get; set; }
 
-        public virtual IList<EducationalDetails> EducationalDetails { get; set; }
+        //public virtual IList<EducationalDetails> EducationalDetails { get; set; }
 
-        public virtual IList<UsersLanguage> UsersLanguages { get; set; }
+        //public virtual IList<UsersLanguage> UsersLanguages { get; set; }
 
-        public virtual IList<UsersSkill> UsersSkills { get; set; }
+        //public virtual IList<UsersSkill> UsersSkills { get; set; }
       
         public User()
         {
