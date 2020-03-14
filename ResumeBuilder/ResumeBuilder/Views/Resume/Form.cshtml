@@ -14,161 +14,225 @@
     </style>   
 }
 
-<div class="box">
-    <div class="container">
-
-        @if (Session["UserName"] != null)
-        {
-            str = Session["UserName"].ToString();
-        }
-
-        <fieldset>
-            <h3 id="welcomeUser">Welcome @str </h3>
-        </fieldset>
-
-        @if (Model.UserRole == "Admin")
-        {
-            <script>
-                document.getElementById("btnSearchNav").style.display = "block";
-            </script>
-        }
-
-        @*1st Row*@
-        <div class="row">
-            @*Personal Summary*@
-            <a href="#" data-toggle="modal" data-target="#modalSummary" id="summary">
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 basic-info div-design">
-
-                    <div class="box-part text-center">
-
-                        <img id="userIcon" alt="BasicInformation" class="image-position" src="@Url.Content("~/Content/Images/Summary-icon.png")" />
-
-                        <div class="title">
-                            <h3>Professional Summary</h3>
-                        </div>
-
-                    </div>
-                </div>
-            </a>
-
-            @*Basic Information*@
-            <a href="#" data-toggle="modal" data-target="#modalBasicInfo">
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 basic-info div-design">
-
-                    <div class="box-part text-center">
-
-                        <img id="userIcon" alt="BasicInformation" class="image-position" src="@Url.Content("~/Content/Images/User-icon.png")" />
-
-                        <div class="title">
-                            <h3>Basic Information</h3>
-                        </div>
-
-                    </div>
-                </div>
-            </a>
-
-            @*Educational Details*@
-            <a href="#" data-toggle="modal" data-target="#modalEducationDetails" id="educationDetails">
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 basic-info div-design">
-
-                    <div class="box-part text-center">
-
-                        <img id="userIcon" alt="BasicInformation" class="image-position" src="@Url.Content("~/Content/Images/Education.png")" />
-
-                        <div class="title">
-                            <h3>Educational Details</h3>
-                        </div>
-
-                    </div>
-                </div>
-            </a>
-        </div>
-
-
-        @*2nd Row*@
-        <div class="row">
-
-            @*Skills*@
-            <a href="#" data-toggle="modal" data-target="#modalSkills">
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 basic-info div-design">
-
-                    <div class="box-part text-center">
-
-                        <img id="userIcon" alt="BasicInformation" class="image-position" src="@Url.Content("~/Content/Images/Skill.png")" />
-
-                        <div class="title">
-                            <h3>Technical Skills</h3>
-                        </div>
-
-                    </div>
-                </div>
-            </a>
-
-
-            @*Projects*@
-            <a href="#" data-toggle="modal" data-target="#modalProject">
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 basic-info div-design">
-
-                    <div class="box-part text-center">
-
-                        <img id="userIcon" alt="BasicInformation" class="image-position" src="@Url.Content("~/Content/Images/Project.png")" />
-
-                        <div class="title">
-                            <h3>Projects</h3>
-                        </div>
-
-                    </div>
-                </div>
-            </a>
-
-
-            @*Work Experience*@
-            <a href="#" data-toggle="modal" data-target="#modalWorkExperience">
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 basic-info div-design">
-
-                    <div class="box-part text-center">
-
-                        <img id="userIcon" alt="BasicInformation" class="image-position" src="@Url.Content("~/Content/Images/Work Experience.png")" />
-
-                        <div class="title">
-                            <h3>Work Experience</h3>
-                        </div>
-
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
-
+@*<div id="menuContainer">
+    Container
 </div>
 
-<div id="close-modal">
-    @*Basic Information Form*@
-    <div id="modalBasicInfo" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h2 class="modal-title">ADD BASIC INFO</h2>
+<div id="search">
+    Container
+</div>*@
+<div id="divPreview">
+
+</div>
+<div id="mainDivModal">
+    <div class="box">
+        <div class="container">
+
+            @if (Session["UserName"] != null)
+            {
+                str = Session["UserName"].ToString();
+            }
+
+            <fieldset>
+                <h3 id="welcomeUser">Welcome @str </h3>
+            </fieldset>
+
+            @if (Model.Role == "Admin")
+            {
+                <script>
+                    document.getElementById("btnSearchNav").style.display = "block";
+                </script>
+            }
+
+            @*1st Row*@
+            <div class="row">
+                @*Personal Summary*@
+                <a href="#" data-toggle="modal" data-target="#modalSummary" id="summary">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 basic-info div-design">
+
+                        <div class="box-part text-center">
+
+                            <img id="userIcon" alt="BasicInformation" class="image-position" src="@Url.Content("~/Content/Images/Summary-icon.png")" />
+
+                            <div class="title">
+                                <h3>Professional Summary</h3>
+                            </div>
+
+                        </div>
+                    </div>
+                </a>
+
+                @*Basic Information*@
+                <a href="#" data-toggle="modal" data-target="#modalBasicInfo">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 basic-info div-design">
+
+                        <div class="box-part text-center">
+
+                            <img id="userIcon" alt="BasicInformation" class="image-position" src="@Url.Content("~/Content/Images/User-icon.png")" />
+
+                            <div class="title">
+                                <h3>Basic Information</h3>
+                            </div>
+
+                        </div>
+                    </div>
+                </a>
+
+                @*Educational Details*@
+                <a href="#" data-toggle="modal" data-target="#modalEducationDetails" id="educationDetails">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 basic-info div-design">
+
+                        <div class="box-part text-center">
+
+                            <img id="userIcon" alt="BasicInformation" class="image-position" src="@Url.Content("~/Content/Images/Education.png")" />
+
+                            <div class="title">
+                                <h3>Educational Details</h3>
+                            </div>
+
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+
+            @*2nd Row*@
+            <div class="row">
+
+                @*Skills*@
+                <a href="#" data-toggle="modal" data-target="#modalSkills">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 basic-info div-design">
+
+                        <div class="box-part text-center">
+
+                            <img id="userIcon" alt="BasicInformation" class="image-position" src="@Url.Content("~/Content/Images/Skill.png")" />
+
+                            <div class="title">
+                                <h3>Technical Skills</h3>
+                            </div>
+
+                        </div>
+                    </div>
+                </a>
+
+
+                @*Projects*@
+                <a href="#" data-toggle="modal" data-target="#modalProject">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 basic-info div-design">
+
+                        <div class="box-part text-center">
+
+                            <img id="userIcon" alt="BasicInformation" class="image-position" src="@Url.Content("~/Content/Images/Project.png")" />
+
+                            <div class="title">
+                                <h3>Projects</h3>
+                            </div>
+
+                        </div>
+                    </div>
+                </a>
+
+
+                @*Work Experience*@
+                <a href="#" data-toggle="modal" data-target="#modalWorkExperience">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 basic-info div-design">
+
+                        <div class="box-part text-center">
+
+                            <img id="userIcon" alt="BasicInformation" class="image-position" src="@Url.Content("~/Content/Images/Work Experience.png")" />
+
+                            <div class="title">
+                                <h3>Work Experience</h3>
+                            </div>
+
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="close-modal">
+        @*Basic Information Form*@
+        <div id="modalBasicInfo" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h2 class="modal-title">ADD BASIC INFO</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form>
+                                    <div>
+                                        <input type="hidden" name="UserID" id="userId" value="@Model.UserID" />
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Full Name:</label>
+                                        <input type="text" class="form-control" name="Name" id="txtFullName">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Email ID:</label>
+                                        <input type="email" class="form-control" name="Username" id="txtEmail" value="@Model.Username" readonly>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Gender</label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="Gender" id="optradio" checked value="Male">Male
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="Gender" id="optradio" value="Female">Female
+                                        </label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Date of Birth</label>
+                                        <input type="date" class="form-control" name="DateOfBirth" id="dateDOB">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Phone Number</label>
+                                        <input type="text" class="form-control" name="PhoneNumber" id="txtPhoneNumber">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                                            <button type="submit" id="btnSaveBasicInfo" class="btn btn-default pull-right">Save </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <form>
-                                <div>
-                                    <input type="hidden" name="UserID" id="userId" value="@Model.UserID" />
+            </div>
+        </div>
 
-                                </div>
-                                <div class="form-group">
-                                    <label>Full Name:</label>
-                                    <input type="text" class="form-control" name="Name" id="txtFullName">
-                                </div>
 
-                                <div class="form-group">
-                                    <label>Email ID:</label>
-                                    <input type="email" class="form-control" name="Username" id="txtEmail" value="@Model.Username" readonly>
-                                </div>
+        @*Summary Form*@
+        <div id="modalSummary" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">ADD PROFESSIONAL SUMMARY</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form action="/Resume/SaveBasicInfo" method="post">
+                                    <div>
+                                        <input type="hidden" name="UserID" id="userId" value="@Model.UserID" />
 
                                 <div class="form-group">
                                     <label>Gender</label>
@@ -180,10 +244,14 @@
                                     </label>
                                 </div>
 
-                                <div class="form-group">
-                                    <label>Date of Birth</label>
-                                    <input type="date" class="form-control" name="DateOfBirth" id="dateDOB">
-                                </div>
+                                    <div class="form-group">
+                                        <label>Summary:</label>
+                                        <textarea class="form-control" name="Summary" id="txtSummary"></textarea>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-default pull-right" id="btnSaveSummary">Save </button>
 
                                 <div class="form-group">
                                     <label>Phone Number</label>
@@ -206,19 +274,18 @@
                                         <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
 
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
-                    </div>
 
-                </div>
-                <div class="modal-footer">
+                    </div>
+                    <div class="modal-footer">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-
+        
     @*Summary Form*@
     <div id="modalSummary" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -242,13 +309,11 @@
                                     <div class="col-md-12">
                                         <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
                                         <button type="submit" class="btn btn-default pull-right" id="btnSaveSummary">Save </button>
-
-                                    </div>
+                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
-
                 </div>
                 <div class="modal-footer">
                 </div>
@@ -276,7 +341,6 @@
                                         <input type="radio" name="courseOption" value="@course.CourseId" >@course.CourseName
                                     </label>
                                 }
-
 
                                 <div class="all-other" style="display:none;">
                                     <div class="form-group stream">
@@ -325,8 +389,8 @@
                 <div class="modal-footer">
                 </div>
             </div>
-            </div>
         </div>
+    </div>
 
     @*Work Experience*@
     <div id="modalWorkExperience" class="modal fade" role="dialog">
@@ -341,7 +405,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <form>
-                            <input type="hidden" name="UserID" />
+                            <input type="hidden" name="UserID" value="@Model.UserID" />
 
                             <div class="form-group">
                                 <label>Company Name:</label>
@@ -439,61 +503,60 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
-                </div>
-              </div>
-                <div class="modal-footer"></div>
-            </div>
-        </div>
-    </div>
-
-    @*Project*@
-    <div id="modalProject" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">ADD PROJECT</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <form>
-                                <input type="hidden" name="UserID" value="@Model.UserID" />
-
-                                <div class="form-group">
-                                    <label>Project Title:</label>
-                                    <input type="text" class="form-control" name="Title" id="txtTitle">
-                                </div>
-                                <div class="form-group">
-                                    <label>Role</label>
-                                    <input type="text" class="form-control" name="Role" id="txtProjectRole">
-                                </div>
-                                <div class="form-group">
-                                    <label>Duration(In Months)</label>
-                                    <input type="text" class="form-control" name="Duration" id="txtDuration">
-                                </div>
-                                <div class="form-group">
-                                    <label>Description</label>
-                                    <textarea class="form-control" name="Description" id="txtDescription"></textarea>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
-                                        <button type="button" id="btnSaveProjectDetials" class="btn btn-default pull-right">Save </button>
-                                    </div>
-                                </div>
-                            </form>
+                      </div>
                         </div>
                     </div>
-
-                </div>
-                <div class="modal-footer">
+                    <div class="modal-footer"></div>
                 </div>
             </div>
         </div>
-    </div>
+                  
+        @*Project*@
+        <div id="modalProject" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">ADD PROJECT</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <form>
+                                    <input type="hidden" name="UserID" value="@Model.UserID" />
+
+                                    <div class="form-group">
+                                        <label>Project Title:</label>
+                                        <input type="text" class="form-control" name="Title" id="txtTitle">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Role</label>
+                                        <input type="text" class="form-control" name="Role" id="txtProjectRole">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Duration(In Months)</label>
+                                        <input type="text" class="form-control" name="Duration" id="txtDuration">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea class="form-control" name="Description" id="txtDescription"></textarea>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                                            <button type="button" id="btnSaveProjectDetials" class="btn btn-default pull-right">Save </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
 
     @*Skills*@
     <div id="modalSkills" class="modal fade" role="dialog">
@@ -533,14 +596,19 @@
                                 </div>
                             </form>
                         </div>
-                    </div>
-
-                </div>
-                <div class="modal-footer"></div>
+                  </div>
             </div>
+            <div class="modal-footer"></div>
         </div>
     </div>
+ </div>
 </div>
+
+@{
+    int ids;
+    var res = Int32.TryParse(Session["UserID"] as String, out ids);
+}
+<span style="display:none;" data-sessionid="@ids" id="sessionIdFetch"></span>
 
 @section scripts{
     <script src="~/Scripts/jquery.js"></script>
@@ -555,6 +623,8 @@
 
     <script src="~/Scripts/ModelScripts/FormScript.js"></script>
 
+
+    <script src="~/Scripts/ModelScripts/PreviewScript.js"></script>
     <script>
 
         $(document).ready(function () {
@@ -707,6 +777,7 @@
                 return false;
             });
 
+
             //save Educational details of user
             $("body").on("click", "#btnSaveEducationalDetails", function () {
                 var tenDetails = {};
@@ -794,8 +865,23 @@
                     alert(item + " already added.");
                 }                
             });
+
+
+            @*preview section by rahul*@
+
+            $("body").on("click", "#preview", function (e) {
+                var ids = $('#sessionIdFetch').data('sessionid');
+                $.ajax({
+                    url: "/Resume/PreviewUser/" + ids,
+                    method: "GET",
+                    success: function (result) {
+                        console.log(result);
+                    },
+                    error: function () {
+                        console.log("error happened!@@#$#%^*&(*");
+                    }
+                })
+            })
         });
     </script>
 }
-
-

@@ -1,5 +1,6 @@
 ﻿using ResumeBuilder.Models;
 using ResumeBuilder.Models.ViewModels;
+using ResumeBuilder.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,13 @@ namespace ResumeBuilder.Controllers
     public class ResumeController : Controller
     {
         private ResumeBuilderConnection db;
+        private PublicProfileViewModel _uiModel;
         public ResumeController()
         {
+            _uiModel = new PublicProfileViewModel();
             db = new ResumeBuilderConnection();
         }
-        
+
         // GET: Resume
         public ActionResult Index()
         {
@@ -37,6 +40,41 @@ namespace ResumeBuilder.Controllers
                 return View(user);                               
             }
             return RedirectToAction("Login","Account");
+        }
+
+        public ActionResult Preview()
+        {
+            return PartialView("~/Views/PartialViews/PreviewPartial.cshtml");
+        }
+
+        public ActionResult PreviewUser(int id)
+        {
+            // User Name
+            _uiModel.Name = db.Users.FirstOrDefault(a => a.UserID == id).Name;
+
+            // User Role
+            _uiModel.UserRole = "Web Developer";
+
+            // User Phone
+            _uiModel.PhoneNumber = db.Users.FirstOrDefault(a => a.UserID == id).PhoneNumber;
+
+            // User E-mail
+            _uiModel.Email = db.Users.FirstOrDefault(a => a.UserID == id).Username;
+
+            //User Linkedin Link
+            _uiModel.LinkedinLink = "https://www.linkedin.com/user";
+
+            // User Summary
+            _uiModel.Summary = "Oh, I misunderstood the problem. ResumeBuilder ResumeBuilder Setting a padding on, ResumeBuilder ResumeBuilder bin the padding won't help you.";
+
+            //Education Details
+            ViewBag.education = 1;
+            var data = db.Users.Where(m=>m.UserID==id).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+            //return Json("Success", JsonRequestBehavior.AllowGet);
+
+            //return View(_uiModel);
+            
         }
 
         [HttpPost]
@@ -155,5 +193,46 @@ namespace ResumeBuilder.Controllers
             return Json(new { Message = message, JsonRequestBehavior.AllowGet });
 
         }
+        
+        public ActionResult DisplayDetails( int[] finalresult)
+        {
+            int id=1;
+            if (Session["UserID"] != null)
+            {
+                
+                var re = Int32.TryParse(Session["UserID"] as String, out id);
+            }
+            var ob = db.settings.SingleOrDefault(user => user.UserSettingId == id);
+            ob.setWorkex = finalresult[0];
+            ob.setProject = finalresult[1];
+            ob.setEducation = finalresult[2];
+            ob.setSkills = finalresult[3];
+            ob.setContact = finalresult[4];
+            TryUpdateModel(ob);
+            db.SaveChanges();
+            return Json("success");
+        }
+
+        public ActionResult settingsValue()
+        {
+            int id = 1;
+            if (Session["UserID"] != null)
+            {
+
+                var re = Int32.TryParse(Session["UserID"] as String, out id);
+            }
+            var ob = db.settings.SingleOrDefault(user => user.UserSettingId == id);
+            UserSetting ob1 = new UserSetting();
+            ob1.setWorkex = ob.setWorkex;
+            ob1.UserSettingId = ob.UserSettingId;
+            ob1.setSkills = ob.setSkills;
+            ob1.setProject = ob.setProject;
+            ob1.setEducation = ob.setEducation;
+            ob1.setContact = ob.setContact;
+
+            return Json(ob1, JsonRequestBehavior.AllowGet);
+        }
+
+        
     }
 }
