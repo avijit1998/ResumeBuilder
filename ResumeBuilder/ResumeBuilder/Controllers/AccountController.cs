@@ -100,7 +100,8 @@ namespace ResumeBuilder.Controllers
         public ActionResult Register(User model)
         {
             ResumeBuilderConnection dbContext = new ResumeBuilderConnection();
-            if (dbContext.Users.Any())
+            
+            if (dbContext.Users.ToList().Any())
             {
                 User u = dbContext.Users.Where(m => m.Username == model.Username).FirstOrDefault();
                 if (u != null)
