@@ -14,13 +14,6 @@
     </style>   
 }
 
-@*<div id="menuContainer">
-    Container
-</div>
-
-<div id="search">
-    Container
-</div>*@
 <div id="divPreview">
 
 </div>
@@ -37,11 +30,11 @@
                 <h3 id="welcomeUser">Welcome @str </h3>
             </fieldset>
 
-            @if (Model.Role == "Admin")
+            @if (Model.UserRole == "Admin")
             {
-                <script>
-                    document.getElementById("btnSearchNav").style.display = "block";
-                </script>
+            <script>
+                document.getElementById("btnSearchNav").style.display = "block";
+            </script>
             }
 
             @*1st Row*@
@@ -61,6 +54,7 @@
                         </div>
                     </div>
                 </a>
+
 
                 @*Basic Information*@
                 <a href="#" data-toggle="modal" data-target="#modalBasicInfo">
@@ -150,7 +144,6 @@
                 </a>
             </div>
         </div>
-
     </div>
 
     <div id="close-modal">
@@ -182,14 +175,14 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Gender</label>
-                                        <label class="radio-inline">
-                                            <input type="radio" name="Gender" id="optradio" checked value="Male">Male
-                                        </label>
-                                        <label class="radio-inline">
-                                            <input type="radio" name="Gender" id="optradio" value="Female">Female
-                                        </label>
-                                    </div>
+                                      <label>Gender</label>
+                                      <label class="radio-inline">
+                                        <input type="radio" name="Gender" id="optRadioMale" checked value="Male">Male
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="Gender" id="optRadioFemale" value="Female">Female
+                                    </label>
+                                </div>
 
                                     <div class="form-group">
                                         <label>Date of Birth</label>
@@ -217,7 +210,6 @@
             </div>
         </div>
 
-
         @*Summary Form*@
         <div id="modalSummary" class="modal fade" role="dialog">
             <div class="modal-dialog">
@@ -231,19 +223,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <form action="/Resume/SaveBasicInfo" method="post">
-                                    <div>
-                                        <input type="hidden" name="UserID" id="userId" value="@Model.UserID" />
-
-                                <div class="form-group">
-                                    <label>Gender</label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="Gender" id="optradioMale" checked value="Male">Male
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="Gender" id="optradioFemale" value="Female">Female
-                                    </label>
-                                </div>
-
+                                    <div><input type="hidden" name="UserID" id="userId" value="@Model.UserID" /></div>
                                     <div class="form-group">
                                         <label>Summary:</label>
                                         <textarea class="form-control" name="Summary" id="txtSummary"></textarea>
@@ -252,32 +232,11 @@
                                         <div class="col-md-12">
                                             <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
                                             <button type="submit" class="btn btn-default pull-right" id="btnSaveSummary">Save </button>
-
-                                <div class="form-group">
-                                    <label>Phone Number</label>
-                                    <input type="text" class="form-control" name="PhoneNumber" id="txtPhoneNumber">
-                                </div>
-                                <div class="form-group">
-                                    <label>Language</label>
-                                    <div class="form-group">
-                                        @foreach (var c in languages)
-                                        {
-                                            <div class="checkbox">
-                                                <label><input type="checkbox" value="@c.LanguageID">@c.Language</label>
-                                            </div>
-                                        }
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button type="submit" id="btnSaveBasicInfo" class="btn btn-default pull-right">Save </button>
-                                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
-
+                                        </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
-
                     </div>
                     <div class="modal-footer">
                     </div>
@@ -285,113 +244,77 @@
             </div>
         </div>
 
+        @*Education Details Form*@
+        <div id="modalEducationDetails" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">ADD EDUCATIONAL DETAILS</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form action="/ResumeContoller/Form" method="get">
+                                    <div><input type="hidden" name="UserID" id="userId" value="@Model.UserID" /></div>
+                                    @foreach (var course in courses)
+                                    {
+                                        <label class="radio-inline">
+                                            <input type="radio" name="courseOption" value="@course.CourseId">@course.CourseName
+                                        </label>
+                                    }
+
+                                    <div class="all-other" style="display:none;">
+                                        <div class="form-group stream">
+                                            <label>Stream:</label>
+                                            <input type="text" class="form-control" name="stream" id="stream" placeholder="Enter stream">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Board or University:</label>
+                                            <select id="boardType" class="form-control">
+                                                <option>select board</option>
+                                                <option value="CBSE">CBSE</option>
+                                                <option value="CBSE">ICSE</option>
+                                                <option value="State Board">State Board</option>
+                                                <option value="Others">Others</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Year Of Passing:</label>
+                                            <input type="text" class="form-control" name="yearOfPassing" id="yearOfPassing" placeholder="Enter year of passing">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="radio-inline">
+                                                <input type="radio" name="marksOption" value="CGPA" checked>CGPA Scored
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="marksOption" value="Percentage">Percentage Scored
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label>Marks Scored:</label>
+                                            <input type="text" class="form-control marks" id="txtMarks" name="marksOption" placeholder="Enter CGPA">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-default pull-right" id="btnSaveEducationalDetails">Save </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>  
+    
         
-    @*Summary Form*@
-    <div id="modalSummary" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">ADD PROFESSIONAL SUMMARY</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <form action="/Resume/SaveBasicInfo" method="post">
-                                <div><input type="hidden" name="UserID" id="userId" value="@Model.UserID" /></div>
-
-                                <div class="form-group">
-                                    <label>Summary:</label>
-                                    <textarea class="form-control" name="Summary" id="txtSummary"></textarea>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-default pull-right" id="btnSaveSummary">Save </button>
-                                     </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    @*Education Details Form*@
-    <div id="modalEducationDetails" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">ADD EDUCATIONAL DETAILS</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <form action="/ResumeContoller/Form" method="get">
-                                <div><input type="hidden" name="UserID" id="userId" value="@Model.UserID" /></div>
-                                @foreach (var course in courses)
-                                {
-                                    <label class="radio-inline">
-                                        <input type="radio" name="courseOption" value="@course.CourseId" >@course.CourseName
-                                    </label>
-                                }
-
-                                <div class="all-other" style="display:none;">
-                                    <div class="form-group stream">
-                                        <label>Stream:</label>
-                                        <input type="text" class="form-control" name="stream" id="stream" placeholder="Enter stream">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Board or University:</label>
-                                        <select id="boardType" class="form-control">
-                                            <option>select board</option>
-                                            <option value="CBSE">CBSE</option>
-                                            <option value="CBSE">ICSE</option>
-                                            <option value="State Board">State Board</option>
-                                            <option value="Others">Others</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Year Of Passing:</label>
-                                        <input type="text" class="form-control" name="yearOfPassing" id="yearOfPassing" placeholder="Enter year of passing">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="radio-inline">
-                                            <input type="radio" name="marksOption" value="CGPA" checked>CGPA Scored
-                                        </label>
-                                        <label class="radio-inline">
-                                            <input type="radio" name="marksOption" value="Percentage">Percentage Scored
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label>Marks Scored:</label>
-                                        <input type="text" class="form-control marks" id="txtMarks" name="marksOption" placeholder="Enter CGPA">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-default pull-right" id="btnSaveEducationalDetails">Save </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="modal-footer">
-                </div>
-            </div>
-        </div>
-    </div>
-
     @*Work Experience*@
     <div id="modalWorkExperience" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -489,28 +412,26 @@
                                             <option class="form-control" value="2020">2020</option>
 
                                         </select>
+                                    <div class="form-group">
+                                        <input type="checkbox" class="checkbox-inline" name="CurrentlyWorking" id="checkWorking">
+                                        <label for="checkWorking">Currently Working</label>
                                     </div>
-                                </div>
-                           </div>
-                            <div class="form-group">
-                                <input type="checkbox" class="checkbox-inline" name="CurrentlyWorking" id="checkWorking">
-                                <label for="checkWorking">Currently Working</label>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-default pull-right" id="btnSaveWorkExperience">Save </button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-default pull-right" id="btnSaveWorkExperience">Save </button>
                                 </div>
-                            </div>
-                        </form>
-                      </div>
                         </div>
                     </div>
                     <div class="modal-footer"></div>
                 </div>
             </div>
         </div>
-                  
+
         @*Project*@
         <div id="modalProject" class="modal fade" role="dialog">
             <div class="modal-dialog">
@@ -558,6 +479,7 @@
             </div>
         </div>
 
+        
     @*Skills*@
     <div id="modalSkills" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -596,14 +518,14 @@
                                 </div>
                             </form>
                         </div>
-                  </div>
+                    </div>
+                </div>
+                <div class="modal-footer"></div>
             </div>
-            <div class="modal-footer"></div>
         </div>
     </div>
- </div>
 </div>
-
+      
 @{
     int ids;
     var res = Int32.TryParse(Session["UserID"] as String, out ids);
@@ -733,17 +655,16 @@
                     contentType: "application/json; charset=utf-8",
                     success: function () {
                         $("#modalProject").modal("hide");
-                        bootbox.alert("<b style='color:black;'>Project details successfully saved.</b>");
+                        bootbox.alert("<p style='color:black'>Project Details successfully saved!</p>");
                     },
                     error: function () {
                         bootbox.alert("Error!");
-
                     }
                 });
                 return false;
             });
 
-            //save work experience info of user
+            //save work experience of a user
             $("body").on("click", "#btnSaveWorkExperience", function () {
                 var project = {};
                 project.UserID = $("#userId").val();
@@ -868,7 +789,6 @@
 
 
             @*preview section by rahul*@
-
             $("body").on("click", "#preview", function (e) {
                 var ids = $('#sessionIdFetch').data('sessionid');
                 $.ajax({
@@ -880,8 +800,8 @@
                     error: function () {
                         console.log("error happened!@@#$#%^*&(*");
                     }
-                })
-            })
+                });
+            });
         });
     </script>
 }
