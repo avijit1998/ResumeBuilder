@@ -37,13 +37,15 @@ namespace ResumeBuilder.Models
         [Display(Name = "Date of Birth")]
         public DateTime? DateOfBirth { get; set; }
 
+        public virtual List<Languages> Languages { get; set; }
 
+        public virtual List<Skills> Skills { get; set; }
 
-        public string Role { get; set; }
+        public string UserRole { get; set; }
 
         public User()
         {
-            Role = "Candidate";
+            UserRole = "Candidate";
         }
     }
 }

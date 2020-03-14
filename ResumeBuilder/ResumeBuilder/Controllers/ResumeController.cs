@@ -1,4 +1,5 @@
 ﻿using ResumeBuilder.Models;
+using ResumeBuilder.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace ResumeBuilder.Controllers
                 var user = db.Users.Where(m => m.UserID == id).FirstOrDefault();
 
                 ViewBag.Courses = db.Courses.ToList();
-
+                ViewBag.Languages = db.Languages.ToList();
                 return View(user);                               
             }
             return RedirectToAction("Login","Account");
@@ -52,14 +53,21 @@ namespace ResumeBuilder.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveBasicInformation(User user)
+        //public ActionResult SaveBasicInformation(User user)
+        public ActionResult SaveBasicInformation(AddUserViewModel addUserViewModel)
         {
-            var userFromDb = db.Users.FirstOrDefault(u => u.UserID == user.UserID);
-            
-            userFromDb.Name = user.Name;
-            userFromDb.Gender = user.Gender;
-            userFromDb.PhoneNumber = user.PhoneNumber;
-            userFromDb.DateOfBirth = user.DateOfBirth;
+            var userFromDb = db.Users.FirstOrDefault(u => u.UserID == addUserViewModel.UserID);
+
+            userFromDb.Name = addUserViewModel.Name;
+            userFromDb.Gender = addUserViewModel.Gender;
+            userFromDb.PhoneNumber = addUserViewModel.PhoneNumber;
+            userFromDb.DateOfBirth = addUserViewModel.DateOfBirth;
+
+            if (addUserViewModel.LanguageIds.Any())
+            {
+                var languages = db.Languages.Where(x => addUserViewModel.LanguageIds.Contains(x.LanguageID)).ToList();
+                userFromDb.Languages.AddRange(languages);
+            }
 
             db.SaveChanges();
             
@@ -114,11 +122,38 @@ namespace ResumeBuilder.Controllers
 
         public JsonResult GetSkill(string term)
         {
+            term = term.Trim();
             List<string> skills;
 
-            skills = db.Skills.Where(x => x.Skill.StartsWith(term)).Select(y => y.Skill).ToList();
+            skills = db.Skills.Where(x => x.SkillName.StartsWith(term)).Select(y => y.SkillName).ToList();
 
             return Json(skills, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult SaveUserSkills(AddUserSkillsViewModel addUserSkillsViewModel)
+        {
+            User user = new User();
+
+            user = db.Users.Where(x => x.UserID == addUserSkillsViewModel.UserID).FirstOrDefault();
+
+            var skillIdsList = db.Skills.Where(x => addUserSkillsViewModel.SkillNames.Contains(x.SkillName)).Select(m=>m.SkillID).ToList();
+
+            List<Skills> refer = new List<Skills>();
+
+            foreach (var item in skillIdsList)
+            {
+                refer.Add(db.Skills.Where(x => x.SkillID == item).FirstOrDefault());
+            }
+            
+            user.Skills.AddRange(refer);
+       
+            db.SaveChanges();
+
+            string message = "SUCCESS";
+
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+
         }
     }
 }

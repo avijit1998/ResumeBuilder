@@ -100,12 +100,16 @@ namespace ResumeBuilder.Controllers
         public ActionResult Register(User model)
         {
             ResumeBuilderConnection dbContext = new ResumeBuilderConnection();
-            User u = dbContext.Users.Where(m => m.Username == model.Username).FirstOrDefault();
-            if (u != null)
+            if (dbContext.Users.Any())
             {
-                ModelState.AddModelError("", "User already exists.");
-                return View(model);
+                User u = dbContext.Users.Where(m => m.Username == model.Username).FirstOrDefault();
+                if (u != null)
+                {
+                    ModelState.AddModelError("", "User already exists.");
+                    return View(model);
+                }
             }
+
             byte[] salt;
             new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
             var pbkdf1 = new Rfc2898DeriveBytes(model.Password, salt, 10000);

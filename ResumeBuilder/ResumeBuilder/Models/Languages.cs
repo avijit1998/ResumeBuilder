@@ -12,5 +12,7 @@ namespace ResumeBuilder.Models
         public int LanguageID { get; set; }
 
         public string Language { get; set; }
+
+        public virtual List<User> Users { get; set; }
     }
 }
