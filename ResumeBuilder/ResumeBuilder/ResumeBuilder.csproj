@@ -266,6 +266,10 @@
     <Compile Include="Migrations\202003121005348_added board field in Educational table.Designer.cs">
       <DependentUpon>202003121005348_added board field in Educational table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003131340108_add ole.cs" />
+    <Compile Include="Migrations\202003131340108_add ole.Designer.cs">
+      <DependentUpon>202003131340108_add ole.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\202003130807262_deleted usersskills table and.cs" />
     <Compile Include="Migrations\202003130807262_deleted usersskills table and.Designer.cs">
       <DependentUpon>202003130807262_deleted usersskills table and.cs</DependentUpon>
@@ -2217,6 +2221,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003121005348_added board field in Educational table.resx">
       <DependentUpon>202003121005348_added board field in Educational table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003131340108_add ole.resx">
+      <DependentUpon>202003131340108_add ole.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003130807262_deleted usersskills table and.resx">
       <DependentUpon>202003130807262_deleted usersskills table and.cs</DependentUpon>
