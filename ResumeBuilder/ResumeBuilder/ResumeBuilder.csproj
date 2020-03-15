@@ -265,6 +265,10 @@
     <Compile Include="Migrations\202003121005348_added board field in Educational table.Designer.cs">
       <DependentUpon>202003121005348_added board field in Educational table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003130915333_Changes.cs" />
+    <Compile Include="Migrations\202003130915333_Changes.Designer.cs">
+      <DependentUpon>202003130915333_Changes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Course.cs" />
@@ -282,6 +286,7 @@
     <Compile Include="Models\WorkExperience.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AllDetailsVM.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\PublicProfileViewModel.cs" />
     <Compile Include="ViewModels\UI Models\EducationUIModel.cs" />
@@ -2184,6 +2189,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003121005348_added board field in Educational table.resx">
       <DependentUpon>202003121005348_added board field in Educational table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003130915333_Changes.resx">
+      <DependentUpon>202003130915333_Changes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -9,7 +9,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" id="modal-style" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
@@ -18,12 +18,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                @{
-                    int id1;
-                    var re1 = Int32.TryParse(Session["UserID"] as String, out id1);   
-                }
-                <span style="display:none;" data-sessionId ="@id1" id="sessionIdFetch"></span>
-                @*re = Int32.TryParse(Session["UserID"] as String, out id);*@
+                <b class="modal-font-size" id="modalUserName"></b><br />
+                <b class="modal-font-size" id="modalSkills">Skills:</b><br />
+                <b class="modal-font-size">Projects:</b><br />
+                <b class="modal-font-size">Work Experience:</b><br />
+                <b class="modal-font-size">Language:</b><br />
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
