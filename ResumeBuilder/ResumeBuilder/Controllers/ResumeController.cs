@@ -1,4 +1,5 @@
 ﻿using ResumeBuilder.Models;
+using ResumeBuilder.Models.ViewModels;
 using ResumeBuilder.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -35,9 +36,10 @@ namespace ResumeBuilder.Controllers
                 var re = Int32.TryParse(Session["UserID"] as String, out id);
                 var user = db.Users.Where(m => m.UserID == id).FirstOrDefault();
                 var projects = db.Projects.Where(m => m.UserId == id).ToList();
-
+                var workExperiences = db.WorkExperiences.Where(m => m.UserID == id).ToList();
+               
                 ViewBag.Projects = projects;
-
+                ViewBag.WorkExperiences = workExperiences;
                 return View(user);
             }
             return RedirectToAction("Login", "Account");
@@ -91,7 +93,7 @@ namespace ResumeBuilder.Controllers
                 ProjectId = proj.ProjectId,
                 Title = proj.Title,
                 Duration = proj.Duration,
-               // Role = proj.Role,
+                ProjectRole = proj.ProjectRole,
                 Description = proj.Description
             };
             return Json(project, JsonRequestBehavior.AllowGet);
@@ -103,8 +105,8 @@ namespace ResumeBuilder.Controllers
             var project = db.Projects.FirstOrDefault(x => x.ProjectId == projectId);
 
             project.Title = model.Title;
-            //project.Role = model.Role;
-            project.Description = model.Description; ;
+            project.ProjectRole = model.ProjectRole;
+            project.Description = model.Description; 
             project.Duration = model.Duration;
 
             db.Entry(project).State = System.Data.Entity.EntityState.Modified;
@@ -121,6 +123,7 @@ namespace ResumeBuilder.Controllers
                 var re = Int32.TryParse(Session["UserID"] as String, out id);
                 var user = db.Users.Where(m => m.UserID == id).FirstOrDefault();
                 ViewBag.Courses = db.Courses.ToList();
+                ViewBag.Languages = db.Languages.ToList();
                 return View(user);                               
             }
             return RedirectToAction("Login", "Account");
@@ -141,6 +144,56 @@ namespace ResumeBuilder.Controllers
                 return HttpNotFound();
             }
 
+        }
+
+        public ActionResult GetWorkExperienceById(int workExperienceId)
+        {
+            var workex = db.WorkExperiences.FirstOrDefault(x => x.WorkExperienceid == workExperienceId);
+            var workExperience = new WorkExperience
+            {
+                WorkExperienceid = workex.WorkExperienceid,
+                OrganizationName = workex.OrganizationName,
+                Role = workex.Role,
+                StartMonth = workex.StartMonth,
+                StartYear = workex.StartYear,
+                EndMonth = workex.EndMonth,
+                EndYear = workex.EndYear,
+                CurrentlyWorking = workex.CurrentlyWorking
+            };
+            return Json(workExperience, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateWorkExperience(int workExpeienceId, WorkExperience model)
+        {
+            var workEx = db.WorkExperiences.FirstOrDefault(x => x.WorkExperienceid == workExpeienceId);
+            workEx.OrganizationName = model.OrganizationName;
+            workEx.Role = model.Role;
+            //workEx.StartMonth = model.StartMonth;
+            //workEx.StartYear = model.StartYear;
+            //workEx.EndMonth = model.EndMonth;
+            //workEx.EndYear = model.EndYear;
+            //workEx.CurrentlyWorking = model.CurrentlyWorking;
+
+            db.Entry(workEx).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return Json("Success");
+        }
+
+        [HttpDelete]
+        public ActionResult DeleteWorkExperience(int workExId)
+        {
+            var workEx = db.WorkExperiences.FirstOrDefault(x => x.WorkExperienceid == workExId);
+            if (workEx != null)
+            {
+                db.WorkExperiences.Remove(workEx);
+                db.SaveChanges();
+                return Json("Successfully Deleted");
+            }
+            else
+            {
+                return HttpNotFound();
+            }
         }
 
         public ActionResult Preview()
@@ -192,19 +245,26 @@ namespace ResumeBuilder.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveBasicInformation(User user)
+        //public ActionResult SaveBasicInformation(User user)
+        public ActionResult SaveBasicInformation(AddUserViewModel addUserViewModel)
         {
-            var userFromDb = db.Users.FirstOrDefault(u => u.UserID == user.UserID);
+            var userFromDb = db.Users.FirstOrDefault(u => u.UserID == addUserViewModel.UserID);
 
-            userFromDb.Name = user.Name;
-            userFromDb.Gender = user.Gender;
-            userFromDb.PhoneNumber = user.PhoneNumber;
-            userFromDb.DateOfBirth = user.DateOfBirth;
+            userFromDb.Name = addUserViewModel.Name;
+            userFromDb.Gender = addUserViewModel.Gender;
+            userFromDb.PhoneNumber = addUserViewModel.PhoneNumber;
+            userFromDb.DateOfBirth = addUserViewModel.DateOfBirth;
+
+            if (addUserViewModel.LanguageIds.Any())
+            {
+                var languages = db.Languages.Where(x => addUserViewModel.LanguageIds.Contains(x.LanguageID)).ToList();
+                userFromDb.Languages.AddRange(languages);
+            }
 
             db.SaveChanges();
-
+            
             string message = "SUCCESS";
-
+            
             return Json(new { Message = message, JsonRequestBehavior.AllowGet });
         }
 
@@ -254,22 +314,49 @@ namespace ResumeBuilder.Controllers
 
         public JsonResult GetSkill(string term)
         {
+            term = term.Trim();
             List<string> skills;
 
-            skills = db.Skills.Where(x => x.Skill.StartsWith(term)).Select(y => y.Skill).ToList();
+            skills = db.Skills.Where(x => x.SkillName.StartsWith(term)).Select(y => y.SkillName).ToList();
 
             return Json(skills, JsonRequestBehavior.AllowGet);
         }
-        
-        public ActionResult DisplayDetails( int[] finalresult)
+
+        [HttpPost]
+        public ActionResult SaveUserSkills(AddUserSkillsViewModel addUserSkillsViewModel)
         {
-            int id=1;
+            User user = new User();
+
+            user = db.Users.Where(x => x.UserID == addUserSkillsViewModel.UserID).FirstOrDefault();
+
+            var skillIdsList = db.Skills.Where(x => addUserSkillsViewModel.SkillNames.Contains(x.SkillName)).Select(m=>m.SkillID).ToList();
+
+            List<Skills> refer = new List<Skills>();
+
+            foreach (var item in skillIdsList)
+            {
+                refer.Add(db.Skills.Where(x => x.SkillID == item).FirstOrDefault());
+            }
+            
+            user.Skills.AddRange(refer);
+       
+            db.SaveChanges();
+
+            string message = "SUCCESS";
+
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+
+        }
+        
+        public ActionResult DisplayDetails(int[] finalresult)
+        {
+            int id = 1;
             if (Session["UserID"] != null)
             {
-                
+
                 var re = Int32.TryParse(Session["UserID"] as String, out id);
             }
-            var ob = db.settings.SingleOrDefault(user => user.UserSettingId == id);
+            var ob = db.settings.Where(user => user.UserID == id).FirstOrDefault();
             ob.setWorkex = finalresult[0];
             ob.setProject = finalresult[1];
             ob.setEducation = finalresult[2];
@@ -288,7 +375,7 @@ namespace ResumeBuilder.Controllers
 
                 var re = Int32.TryParse(Session["UserID"] as String, out id);
             }
-            var ob = db.settings.SingleOrDefault(user => user.UserSettingId == id);
+            var ob = db.settings.SingleOrDefault(user => user.UserID == id);
             UserSetting ob1 = new UserSetting();
             ob1.setWorkex = ob.setWorkex;
             ob1.UserSettingId = ob.UserSettingId;
