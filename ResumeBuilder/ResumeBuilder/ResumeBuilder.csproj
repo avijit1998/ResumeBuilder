@@ -246,10 +246,6 @@
     <Compile Include="Migrations\202003111213049_added stream field in educational details.Designer.cs">
       <DependentUpon>202003111213049_added stream field in educational details.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003121424222_updated role to userrole and projectrole.cs" />
-    <Compile Include="Migrations\202003121424222_updated role to userrole and projectrole.Designer.cs">
-      <DependentUpon>202003121424222_updated role to userrole and projectrole.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\202003120628448_Added grade or percent value.cs" />
     <Compile Include="Migrations\202003120628448_Added grade or percent value.Designer.cs">
       <DependentUpon>202003120628448_Added grade or percent value.cs</DependentUpon>
@@ -269,6 +265,10 @@
     <Compile Include="Migrations\202003121005348_added board field in Educational table.cs" />
     <Compile Include="Migrations\202003121005348_added board field in Educational table.Designer.cs">
       <DependentUpon>202003121005348_added board field in Educational table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003131340108_add ole.cs" />
+    <Compile Include="Migrations\202003131340108_add ole.Designer.cs">
+      <DependentUpon>202003131340108_add ole.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -2177,9 +2177,6 @@
     <EmbeddedResource Include="Migrations\202003111213049_added stream field in educational details.resx">
       <DependentUpon>202003111213049_added stream field in educational details.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003121424222_updated role to userrole and projectrole.resx">
-      <DependentUpon>202003121424222_updated role to userrole and projectrole.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003120628448_Added grade or percent value.resx">
       <DependentUpon>202003120628448_Added grade or percent value.cs</DependentUpon>
     </EmbeddedResource>
@@ -2194,6 +2191,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003121005348_added board field in Educational table.resx">
       <DependentUpon>202003121005348_added board field in Educational table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003131340108_add ole.resx">
+      <DependentUpon>202003131340108_add ole.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -7,13 +7,13 @@ namespace ResumeBuilder.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class updatedroletouserroleandprojectrole : IMigrationMetadata
+    public sealed partial class addole : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(updatedroletouserroleandprojectrole));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addole));
         
         string IMigrationMetadata.Id
         {
-            get { return "202003121424222_updated role to userrole and projectrole"; }
+            get { return "202003131340108_add ole"; }
         }
         
         string IMigrationMetadata.Source
