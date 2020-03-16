@@ -32,16 +32,9 @@
                 </a>
             </div>
             <div>
-                <a href="#education" class="text-white no-underline">
+                <a href="#workExperience" class="text-white no-underline">
                     <div class="p-3">
-                        <i class="fa fa-graduation-cap"></i> Education
-                    </div>
-                </a>
-            </div>
-            <div>
-                <a href="#skills" class="text-white no-underline">
-                    <div class="p-3">
-                        <i class="fa fa-line-chart"></i> Skills
+                        <i class="fa fa-folder"></i> Work Ex.
                     </div>
                 </a>
             </div>
@@ -53,9 +46,16 @@
                 </a>
             </div>
             <div>
-                <a href="#workExperience" class="text-white no-underline">
+                <a href="#skills" class="text-white no-underline">
                     <div class="p-3">
-                        <i class="fa fa-folder"></i> Work Ex.
+                        <i class="fa fa-line-chart"></i> Skills
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="#education" class="text-white no-underline">
+                    <div class="p-3">
+                        <i class="fa fa-graduation-cap"></i> Education
                     </div>
                 </a>
             </div>
@@ -98,6 +98,86 @@
             </div>
         </div>
     </div>
+
+    <!-- Work Experience -->
+    <div class="container">
+        <div id="workExperience" class="pseudo-element">
+            <div class="p-2 text-primary bg-blue-design">
+                <i class="fa fa-folder fa-2x text-primary pl-4"> Work Experiences</i>
+            </div>
+            <div class="p-3 bg-light">
+                <div id="workExTimelineId" class="timeline bg-light">
+                    @if (Model.WorkExList != null)
+                    {
+                        foreach (var data in Model.WorkExList)
+                        {
+                            <div class="container-timeline">
+                                <div class="content text-center">
+                                    <h2>@data.OrganizationName</h2>
+                                    <div>Role : @data.Role</div>
+                                    @if (@data.CurrentlyWorking == true)
+                                    {
+                                        <h4>Working Here...</h4>
+                                    }
+                                    <h4>@data.StartMonth/@data.StartYear - @data.EndMonth/@data.EndYear</h4>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Projects -->
+    <div class="container">
+        <div id="projects" class="pseudo-element">
+            <div class="p-2 text-primary bg-blue-design">
+                <i class="fa fa-tasks fa-2x text-primary pl-4"> Projects</i>
+            </div>
+            <div class="p-3 bg-light">
+                <div id="projectTimelineId" class="timeline bg-light">
+                    @if (Model.ProjectList != null)
+                    {
+                        foreach (var data in Model.ProjectList)
+                        {
+                            <div class="container-timeline">
+                                <div class="content text-center">
+                                    <h2>@data.Title</h2>
+                                    <p>@data.Description</p>
+                                    <h4>@data.Duration</h4>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skills -->
+    <div class="container">
+        <div id="skills" class="pseudo-element">
+            <div class="p-2 text-primary bg-blue-design">
+                <i class="fa fa-line-chart fa-2x text-primary pl-4"> Skills</i>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div id="" class="row p-3 bg-light">
+                    @if (Model.SkillList != null)
+                    {
+                        foreach (var data in Model.SkillList)
+                        {
+                            <div class="col-md-6 col-lg-6">
+                                <h4>@data</h4>
+                                <progress class="progress progress-bar mb-3" id="progBar" value="75" max="100" style="width: 100%"></progress>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>    
+
     <!-- Education -->
     <div class="container">
         <div id="education" class="pseudo-element">
@@ -110,10 +190,10 @@
                     foreach (var data in Model.EducationList)
                     {
                         <div class="mb-3 mt-4 ml-2 mr-2 text-center bg-card">
-                            <div class="card-header education-text-header-size">@data.CourseName</div>
+                            <div class="card-header education-text-header-size">@data.CourseName (@data.Stream)</div>
                             <div class="card-body">
-                                <h4>Utkal University and edudyuio</h4>
-                                <h5>Percentage : <label>@data.CGPAOrPercentage%</label></h5>
+                                <h4>@data.Board</h4>
+                                <h5>@data.CGPAOrPercentage : <label>@data.TotalPercentorCGPAValue</label></h5>
                             </div>
                             <div class="card-footer">Passing Year - @data.PassingYear</div>
                         </div>
@@ -124,68 +204,7 @@
 
         </div>
     </div>
-    <!-- Skills -->
-    <div class="container">
-        <div id="skills" class="pseudo-element">
-            <div class="p-2 text-primary bg-blue-design">
-                <i class="fa fa-line-chart fa-2x text-primary pl-4"> Skills</i>
-            </div>
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <div id="" class="row p-3 bg-light">
-                    @foreach (var data in Model.SkillList)
-                    {
-                        <div class="col-md-6 col-lg-6">
-                            <h4>@data</h4>
-                            <progress class="progress progress-bar mb-3" id="progBar" value="75" max="100" style="width: 100%"></progress>
-                        </div>
-                    }
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Projects -->
-    <div class="container">
-        <div id="projects" class="pseudo-element">
-            <div class="p-2 text-primary bg-blue-design">
-                <i class="fa fa-tasks fa-2x text-primary pl-4"> Projects</i>
-            </div>
-            <div class="p-3 bg-light">
-                <div id="projectTimelineId" class="timeline bg-light">
-                    @foreach (var data in Model.ProjectList)
-                    {
-                        <div class="container-timeline">
-                            <div class="content">
-                                <h2>@data.StartDate - @data.EndDate</h2>
-                                <p>Lorem ipsum dolor sit amet, quo ei simul congue exEa quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
-                            </div>
-                        </div>
-                    }
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Work Experience -->
-    <div class="container">
-        <div id="workExperience" class="pseudo-element">
-            <div class="p-2 text-primary bg-blue-design">
-                <i class="fa fa-folder fa-2x text-primary pl-4"> Work Experiences</i>
-            </div>
-            <div class="p-3 bg-light">
-                <div id="workExTimelineId" class="timeline bg-light">
-                    @foreach (var data in Model.WorkExList)
-                    {
-                        <div class="container-timeline">
-                            <div class="content text-center">
-                                <h2>@data.OrganizationName</h2>
-                                <div>Role : @data.Role</div>
-                                <h4>@data.StartDate - @data.EndDate</h4>
-                            </div>
-                        </div>
-                    }
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <!-- Contact -->
     @*<div class="container">
             <div id="contact" class="bg-light-gray pseudo-element">
@@ -225,28 +244,37 @@
     <script type="text/javascript" src="~/Scripts/Profile_Scripts/profileDefaultScript.js"></script>
     <!-- Internal JavaScript Code -->
     <script type="text/javascript">
-        $(document).ready(function () {
+    $(document).ready(function () {
 
-            $('body').scrollspy({target: ".scroll-spy-div"});
+        $('body').scrollspy({target: ".scroll-spy-div"});
+
+        @*if(@Model.WorkExList == null)
+            $('#workExperience').hide();
+        if(@Model.ProjectList == null)
+            $('#projects').hide();*@
+        //if(1)
+        //    $('#skills').hide();
+        @*if(@Model.EducationList == null)
+            $('#education').hide();*@
 
             var projectCount = @Model.ProjectList.Count;
-            for(var i =0; i< projectCount; i++)
-            {
-                if(i % 2 === 0)
-                    $('#projectTimelineId').children().eq(i).addClass("timeline-left");
-                else
-                    $('#projectTimelineId').children().eq(i).addClass("timeline-right");
-            }
+        for(var i =0; i< projectCount; i++)
+        {
+            if(i % 2 === 0)
+                $('#projectTimelineId').children().eq(i).addClass("timeline-left");
+            else
+                $('#projectTimelineId').children().eq(i).addClass("timeline-right");
+        }
 
-            var projectCount = @Model.WorkExList.Count;
-            for(var i =0; i< projectCount; i++)
-            {
-                if(i % 2 === 0)
-                    $('#workExTimelineId').children().eq(i).addClass("timeline-left");
-                else
-                    $('#workExTimelineId').children().eq(i).addClass("timeline-right");
-            }
-        });
+        var projectCount = @Model.WorkExList.Count;
+        for(var i =0; i< projectCount; i++)
+        {
+            if(i % 2 === 0)
+                $('#workExTimelineId').children().eq(i).addClass("timeline-left");
+            else
+                $('#workExTimelineId').children().eq(i).addClass("timeline-right");
+        }
+    });
     </script>
 
 </body>

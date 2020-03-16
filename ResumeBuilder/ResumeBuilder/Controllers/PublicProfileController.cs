@@ -49,9 +49,12 @@ namespace ResumeBuilder.Controllers
                                               select new EducationUIModel 
                                               {
                                                   CourseName = _context.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName,
-                                                  CGPAOrPercentage =user.CGPAOrPercentageValue,
+                                                  CGPAOrPercentage =user.CGPAOrPercentage,
+                                                  Board = user.Board,
+                                                  Stream = user.Stream,
+                                                  TotalPercentorCGPAValue = user.TotalPercentorCGPAValue,
                                                   PassingYear = user.PassingYear
-                                              }).ToList();
+                                              }).OrderByDescending(x => x.PassingYear).ToList();
                 }
                 catch (Exception)
                 {
@@ -79,26 +82,44 @@ namespace ResumeBuilder.Controllers
             _uiModel.ProjectStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setProject;
             if (_uiModel.ProjectStatus == 1)
             {
-                _uiModel.ProjectList = new List<ProjectUIModel>()
+                try
                 {
-                    new ProjectUIModel{ Title = "Random Title", Description ="Random Desc.", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) },
-                    new ProjectUIModel{ Title = "Random Title", Description ="Random Desc.", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) },
-                    new ProjectUIModel{ Title = "Random Title", Description ="Random Desc.", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) },
-                    new ProjectUIModel{ Title = "Random Title", Description ="Random Desc.", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) }
-                }; 
+                    _uiModel.ProjectList = (from user in _context.Projects.Where(x => x.UserId == id)
+                                            select new ProjectUIModel
+                                            {
+                                                Title = user.Title,
+                                                Description = user.Description,
+                                                Duration = user.Duration
+                                            }).ToList();
+                }
+                catch (Exception)
+                {
+                    
+                }
             }
 
             // Work Ex.
             _uiModel.WorkExStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setWorkex;
             if (_uiModel.WorkExStatus == 1)
             {
-                _uiModel.WorkExList = new List<WorkExUIModel>()
+                try
                 {
-                    new WorkExUIModel{ OrganizationName = "Mindfire Solutions", Role = "Developer", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) },
-                    new WorkExUIModel{ OrganizationName = "Mindfire Solutions", Role = "Developer", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) },
-                    new WorkExUIModel{ OrganizationName = "Mindfire Solutions", Role = "Developer", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) },
-                    new WorkExUIModel{ OrganizationName = "Mindfire Solutions", Role = "Developer", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) }
-                }; 
+                    _uiModel.WorkExList = (from user in _context.WorkExperiences.Where(x => x.UserID == id)
+                                           select new WorkExUIModel 
+                                           {
+                                               OrganizationName = user.OrganizationName,
+                                               StartMonth = user.StartMonth,
+                                               StartYear = user.StartYear,
+                                               EndMonth = user.EndMonth,
+                                               EndYear = user.EndYear,
+                                               Role = user.Role,
+                                               CurrentlyWorking = user.CurrentlyWorking
+                                           }).ToList();
+                }
+                catch (Exception)
+                {
+                    
+                }
             }
 
             // Languages 
@@ -115,9 +136,9 @@ namespace ResumeBuilder.Controllers
                     
                 }
             }
-            //return View(_uiModel);
-            var data = _context.Users.Include("Skills").Where(x => x.UserID == id).Select(a => a.Skills.Select(b => b.SkillName)).ToList();
-            return Json(data, JsonRequestBehavior.AllowGet);
+            return View(_uiModel);
+            
+            //return Json(_uiModel, JsonRequestBehavior.AllowGet);
         }
     }
 }
