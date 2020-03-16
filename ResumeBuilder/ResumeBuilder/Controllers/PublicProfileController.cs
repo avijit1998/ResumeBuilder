@@ -25,7 +25,7 @@ namespace ResumeBuilder.Controllers
             _uiModel.Name = _context.Users.FirstOrDefault(a => a.UserID == id).Name;
 
             // User Role
-            _uiModel.UserRole = "Web Developer";
+            _uiModel.UserRole = _context.Users.FirstOrDefault(a => a.UserID == id).UserRole;
             
             // User Phone
             _uiModel.PhoneNumber = _context.Users.FirstOrDefault(a => a.UserID == id).PhoneNumber;
@@ -37,60 +37,87 @@ namespace ResumeBuilder.Controllers
             _uiModel.LinkedinLink = "https://www.linkedin.com/user";
 
             // User Summary
-            _uiModel.Summary = "Oh, I misunderstood the problem. ResumeBuilder ResumeBuilder Setting a padding on, ResumeBuilder ResumeBuilder bin the padding won't help you.";
+            _uiModel.Summary = _context.Users.FirstOrDefault(a => a.UserID == id).Summary;
             
             // Education Details
-            _uiModel.EducationStatus = true;
-            _uiModel.EducationList = new List<EducationUIModel>()
+            _uiModel.EducationStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setEducation;
+            if(_uiModel.EducationStatus == 1)
             {
-                new EducationUIModel{ CourseName = "+2", PassingYear = 2014, CGPAOrPercentage = 90 },
-                new EducationUIModel{ CourseName = "+2", PassingYear = 2014, CGPAOrPercentage = 70 },
-                new EducationUIModel{ CourseName = "+2", PassingYear = 2014, CGPAOrPercentage = 95 },
-                new EducationUIModel{ CourseName = "+2", PassingYear = 2014, CGPAOrPercentage = 95 },
-                new EducationUIModel{ CourseName = "+2", PassingYear = 2014, CGPAOrPercentage = 80 }
-            };
+                try
+                {
+                    _uiModel.EducationList = (from user in _context.EducationalDetails.ToList()
+                                              select new EducationUIModel 
+                                              {
+                                                  CourseName = _context.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName,
+                                                  CGPAOrPercentage =user.CGPAOrPercentageValue,
+                                                  PassingYear = user.PassingYear
+                                              }).ToList();
+                }
+                catch (Exception)
+                {
+                    
+                    
+                }
+            }
 
             // Skills
-            _uiModel.SkillStatus = true;
-            _uiModel.SkillList = new List<string>()
+            _uiModel.SkillStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setSkills;
+            if(_uiModel.SkillStatus == 1)
             {
-                "HTML",
-                "CSS",
-                "JavaScript",
-                "C#"
-            };
+                try
+                {
+                    _uiModel.SkillList = _context.Users.Where(x => x.UserID == id).Select(a => a.Skills.Select(b => b.SkillName)).ToList();
+                }
+                catch (Exception)
+                {
+                    
+                    
+                }
+            }
 
             // Project Details
-            _uiModel.ProjectStatus = true;
-            _uiModel.ProjectList = new List<ProjectUIModel>()
+            _uiModel.ProjectStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setProject;
+            if (_uiModel.ProjectStatus == 1)
             {
-                new ProjectUIModel{ Title = "Random Title", Description ="Random Desc.", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) },
-                new ProjectUIModel{ Title = "Random Title", Description ="Random Desc.", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) },
-                new ProjectUIModel{ Title = "Random Title", Description ="Random Desc.", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) },
-                new ProjectUIModel{ Title = "Random Title", Description ="Random Desc.", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) }
-            };
+                _uiModel.ProjectList = new List<ProjectUIModel>()
+                {
+                    new ProjectUIModel{ Title = "Random Title", Description ="Random Desc.", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) },
+                    new ProjectUIModel{ Title = "Random Title", Description ="Random Desc.", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) },
+                    new ProjectUIModel{ Title = "Random Title", Description ="Random Desc.", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) },
+                    new ProjectUIModel{ Title = "Random Title", Description ="Random Desc.", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) }
+                }; 
+            }
 
             // Work Ex.
-            _uiModel.WorkExStatus = true;
-            _uiModel.WorkExList = new List<WorkExUIModel>()
+            _uiModel.WorkExStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setWorkex;
+            if (_uiModel.WorkExStatus == 1)
             {
-                new WorkExUIModel{ OrganizationName = "Mindfire Solutions", Role = "Developer", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) },
-                new WorkExUIModel{ OrganizationName = "Mindfire Solutions", Role = "Developer", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) },
-                new WorkExUIModel{ OrganizationName = "Mindfire Solutions", Role = "Developer", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) },
-                new WorkExUIModel{ OrganizationName = "Mindfire Solutions", Role = "Developer", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) }
-            };
+                _uiModel.WorkExList = new List<WorkExUIModel>()
+                {
+                    new WorkExUIModel{ OrganizationName = "Mindfire Solutions", Role = "Developer", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) },
+                    new WorkExUIModel{ OrganizationName = "Mindfire Solutions", Role = "Developer", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) },
+                    new WorkExUIModel{ OrganizationName = "Mindfire Solutions", Role = "Developer", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) },
+                    new WorkExUIModel{ OrganizationName = "Mindfire Solutions", Role = "Developer", StartDate = new DateTime(1993, 12, 12) , EndDate = new DateTime(1994, 12, 24) }
+                }; 
+            }
 
             // Languages 
-            _uiModel.Languages = new List<string>()
+            _uiModel.LanguageStatus = 1;
+            if(_uiModel.LanguageStatus == 1)
             {
-                "English",
-                "Hindi",
-                "Odia",
-                "Bengoli"
-            };
-            
-            return View(_uiModel);
-            //var data = _context.Users.ToList();return Json(_uiModel, JsonRequestBehavior.AllowGet);
+                try
+                {
+                    _uiModel.Languages = _context.Users.Where(b => b.UserID == id).Select(x => x.Languages.Select(a => a.Language)).ToList();
+                }
+                catch (Exception)
+                {
+                    
+                    
+                }
+            }
+            //return View(_uiModel);
+            var data = _context.Users.Include("Skills").Where(x => x.UserID == id).Select(a => a.Skills.Select(b => b.SkillName)).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
     }
 }
