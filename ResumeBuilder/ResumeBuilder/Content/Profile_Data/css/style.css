@@ -1,15 +1,37 @@
-.font-div
-{
-    width: 16.66%;
+.logo-container-div {
+    position: relative;
 }
-
+.logo {
+    font-size: 28px;
+}
+.logo-small {
+    position:absolute;
+    right: 3%;
+    bottom: 5%;
+    font-size: 10px;
+    letter-spacing:2px;
+    opacity: .8;
+}
 .bg-purple
 {
     background-color: #a843ab;
 }
+.bg-blue-design
+{
+    background-color: #86b9d68f;
+}
 .bg-card
 {
-    background-color: #af3c47;
+    background-color: #e3edf3;
+    border-radius: 7px;
+    border-top: 3px solid #007bff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+bg-dark-gray {
+    background-color: red !important;
+}
+.bg-black {
+    background-color: black;
 }
 
 .bg-summary{
@@ -18,10 +40,6 @@
 .css-summary {
     font-size: 20px;
 }
-body{
-    background-color: lightblue;
-}
-
 html
 {
     scroll-behavior: smooth;
@@ -30,34 +48,29 @@ html
 {
     text-decoration: none !important;
 }
-h2{
-    text-align: center;
+.education-text-header-size {
+    font-size: 30px;
 }
-
-
 * {
     box-sizing: border-box;
   }
-  
 body {
-    /* background-color: #474e5d; */
     font-family: Helvetica, sans-serif;
 } 
+/* The actual timeline (the vertical ruler) */
+.timeline {
+position: relative;
+max-width: 1200px;
+margin: 0 auto;
+}
   
-  /* The actual timeline (the vertical ruler) */
-  .timeline {
-    position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  /* The actual timeline (the vertical ruler) */
+/* The actual timeline (the vertical ruler) */
 .timeline::after
 {
   content: '';
   position: absolute;
   width: 6px;
-  background-color: #a843ab;
+  background-color: #007bff;
   top: 0;
   bottom: 0;
   left: 50%;
@@ -82,7 +95,7 @@ body {
     height: 25px;
     right: -13px;
     background-color: white;
-    border: 4px solid #a843ab;
+    border: 4px solid #007bff;
     top: 19px;
     border-radius: 50%;
     z-index: 1;
@@ -112,7 +125,7 @@ body {
     right: 30px;
     border: medium solid white;
     border-width: 10px 0 10px 10px;
-    border-color: transparent transparent transparent #a843ab;
+    border-color: transparent transparent transparent #007bff;
 }
 
 /* Add arrows to the right container (pointing left) */
@@ -127,7 +140,7 @@ body {
     left: 30px;
     border: medium solid #a843ab;
     border-width: 10px 10px 10px 0;
-    border-color: transparent #a843ab transparent transparent;
+    border-color: transparent #007bff transparent transparent;
 }
 
 /* Fix the circle for containers on the right side */
@@ -140,10 +153,11 @@ body {
 .content
 {
     padding: 20px 30px;
-    /* background-color: white; */
+    background-color: #cad9e28f; 
     position: relative;
     border-radius: 6px;
-    border-top: 5px solid #a843ab;
+    border-top: 3px solid #007bff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 /* Media queries - Responsive timeline on screens less than 600px wide */
@@ -166,7 +180,7 @@ body {
     left: 45px;
     border: medium solid white;
     border-width: 10px 10px 10px 0;
-    border-color: transparent #a843ab transparent transparent;
+    border-color: transparent #007bff transparent transparent;
     }
     
     /* Make sure all circles are at the same spot */
@@ -188,44 +202,10 @@ body {
     margin: -56px 0 0;
     z-index: -1;
 }
-
-/* Timeline Properties for Projects */
-    #workExperience .timeline::after
-    {
-        background-color: #28a745;
-    }
-    #workExperience .container-timeline::after
-    {
-        border: 4px solid #28a745;
-    }
-    #workExperience .content
-    {
-    border-top: 5px solid #28a745;
-    }
-/* Timeline Properties for Projects */
-    #projects .timeline-left::before
-    {
-        border-color: transparent transparent transparent #28a745;
-    }
-    #projects .timeline-right::before
-    {
-        border: medium solid #28a745;
-        border-width: 10px 10px 10px 0;
-        border-color: transparent #28a745 transparent transparent;
-    }
-   
-    @media screen and (max-width: 600px)
-    {
-        .container-timeline::before
-        {
-            border-color: transparent #28a745 transparent transparent;
-        }
-
-    }
 /* Changing progress bar default color */
-    progress::-webkit-progress-value {
-        background: #007bff;
-    }
-    progress::-webkit-progress-bar {
-        background: #474e5d;
-    }
+progress::-webkit-progress-value {
+    background: #5698e0;
+}
+progress::-webkit-progress-bar {
+    background: #cad9e28f;
+}

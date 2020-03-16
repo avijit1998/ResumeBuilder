@@ -13,50 +13,55 @@
     <link rel="stylesheet" href="~/Content/Profile_Data/bootstrap-4.3.1-dist/css/bootstrap.css" type="text/css">
     <link rel="stylesheet" href="~/Content/Profile_Data/css/style.css" type="text/css">
 </head>
-<body>
-    <div class="container fixed-top">
-        <div class="no-gutters">
-            <div class="col-lg-12 col-md-12">
-                <div class="col-lg-12 col-md-12">
-                    <div class="row text-center text-white">
-                        <div class="p-3 bg-dark font-div">
-                            <a href="#basicInfo" class="text-white no-underline">
-                                <i class="fa fa-home"></i> Basic Info
-                            </a>
-                        </div>
-                        <div class="p-3 bg-danger font-div">
-                            <a href="#education" class="text-white no-underline">
-                                <i class="fa fa-graduation-cap"></i> Education
-                            </a>
-                        </div>
-                        <div class="p-3 bg-primary font-div">
-                            <a href="#skills" class="text-white no-underline">
-                                <i class="fa fa-line-chart"></i> Skills
-                            </a>
-                        </div>
-                        <div class="p-3 bg-success font-div">
-                            <a href="#projects" class="text-white no-underline">
-                                <i class="fa fa-tasks"></i> Projects
-                            </a>
-                        </div>
-                        <div class="p-3 bg-purple font-div">
-                            <a href="#workExperience" class="text-white no-underline">
-                                <i class="fa fa-folder"></i> Work Ex.
-                            </a>
-                        </div>
-                        <div class="p-3 bg-warning font-div">
-                            <a href="#contact" class="text-white no-underline">
-                                <i class="fa fa-envelope"></i> Contact
-                            </a>
-                        </div>
+<body data-spy="scroll" data-target=".scroll-spy-div" data-offset="50">
+    <div class="d-flex fixed-top bg-primary justify-content-around scroll-spy-div">
+        <a href="https://www.mindfiresolutions.com/" class="no-underline text-white">
+            <div class="p-1 logo-container-div">
+                <i>
+                    <span class="logo"><b>mindfire</b> solutions</span>
+                    <small class="logo-small">BURN IGNORANCE</small>
+                </i>
+            </div>
+        </a>
+        <div class="d-flex justify-content-end">
+            <div>
+                <a href="#basicInfo" class="text-white no-underline">
+                    <div class="p-3">
+                        <i class="fa fa-home"></i> Basic Info
                     </div>
-                </div>
+                </a>
+            </div>
+            <div>
+                <a href="#education" class="text-white no-underline">
+                    <div class="p-3">
+                        <i class="fa fa-graduation-cap"></i> Education
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="#skills" class="text-white no-underline">
+                    <div class="p-3">
+                        <i class="fa fa-line-chart"></i> Skills
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="#projects" class="text-white no-underline">
+                    <div class="p-3">
+                        <i class="fa fa-tasks"></i> Projects
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="#workExperience" class="text-white no-underline">
+                    <div class="p-3">
+                        <i class="fa fa-folder"></i> Work Ex.
+                    </div>
+                </a>
             </div>
         </div>
     </div>
     <!-- Basic Information -->
-
-
     <div class="container pseudo-element" id="basicInfo">
         <div class="no-gutters">
             <div class="col-lg-12 col-md-12">
@@ -82,11 +87,11 @@
                                     <i class="fa fa-linkedin"> @Model.LinkedinLink</i>
                                 </a>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 bg-summary">
-                    <div class="text-white-50 text-center p-2  css-summary">
+                    <div class="text-white text-center p-2  css-summary" style="opacity: .8">
                         @Model.Summary
                     </div>
                 </div>
@@ -96,34 +101,30 @@
     <!-- Education -->
     <div class="container">
         <div id="education" class="pseudo-element">
-            <div class="p-3 text-white bg-danger">
-                <h2>Educational Details</h2>
+            <div class="d-flex p-2 flex-fill bg-blue-design text-center">
+                <i class="fa fa-graduation-cap fa-2x text-primary pl-4"> Educational Details</i>
             </div>
-            <!-- Cards Here -->
-            <div class="col-md-12 col-lg-12 bg-light">
-                <div class="row">
-                    @foreach (var data in Model.EducationList)
-                    {
-                        <div class="col-lg-4 mb-2 mt-2 text-center text-white">
-                            <div class="card col-md-9 col-lg-11 offset-lg-1 offset-md-2 bg-card">
-                                <div class="card-header">@data.CourseName</div>
-                                <div class="card-body">
-                                    <h4>Utkal University</h4>
-                                    <h5>Percentage :<label>@data.CGPAOrPercentage%</label></h5>
-                                </div>
-                                <div class="card-footer">Passing Year - @data.PassingYear</div>
-                            </div>
+            <div class="d-flex flex-wrap align-items-stretch align-content-center justify-content-around bg-light">
+                @foreach (var data in Model.EducationList)
+                {
+                    <div class="mb-3 mt-4 ml-2 mr-2 text-center bg-card">
+                        <div class="card-header education-text-header-size">@data.CourseName</div>
+                        <div class="card-body">
+                            <h4>Utkal University and edudyuio</h4>
+                            <h5>Percentage :<label>@data.CGPAOrPercentage%</label></h5>
                         </div>
-                    }
-                </div>
+                        <div class="card-footer">Passing Year - @data.PassingYear</div>
+                    </div>
+                }
             </div>
+
         </div>
     </div>
     <!-- Skills -->
     <div class="container">
         <div id="skills" class="pseudo-element">
-            <div class="p-3 text-white bg-primary">
-                <h2>Skills</h2>
+            <div class="p-2 text-primary bg-blue-design">
+                <i class="fa fa-line-chart fa-2x text-primary pl-4"> Skills</i>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div id="" class="row p-3 bg-light">
@@ -141,17 +142,17 @@
     <!-- Projects -->
     <div class="container">
         <div id="projects" class="pseudo-element">
-            <div class="p-3 text-white bg-success">
-                <h2>My Projects</h2>
+            <div class="p-2 text-primary bg-blue-design">
+                <i class="fa fa-tasks fa-2x text-primary pl-4"> Projects</i>
             </div>
             <div class="p-3 bg-light">
-                <div id="projectTimelineId" class="timeline">
+                <div id="projectTimelineId" class="timeline bg-light">
                     @foreach (var data in Model.ProjectList)
                     {
                         <div class="container-timeline">
-                            <div class="content bg-success text-white">
+                            <div class="content">
                                 <h2>@data.StartDate - @data.EndDate</h2>
-                                <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+                                <p>Lorem ipsum dolor sit amet, quo ei simul congue exEa quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
                             </div>
                         </div>
                     }
@@ -162,15 +163,15 @@
     <!-- Work Experience -->
     <div class="container">
         <div id="workExperience" class="pseudo-element">
-            <div class="p-3 text-white bg-purple">
-                <h2>Work Experiences</h2>
+            <div class="p-2 text-primary bg-blue-design">
+                <i class="fa fa-folder fa-2x text-primary pl-4"> Work Experiences</i>
             </div>
             <div class="p-3 bg-light">
-                <div id="workExTimelineId" class="timeline">
+                <div id="workExTimelineId" class="timeline bg-light">
                     @foreach (var data in Model.WorkExList)
                     {
                         <div class="container-timeline">
-                            <div class="content bg-purple text-white text-center">
+                            <div class="content text-center">
                                 <h2>@data.OrganizationName</h2>
                                 <div>Role : @data.Role</div>
                                 <h4>@data.StartDate - @data.EndDate</h4>
@@ -182,30 +183,30 @@
         </div>
     </div>
     <!-- Contact -->
-    <div class="container">
-        <div id="contact" class="bg-light-gray pseudo-element">
-            <div class="p-3 text-white bg-warning">
-                <h2>My Resume</h2>
-                
+    @*<div class="container">
+            <div id="contact" class="bg-light-gray pseudo-element">
+                <div class="p-3 text-white bg-warning">
+                    <h2>My Resume</h2>
+
+                </div>
             </div>
-        </div>
-    </div>
+        </div>*@
     <!-- Footer -->
     <footer>
         <div class="container">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 bg-dark p-2">
-                <div class="row">
-                    <div class="pull-left col-lg-4 col-xs-12">
-                        <h6 class="text-white">Copyright &copy;2020 by<span style="opacity: .7;"> Abhijit Group</span></h6>
+                <div class="row p-1">
+                    <div class="pull-left col-lg-4 col-xs-12 text-white">
+                        Copyright &copy;2020 by<span style="opacity: .7;"> Mindfire Solutions</span>
                     </div>
                     <div class="col-lg-4 offset-lg-4 col-xs-12">
                         <div class="pull-right">
-                            <a href="#"><i class="fa fa-behance-square text-white"></i></a>
-                            <a href="#"><i class="fa fa-linkedin-square text-white"></i></a>
-                            <a href="#"><i class="fa fa-twitter-square text-white"></i></a>
-                            <a href="#"><i class="fa fa-skype text-white"></i></a>
-                            <a href="#"><i class="fa fa-facebook-square text-white"></i></a>
-                            <a href="#"><i class="fa fa-github-square text-white"></i></a>
+                            <a href="https://www.linkedin.com/company/mindfire-solutions"><i class="fa fa-linkedin-square text-white"></i></a>
+                            <a href="https://twitter.com/mindfires"><i class="fa fa-twitter-square text-white"></i></a>
+                            <a href="https://plus.google.com/111970111220820687030?prsrc=3"><i class="fa fa-google-plus-square text-white"></i></a>
+                            <a href="https://www.facebook.com/MindfireSolutions"><i class="fa fa-facebook-square text-white"></i></a>
+                            <a href="https://www.mindfiresolutions.com/blog/"><i class="fa fa-book text-white"></i></a>
+                            <a href="https://www.youtube.com/user/MindfireSolutions"><i class="fa fa-youtube-square text-white"></i></a>
                         </div>
                     </div>
                 </div>
@@ -220,55 +221,29 @@
     <script type="text/javascript" src="~/Scripts/Profile_Scripts/profileDefaultScript.js"></script>
     <!-- Internal JavaScript Code -->
     <script type="text/javascript">
-    $(document).ready(function () {
+        $(document).ready(function () {
 
-        var projectCount = @Model.ProjectList.Count;
-        for(var i =0; i< projectCount; i++)
-        {
-            if(i % 2 === 0)
-                $('#projectTimelineId').children().eq(i).addClass("timeline-left");
-            else
-                $('#projectTimelineId').children().eq(i).addClass("timeline-right");
-        }
+            $('body').scrollspy({target: ".scroll-spy-div"});
 
-        var projectCount = @Model.WorkExList.Count;
-        for(var i =0; i< projectCount; i++)
-        {
-            if(i % 2 === 0)
-                $('#workExTimelineId').children().eq(i).addClass("timeline-left");
-            else
-                $('#workExTimelineId').children().eq(i).addClass("timeline-right");
-        }
+            var projectCount = @Model.ProjectList.Count;
+            for(var i =0; i< projectCount; i++)
+            {
+                if(i % 2 === 0)
+                    $('#projectTimelineId').children().eq(i).addClass("timeline-left");
+                else
+                    $('#projectTimelineId').children().eq(i).addClass("timeline-right");
+            }
 
-
-        @*function addf() {
-            var division = document.createElement('DIV');
-            division.innerHTML = DynamicElement("");
-            $(educationWrapper).append(division);
-        }
-        function DynamicElement(value) {
-            return '<div class="card col-md-9 col-lg-11 offset-lg-1 offset-md-2 bg-card"><div class="card-header">+3</div><div class="card-body"><h4>VSSUT University</h4><h5>Anill Percentage<label>110%</label></h5></div><div class="card-footer">Passing Year - 1997</div></div>';
-        }
-
-
-
-        var educationCount = @Model.EducationList.Count;
-
-        console.log(educationCount);
-
-        if (0)
-        {
-            addf();
-            $('#educationConnectionId').children().eq(4).addClass("col-lg-4 mb-2 mt-2 text-center text-white")
-        }*@
-
-
-
-
-
-
-    });
-</script>
+            var projectCount = @Model.WorkExList.Count;
+            for(var i =0; i< projectCount; i++)
+            {
+                if(i % 2 === 0)
+                    $('#workExTimelineId').children().eq(i).addClass("timeline-left");
+                else
+                    $('#workExTimelineId').children().eq(i).addClass("timeline-right");
+            }
+        });
+    </script>
 
 </body>
 </html>

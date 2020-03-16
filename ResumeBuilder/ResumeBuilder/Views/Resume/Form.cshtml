@@ -1,6 +1,7 @@
 ﻿@model ResumeBuilder.Models.User
 @{
     ViewBag.Title = "Form";
+    List<ResumeBuilder.Models.Languages> languages = ViewBag.Languages;
     Layout = "~/Views/Shared/_Layout.cshtml";
     string str = "test";
     List<ResumeBuilder.Models.Course> courses = ViewBag.Courses;
@@ -10,23 +11,24 @@
         .color-added-for-text {
             color: black;
         }
+      
         .modal-font-size{
             font-size:24px;
         }
-        @@media (min-width: 768px)
+      
+        @media (min-width: 768px)
         {
             #modal-style{
              width: 1152px;
              margin-left: 132px;
             }
         }
-            
     </style>
 }
 
-<div id="divPreview">
+<div id="divPreview"></div>
 
-</div>
+
 <div id="mainDivModal">
     <div class="box">
         <div class="container">
@@ -40,7 +42,7 @@
                 <h3 id="welcomeUser">Welcome @str </h3>
             </fieldset>
 
-            @if (Model.Role == "Admin")
+            @if (Model.UserRole == "Admin")
             {
                 <script>
                     document.getElementById("btnSearchNav").style.display = "block";
@@ -169,11 +171,11 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <form>
+                                <form action="/Resume/SaveBasicInfo" method="post">
                                     <div>
                                         <input type="hidden" name="UserID" id="userId" value="@Model.UserID" />
-
                                     </div>
+
                                     <div class="form-group">
                                         <label>Full Name:</label>
                                         <input type="text" class="form-control" name="Name" id="txtFullName">
@@ -187,10 +189,10 @@
                                     <div class="form-group">
                                         <label>Gender</label>
                                         <label class="radio-inline">
-                                            <input type="radio" name="Gender" id="optRadioMale" checked value="Male">Male
+                                            <input type="radio" name="Gender" id="optradioMale" checked value="Male">Male
                                         </label>
                                         <label class="radio-inline">
-                                            <input type="radio" name="Gender" id="optRadioFemale" value="Female">Female
+                                            <input type="radio" name="Gender" id="optradioFemale" value="Female">Female
                                         </label>
                                     </div>
 
@@ -203,6 +205,22 @@
                                         <label>Phone Number</label>
                                         <input type="text" class="form-control" name="PhoneNumber" id="txtPhoneNumber">
                                     </div>
+
+                                    <div class="form-check">
+                                        <label>Language</label>
+                                        <div class="checkbox">
+                                            @foreach (var c in languages)
+                                            {
+                                                <div>
+                                                    <label>
+                                                        <input type="checkbox" value="@c.LanguageID">
+                                                        @c.Language
+                                                    </label>
+                                                </div>
+                                            }
+
+                                        </div>
+                                    </div>                             
                                     <div class="row">
                                         <div class="col-md-12">
                                             <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
@@ -220,7 +238,7 @@
             </div>
         </div>
 
-        @*Summary Form*@
+      @*Summary Form*@
         <div id="modalSummary" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <!-- Modal content-->
@@ -318,6 +336,7 @@
                                 </form>
                             </div>
                         </div>
+
                     </div>
                     <div class="modal-footer">
                     </div>
@@ -327,6 +346,126 @@
 
         @*Work Experience*@
         <div id="modalWorkExperience" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">ADD WORK EXPERIENCE</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <form>
+                                    <input type="hidden" name="UserID" value="@Model.UserID" />
+
+                                    <div class="form-group">
+                                        <label>Company Name:</label>
+                                        <input type="text" class="form-control" name="OrganizationName" id="txtCompanyName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Designation</label>
+                                        <input type="text" class="form-control" name="Role" id="txtRole">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Duration</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Start Month:</label>
+                                            <select class="form-control" name="StartMonth" id="selectStartMonth">
+                                                <option class="form-control">Select Month</option>
+                                                <option class="form-control" value="1">1</option>
+                                                <option class="form-control" value="2">2</option>
+                                                <option class="form-control" value="3">3</option>
+                                                <option class="form-control" value="4">4</option>
+                                                <option class="form-control" value="5">5</option>
+                                                <option class="form-control" value="6">6</option>
+                                                <option class="form-control" value="7">7</option>
+                                                <option class="form-control" value="8">8</option>
+                                                <option class="form-control" value="9">9</option>
+                                                <option class="form-control" value="10">10</option>
+                                                <option class="form-control" value="11">11</option>
+                                                <option class="form-control" value="12">12</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Start Year:</label>
+                                            <select class="form-control" name="StartYear" id="selectStartYear">
+                                                <option class="form-control">Select Year</option>
+                                                <option class="form-control" value="2015">2015</option>
+                                                <option class="form-control" value="2016">2016</option>
+                                                <option class="form-control" value="2017">2017</option>
+                                                <option class="form-control" value="2018">2018</option>
+                                                <option class="form-control" value="2019">2019</option>
+                                                <option class="form-control" value="2020">2020</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="hide-if-currently-working">
+                                        <div class="col-lg-6 end-duration">
+                                            <div class="form-group">
+                                                <label>End Month:</label>
+                                                <select class="form-control" name="EndMonth" id="selectEndMonth">
+                                                    <option class="form-control">Select Month</option>
+                                                    <option class="form-control" value="1">1</option>
+                                                    <option class="form-control" value="2">2</option>
+                                                    <option class="form-control" value="3">3</option>
+                                                    <option class="form-control" value="4">4</option>
+                                                    <option class="form-control" value="5">5</option>
+                                                    <option class="form-control" value="6">6</option>
+                                                    <option class="form-control" value="7">7</option>
+                                                    <option class="form-control" value="8">8</option>
+                                                    <option class="form-control" value="9">9</option>
+                                                    <option class="form-control" value="10">10</option>
+                                                    <option class="form-control" value="11">11</option>
+                                                    <option class="form-control" value="12">12</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 end-duration">
+                                            <div class="form-group">
+                                                <label>End Year:</label>
+                                                <select class="form-control" name="EndYear" id="selectEndYear">
+                                                    <option class="form-control">Select Year</option>
+                                                    <option class="form-control" value="2015">2015</option>
+                                                    <option class="form-control" value="2016">2016</option>
+                                                    <option class="form-control" value="2017">2017</option>
+                                                    <option class="form-control" value="2018">2018</option>
+                                                    <option class="form-control" value="2019">2019</option>
+                                                    <option class="form-control" value="2020">2020</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="checkbox-inline" name="CurrentlyWorking" id="checkWorking">
+                                        <label for="checkWorking">Currently Working</label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-default pull-right" id="btnSaveWorkExperience">Save </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*Project*@
+        <div id="modalProject" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
@@ -451,28 +590,42 @@
         </div>
     </div>
 
-    @*Skills*@
-    <div id="modalSkills" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">ADD TECHNICAL SKILLS</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <form>
-                                <input type="hidden" name="UserID" value="@Model.UserID" />
-                                <div class="form-group">
-                                    <label>Add Skills:</label>
+        @*Skills*@
+        <div id="modalSkills" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">ADD TECHNICAL SKILLS</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
 
-
-                                    <input type="text" name="SearchTerm" id="txtSearch" class="color-added-for-text form-control">
-                                    <input type="button" value="Save" id="btnSaveSkill" class="color-added-for-text btn btn-default pull-right">
-                                </div>
-                            </form>
+                                <form id="autoComplete">
+                                    <input type="hidden" name="UserID" value="@Model.UserID" />
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="SearchTerm" id="txtSearch" placeholder="Search">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-info" type="button" id="addSkill">
+                                                <i class="glyphicon glyphicon-plus">Add</i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <form>
+                                    <div>
+                                        <ul id="skillMenu" style="color:black"></ul>
+                                    </div>
+                                    <div class="row skill-button">
+                                        <div class="col-md-12">
+                                            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                                            <button type="button" id="btnSaveSkills" class="btn btn-default pull-right">Save </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer"></div>
@@ -481,7 +634,6 @@
         </div>
     </div>
 </div>
-
     @{
         int ids;
         var res = Int32.TryParse(Session["UserID"] as String, out ids);
@@ -489,9 +641,8 @@
     <span style="display:none;" data-sessionid="@ids" id="sessionIdFetch"></span>
 
     @section scripts{
-        @*<script src="~/Scripts/jquery.js"></script>*@
+        <script src="~/Scripts/jquery.js"></script>
         <script src="~/Scripts/jquery-ui.js"></script>
-        <script src="~/Scripts/jquery-ui.min.js"></script>
         <script src="~/Scripts/jquery-ui.min.js"></script>
         <link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
         <link href="~/Content/jquery-ui.structure.css" rel="stylesheet" />
@@ -506,11 +657,12 @@
         <script>
 
             $(document).ready(function () {
+
                 //empty auto fill data
                 $("body").on('click', 'hidden.bs.modal', function () {
                     //$('input:not(:radio),textarea').val('');
                 });
-
+          
                 $("body").on('change', 'input[type=radio][name=marksOption]', function () {
                     if ($(this).val() == 'CGPA') {
                         $('.marks').attr('placeholder', 'Enter CGPA');
@@ -519,8 +671,7 @@
                     }
                 });
 
-
-                $('#checkWorking').click(function () {
+            $('#checkWorking').click(function () {
                     if ($(this).is(':checked')) {
                         $(".hide-if-currently-working").hide();
                     } else {
@@ -551,7 +702,6 @@
                         dataType: "json",
                         contentType: "application/json; charset=utf-8",
                         success: function () {
-                            //$('#modalSummary').attr('disabled:disabled');
                             $("#modalSummary").modal("hide");
                             bootbox.alert("<b style='color:black;'>Summary details successfully saved.</b>");
                         },
@@ -563,19 +713,26 @@
                     return false;
                 });
 
+
                 //save basic info of user
                 $("body").on("click", "#btnSaveBasicInfo", function () {
-                    var user = {};
-                    user.UserID = $("#userId").val();
-                    user.Name = $("#txtFullName").val();
-                    user.Gender = $('input[name="Gender"]:checked').val();
-                    user.DateOfBirth = $("#dateDOB").val();
-                    user.PhoneNumber = $("#txtPhoneNumber").val();
+                    var user = {
+                        "UserID": $("#userId").val(),
+                        "Name": $("#txtFullName").val(),
+                        "Gender": $('input[name="Gender"]:checked').val(),
+                        "DateOfBirth": $("#dateDOB").val(),
+                        "PhoneNumber": $("#txtPhoneNumber").val(),
+                        "LanguageIds": []
+                    };
+                    debugger;
 
+                    $('input[type="checkbox"]:checked').each(function (e, el) {
+                        user.LanguageIds.push($(el).val());
+                    })
                     $.ajax({
                         type: "POST",
                         url: '/Resume/SaveBasicInformation',
-                        data: '{user: ' + JSON.stringify(user) + '}',
+                        data: '{addUserViewModel: ' + JSON.stringify(user) + '}',
                         dataType: "json",
                         contentType: "application/json; charset=utf-8",
                         success: function () {
@@ -595,10 +752,10 @@
                     var project = {};
                     project.UserID = $("#userId").val();
                     project.Title = $("#txtTitle").val();
-                    project.Role = $('#txtProjectRole').val();
+                    project.ProjectRole = $('#txtProjectRole').val();
                     project.Duration = $("#txtDuration").val();
                     project.Description = $("#txtDescription").val();
-
+                    debugger;
                     $.ajax({
                         type: "POST",
                         url: '/Resume/SaveProjectDetails',
@@ -607,16 +764,17 @@
                         contentType: "application/json; charset=utf-8",
                         success: function () {
                             $("#modalProject").modal("hide");
-                            bootbox.alert("<p style='color:black'>Project Details successfully saved!</p>");
+                            bootbox.alert("<b style='color:black;'>Project details successfully saved.</b>");
                         },
                         error: function () {
                             bootbox.alert("Error!");
+
                         }
                     });
                     return false;
                 });
 
-                //save work experience of a user
+                //save work experience info of user
                 $("body").on("click", "#btnSaveWorkExperience", function () {
                     var project = {};
                     project.UserID = $("#userId").val();
@@ -653,71 +811,99 @@
 
                 //save Educational details of user
                 $("body").on("click", "#btnSaveEducationalDetails", function () {
-                    var tenDetails = {};
+                    var educationalDetails = {};
 
-                    tenDetails.UserID = $("#userId").val();
-                    tenDetails.CourseId = $('input[name="courseOption"]:checked').val();
-                    tenDetails.Board = $("#boardType").val();
-                    tenDetails.PassingYear = $("#yearOfPassing").val();
+                    educationalDetails.UserID = $("#userId").val();
+                    educationalDetails.CourseId = $('input[name="courseOption"]:checked').val();
+                    educationalDetails.Board = $("#boardType").val();
+                    educationalDetails.PassingYear = $("#yearOfPassing").val();
 
                     if ($('input[name="courseOption"]:checked').val() != '1') {
-                        tenDetails.Stream = $("#stream").val();
+                        educationalDetails.Stream = $("#stream").val();
                     }
 
-                    tenDetails.CGPAOrPercentage = $('input[name="marksOption"]:checked').val();
-                    tenDetails.CGPAOrPercentageValue = $("#txtMarks").val();
+                    educationalDetails.CGPAOrPercentage = $('input[name="marksOption"]:checked').val();
+                    educationalDetails.TotalPercentorCGPAValue = $("#txtMarks").val();
 
                     $.ajax({
                         type: "POST",
                         url: '/Resume/SaveEducationalDetails',
-                        data: '{educationalDetails: ' + JSON.stringify(tenDetails) + '}',
+                        data: '{educationalDetails: ' + JSON.stringify(educationalDetails) + '}',
                         dataType: "json",
                         contentType: "application/json; charset=utf-8",
                         success: function () {
                             $("#modalEducationDetails").modal("hide");
                             bootbox.alert("<b style='color:black;'>Educational details successfully saved.</b>");
-                            //bootbox.alert("Educational Details successfully saved!");
-                            //$('input:not(:radio,:hidden),textarea').val('');
                         },
                         error: function () {
                             bootbox.alert("Error!");
+                        }
+                    });
+                    return false;
+                });
+                        },
+                        error: function () {
+                            bootbox.alert("Error!");
+                        }
+                    });
+                    return false;
+                });
 
+                $("body").on("click", "#btnSaveSkills", function () {
+                    var skillDetails = {
+                        "UserID": $("#userId").val(),
+                        "SkillNames": []
+                    };
+
+                    $(".skillItem").each(function (index) {
+                        skillDetails.SkillNames.push($(this).text());
+                    })
+
+                    $.ajax({
+                        type: "POST",
+                        url: '/Resume/SaveUserSkills',
+                        data: '{addUserSkillsViewModel: ' + JSON.stringify(skillDetails) + '}',
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function () {
+                            $("#modalSkills").modal("hide");
+                            bootbox.alert("<b style='color:black;'>Skills successfully saved.</b>");
+                        },
+                        error: function () {
+                            bootbox.alert("<b style='color:black;'>Some error occurred.</b>");
                         }
                     });
                     return false;
                 });
 
                 $('#txtSearch').autocomplete({
-                    source: '@Url.Action("GetSkill")'
+                    source: '@Url.Action("GetSkill")',
+                    appendTo: $('#autoComplete')
                 });
 
-                $("body").on("click", "#btnSaveEducationalDetails", function () {
-                    var skillDetails = {};
+                $("body").on('click', '#addSkill', function () {
+                    var item = $("#txtSearch").val();
+                    var isSkillFound = 0;
 
-                    skillDetails.UserID = $("#userId").val();
-
-
-
-                    $.ajax({
-                        type: "POST",
-                        url: '/Resume/SaveSkill',
-                        data: '{skill: ' + JSON.stringify(skillDetails) + '}',
-                        dataType: "json",
-                        contentType: "application/json; charset=utf-8",
-                        success: function () {
-                            $("#modalEducationDetails").modal("hide");
-                            bootbox.alert("<b style='color:black;'>Educational details successfully saved.</b>");
-
-                        },
-                        error: function () {
-                            bootbox.alert("Error!");
-
+                    $(".skillItem").each(function (index) {
+                        var skillValue = $(this).text();
+                        if (skillValue == item) {
+                            isSkillFound = 1;
+                            return false;
                         }
+                        //console.log(index + ": " + $(this).text());
                     });
-                    return false;
+
+                    if (isSkillFound == 0) {
+                        $("#skillMenu").append('<li class="skillItem">' + item + '</li>');
+                    } else {
+                        alert(item + " already added.");
+                    }
                 });
 
-                $("body").on("click", "#preview", function (e) {
+
+                @*preview section by rahul*@
+            $("body").on("click", "#preview", function (e) {
                     var ids = $('#sessionIdFetch').data('sessionid');
                     $.ajax({
                         url: "/Resume/PreviewUser/" + ids,
@@ -731,6 +917,5 @@
                         }
                     });
                 });
-            });
         </script>
     }
