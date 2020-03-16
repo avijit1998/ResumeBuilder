@@ -105,17 +105,21 @@
                 <i class="fa fa-graduation-cap fa-2x text-primary pl-4"> Educational Details</i>
             </div>
             <div class="d-flex flex-wrap align-items-stretch align-content-center justify-content-around bg-light">
-                @foreach (var data in Model.EducationList)
+                @if (Model.EducationList != null)
                 {
-                    <div class="mb-3 mt-4 ml-2 mr-2 text-center bg-card">
-                        <div class="card-header education-text-header-size">@data.CourseName</div>
-                        <div class="card-body">
-                            <h4>Utkal University and edudyuio</h4>
-                            <h5>Percentage :<label>@data.CGPAOrPercentage%</label></h5>
+                    foreach (var data in Model.EducationList)
+                    {
+                        <div class="mb-3 mt-4 ml-2 mr-2 text-center bg-card">
+                            <div class="card-header education-text-header-size">@data.CourseName</div>
+                            <div class="card-body">
+                                <h4>Utkal University and edudyuio</h4>
+                                <h5>Percentage : <label>@data.CGPAOrPercentage%</label></h5>
+                            </div>
+                            <div class="card-footer">Passing Year - @data.PassingYear</div>
                         </div>
-                        <div class="card-footer">Passing Year - @data.PassingYear</div>
-                    </div>
+                    }
                 }
+                
             </div>
 
         </div>

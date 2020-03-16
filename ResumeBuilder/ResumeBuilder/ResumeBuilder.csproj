@@ -282,10 +282,6 @@
     <Compile Include="Migrations\202003131030573_there is some changes which I don%27t know.Designer.cs">
       <DependentUpon>202003131030573_there is some changes which I don%27t know.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003131144206_rename skill to skillname in skills model and added virtual properties for skill in users and virtual properties  for users in skills.cs" />
-    <Compile Include="Migrations\202003131144206_rename skill to skillname in skills model and added virtual properties for skill in users and virtual properties  for users in skills.Designer.cs">
-      <DependentUpon>202003131144206_rename skill to skillname in skills model and added virtual properties for skill in users and virtual properties  for users in skills.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\202003131042074_added user role.cs" />
     <Compile Include="Migrations\202003131042074_added user role.Designer.cs">
       <DependentUpon>202003131042074_added user role.cs</DependentUpon>
@@ -321,6 +317,7 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\PublicProfileViewModel.cs" />
     <Compile Include="ViewModels\UI Models\EducationUIModel.cs" />
+    <Compile Include="ViewModels\UI Models\LanguageUIModel.cs" />
     <Compile Include="ViewModels\UI Models\ProjectUIModel.cs" />
     <Compile Include="ViewModels\UI Models\WorkExUIModel.cs" />
   </ItemGroup>
@@ -2233,9 +2230,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003131030573_there is some changes which I don%27t know.resx">
       <DependentUpon>202003131030573_there is some changes which I don%27t know.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003131144206_rename skill to skillname in skills model and added virtual properties for skill in users and virtual properties  for users in skills.resx">
-      <DependentUpon>202003131144206_rename skill to skillname in skills model and added virtual properties for skill in users and virtual properties  for users in skills.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003131042074_added user role.resx">
       <DependentUpon>202003131042074_added user role.cs</DependentUpon>
