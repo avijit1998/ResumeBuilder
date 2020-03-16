@@ -223,7 +223,50 @@ namespace ResumeBuilder.Controllers
 
             //Education Details
             ViewBag.education = 1;
-            var data = db.Users.Where(m=>m.UserID==id).ToList();
+            //var ob=new PublicProfileViewModel
+            //{
+                
+            //}
+
+            //var language = (from u in db.UsersLanguage.Where(m=>m.UserID==id)
+            //                from l in db.Languages.Where(m=>m.LanguageID==u.LanguageID).ToList()
+            //                select new
+            //                {
+                                
+            //                }
+
+            var data = new AllDetailsVM
+            {
+                Name=db.Users.Where(m=>m.UserID==id).Select(m=>m.Name).FirstOrDefault(),
+
+                PhoneNumber=db.Users.Where(m=>m.UserID==id).Select(m=>m.PhoneNumber).FirstOrDefault(),
+
+                Email=db.Users.Where(m=>m.UserID==id).Select(m=>m.Username).FirstOrDefault(),
+
+                UserRole=db.Users.Where(m=>m.UserID==id).Select(m=>m.UserRole).FirstOrDefault(),
+                
+                Summary=db.Users.Where(m=>m.UserID==id).Select(m=>m.Summary).FirstOrDefault(),
+                
+                Title=db.Projects.Where(m=>m.UserId==id).Select(m=>m.Title).FirstOrDefault(),
+
+                Description=db.Projects.Where(m=>m.UserId==id).Select(m=>m.Description).FirstOrDefault(),
+
+
+
+
+                //Languages=language,
+
+                //SkillList=db.
+
+                //IEnumerable < EducationUIModel > EducationList = db.EducationalDetails.Where(m => m.UserId == id).ToList(),
+
+
+            };
+           
+            var UserData = db.Users.Where(m=>m.UserID==id).Select(m=>m.Name).ToList();
+            var coursesData = db.Courses.Where(m => m.CourseId == id).ToList();
+            var educationalData=db.EducationalDetails.Where(m => m.CourseId == id).ToList();
+
             return Json(data, JsonRequestBehavior.AllowGet);
             //return Json("Success", JsonRequestBehavior.AllowGet);
 
@@ -364,7 +407,7 @@ namespace ResumeBuilder.Controllers
             ob.setContact = finalresult[4];
             TryUpdateModel(ob);
             db.SaveChanges();
-            return Json("success");
+            return Json("success",JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult settingsValue()
@@ -384,7 +427,7 @@ namespace ResumeBuilder.Controllers
             ob1.setEducation = ob.setEducation;
             ob1.setContact = ob.setContact;
 
-            return Json(ob1, JsonRequestBehavior.AllowGet);
+            return Json("success", JsonRequestBehavior.AllowGet);
         }
 
         

@@ -11,8 +11,16 @@
         .color-added-for-text {
             color: black;
         }
+      
+        .modal-font-size{
+            font-size:24px;
+        }
+      
+        
     </style>
 }
+
+<div id="divPreview"></div>
 
 
 <div id="mainDivModal">
@@ -52,6 +60,7 @@
                         </div>
                     </div>
                 </a>
+
 
                 @*Basic Information*@
                 <a href="#" data-toggle="modal" data-target="#modalBasicInfo">
@@ -222,6 +231,7 @@
                 </div>
             </div>
         </div>
+
         @*Summary Form*@
         <div id="modalSummary" class="modal fade" role="dialog">
             <div class="modal-dialog">
@@ -442,7 +452,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer"></div>
+                    <div class="modal-footer">
+                    </div>
                 </div>
             </div>
         </div>
@@ -493,7 +504,7 @@
                 </div>
             </div>
         </div>
-
+       
         @*Skills*@
         <div id="modalSkills" class="modal fade" role="dialog">
             <div class="modal-dialog">
@@ -538,6 +549,7 @@
         </div>
     </div>
 </div>
+
     @{
         int ids;
         var res = Int32.TryParse(Session["UserID"] as String, out ids);
@@ -547,7 +559,6 @@
     @section scripts{
         <script src="~/Scripts/jquery.js"></script>
         <script src="~/Scripts/jquery-ui.js"></script>
-        <script src="~/Scripts/jquery-ui.min.js"></script>
         <script src="~/Scripts/jquery-ui.min.js"></script>
         <link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
         <link href="~/Content/jquery-ui.structure.css" rel="stylesheet" />
@@ -575,7 +586,6 @@
                         $('.marks').attr('placeholder', 'Enter percentage ');
                     }
                 });
-
 
                 $('#checkWorking').click(function () {
                     if ($(this).is(':checked')) {
@@ -618,6 +628,7 @@
                     });
                     return false;
                 });
+
 
                 //save basic info of user
                 $("body").on("click", "#btnSaveBasicInfo", function () {
@@ -742,7 +753,6 @@
                         },
                         error: function () {
                             bootbox.alert("Error!");
-
                         }
                     });
                     return false;
@@ -790,7 +800,6 @@
                             isSkillFound = 1;
                             return false;
                         }
-                        //console.log(index + ": " + $(this).text());
                     });
 
                     if (isSkillFound == 0) {
@@ -802,7 +811,6 @@
 
 
                 @*preview section by rahul*@
-
                 $("body").on("click", "#preview", function (e) {
                     var ids = $('#sessionIdFetch').data('sessionid');
                     $.ajax({
@@ -810,12 +818,13 @@
                         method: "GET",
                         success: function (result) {
                             console.log(result);
+                            $("#modalUserName").html(result.Name);
                         },
                         error: function () {
-                            console.log("error happened!@@#$#%^*&(*");
+                            console.log("error!");
                         }
-                    })
-                })
+                    });
+                });
             });
         </script>
     }
