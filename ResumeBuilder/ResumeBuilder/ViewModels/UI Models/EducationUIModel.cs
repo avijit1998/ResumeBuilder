@@ -7,6 +7,6 @@ namespace ResumeBuilder.ViewModels
 
         public int PassingYear { get; set; }
 
-        public int CGPAOrPercentage { get; set; }
+        public double CGPAOrPercentage { get; set; }
     }
 }

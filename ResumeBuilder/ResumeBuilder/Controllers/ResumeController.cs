@@ -243,7 +243,7 @@ namespace ResumeBuilder.Controllers
 
                 Email=db.Users.Where(m=>m.UserID==id).Select(m=>m.Username).FirstOrDefault(),
 
-                UserRole=db.Users.Where(m=>m.UserID==id).Select(m=>m.Role).FirstOrDefault(),
+                UserRole=db.Users.Where(m=>m.UserID==id).Select(m=>m.UserRole).FirstOrDefault(),
                 
                 Summary=db.Users.Where(m=>m.UserID==id).Select(m=>m.Summary).FirstOrDefault(),
                 
