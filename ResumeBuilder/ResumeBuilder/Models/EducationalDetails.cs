@@ -22,7 +22,7 @@ namespace ResumeBuilder.Models
 
         public int CourseId { get; set; }
 
-        public string Board { get; set; }
+        public string Board { get; set; }   
 
         public int PassingYear { get; set; }
 
@@ -30,6 +30,7 @@ namespace ResumeBuilder.Models
 
         public string CGPAOrPercentage { get; set; }
 
-        public int CGPAOrPercentageValue { get; set; }
-    }
+        public double TotalPercentorCGPAValue { get; set; }
+
+     }
 }   

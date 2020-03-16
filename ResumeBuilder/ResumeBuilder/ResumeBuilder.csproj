@@ -298,6 +298,14 @@
     <Compile Include="Migrations\202003141535134_made few changes.Designer.cs">
       <DependentUpon>202003141535134_made few changes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003160748056_deleted cgpaorpercentValue from educaitonaldetails model.cs" />
+    <Compile Include="Migrations\202003160748056_deleted cgpaorpercentValue from educaitonaldetails model.Designer.cs">
+      <DependentUpon>202003160748056_deleted cgpaorpercentValue from educaitonaldetails model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003160751317_added TotalPercentorCGPAValue in educaitonaldetails model.cs" />
+    <Compile Include="Migrations\202003160751317_added TotalPercentorCGPAValue in educaitonaldetails model.Designer.cs">
+      <DependentUpon>202003160751317_added TotalPercentorCGPAValue in educaitonaldetails model.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Course.cs" />
@@ -312,8 +320,6 @@
     <Compile Include="Models\ViewModels\AddUserSkillsViewModel.cs" />
     <Compile Include="Models\ViewModels\AddUserViewModel.cs" />
     <Compile Include="Models\UserSetting.cs" />
-    <Compile Include="Models\UsersLanguage.cs" />
-    <Compile Include="Models\UsersSkill.cs" />
     <Compile Include="Models\WorkExperience.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -2245,6 +2251,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003141535134_made few changes.resx">
       <DependentUpon>202003141535134_made few changes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003160748056_deleted cgpaorpercentValue from educaitonaldetails model.resx">
+      <DependentUpon>202003160748056_deleted cgpaorpercentValue from educaitonaldetails model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003160751317_added TotalPercentorCGPAValue in educaitonaldetails model.resx">
+      <DependentUpon>202003160751317_added TotalPercentorCGPAValue in educaitonaldetails model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
