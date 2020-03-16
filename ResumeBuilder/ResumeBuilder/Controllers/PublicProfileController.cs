@@ -49,7 +49,7 @@ namespace ResumeBuilder.Controllers
                                               select new EducationUIModel 
                                               {
                                                   CourseName = _context.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName,
-                                                  CGPAOrPercentage =user.CGPAOrPercentageValue,
+                                                  CGPAOrPercentage =user.TotalPercentorCGPAValue,
                                                   PassingYear = user.PassingYear
                                               }).ToList();
                 }
