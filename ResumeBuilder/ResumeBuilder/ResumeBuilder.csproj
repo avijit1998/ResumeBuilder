@@ -306,6 +306,10 @@
     <Compile Include="Migrations\202003160751317_added TotalPercentorCGPAValue in educaitonaldetails model.Designer.cs">
       <DependentUpon>202003160751317_added TotalPercentorCGPAValue in educaitonaldetails model.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003161258228_amigration.cs" />
+    <Compile Include="Migrations\202003161258228_amigration.Designer.cs">
+      <DependentUpon>202003161258228_amigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Course.cs" />
@@ -2259,6 +2263,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003160751317_added TotalPercentorCGPAValue in educaitonaldetails model.resx">
       <DependentUpon>202003160751317_added TotalPercentorCGPAValue in educaitonaldetails model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003161258228_amigration.resx">
+      <DependentUpon>202003161258228_amigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
