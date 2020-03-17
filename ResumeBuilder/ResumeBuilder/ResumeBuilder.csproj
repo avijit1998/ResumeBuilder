@@ -1984,6 +1984,7 @@
     <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\js\bootstrap.js" />
     <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\js\bootstrap.min.js" />
     <Content Include="Content\Profile_Data\css\style.css" />
+    <Content Include="Content\Images\logo_img.jpg" />
     <Content Include="Content\settings.css" />
     <Content Include="Content\register.css" />
     <Content Include="Content\Site.css" />
