@@ -13,7 +13,7 @@ namespace ResumeBuilder.ViewModels
         public string Summary { get; set; }
         // Language
         public int LanguageStatus { get; set; }
-        public List<IEnumerable<string>> Languages { get; set; }
+        public List<string> Languages { get; set; }
 
         // Educational Details
         public int EducationStatus { get; set; }
@@ -21,7 +21,7 @@ namespace ResumeBuilder.ViewModels
 
         // Skills
         public int SkillStatus { get; set; }
-        public List<IEnumerable<string>> SkillList { get; set; }
+        public List<string> SkillList { get; set; }
 
         // Projects
         public int ProjectStatus { get; set; }
@@ -31,7 +31,7 @@ namespace ResumeBuilder.ViewModels
         public int WorkExStatus { get; set; }
         public List<WorkExUIModel> WorkExList { get; set; }
 
-        // Contact Details
-
+        // Error Message
+        public string ErrorMsg { get; set; }
     }
 }
