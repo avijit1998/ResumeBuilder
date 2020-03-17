@@ -75,8 +75,9 @@ namespace ResumeBuilder.Controllers
         public ActionResult UserDashBoard(User user)  
         {  
             if (Session["UserID"] != null)  
-            {  
-                return RedirectToAction("Form", "Resume");  
+            {
+                return View("~/Views/Resume/Index.cshtml");
+                //return RedirectToAction("Form", "Resume");  
             } else  
             {  
                 return RedirectToAction("Login");  
