@@ -170,141 +170,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CustomMapper.cs" />
-    <Compile Include="Migrations\202003071630567_AddedUserAndRolesAndOtherTables.cs" />
-    <Compile Include="Migrations\202003071630567_AddedUserAndRolesAndOtherTables.Designer.cs">
-      <DependentUpon>202003071630567_AddedUserAndRolesAndOtherTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003090638563_AddedTablesForUser.cs" />
-    <Compile Include="Migrations\202003090638563_AddedTablesForUser.Designer.cs">
-      <DependentUpon>202003090638563_AddedTablesForUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003090952426_DeleteRegistratioModelAndUpdatedUserModel.cs" />
-    <Compile Include="Migrations\202003090952426_DeleteRegistratioModelAndUpdatedUserModel.Designer.cs">
-      <DependentUpon>202003090952426_DeleteRegistratioModelAndUpdatedUserModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003091145578_ChangedPasswordField.cs" />
-    <Compile Include="Migrations\202003091145578_ChangedPasswordField.Designer.cs">
-      <DependentUpon>202003091145578_ChangedPasswordField.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003091151064_updatedpasswordfield.cs" />
-    <Compile Include="Migrations\202003091151064_updatedpasswordfield.Designer.cs">
-      <DependentUpon>202003091151064_updatedpasswordfield.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003091213555_ContextUpdated.cs" />
-    <Compile Include="Migrations\202003091213555_ContextUpdated.Designer.cs">
-      <DependentUpon>202003091213555_ContextUpdated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003100854271_AddedName.cs" />
-    <Compile Include="Migrations\202003100854271_AddedName.Designer.cs">
-      <DependentUpon>202003100854271_AddedName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003110722076_Added Course model and courseid properties in educationaldetails.cs" />
-    <Compile Include="Migrations\202003110722076_Added Course model and courseid properties in educationaldetails.Designer.cs">
-      <DependentUpon>202003110722076_Added Course model and courseid properties in educationaldetails.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003110856470_Added Project model.cs" />
-    <Compile Include="Migrations\202003110856470_Added Project model.Designer.cs">
-      <DependentUpon>202003110856470_Added Project model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003110902525_Added gender in users.cs" />
-    <Compile Include="Migrations\202003110902525_Added gender in users.Designer.cs">
-      <DependentUpon>202003110902525_Added gender in users.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003110909367_Added start end month year in workexperience model.cs" />
-    <Compile Include="Migrations\202003110909367_Added start end month year in workexperience model.Designer.cs">
-      <DependentUpon>202003110909367_Added start end month year in workexperience model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003110910436_Added currently working in workexperience model.cs" />
-    <Compile Include="Migrations\202003110910436_Added currently working in workexperience model.Designer.cs">
-      <DependentUpon>202003110910436_Added currently working in workexperience model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003110914186_Added duration in project.cs" />
-    <Compile Include="Migrations\202003110914186_Added duration in project.Designer.cs">
-      <DependentUpon>202003110914186_Added duration in project.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003111035225_added role field in user model.cs" />
-    <Compile Include="Migrations\202003111035225_added role field in user model.Designer.cs">
-      <DependentUpon>202003111035225_added role field in user model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003111040493_added role field in user model and made phone number field string.cs" />
-    <Compile Include="Migrations\202003111040493_added role field in user model and made phone number field string.Designer.cs">
-      <DependentUpon>202003111040493_added role field in user model and made phone number field string.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003111252223_addedSettingsTable.cs" />
-    <Compile Include="Migrations\202003111252223_addedSettingsTable.Designer.cs">
-      <DependentUpon>202003111252223_addedSettingsTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003111255024_addedSettingsTable1.cs" />
-    <Compile Include="Migrations\202003111255024_addedSettingsTable1.Designer.cs">
-      <DependentUpon>202003111255024_addedSettingsTable1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003120851031_linked users table with usrsetting.cs" />
-    <Compile Include="Migrations\202003120851031_linked users table with usrsetting.Designer.cs">
-      <DependentUpon>202003120851031_linked users table with usrsetting.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003111213049_added stream field in educational details.cs" />
-    <Compile Include="Migrations\202003111213049_added stream field in educational details.Designer.cs">
-      <DependentUpon>202003111213049_added stream field in educational details.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003120628448_Added grade or percent value.cs" />
-    <Compile Include="Migrations\202003120628448_Added grade or percent value.Designer.cs">
-      <DependentUpon>202003120628448_Added grade or percent value.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003120629525_deleted grade or percent value.cs" />
-    <Compile Include="Migrations\202003120629525_deleted grade or percent value.Designer.cs">
-      <DependentUpon>202003120629525_deleted grade or percent value.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003120632013_Added CGPAOrPercent and CGPAOrPercentageValue.cs" />
-    <Compile Include="Migrations\202003120632013_Added CGPAOrPercent and CGPAOrPercentageValue.Designer.cs">
-      <DependentUpon>202003120632013_Added CGPAOrPercent and CGPAOrPercentageValue.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003120651568_rename role to project role in project model.cs" />
-    <Compile Include="Migrations\202003120651568_rename role to project role in project model.Designer.cs">
-      <DependentUpon>202003120651568_rename role to project role in project model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003121005348_added board field in Educational table.cs" />
-    <Compile Include="Migrations\202003121005348_added board field in Educational table.Designer.cs">
-      <DependentUpon>202003121005348_added board field in Educational table.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003130915333_Changes.cs" />
-    <Compile Include="Migrations\202003130915333_Changes.Designer.cs">
-      <DependentUpon>202003130915333_Changes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003131340108_add ole.cs" />
-    <Compile Include="Migrations\202003131340108_add ole.Designer.cs">
-      <DependentUpon>202003131340108_add ole.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003130807262_deleted usersskills table and.cs" />
-    <Compile Include="Migrations\202003130807262_deleted usersskills table and.Designer.cs">
-      <DependentUpon>202003130807262_deleted usersskills table and.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003130856098_rename role to user role in users model.cs" />
-    <Compile Include="Migrations\202003130856098_rename role to user role in users model.Designer.cs">
-      <DependentUpon>202003130856098_rename role to user role in users model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003131030573_there is some changes which I don%27t know.cs" />
-    <Compile Include="Migrations\202003131030573_there is some changes which I don%27t know.Designer.cs">
-      <DependentUpon>202003131030573_there is some changes which I don%27t know.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003131042074_added user role.cs" />
-    <Compile Include="Migrations\202003131042074_added user role.Designer.cs">
-      <DependentUpon>202003131042074_added user role.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003131046588_added settingstable-again.cs" />
-    <Compile Include="Migrations\202003131046588_added settingstable-again.Designer.cs">
-      <DependentUpon>202003131046588_added settingstable-again.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003141535134_made few changes.cs" />
-    <Compile Include="Migrations\202003141535134_made few changes.Designer.cs">
-      <DependentUpon>202003141535134_made few changes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003160748056_deleted cgpaorpercentValue from educaitonaldetails model.cs" />
-    <Compile Include="Migrations\202003160748056_deleted cgpaorpercentValue from educaitonaldetails model.Designer.cs">
-      <DependentUpon>202003160748056_deleted cgpaorpercentValue from educaitonaldetails model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003160751317_added TotalPercentorCGPAValue in educaitonaldetails model.cs" />
-    <Compile Include="Migrations\202003160751317_added TotalPercentorCGPAValue in educaitonaldetails model.Designer.cs">
-      <DependentUpon>202003160751317_added TotalPercentorCGPAValue in educaitonaldetails model.cs</DependentUpon>
+    <Compile Include="Migrations\202003170723056_deleted all migration and fresh database.cs" />
+    <Compile Include="Migrations\202003170723056_deleted all migration and fresh database.Designer.cs">
+      <DependentUpon>202003170723056_deleted all migration and fresh database.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202003161258228_amigration.cs" />
     <Compile Include="Migrations\202003161258228_amigration.Designer.cs">
@@ -2163,113 +2031,6 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003071630567_AddedUserAndRolesAndOtherTables.resx">
-      <DependentUpon>202003071630567_AddedUserAndRolesAndOtherTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003090638563_AddedTablesForUser.resx">
-      <DependentUpon>202003090638563_AddedTablesForUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003090952426_DeleteRegistratioModelAndUpdatedUserModel.resx">
-      <DependentUpon>202003090952426_DeleteRegistratioModelAndUpdatedUserModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003091145578_ChangedPasswordField.resx">
-      <DependentUpon>202003091145578_ChangedPasswordField.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003091151064_updatedpasswordfield.resx">
-      <DependentUpon>202003091151064_updatedpasswordfield.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003091213555_ContextUpdated.resx">
-      <DependentUpon>202003091213555_ContextUpdated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003100854271_AddedName.resx">
-      <DependentUpon>202003100854271_AddedName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003110722076_Added Course model and courseid properties in educationaldetails.resx">
-      <DependentUpon>202003110722076_Added Course model and courseid properties in educationaldetails.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003110856470_Added Project model.resx">
-      <DependentUpon>202003110856470_Added Project model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003110902525_Added gender in users.resx">
-      <DependentUpon>202003110902525_Added gender in users.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003110909367_Added start end month year in workexperience model.resx">
-      <DependentUpon>202003110909367_Added start end month year in workexperience model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003110910436_Added currently working in workexperience model.resx">
-      <DependentUpon>202003110910436_Added currently working in workexperience model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003110914186_Added duration in project.resx">
-      <DependentUpon>202003110914186_Added duration in project.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003111035225_added role field in user model.resx">
-      <DependentUpon>202003111035225_added role field in user model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003111040493_added role field in user model and made phone number field string.resx">
-      <DependentUpon>202003111040493_added role field in user model and made phone number field string.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003111252223_addedSettingsTable.resx">
-      <DependentUpon>202003111252223_addedSettingsTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003111255024_addedSettingsTable1.resx">
-      <DependentUpon>202003111255024_addedSettingsTable1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003120851031_linked users table with usrsetting.resx">
-      <DependentUpon>202003120851031_linked users table with usrsetting.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003111213049_added stream field in educational details.resx">
-      <DependentUpon>202003111213049_added stream field in educational details.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003120628448_Added grade or percent value.resx">
-      <DependentUpon>202003120628448_Added grade or percent value.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003120629525_deleted grade or percent value.resx">
-      <DependentUpon>202003120629525_deleted grade or percent value.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003120632013_Added CGPAOrPercent and CGPAOrPercentageValue.resx">
-      <DependentUpon>202003120632013_Added CGPAOrPercent and CGPAOrPercentageValue.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003120651568_rename role to project role in project model.resx">
-      <DependentUpon>202003120651568_rename role to project role in project model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003121005348_added board field in Educational table.resx">
-      <DependentUpon>202003121005348_added board field in Educational table.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003130915333_Changes.resx">
-      <DependentUpon>202003130915333_Changes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003131340108_add ole.resx">
-      <DependentUpon>202003131340108_add ole.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003130807262_deleted usersskills table and.resx">
-      <DependentUpon>202003130807262_deleted usersskills table and.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003130856098_rename role to user role in users model.resx">
-      <DependentUpon>202003130856098_rename role to user role in users model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003131030573_there is some changes which I don%27t know.resx">
-      <DependentUpon>202003131030573_there is some changes which I don%27t know.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003131042074_added user role.resx">
-      <DependentUpon>202003131042074_added user role.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003131046588_added settingstable-again.resx">
-      <DependentUpon>202003131046588_added settingstable-again.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003141535134_made few changes.resx">
-      <DependentUpon>202003141535134_made few changes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003160748056_deleted cgpaorpercentValue from educaitonaldetails model.resx">
-      <DependentUpon>202003160748056_deleted cgpaorpercentValue from educaitonaldetails model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003160751317_added TotalPercentorCGPAValue in educaitonaldetails model.resx">
-      <DependentUpon>202003160751317_added TotalPercentorCGPAValue in educaitonaldetails model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003161258228_amigration.resx">
-      <DependentUpon>202003161258228_amigration.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <TypeScriptCompile Include="Content\plugins\filterizr\ActiveFilter.d.ts" />
     <TypeScriptCompile Include="Content\plugins\filterizr\animate.d.ts" />
     <TypeScriptCompile Include="Content\plugins\filterizr\BrowserWindow.d.ts" />
@@ -2360,6 +2121,11 @@
     <TypeScriptCompile Include="Content\plugins\fullcalendar-interaction\main.d.ts" />
     <TypeScriptCompile Include="Content\plugins\fullcalendar-timegrid\main.d.ts" />
     <TypeScriptCompile Include="Content\plugins\fullcalendar\main.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202003170723056_deleted all migration and fresh database.resx">
+      <DependentUpon>202003170723056_deleted all migration and fresh database.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

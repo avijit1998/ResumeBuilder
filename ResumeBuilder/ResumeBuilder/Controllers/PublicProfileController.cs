@@ -39,10 +39,10 @@ namespace ResumeBuilder.Controllers
 
                 // User Summary
                 _uiModel.Summary = _context.Users.FirstOrDefault(a => a.UserID == id).Summary;
-
+                
                 // Education Details
                 _uiModel.EducationStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setEducation;
-                if (_uiModel.EducationStatus == 1)
+                if (_uiModel.EducationStatus == 0)
                 {
                     _uiModel.EducationList = (from user in _context.EducationalDetails.ToList()
                                               select new EducationUIModel
@@ -78,7 +78,7 @@ namespace ResumeBuilder.Controllers
 
                 // Work Ex.
                 _uiModel.WorkExStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setWorkex;
-                if (_uiModel.WorkExStatus == 1)
+                if (_uiModel.WorkExStatus == 0)
                 {
                     _uiModel.WorkExList = (from user in _context.WorkExperiences.Where(x => x.UserID == id)
                                             select new WorkExUIModel
@@ -91,7 +91,6 @@ namespace ResumeBuilder.Controllers
                                                 Role = user.Role,
                                                 CurrentlyWorking = user.CurrentlyWorking
                                             }).ToList();
-                }
 
                 // Languages 
                 _uiModel.LanguageStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setContact;
