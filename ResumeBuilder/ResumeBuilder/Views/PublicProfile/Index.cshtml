@@ -266,8 +266,8 @@
                 $('#projectTimelineId').children().eq(i).addClass("timeline-right");
         }
 
-        var projectCount = @Model.WorkExList.Count;
-        for(var i =0; i< projectCount; i++)
+        var workCount = @Model.WorkExList.Count;
+        for(var i =0; i< workCount; i++)
         {
             if(i % 2 === 0)
                 $('#workExTimelineId').children().eq(i).addClass("timeline-left");

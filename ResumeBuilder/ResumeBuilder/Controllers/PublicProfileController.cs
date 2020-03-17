@@ -40,67 +40,38 @@ namespace ResumeBuilder.Controllers
             _uiModel.Summary = _context.Users.FirstOrDefault(a => a.UserID == id).Summary;
             
             // Education Details
-            _uiModel.EducationStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setEducation;
-            if(_uiModel.EducationStatus == 1)
+            _uiModel.EducationStatus = _context.settings.Where(a => a.UserID == id).Select(b => b.setEducation).FirstOrDefault();
+            if(_uiModel.EducationStatus == 0)
             {
-                try
-                {
-                    _uiModel.EducationList = (from user in _context.EducationalDetails.ToList()
-                                              select new EducationUIModel 
-                                              {
-                                                  CourseName = _context.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName,
-                                                  CGPAOrPercentage =user.CGPAOrPercentage,
-                                                  Board = user.Board,
-                                                  Stream = user.Stream,
-                                                  TotalPercentorCGPAValue = user.TotalPercentorCGPAValue,
-                                                  PassingYear = user.PassingYear
-                                              }).OrderByDescending(x => x.PassingYear).ToList();
-                }
-                catch (Exception)
-                {
-                    
-                    
-                }
+                _uiModel.EducationList = (from user in _context.EducationalDetails.ToList()
+                                          select new EducationUIModel
+                                          {
+                                              CourseName = _context.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName,
+                                              CGPAOrPercentage = user.CGPAOrPercentage,
+                                              Board = user.Board,
+                                              Stream = user.Stream,
+                                              TotalPercentorCGPAValue = user.TotalPercentorCGPAValue,
+                                              PassingYear = user.PassingYear
+                                          }).OrderByDescending(x => x.PassingYear).ToList();
             }
 
-            // Skills
-            _uiModel.SkillStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setSkills;
-            if(_uiModel.SkillStatus == 1)
-            {
-                try
-                {
-                    _uiModel.SkillList = _context.Users.Where(x => x.UserID == id).Select(a => a.Skills.Select(b => b.SkillName)).ToList();
-                }
-                catch (Exception)
-                {
-                    
-                    
-                }
-            }
 
             // Project Details
             _uiModel.ProjectStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setProject;
-            if (_uiModel.ProjectStatus == 1)
+            if (_uiModel.ProjectStatus == 0)
             {
-                try
-                {
-                    _uiModel.ProjectList = (from user in _context.Projects.Where(x => x.UserId == id)
-                                            select new ProjectUIModel
-                                            {
-                                                Title = user.Title,
-                                                Description = user.Description,
-                                                Duration = user.Duration
-                                            }).ToList();
-                }
-                catch (Exception)
-                {
-                    
-                }
+                _uiModel.ProjectList = (from user in _context.Projects.Where(x => x.UserId == id)
+                                        select new ProjectUIModel
+                                        {
+                                            Title = user.Title,
+                                            Description = user.Description,
+                                            Duration = user.Duration
+                                        }).ToList();
             }
 
             // Work Ex.
             _uiModel.WorkExStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setWorkex;
-            if (_uiModel.WorkExStatus == 1)
+            if (_uiModel.WorkExStatus == 0)
             {
                 try
                 {
@@ -122,6 +93,21 @@ namespace ResumeBuilder.Controllers
                 }
             }
 
+            // Skills
+            _uiModel.SkillStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setSkills;
+            if (_uiModel.SkillStatus == 0)
+            {
+                try
+                {
+                    _uiModel.SkillList = _context.Users.Where(x => x.UserID == id).Select(a => a.Skills.Select(b => b.SkillName)).ToList();
+                }
+                catch (Exception)
+                {
+
+
+                }
+            }
+            
             // Languages 
             _uiModel.LanguageStatus = 1;
             if(_uiModel.LanguageStatus == 1)
