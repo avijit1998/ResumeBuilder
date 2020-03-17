@@ -81,16 +81,17 @@ namespace ResumeBuilder.Controllers
                 if (_uiModel.WorkExStatus == 0)
                 {
                     _uiModel.WorkExList = (from user in _context.WorkExperiences.Where(x => x.UserID == id)
-                                            select new WorkExUIModel
-                                            {
-                                                OrganizationName = user.OrganizationName,
-                                                StartMonth = user.StartMonth,
-                                                StartYear = user.StartYear,
-                                                EndMonth = user.EndMonth,
-                                                EndYear = user.EndYear,
-                                                Role = user.Role,
-                                                CurrentlyWorking = user.CurrentlyWorking
-                                            }).ToList();
+                                           select new WorkExUIModel
+                                           {
+                                               OrganizationName = user.OrganizationName,
+                                               StartMonth = user.StartMonth,
+                                               StartYear = user.StartYear,
+                                               EndMonth = user.EndMonth,
+                                               EndYear = user.EndYear,
+                                               Role = user.Role,
+                                               CurrentlyWorking = user.CurrentlyWorking
+                                           }).ToList();
+                }
 
                 // Languages 
                 _uiModel.LanguageStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setContact;
