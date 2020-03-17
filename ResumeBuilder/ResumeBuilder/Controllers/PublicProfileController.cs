@@ -94,14 +94,14 @@ namespace ResumeBuilder.Controllers
                 }
 
                 // Languages 
-                _uiModel.LanguageStatus = 1;
+                _uiModel.LanguageStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setContact;
                 if (_uiModel.LanguageStatus == 1)
                 {
                     _uiModel.Languages = _context.Users.FirstOrDefault(b => b.UserID == id).Languages.Select(a => a.Language).ToList();
                 }
             }
             catch (Exception)
-            {
+            { 
                 _uiModel.ErrorMsg = "Unexpected error occured, try again...";                
             }
             return View(_uiModel);
