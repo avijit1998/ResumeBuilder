@@ -45,34 +45,34 @@
 </div>
 
 @*@section scripts
-    {
-        <script>
-            $(document).ready(function () {
+{
+    <script>
+        $(document).ready(function () {
 
-                @{
-                    int ids;
-                    var res = Int32.TryParse(Session["UserID"] as String, out ids);
-                }
-                $("body").on("click", "#preview", function (e) {
-                    e.preventDefault();
-                    url = $(this).data('url');
-                    $("#mainDivModal").hide();
-                    $.get(url, function (data) {
-                        $('#previewDiv').replaceWith(data);
-                    });
-                    var id = $('#sessionIdFetch').data('sessionId');
+            @{
+                int ids;
+                var res = Int32.TryParse(Session["UserID"] as String, out ids);
+            }
+            $("body").on("click", "#preview", function (e) {
+                e.preventDefault();
+                url = $(this).data('url');
+                $("#mainDivModal").hide();
+                $.get(url, function (data) {
+                    $('#previewDiv').replaceWith(data);
                 });
-                $.ajax({
-                    url: "/Resume/PreviewUser/"+@ids,
-                    method: "GET",
-                    success: function (result) {
-                        console.log(result);
-                    }
+                var id = $('#sessionIdFetch').data('sessionId');
+            });
+            $.ajax({
+                url: "/Resume/PreviewUser/"+@ids,
+                method: "GET",
+                success: function (result) {
+                    console.log(result);
+                }
 
-                })
             })
-        </script>
-    }*@
+        })
+    </script>
+}*@
 
 
 
