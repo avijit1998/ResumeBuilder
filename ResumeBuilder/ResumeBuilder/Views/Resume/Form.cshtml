@@ -819,6 +819,13 @@
                         success: function (result) {
                             console.log(result);
                             $("#modalUserName").html(result.Name);
+                            $("#modalUserPhone").html(result.PhoneNumber);
+                            $("#modalUserEmail").html(result.Email);
+                            $("#modalSkills").html(result.SkillList);
+                            var data = '';
+                            for (var i = 0; i < result.SkillList.Count();i++){
+                                data.append(SkillList[i]);
+                            }
                         },
                         error: function () {
                             console.log("error!");

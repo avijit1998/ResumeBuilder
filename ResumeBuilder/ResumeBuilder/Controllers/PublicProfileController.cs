@@ -15,6 +15,7 @@ namespace ResumeBuilder.Controllers
         public PublicProfileController()
         {
             _context = new ResumeBuilderConnection();
+
             _uiModel = new PublicProfileViewModel();
         }
 
