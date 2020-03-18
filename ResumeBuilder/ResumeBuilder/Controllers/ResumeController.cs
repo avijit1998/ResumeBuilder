@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ResumeBuilder.ViewModels;
 using ResumeBuilder.Helpers;
 
 
@@ -350,7 +349,7 @@ namespace ResumeBuilder.Controllers
             ob1.setEducation = ob.setEducation;
             ob1.setContact = ob.setContact;
 
-            return Json("success", JsonRequestBehavior.AllowGet);
+            return Json(ob1, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Preview()
@@ -413,5 +412,26 @@ namespace ResumeBuilder.Controllers
         //    //return View(_uiModel);
 
         //} 
+
+        public ActionResult Search()
+        {
+            return PartialView();
+        }
+
+        public ActionResult GetUserSkills()
+        {
+            //db.Configuration.ProxyCreationEnabled = false;
+            List<UserSkillVM> listUserSkills = new List<UserSkillVM>();
+            listUserSkills = (from user in db.Users.Include("Skills").ToList()
+                                    select new UserSkillVM
+                                    {
+                                        UserID = user.UserID,
+                                        UserName = user.Username,
+                                        SkillNames = user.Skills.Select(x => x.SkillName).ToList()
+                                    }).ToList();
+            
+            
+            return Json(listUserSkills, JsonRequestBehavior.AllowGet);
+        }
     }
 }

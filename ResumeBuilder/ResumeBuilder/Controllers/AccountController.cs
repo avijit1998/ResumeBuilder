@@ -156,6 +156,12 @@ namespace ResumeBuilder.Controllers
             base.Dispose(disposing);
         }
 
-        
+        public ActionResult LogOff()
+        {
+            Session.RemoveAll();
+            Session.Clear();
+            Session.Abandon();
+            return RedirectToAction("Login");
+        }
     }
 }

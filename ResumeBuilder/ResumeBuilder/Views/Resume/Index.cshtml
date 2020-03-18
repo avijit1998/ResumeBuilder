@@ -30,7 +30,7 @@
                 <li><a href="#pageContent" data-url="/Resume/Preview">Preview</a></li>
                 <li><a href="#" data-toggle="modal" data-target="#myModal" id="settingsBtn">Settings</a></li>
                 <li>@Html.ActionLink("Public Profile", "Index", new { controller = "PublicProfile", id = Session["UserID"], target = "_blank" })</li>
-                <li id="btnSearchNav" style="display:block;"><a href="#pageContent" data-url="/Resume/Search" class="ajaxLink">Search</a></li>
+                <li id="btnSearchNav" style="display:none;"><a href="#pageContent" data-url="/Resume/Search" class="ajaxLink">Search</a></li>
             </ul>
         </div>
 
