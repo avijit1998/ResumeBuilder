@@ -68,7 +68,7 @@
             result[3] = 0;
         if ($("#contact").prop("checked") == true)
             result[4] = 0;
-
+        debugger;
         $.ajax({
             url: "DisplayDetails",
             type: 'post',

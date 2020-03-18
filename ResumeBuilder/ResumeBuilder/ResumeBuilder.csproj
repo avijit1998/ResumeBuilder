@@ -325,7 +325,6 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Resume\Form.cshtml" />
     <Content Include="Views\Resume\Preview.cshtml" />
-    <Content Include="Views\PartialViews\PreviewPartial.cshtml" />
     <Content Include="Views\PublicProfile\Index.cshtml" />
     <Content Include="Views\Resume\ShowData.cshtml" />
   </ItemGroup>
