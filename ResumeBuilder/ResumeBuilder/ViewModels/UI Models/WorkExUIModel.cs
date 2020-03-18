@@ -8,11 +8,11 @@ namespace ResumeBuilder.ViewModels
 
         public string Role { get; set; }
 
-        public int StartMonth { get; set; }
+        public string StartMonth { get; set; }
 
         public int StartYear { get; set; }
 
-        public int EndMonth { get; set; }
+        public string EndMonth { get; set; }
 
         public int EndYear { get; set; }
 

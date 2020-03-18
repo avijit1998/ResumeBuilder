@@ -21,7 +21,7 @@ else
         <link rel="stylesheet" href="~/Content/Profile_Data/css/style.css" type="text/css">
     </head>
     <body data-spy="scroll" data-target=".scroll-spy-div" data-offset="50">
-        <div class="d-flex fixed-top bg-primary justify-content-around scroll-spy-div">
+        <div class="container-fluid d-flex fixed-top bg-primary justify-content-around scroll-spy-div">
             <a href="https://www.mindfiresolutions.com/" class="no-underline text-white">
                 <div class="p-1 logo-container-div">
                     <i>
@@ -76,6 +76,7 @@ else
                 </div>
             </div>
         </div>
+
         <!-- Basic Information -->
         <div class="container pseudo-element" id="basicInfo">
             <div class="no-gutters">
@@ -202,7 +203,7 @@ else
                         foreach (var data in Model.EducationList)
                         {
                             <div class="mb-3 mt-4 ml-2 mr-2 text-center bg-card">
-                                <div class="card-header education-text-header-size">@data.CourseName (@data.Stream)</div>
+                                <div class="card-header education-text-header-size">@data.CourseName @data.Stream</div>
                                 <div class="card-body">
                                     <h4>@data.Board</h4>
                                     <h5>@data.CGPAOrPercentage : <label>@data.TotalPercentorCGPAValue</label></h5>
@@ -270,7 +271,7 @@ else
 
                 $('body').scrollspy({target: ".scroll-spy-div"});
 
-                if(@Model.WorkExStatus === 0)
+                if(@Model.WorkExStatus === -1)
                 {
                     $('#workExperience, #workExperienceNav').hide();
                 }
@@ -285,7 +286,7 @@ else
                     }
                 }
 
-                if(@Model.ProjectStatus === 0)
+                if(@Model.ProjectStatus === -1)
                 {
                     $('#projects, #projectsNav').hide();
                 }
@@ -300,10 +301,12 @@ else
                     }
                 }
 
-                if(@Model.SkillStatus === 0)
+                if(@Model.SkillStatus === -1)
                     $('#skills, #skillsNav').hide();
-                if(@Model.EducationStatus === 0)
+                if(@Model.EducationStatus === -1)
                     $('#education, #educationNav').hide();
+                if(@Model.LanguageStatus === -1)
+                    $('#languages, #languagesNav').hide();
             });
         </script>
 
