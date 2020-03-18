@@ -170,13 +170,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CustomMapper.cs" />
-    <Compile Include="Migrations\202003170723056_deleted all migration and fresh database.cs" />
-    <Compile Include="Migrations\202003170723056_deleted all migration and fresh database.Designer.cs">
-      <DependentUpon>202003170723056_deleted all migration and fresh database.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003161258228_amigration.cs" />
-    <Compile Include="Migrations\202003161258228_amigration.Designer.cs">
-      <DependentUpon>202003161258228_amigration.cs</DependentUpon>
+    <Compile Include="Migrations\202003171146073_update_table.cs" />
+    <Compile Include="Migrations\202003171146073_update_table.Designer.cs">
+      <DependentUpon>202003171146073_update_table.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -2123,8 +2119,8 @@
     <TypeScriptCompile Include="Content\plugins\fullcalendar\main.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003170723056_deleted all migration and fresh database.resx">
-      <DependentUpon>202003170723056_deleted all migration and fresh database.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003171146073_update_table.resx">
+      <DependentUpon>202003171146073_update_table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

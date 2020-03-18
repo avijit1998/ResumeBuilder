@@ -47,10 +47,13 @@ namespace ResumeBuilder.Controllers
                     _uiModel.EducationList = (from user in _context.EducationalDetails.ToList()
                                               select new EducationUIModel
                                               {
-                                                  CourseName = _context.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName,
+                                                  CourseName = (_context.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName == "10"
+                                                               || _context.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName == "12")?
+                                                               _context.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName + "TH" :
+                                                               _context.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName,
                                                   CGPAOrPercentage = user.CGPAOrPercentage,
                                                   Board = user.Board,
-                                                  Stream = user.Stream,
+                                                  Stream = (user.Stream == null)? "" : "(" + user.Stream + ")",
                                                   TotalPercentorCGPAValue = user.TotalPercentorCGPAValue,
                                                   PassingYear = user.PassingYear
                                               }).OrderByDescending(x => x.PassingYear).ToList();
@@ -58,14 +61,14 @@ namespace ResumeBuilder.Controllers
 
                 // Skills
                 _uiModel.SkillStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setSkills;
-                if (_uiModel.SkillStatus == 1)
+                if (_uiModel.SkillStatus == 0)
                 {
-                    //_uiModel.SkillList = _context.Users.FirstOrDefault(x => x.UserID == id).Skills.Select(a => a.SkillName).ToList();
+                    _uiModel.SkillList = _context.Users.FirstOrDefault(x => x.UserID == id).Skills.Select(a => a.SkillName).ToList();
                 }
 
                 // Project Details
                 _uiModel.ProjectStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setProject;
-                if (_uiModel.ProjectStatus == 1)
+                if (_uiModel.ProjectStatus == 0)
                 {
                     _uiModel.ProjectList = (from user in _context.Projects.Where(x => x.UserId == id)
                                             select new ProjectUIModel
@@ -81,20 +84,21 @@ namespace ResumeBuilder.Controllers
                 if (_uiModel.WorkExStatus == 0)
                 {
                     _uiModel.WorkExList = (from user in _context.WorkExperiences.Where(x => x.UserID == id)
-                                            select new WorkExUIModel
-                                            {
-                                                OrganizationName = user.OrganizationName,
-                                                StartMonth = user.StartMonth,
-                                                StartYear = user.StartYear,
-                                                EndMonth = user.EndMonth,
-                                                EndYear = user.EndYear,
-                                                Role = user.Role,
-                                                CurrentlyWorking = user.CurrentlyWorking
-                                            }).ToList();
+                                           select new WorkExUIModel
+                                           {
+                                               OrganizationName = user.OrganizationName,
+                                               StartMonth = (user.StartMonth <= 9)? "0" + user.StartMonth : user.StartMonth.ToString(),
+                                               StartYear = user.StartYear,
+                                               EndMonth = (user.EndMonth <= 9)? "0" + user.EndMonth : user.EndMonth.ToString(),
+                                               EndYear = user.EndYear,
+                                               Role = user.Role,
+                                               CurrentlyWorking = user.CurrentlyWorking
+                                           }).ToList();
+                }
 
                 // Languages 
                 _uiModel.LanguageStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setContact;
-                if (_uiModel.LanguageStatus == 1)
+                if (_uiModel.LanguageStatus == 0)
                 {
                     _uiModel.Languages = _context.Users.FirstOrDefault(b => b.UserID == id).Languages.Select(a => a.Language).ToList();
                 }
