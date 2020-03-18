@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "Form";
     List<ResumeBuilder.Models.Languages> languages = ViewBag.Languages;
-    Layout = "~/Views/Shared/_Layout.cshtml";
     string str = "test";
     List<ResumeBuilder.Models.Course> courses = ViewBag.Courses;
 }
@@ -139,7 +138,7 @@
 
                         <div class="box-part text-center">
 
-                            <img id="userIcon" alt="BasicInformation" class="image-position" src="@Url.Content("~/Content/Images/Work Experience.png")" />
+                            <img id="userIcon" alt="BasicInformation" class="image-position" src="@Url.Content("~/Content/Images/Work-Experience.png")" />
 
                             <div class="title">
                                 <h3>Work Experience</h3>
@@ -167,7 +166,7 @@
                             <div class="col-md-12">
                                 <form action="/Resume/SaveBasicInfo" method="post">
                                     <div>
-                                        <input type="hidden" name="UserID" id="userId" value="@Model.UserID" />
+                                        <input type="hidden" name="UserID" id="userIdBasicInfoField" value="@Model.UserID" />
                                     </div>
 
                                     <div class="form-group">
@@ -245,7 +244,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <form action="/Resume/SaveBasicInfo" method="post">
-                                    <div><input type="hidden" name="UserID" id="userId" value="@Model.UserID" /></div>
+                                    <div><input type="hidden" name="UserID" id="userIdSummaryField" value="@Model.UserID" /></div>
 
                                     <div class="form-group">
                                         <label>Summary:</label>
@@ -280,7 +279,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <form action="/ResumeContoller/Form" method="get">
-                                    <div><input type="hidden" name="UserID" id="userId" value="@Model.UserID" /></div>
+                                    <div><input type="hidden" name="UserID" id="userIdEducationDetails" value="@Model.UserID" /></div>
                                     @foreach (var course in courses)
                                     {
                                         <label class="radio-inline">
@@ -572,164 +571,164 @@
         <script src="~/Scripts/ModelScripts/PreviewScript.js"></script>
         <script>
 
-            $(document).ready(function () {
+    $(document).ready(function () {
 
-                //empty auto fill data
-                $("body").on('click', 'hidden.bs.modal', function () {
-                    //$('input:not(:radio),textarea').val('');
-                });
+        //empty auto fill data
+        $("body").on('click', 'hidden.bs.modal', function () {
+            //$('input:not(:radio),textarea').val('');
+        });
 
-                $("body").on('change', 'input[type=radio][name=marksOption]', function () {
-                    if ($(this).val() == 'CGPA') {
-                        $('.marks').attr('placeholder', 'Enter CGPA');
-                    } else {
-                        $('.marks').attr('placeholder', 'Enter percentage ');
-                    }
-                });
+        $("body").on('change', 'input[type=radio][name=marksOption]', function () {
+            if ($(this).val() == 'CGPA') {
+                $('.marks').attr('placeholder', 'Enter CGPA');
+            } else {
+                $('.marks').attr('placeholder', 'Enter percentage ');
+            }
+        });
 
-                $('#checkWorking').click(function () {
-                    if ($(this).is(':checked')) {
-                        $(".hide-if-currently-working").hide();
-                    } else {
-                        $(".hide-if-currently-working").show();
-                    }
-                });
+        $('#checkWorking').click(function () {
+            if ($(this).is(':checked')) {
+                $(".hide-if-currently-working").hide();
+            } else {
+                $(".hide-if-currently-working").show();
+            }
+        });
 
-                $('input[type=radio][name=courseOption]').change(function () {
-                    if ($(this).val() == '1') {
-                        $(".all-other").show();
-                        $(".stream").hide();
-                    }
-                    else {
-                        $(".stream").show();
-                        $(".all-other").show();
-                    }
-                });
+        $('input[type=radio][name=courseOption]').change(function () {
+            if ($(this).val() == '1') {
+                $(".all-other").show();
+                $(".stream").hide();
+            }
+            else {
+                $(".stream").show();
+                $(".all-other").show();
+            }
+        });
 
-                //save summary info of user
-                $("body").on("click", "#btnSaveSummary", function () {
-                    var user = {};
-                    user.Summary = $("#txtSummary").val();
-                    user.UserID = $("#userId").val();
-                    $.ajax({
-                        type: "POST",
-                        url: '/Resume/SaveSummary',
-                        data: '{user: ' + JSON.stringify(user) + '}',
-                        dataType: "json",
-                        contentType: "application/json; charset=utf-8",
-                        success: function () {
-                            $("#modalSummary").modal("hide");
-                            bootbox.alert("<b style='color:black;'>Summary details successfully saved.</b>");
-                        },
-                        error: function () {
-                            bootbox.alert("Error!");
+        //save summary info of user
+        $("body").on("click", "#btnSaveSummary", function () {
+            var user = {};
+            user.Summary = $("#txtSummary").val();
+            user.UserID = @Model.UserID;
+            $.ajax({
+                type: "POST",
+                url: '/Resume/SaveSummary',
+                data: '{user: ' + JSON.stringify(user) + '}',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    $("#modalSummary").modal("hide");
+                    bootbox.alert("<b style='color:black;'>Summary details successfully saved.</b>");
+                },
+                error: function () {
+                    bootbox.alert("Error!");
 
-                        }
-                    });
-                    return false;
-                });
-
-
-                //save basic info of user
-                $("body").on("click", "#btnSaveBasicInfo", function () {
-                    var user = {
-                        "UserID": $("#userId").val(),
-                        "Name": $("#txtFullName").val(),
-                        "Gender": $('input[name="Gender"]:checked').val(),
-                        "DateOfBirth": $("#dateDOB").val(),
-                        "PhoneNumber": $("#txtPhoneNumber").val(),
-                        "LanguageIds": []
-                    };
-                    debugger;
-
-                    $('input[type="checkbox"]:checked').each(function (e, el) {
-                        user.LanguageIds.push($(el).val());
-                    })
-                    $.ajax({
-                        type: "POST",
-                        url: '/Resume/SaveBasicInformation',
-                        data: '{addUserViewModel: ' + JSON.stringify(user) + '}',
-                        dataType: "json",
-                        contentType: "application/json; charset=utf-8",
-                        success: function () {
-                            $("#modalBasicInfo").modal("hide");
-                            bootbox.alert("<b style='color:black;'>Basic information successfully saved.</b>");
-                        },
-                        error: function () {
-                            bootbox.alert("Error!");
-
-                        }
-                    });
-                    return false;
-                });
-
-                //save projects info of user
-                $("body").on("click", "#btnSaveProjectDetials", function () {
-                    var project = {};
-                    project.UserID = $("#userId").val();
-                    project.Title = $("#txtTitle").val();
-                    project.ProjectRole = $('#txtProjectRole').val();
-                    project.Duration = $("#txtDuration").val();
-                    project.Description = $("#txtDescription").val();
-                    debugger;
-                    $.ajax({
-                        type: "POST",
-                        url: '/Resume/SaveProjectDetails',
-                        data: '{project: ' + JSON.stringify(project) + '}',
-                        dataType: "json",
-                        contentType: "application/json; charset=utf-8",
-                        success: function () {
-                            $("#modalProject").modal("hide");
-                            bootbox.alert("<b style='color:black;'>Project details successfully saved.</b>");
-                        },
-                        error: function () {
-                            bootbox.alert("Error!");
-
-                        }
-                    });
-                    return false;
-                });
-
-                //save work experience info of user
-                $("body").on("click", "#btnSaveWorkExperience", function () {
-                    var project = {};
-                    project.UserID = $("#userId").val();
-                    project.StartMonth = $("#selectStartMonth").val();
-                    project.EndMonth = $('#selectEndMonth').val();
-                    project.StartYear = $("#selectStartYear").val();
-                    project.EndYear = $("#selectEndYear").val();
-                    project.OrganizationName = $("#txtCompanyName").val();
-                    project.Role = $('#txtRole').val();
-                    if ($("#checkWorking").prop('checked') == true)
-                        project.CurrentlyWorking = true;
-                    else
-                        project.CurrentlyWorking = false;
-
-                    $.ajax({
-                        type: "POST",
-                        url: '/Resume/SaveWorkExperience',
-                        data: '{workExperience: ' + JSON.stringify(project) + '}',
-                        dataType: "json",
-                        contentType: "application/json; charset=utf-8",
-                        success: function () {
-                            $("#modalWorkExperience").modal("hide");
-                            bootbox.alert("<b style='color:black;'>Work experience successfully saved.</b>");
-
-                        },
-                        error: function () {
-                            bootbox.alert("Error!");
-
-                        }
-                    });
-                    return false;
-                });
+                }
+            });
+            return false;
+        });
 
 
-                //save Educational details of user
-                $("body").on("click", "#btnSaveEducationalDetails", function () {
-                    var educationalDetails = {};
+        //save basic info of user
+        $("body").on("click", "#btnSaveBasicInfo", function () {
+            var user = {
+                "UserID": @Model.UserID,
+                "Name": $("#txtFullName").val(),
+                "Gender": $('input[name="Gender"]:checked').val(),
+                "DateOfBirth": $("#dateDOB").val(),
+                "PhoneNumber": $("#txtPhoneNumber").val(),
+                "LanguageIds": []
+            };
+            debugger;
 
-                    educationalDetails.UserID = $("#userId").val();
+            $('input[type="checkbox"]:checked').each(function (e, el) {
+                user.LanguageIds.push($(el).val());
+            })
+            $.ajax({
+                type: "POST",
+                url: '/Resume/SaveBasicInformation',
+                data: '{addUserViewModel: ' + JSON.stringify(user) + '}',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    $("#modalBasicInfo").modal("hide");
+                    bootbox.alert("<b style='color:black;'>Basic information successfully saved.</b>");
+                },
+                error: function () {
+                    bootbox.alert("Error!");
+
+                }
+            });
+            return false;
+        });
+
+        //save projects info of user
+        $("body").on("click", "#btnSaveProjectDetials", function () {
+            var project = {};
+            project.UserID = @Model.UserID;
+            project.Title = $("#txtTitle").val();
+            project.ProjectRole = $('#txtProjectRole').val();
+            project.Duration = $("#txtDuration").val();
+            project.Description = $("#txtDescription").val();
+            debugger;
+            $.ajax({
+                type: "POST",
+                url: '/Resume/SaveProjectDetails',
+                data: '{project: ' + JSON.stringify(project) + '}',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    $("#modalProject").modal("hide");
+                    bootbox.alert("<b style='color:black;'>Project details successfully saved.</b>");
+                },
+                error: function () {
+                    bootbox.alert("Error!");
+
+                }
+            });
+            return false;
+        });
+
+        //save work experience info of user
+        $("body").on("click", "#btnSaveWorkExperience", function () {
+            var project = {};
+            project.UserID = @Model.UserID;
+            project.StartMonth = $("#selectStartMonth").val();
+            project.EndMonth = $('#selectEndMonth').val();
+            project.StartYear = $("#selectStartYear").val();
+            project.EndYear = $("#selectEndYear").val();
+            project.OrganizationName = $("#txtCompanyName").val();
+            project.Role = $('#txtRole').val();
+            if ($("#checkWorking").prop('checked') == true)
+                project.CurrentlyWorking = true;
+            else
+                project.CurrentlyWorking = false;
+
+            $.ajax({
+                type: "POST",
+                url: '/Resume/SaveWorkExperience',
+                data: '{workExperience: ' + JSON.stringify(project) + '}',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    $("#modalWorkExperience").modal("hide");
+                    bootbox.alert("<b style='color:black;'>Work experience successfully saved.</b>");
+
+                },
+                error: function () {
+                    bootbox.alert("Error!");
+
+                }
+            });
+            return false;
+        });
+
+
+        //save Educational details of user
+        $("body").on("click", "#btnSaveEducationalDetails", function () {
+            var educationalDetails = {};
+
+            educationalDetails.UserID = @Model.UserID;
                     educationalDetails.CourseId = $('input[name="courseOption"]:checked').val();
                     educationalDetails.Board = $("#boardType").val();
                     educationalDetails.PassingYear = $("#yearOfPassing").val();
@@ -760,7 +759,7 @@
 
                 $("body").on("click", "#btnSaveSkills", function () {
                     var skillDetails = {
-                        "UserID": $("#userId").val(),
+                        "UserID": @Model.UserID,
                         "SkillNames": []
                     };
 
@@ -787,44 +786,44 @@
 
                 $('#txtSearch').autocomplete({
                     source: '@Url.Action("GetSkill")',
-                    appendTo: $('#autoComplete')
-                });
+            appendTo: $('#autoComplete')
+        });
 
-                $("body").on('click', '#addSkill', function () {
-                    var item = $("#txtSearch").val();
-                    var isSkillFound = 0;
+        $("body").on('click', '#addSkill', function () {
+            var item = $("#txtSearch").val();
+            var isSkillFound = 0;
 
-                    $(".skillItem").each(function (index) {
-                        var skillValue = $(this).text();
-                        if (skillValue == item) {
-                            isSkillFound = 1;
-                            return false;
-                        }
-                    });
-
-                    if (isSkillFound == 0) {
-                        $("#skillMenu").append('<li class="skillItem">' + item + '</li>');
-                    } else {
-                        alert(item + " already added.");
-                    }
-                });
-
-
-                @*preview section by rahul*@
-                $("body").on("click", "#preview", function (e) {
-                    var ids = $('#sessionIdFetch').data('sessionid');
-                    $.ajax({
-                        url: "/Resume/PreviewUser/" + ids,
-                        method: "GET",
-                        success: function (result) {
-                            console.log(result);
-                            $("#modalUserName").html(result.Name);
-                        },
-                        error: function () {
-                            console.log("error!");
-                        }
-                    });
-                });
+            $(".skillItem").each(function (index) {
+                var skillValue = $(this).text();
+                if (skillValue == item) {
+                    isSkillFound = 1;
+                    return false;
+                }
             });
+
+            if (isSkillFound == 0) {
+                $("#skillMenu").append('<li class="skillItem">' + item + '</li>');
+            } else {
+                alert(item + " already added.");
+            }
+        });
+
+
+        @*preview section by rahul*@
+        $("body").on("click", "#preview", function (e) {
+            var ids = $('#sessionIdFetch').data('sessionid');
+            $.ajax({
+                url: "/Resume/PreviewUser/" + ids,
+                method: "GET",
+                success: function (result) {
+                    console.log(result);
+                    $("#modalUserName").html(result.Name);
+                },
+                error: function () {
+                    console.log("error!");
+                }
+            });
+        });
+    });
         </script>
     }

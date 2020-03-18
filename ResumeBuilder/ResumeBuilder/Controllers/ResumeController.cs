@@ -40,7 +40,7 @@ namespace ResumeBuilder.Controllers
                
                 ViewBag.Projects = projects;
                 ViewBag.WorkExperiences = workExperiences;
-                return View(user);
+                return PartialView(user);
             }
             return RedirectToAction("Login", "Account");
             
@@ -124,7 +124,7 @@ namespace ResumeBuilder.Controllers
                 var user = db.Users.Where(m => m.UserID == id).FirstOrDefault();
                 ViewBag.Courses = db.Courses.ToList();
                 ViewBag.Languages = db.Languages.ToList();
-                return View(user);                               
+                return PartialView(user);                               
             }
             return RedirectToAction("Login", "Account");
         }
