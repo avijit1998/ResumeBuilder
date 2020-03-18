@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -170,9 +170,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CustomMapper.cs" />
-    <Compile Include="Migrations\202003171146073_update_table.cs" />
-    <Compile Include="Migrations\202003171146073_update_table.Designer.cs">
-      <DependentUpon>202003171146073_update_table.cs</DependentUpon>
+    <Compile Include="Migrations\202003181302557_new database.cs" />
+    <Compile Include="Migrations\202003181302557_new database.Designer.cs">
+      <DependentUpon>202003181302557_new database.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -429,11 +429,8 @@
     <TypeScriptCompile Include="Content\plugins\fullcalendar\main.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003171146073_update_table.resx">
-      <DependentUpon>202003171146073_update_table.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003170723056_deleted all migration and fresh database.resx">
-      <DependentUpon>202003170723056_deleted all migration and fresh database.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003181302557_new database.resx">
+      <DependentUpon>202003181302557_new database.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

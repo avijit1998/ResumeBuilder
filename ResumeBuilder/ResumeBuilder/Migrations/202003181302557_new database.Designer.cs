@@ -7,13 +7,13 @@ namespace ResumeBuilder.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class update_table : IMigrationMetadata
+    public sealed partial class newdatabase : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(update_table));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(newdatabase));
         
         string IMigrationMetadata.Id
         {
-            get { return "202003171146073_update_table"; }
+            get { return "202003181302557_new database"; }
         }
         
         string IMigrationMetadata.Source
