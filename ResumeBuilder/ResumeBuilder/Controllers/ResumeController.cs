@@ -24,7 +24,12 @@ namespace ResumeBuilder.Controllers
         // GET: Resume
         public ActionResult Index()
         {
-            return View();
+            if(Session.Count != 0)
+                return View();
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
         }
 
         public ActionResult ShowData()
@@ -266,16 +271,6 @@ namespace ResumeBuilder.Controllers
             return Json(new { Message = message, JsonRequestBehavior.AllowGet });
         }
 
-        public ActionResult LogOff()
-        {
-            if (Session["UserID"] != null)
-            {
-                Session.Remove("UserID");
-                Session.RemoveAll();
-            }
-
-            return RedirectToAction("Login", "Account");
-        }
 
         public JsonResult GetSkill(string term)
         {
@@ -460,5 +455,6 @@ namespace ResumeBuilder.Controllers
             
             return Json(listUserSkills, JsonRequestBehavior.AllowGet);
         }
+
     }
 }

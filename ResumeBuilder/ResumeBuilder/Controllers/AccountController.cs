@@ -22,7 +22,27 @@ namespace ResumeBuilder.Controllers
         {
         }
 
-        //
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult LogOff()
+        {
+            Session.RemoveAll();
+            Session.Clear();
+            Session.Abandon();
+            return RedirectToAction("Login", "Account");
+        }
+
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        //[ActionName("LogOff")]
+        //public void LogOffPost()
+        //{
+        //    Session.RemoveAll();
+        //    Session.Clear();
+        //    Session.Abandon();
+        //}
+
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login()
@@ -76,12 +96,18 @@ namespace ResumeBuilder.Controllers
         {  
             if (Session["UserID"] != null)  
             {
-                return View("~/Views/Resume/Index.cshtml");
+                return RedirectToAction("Index", "Resume");
+                //return View("~/Views/Resume/Index.cshtml");
                 //return RedirectToAction("Form", "Resume");  
-            } else  
-            {  
-                return RedirectToAction("Login");  
-            }  
+            }
+            else if (Session.Count == 0)
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
         }    
 
         
@@ -151,17 +177,13 @@ namespace ResumeBuilder.Controllers
             return View(model);
         }
 
+        
+
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
         }
 
-        public ActionResult LogOff()
-        {
-            Session.RemoveAll();
-            Session.Clear();
-            Session.Abandon();
-            return RedirectToAction("Login");
-        }
+        
     }
 }
