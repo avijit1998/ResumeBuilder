@@ -196,7 +196,6 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\PublicProfileViewModel.cs" />
     <Compile Include="ViewModels\UI Models\EducationUIModel.cs" />
-    <Compile Include="ViewModels\UI Models\LanguageUIModel.cs" />
     <Compile Include="ViewModels\UI Models\ProjectUIModel.cs" />
     <Compile Include="ViewModels\UI Models\WorkExUIModel.cs" />
     <Compile Include="ViewModels\UserSkillVM.cs" />

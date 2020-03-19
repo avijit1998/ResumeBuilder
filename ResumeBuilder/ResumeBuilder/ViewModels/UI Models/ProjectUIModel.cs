@@ -9,5 +9,7 @@ namespace ResumeBuilder.ViewModels
         public int Duration { get; set; }
 
         public string Description { get; set; }
+
+        public string projectRole { get; set; }
     }
 }

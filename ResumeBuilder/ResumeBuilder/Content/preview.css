@@ -1,6 +1,9 @@
-.preview-card{
-    border-radius: 5px;
-    border-radius: 10px 10px 10px 10px;
+.font-size-heading {
+    font-size: 30px;
+    background-color: #86b9d68f;
+}
+.preview-card {
+    border-radius: 10px;
     background-color: #fff;
     width:280px;
     height:300px;
@@ -8,8 +11,7 @@
     text-align:center;
     margin-top: 38px;
     box-shadow: 0 20px 60px 0 rgba(0,0,0,0.3);
-    text-align: center;
-
+    position: relative;
 }
 .plus-symbol{
     margin-left: 1px;
@@ -17,9 +19,9 @@
 }
 .preview-text{
     position:absolute;
-    margin-left: 96px;
-    margin-top: 124px;
-    font-size:24px;
+    margin-left: 83px;
+    margin-top: 119px;
+    font-size:30px;
 }
 .preview-card:hover{
     background:rgba(191, 200, 252, 0.884);
@@ -36,9 +38,6 @@
   transform: scaleX(0);
   transform-origin: right;
 }
-/*.preview-card:hover {
-  color: #95a5a6;
-}*/
 .preview-text:hover::after {
   transform: scaleX(1);
   transform-origin: left;

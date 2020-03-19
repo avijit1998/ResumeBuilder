@@ -49,7 +49,7 @@ namespace ResumeBuilder.Controllers
                                               {
                                                   CourseName = (_context.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName == "10"
                                                                || _context.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName == "12")?
-                                                               _context.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName + "TH" :
+                                                               _context.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName + " TH" :
                                                                _context.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName,
                                                   CGPAOrPercentage = user.CGPAOrPercentage,
                                                   Board = user.Board,
@@ -75,6 +75,7 @@ namespace ResumeBuilder.Controllers
                                             {
                                                 Title = user.Title,
                                                 Description = user.Description,
+                                                projectRole = user.ProjectRole,
                                                 Duration = user.Duration
                                             }).ToList();
                 }
@@ -93,7 +94,7 @@ namespace ResumeBuilder.Controllers
                                                EndYear = user.EndYear,
                                                Role = user.Role,
                                                CurrentlyWorking = user.CurrentlyWorking
-                                           }).ToList();
+                                           }).OrderByDescending(x => x.StartYear).ToList();
                 }
 
                 // Languages 
