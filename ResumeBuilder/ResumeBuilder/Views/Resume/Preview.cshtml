@@ -1,17 +1,9 @@
 ﻿@model ResumeBuilder.ViewModels.PublicProfileViewModel
 
 @{
+    Layout = null;
     ViewBag.Title = "Preview";
 }
-@*<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="~/Content/preview.css">
-    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
-</head>*@
-
-
 
 @if (Model.ErrorMsg != null)
 {
@@ -26,22 +18,14 @@ else
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Profile</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>Preview</title>
         <link rel="stylesheet" href="~/Content/Profile_Data/bootstrap-4.3.1-dist/css/bootstrap.css" type="text/css">
-        <link rel="stylesheet" href="~/Content/Profile_Data/css/style.css" type="text/css">
         <link rel="stylesheet" type="text/css" href="~/Content/preview.css">
-
-        <style>
-            .font-size-heading {
-                font-size: 30px;
-                background-color: #6dbbee;
-            }
-        </style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
         <div class="preview-card text-center" data-toggle="modal" data-target="#resumePreviewModal">
-            <i class="fa fa-list fa-5x text-primary"></i>
+            <div class="preview-text text-primary">Preview</div>
         </div>
         @*<div class="modal fade" id="resumePreviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">*@
         <div id="resumePreviewModal" class="modal fade" role="dialog">
@@ -57,6 +41,12 @@ else
                         <h1 class="text-primary text-center display-4">@Model.Name</h1>
                         <div id="basicInfo">
                             <div class="text-center text-primary font-size-heading">Personal Details</div>
+                            <div>
+                                <div><b>Gender : </b>@Model.Gender</div>
+                                <div><b>DOB : </b>@Model.DOB</div>
+                                <div><b>E-mail : </b>@Model.Email</div>
+                                <div><b>Phone No. : </b>@Model.PhoneNumber</div>
+                            </div>
                         </div>
                         <div id="education">
                             <div class="text-center text-primary font-size-heading">Education Details</div>
@@ -94,7 +84,7 @@ else
                         <div id="skills">
                             <div class="text-center text-primary font-size-heading">Skills</div>
 
-                            <div class="ml-4">
+                            <div class="ml-4 pt-3 pb-3">
                                 @if (Model.SkillList != null)
                                 {
                                     var count = Model.SkillList.Count;
@@ -166,7 +156,7 @@ else
                         </div>
                         <div id="languages">
                             <div class="text-center text-primary font-size-heading">Languages</div>
-                            <div class="ml-4">
+                            <div class="ml-4 pt-3 pb-3">
                                 @if (Model.Languages != null)
                                 {
                                     var count = Model.Languages.Count;
@@ -174,13 +164,16 @@ else
                                     foreach (var data in Model.Languages)
                                     {
                                         counter++;
-                                        if (counter == count - 1) {
+                                        if (counter == count - 1)
+                                        {
                                             <span><b>@data</b> and </span>
                                         }
-                                        else if (counter == count) {
+                                        else if (counter == count)
+                                        {
                                             <span><b>@data</b></span>
                                         }
-                                        else {
+                                        else
+                                        {
                                             <span><b>@data</b>, </span>
                                         }
                                     }

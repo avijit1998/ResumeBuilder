@@ -355,36 +355,40 @@ namespace ResumeBuilder.Controllers
         // GET: Resume/Preview/id
         public ActionResult Preview()
         {
-            int id = 1;
-            bool result = true;
             if (Session["UserID"] != null)
             {
-                result = Int32.TryParse(Session["UserID"] as String, out id);
-            }
-            if(result)
-            {
-                try
+                int id;
+                var result = Int32.TryParse(Session["UserID"] as String, out id);
+                if (result)
                 {
-                    // User Name
-                    _uiModel.Name = db.Users.FirstOrDefault(a => a.UserID == id).Name;
+                    try
+                    {
+                        // User Name
+                        _uiModel.Name = db.Users.FirstOrDefault(a => a.UserID == id).Name;
 
-                    // User Role
-                    _uiModel.UserRole = db.Users.FirstOrDefault(a => a.UserID == id).UserRole;
+                        // User Gender
+                        _uiModel.Gender = db.Users.FirstOrDefault(a => a.UserID == id).Gender;
 
-                    // User Phone
-                    _uiModel.PhoneNumber = db.Users.FirstOrDefault(a => a.UserID == id).PhoneNumber;
+                        // User Gender
+                        _uiModel.DOB = (db.Users.FirstOrDefault(a => a.UserID == id).DateOfBirth.ToString().Split(' '))[0];
 
-                    // User E-mail
-                    _uiModel.Email = db.Users.FirstOrDefault(a => a.UserID == id).Username;
+                        // User Role
+                        _uiModel.UserRole = db.Users.FirstOrDefault(a => a.UserID == id).UserRole;
 
-                    //User Linkedin Link
-                    _uiModel.LinkedinLink = "https://www.linkedin.com/user";
+                        // User Phone
+                        _uiModel.PhoneNumber = db.Users.FirstOrDefault(a => a.UserID == id).PhoneNumber;
 
-                    // User Summary
-                    _uiModel.Summary = db.Users.FirstOrDefault(a => a.UserID == id).Summary;
+                        // User E-mail
+                        _uiModel.Email = db.Users.FirstOrDefault(a => a.UserID == id).Username;
 
-                    // Education Details
-                   _uiModel.EducationList = (from user in db.EducationalDetails.ToList()
+                        //User Linkedin Link
+                        _uiModel.LinkedinLink = "https://www.linkedin.com/user";
+
+                        // User Summary
+                        _uiModel.Summary = db.Users.FirstOrDefault(a => a.UserID == id).Summary;
+
+                        // Education Details
+                        _uiModel.EducationList = (from user in db.EducationalDetails.ToList()
                                                   select new EducationUIModel
                                                   {
                                                       CourseName = (db.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName == "10"
@@ -398,11 +402,11 @@ namespace ResumeBuilder.Controllers
                                                       PassingYear = user.PassingYear
                                                   }).OrderByDescending(x => x.PassingYear).ToList();
 
-                    // Skills
-                    _uiModel.SkillList = db.Users.FirstOrDefault(x => x.UserID == id).Skills.Select(a => a.SkillName).ToList();
+                        // Skills
+                        _uiModel.SkillList = db.Users.FirstOrDefault(x => x.UserID == id).Skills.Select(a => a.SkillName).ToList();
 
-                    // Project Details
-                   _uiModel.ProjectList = (from user in db.Projects.Where(x => x.UserId == id)
+                        // Project Details
+                        _uiModel.ProjectList = (from user in db.Projects.Where(x => x.UserId == id)
                                                 select new ProjectUIModel
                                                 {
                                                     Title = user.Title,
@@ -410,8 +414,8 @@ namespace ResumeBuilder.Controllers
                                                     Duration = user.Duration
                                                 }).ToList();
 
-                   // Work Ex.
-                   _uiModel.WorkExList = (from user in db.WorkExperiences.Where(x => x.UserID == id)
+                        // Work Ex.
+                        _uiModel.WorkExList = (from user in db.WorkExperiences.Where(x => x.UserID == id)
                                                select new WorkExUIModel
                                                {
                                                    OrganizationName = user.OrganizationName,
@@ -423,72 +427,18 @@ namespace ResumeBuilder.Controllers
                                                    CurrentlyWorking = user.CurrentlyWorking
                                                }).OrderByDescending(x => x.StartYear).ToList();
 
-                   // Languages 
-                    _uiModel.Languages = db.Users.FirstOrDefault(b => b.UserID == id).Languages.Select(a => a.Language).ToList();
+                        // Languages 
+                        _uiModel.Languages = db.Users.FirstOrDefault(b => b.UserID == id).Languages.Select(a => a.Language).ToList();
 
+                    }
+                    catch (Exception)
+                    {
+                        _uiModel.ErrorMsg = "Unexpected error occured, try again...";
+                    }
                 }
-                catch (Exception)
-                {
-                    _uiModel.ErrorMsg = "Unexpected error occured, try again...";
-                }
+                return PartialView(_uiModel);
             }
-            // using session user id find userid, get user details and store the data in a view model and pass that model to 
-            // partial view name as preview.cshtml 
-            //ViewModel vm;
-            //return PartialView(vm);
-            return PartialView(_uiModel);
+            return RedirectToAction("Login", "Account");
         }
-
-        //public ActionResult PreviewUser(int id)
-        //{
-        //    // User Name
-        //    _uiModel.Name = db.Users.FirstOrDefault(a => a.UserID == id).Name;
-
-        //    // User Role
-        //    _uiModel.UserRole = "Web Developer";
-
-        //    // User Phone
-        //    _uiModel.PhoneNumber = db.Users.FirstOrDefault(a => a.UserID == id).PhoneNumber;
-
-        //    // User E-mail
-        //    _uiModel.Email = db.Users.FirstOrDefault(a => a.UserID == id).Username;
-
-        //    //User Linkedin Link
-        //    _uiModel.LinkedinLink = "https://www.linkedin.com/user";
-
-        //    // User Summary
-        //    _uiModel.Summary = "Oh, I misunderstood the problem. ResumeBuilder ResumeBuilder Setting a padding on, ResumeBuilder ResumeBuilder bin the padding won't help you.";
-
-        //    //Education Details
-        //    ViewBag.education = 1;
-
-        //    var data = new AllDetailsVM
-        //    {
-        //        Name = db.Users.Where(m => m.UserID == id).Select(m => m.Name).FirstOrDefault(),
-
-        //        PhoneNumber = db.Users.Where(m => m.UserID == id).Select(m => m.PhoneNumber).FirstOrDefault(),
-
-        //        Email = db.Users.Where(m => m.UserID == id).Select(m => m.Username).FirstOrDefault(),
-
-        //        UserRole = db.Users.Where(m => m.UserID == id).Select(m => m.UserRole).FirstOrDefault(),
-
-        //        Summary = db.Users.Where(m => m.UserID == id).Select(m => m.Summary).FirstOrDefault(),
-
-        //        Title = db.Projects.Where(m => m.UserId == id).Select(m => m.Title).FirstOrDefault(),
-
-        //        Description = db.Projects.Where(m => m.UserId == id).Select(m => m.Description).FirstOrDefault(),
-
-        //    };
-
-        //    var UserData = db.Users.Where(m => m.UserID == id).Select(m => m.Name).ToList();
-        //    var coursesData = db.Courses.Where(m => m.CourseId == id).ToList();
-        //    var educationalData = db.EducationalDetails.Where(m => m.CourseId == id).ToList();
-
-        //    return Json(data, JsonRequestBehavior.AllowGet);
-        //    //return Json("Success", JsonRequestBehavior.AllowGet);
-
-        //    //return View(_uiModel);
-
-        //} 
     }
 }
