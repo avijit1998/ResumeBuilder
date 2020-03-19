@@ -13,17 +13,8 @@
 }
 else
 {
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Preview</title>
-        <link rel="stylesheet" href="~/Content/Profile_Data/bootstrap-4.3.1-dist/css/bootstrap.css" type="text/css">
         <link rel="stylesheet" type="text/css" href="~/Content/preview.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    </head>
-    <body>
         <div class="preview-card text-center" data-toggle="modal" data-target="#resumePreviewModal">
             <div class="preview-text text-primary">Preview</div>
         </div>
@@ -37,7 +28,7 @@ else
                         <h4 class="modal-title">RESUME</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body" style="color:black;">
                         <h1 class="text-primary text-center display-4">@Model.Name</h1>
                         <div id="basicInfo">
                             <div class="text-center text-primary font-size-heading">Personal Details</div>
@@ -92,13 +83,16 @@ else
                                     foreach (var data in Model.SkillList)
                                     {
                                         counter++;
-                                        if (counter == count - 1) {
+                                        if (counter == count - 1)
+                                        {
                                             <span><b>@data</b> and </span>
                                         }
-                                        else if (counter == count) {
+                                        else if (counter == count)
+                                        {
                                             <span><b>@data</b></span>
                                         }
-                                        else {
+                                        else
+                                        {
                                             <span><b>@data</b>, </span>
                                         }
                                     }
@@ -189,9 +183,5 @@ else
 
             </div>
         </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script type="text/javascript" src="~/Content/Profile_Data/bootstrap-4.3.1-dist/js/bootstrap.js"></script>
-</body>
-</html>
 }
