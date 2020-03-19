@@ -34,9 +34,6 @@ namespace ResumeBuilder.Controllers
                 // User E-mail
                 _uiModel.Email = _context.Users.FirstOrDefault(a => a.UserID == id).Username;
 
-                //User Linkedin Link
-                _uiModel.LinkedinLink = "https://www.linkedin.com/user";
-
                 // User Summary
                 _uiModel.Summary = _context.Users.FirstOrDefault(a => a.UserID == id).Summary;
                 
@@ -44,7 +41,7 @@ namespace ResumeBuilder.Controllers
                 _uiModel.EducationStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setEducation;
                 if (_uiModel.EducationStatus == 0)
                 {
-                    _uiModel.EducationList = (from user in _context.EducationalDetails.ToList()
+                    _uiModel.EducationList = (from user in _context.EducationalDetails.Where(x => x.UserId == id).ToList()
                                               select new EducationUIModel
                                               {
                                                   CourseName = (_context.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName == "10"

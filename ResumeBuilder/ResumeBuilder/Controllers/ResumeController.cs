@@ -375,14 +375,11 @@ namespace ResumeBuilder.Controllers
                         // User E-mail
                         _uiModel.Email = db.Users.FirstOrDefault(a => a.UserID == id).Username;
 
-                        //User Linkedin Link
-                        _uiModel.LinkedinLink = "https://www.linkedin.com/user";
-
                         // User Summary
                         _uiModel.Summary = db.Users.FirstOrDefault(a => a.UserID == id).Summary;
 
                         // Education Details
-                        _uiModel.EducationList = (from user in db.EducationalDetails.ToList()
+                        _uiModel.EducationList = (from user in db.EducationalDetails.Where(x => x.UserId == id).ToList()
                                                   select new EducationUIModel
                                                   {
                                                       CourseName = (db.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName == "10"

@@ -10,7 +10,6 @@ namespace ResumeBuilder.ViewModels
         public string DOB { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
-        public string LinkedinLink { get; set; }
         public string UserRole { get; set; }
         public string Summary { get; set; }
         // Language
