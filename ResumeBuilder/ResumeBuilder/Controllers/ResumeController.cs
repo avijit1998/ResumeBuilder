@@ -349,7 +349,7 @@ namespace ResumeBuilder.Controllers
             ob1.setEducation = ob.setEducation;
             ob1.setContact = ob.setContact;
 
-            return Json("success", JsonRequestBehavior.AllowGet);
+            return Json(ob1, JsonRequestBehavior.AllowGet);
         }
         // GET: Resume/Preview/id
         public ActionResult Preview()
@@ -438,6 +438,79 @@ namespace ResumeBuilder.Controllers
                 return PartialView(_uiModel);
             }
             return RedirectToAction("Login", "Account");
+        }
+
+        //public ActionResult PreviewUser(int id)
+        //{
+        //    // User Name
+        //    _uiModel.Name = db.Users.FirstOrDefault(a => a.UserID == id).Name;
+
+        //    // User Role
+        //    _uiModel.UserRole = "Web Developer";
+
+        //    // User Phone
+        //    _uiModel.PhoneNumber = db.Users.FirstOrDefault(a => a.UserID == id).PhoneNumber;
+
+        //    // User E-mail
+        //    _uiModel.Email = db.Users.FirstOrDefault(a => a.UserID == id).Username;
+
+        //    //User Linkedin Link
+        //    _uiModel.LinkedinLink = "https://www.linkedin.com/user";
+
+        //    // User Summary
+        //    _uiModel.Summary = "Oh, I misunderstood the problem. ResumeBuilder ResumeBuilder Setting a padding on, ResumeBuilder ResumeBuilder bin the padding won't help you.";
+
+        //    //Education Details
+        //    ViewBag.education = 1;
+
+        //    var data = new AllDetailsVM
+        //    {
+        //        Name = db.Users.Where(m => m.UserID == id).Select(m => m.Name).FirstOrDefault(),
+
+        //        PhoneNumber = db.Users.Where(m => m.UserID == id).Select(m => m.PhoneNumber).FirstOrDefault(),
+
+        //        Email = db.Users.Where(m => m.UserID == id).Select(m => m.Username).FirstOrDefault(),
+
+        //        UserRole = db.Users.Where(m => m.UserID == id).Select(m => m.UserRole).FirstOrDefault(),
+
+        //        Summary = db.Users.Where(m => m.UserID == id).Select(m => m.Summary).FirstOrDefault(),
+
+        //        Title = db.Projects.Where(m => m.UserId == id).Select(m => m.Title).FirstOrDefault(),
+
+        //        Description = db.Projects.Where(m => m.UserId == id).Select(m => m.Description).FirstOrDefault(),
+
+        //    };
+
+        //    var UserData = db.Users.Where(m => m.UserID == id).Select(m => m.Name).ToList();
+        //    var coursesData = db.Courses.Where(m => m.CourseId == id).ToList();
+        //    var educationalData = db.EducationalDetails.Where(m => m.CourseId == id).ToList();
+
+        //    return Json(data, JsonRequestBehavior.AllowGet);
+        //    //return Json("Success", JsonRequestBehavior.AllowGet);
+
+        //    //return View(_uiModel);
+
+        //} 
+
+        public ActionResult Search()
+        {
+            return PartialView();
+        }
+
+        public ActionResult GetUserSkills()
+        {
+            //db.Configuration.ProxyCreationEnabled = false;
+            List<UserSkillVM> listUserSkills = new List<UserSkillVM>();
+            listUserSkills = (from user in db.Users.Include("Skills").ToList()
+                                    select new UserSkillVM
+                                    {
+                                        UserID = user.UserID,
+                                        UserName = user.Username,
+                                        SkillNames = user.Skills.Select(x => x.SkillName).ToList()
+                                    }).ToList();
+            
+            
+            return Json(listUserSkills, JsonRequestBehavior.AllowGet);
         }
     }
 }
