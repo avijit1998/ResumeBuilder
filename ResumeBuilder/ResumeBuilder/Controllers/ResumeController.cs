@@ -352,14 +352,91 @@ namespace ResumeBuilder.Controllers
 
             return Json("success", JsonRequestBehavior.AllowGet);
         }
-
+        // GET: Resume/Preview/id
         public ActionResult Preview()
         {
+            int id = 1;
+            bool result = true;
+            if (Session["UserID"] != null)
+            {
+                result = Int32.TryParse(Session["UserID"] as String, out id);
+            }
+            if(result)
+            {
+                try
+                {
+                    // User Name
+                    _uiModel.Name = db.Users.FirstOrDefault(a => a.UserID == id).Name;
+
+                    // User Role
+                    _uiModel.UserRole = db.Users.FirstOrDefault(a => a.UserID == id).UserRole;
+
+                    // User Phone
+                    _uiModel.PhoneNumber = db.Users.FirstOrDefault(a => a.UserID == id).PhoneNumber;
+
+                    // User E-mail
+                    _uiModel.Email = db.Users.FirstOrDefault(a => a.UserID == id).Username;
+
+                    //User Linkedin Link
+                    _uiModel.LinkedinLink = "https://www.linkedin.com/user";
+
+                    // User Summary
+                    _uiModel.Summary = db.Users.FirstOrDefault(a => a.UserID == id).Summary;
+
+                    // Education Details
+                   _uiModel.EducationList = (from user in db.EducationalDetails.ToList()
+                                                  select new EducationUIModel
+                                                  {
+                                                      CourseName = (db.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName == "10"
+                                                                   || db.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName == "12") ?
+                                                                   db.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName + " TH" :
+                                                                   db.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName,
+                                                      CGPAOrPercentage = user.CGPAOrPercentage,
+                                                      Board = user.Board,
+                                                      Stream = (user.Stream == null) ? "N/A" : user.Stream,
+                                                      TotalPercentorCGPAValue = user.TotalPercentorCGPAValue,
+                                                      PassingYear = user.PassingYear
+                                                  }).OrderByDescending(x => x.PassingYear).ToList();
+
+                    // Skills
+                    _uiModel.SkillList = db.Users.FirstOrDefault(x => x.UserID == id).Skills.Select(a => a.SkillName).ToList();
+
+                    // Project Details
+                   _uiModel.ProjectList = (from user in db.Projects.Where(x => x.UserId == id)
+                                                select new ProjectUIModel
+                                                {
+                                                    Title = user.Title,
+                                                    Description = user.Description,
+                                                    Duration = user.Duration
+                                                }).ToList();
+
+                   // Work Ex.
+                   _uiModel.WorkExList = (from user in db.WorkExperiences.Where(x => x.UserID == id)
+                                               select new WorkExUIModel
+                                               {
+                                                   OrganizationName = user.OrganizationName,
+                                                   StartMonth = (user.StartMonth <= 9) ? "0" + user.StartMonth : user.StartMonth.ToString(),
+                                                   StartYear = user.StartYear,
+                                                   EndMonth = (user.EndMonth <= 9) ? "0" + user.EndMonth : user.EndMonth.ToString(),
+                                                   EndYear = user.EndYear,
+                                                   Role = user.Role,
+                                                   CurrentlyWorking = user.CurrentlyWorking
+                                               }).OrderByDescending(x => x.StartYear).ToList();
+
+                   // Languages 
+                    _uiModel.Languages = db.Users.FirstOrDefault(b => b.UserID == id).Languages.Select(a => a.Language).ToList();
+
+                }
+                catch (Exception)
+                {
+                    _uiModel.ErrorMsg = "Unexpected error occured, try again...";
+                }
+            }
             // using session user id find userid, get user details and store the data in a view model and pass that model to 
             // partial view name as preview.cshtml 
             //ViewModel vm;
             //return PartialView(vm);
-            return PartialView();
+            return PartialView(_uiModel);
         }
 
         //public ActionResult PreviewUser(int id)

@@ -3,77 +3,202 @@
 @{
     ViewBag.Title = "Preview";
 }
-@*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Launch demo modal
-    </button>*@
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" id="modal-style" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <b class="modal-font-size" id="modalUserName"></b><br />
-                <b class="modal-font-size" id="modalSkills">Skills:</b><br />
-                <b class="modal-font-size">Projects:</b><br />
-                <b class="modal-font-size">Work Experience:</b><br />
-                <b class="modal-font-size">Language:</b><br />
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-<head>
+@*<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="~/Content/preview.css">
-    @*<link rel="stylesheet" type="text/css" href="~/Content/bootstrap-lumen-v3.css">*@
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
-</head>
-<div class="preview-card" data-toggle="modal" data-target="#exampleModal">
-    <div class="preview-text">Preview</div>
-    @*<i class="glyphicon glyphicon-plus plus-symbol"></i>*@
-</div>
+</head>*@
 
-@*@section scripts
+
+
+@if (Model.ErrorMsg != null)
 {
     <script>
-        $(document).ready(function () {
-
-            @{
-                int ids;
-                var res = Int32.TryParse(Session["UserID"] as String, out ids);
-            }
-            $("body").on("click", "#preview", function (e) {
-                e.preventDefault();
-                url = $(this).data('url');
-                $("#mainDivModal").hide();
-                $.get(url, function (data) {
-                    $('#previewDiv').replaceWith(data);
-                });
-                var id = $('#sessionIdFetch').data('sessionId');
-            });
-            $.ajax({
-                url: "/Resume/PreviewUser/"+@ids,
-                method: "GET",
-                success: function (result) {
-                    console.log(result);
-                }
-
-            })
-        })
+        alert('@Model.ErrorMsg');
     </script>
-}*@
+}
+else
+{
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Profile</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="~/Content/Profile_Data/bootstrap-4.3.1-dist/css/bootstrap.css" type="text/css">
+        <link rel="stylesheet" href="~/Content/Profile_Data/css/style.css" type="text/css">
+        <link rel="stylesheet" type="text/css" href="~/Content/preview.css">
+
+        <style>
+            .font-size-heading {
+                font-size: 30px;
+                background-color: #6dbbee;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="preview-card text-center" data-toggle="modal" data-target="#resumePreviewModal">
+            <i class="fa fa-list fa-5x text-primary"></i>
+        </div>
+        @*<div class="modal fade" id="resumePreviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">*@
+        <div id="resumePreviewModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">RESUME</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <h1 class="text-primary text-center display-4">@Model.Name</h1>
+                        <div id="basicInfo">
+                            <div class="text-center text-primary font-size-heading">Personal Details</div>
+                        </div>
+                        <div id="education">
+                            <div class="text-center text-primary font-size-heading">Education Details</div>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Sl. No.</th>
+                                        <th>Course</th>
+                                        <th>Stream</th>
+                                        <th>Board</th>
+                                        <th>CGPA / Percentage</th>
+                                        <th>Passing Year</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.EducationList != null)
+                                    {
+                                        var counter = 0;
+                                        foreach (var data in Model.EducationList)
+                                        {
+                                            counter++;
+                                            <tr>
+                                                <td>@counter</td>
+                                                <td>@data.CourseName</td>
+                                                <td>@data.Stream</td>
+                                                <td>@data.Board</td>
+                                                <td>@data.CGPAOrPercentage : @data.TotalPercentorCGPAValue</td>
+                                                <td>@data.PassingYear</td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="skills">
+                            <div class="text-center text-primary font-size-heading">Skills</div>
+
+                            <div class="ml-4">
+                                @if (Model.SkillList != null)
+                                {
+                                    var count = Model.SkillList.Count;
+                                    var counter = 0;
+                                    foreach (var data in Model.SkillList)
+                                    {
+                                        counter++;
+                                        if (counter == count - 1) {
+                                            <span><b>@data</b> and </span>
+                                        }
+                                        else if (counter == count) {
+                                            <span><b>@data</b></span>
+                                        }
+                                        else {
+                                            <span><b>@data</b>, </span>
+                                        }
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div id="projects">
+                            <div class="text-center text-primary font-size-heading">Projects</div>
+                            <ul class="mt-2">
+                                @if (Model.ProjectList != null)
+                                {
+                                    foreach (var data in Model.ProjectList)
+                                    {
+                                        <li>
+                                            <div class="">
+                                                <div class="">
+                                                    <h5>@data.Title</h5>
+                                                    <p>@data.Description</p>
+                                                    <h6>Duration : @data.Duration Months</h6>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                }
+                            </ul>
 
 
 
+                        </div>
+                        <div id="workEx">
+                            <div class="text-center text-primary font-size-heading">Work Experience</div>
+                            <div class="">
+                                <ul class="mt-2">
+                                    @if (Model.WorkExList != null)
+                                    {
+                                        foreach (var data in Model.WorkExList)
+                                        {
+                                            <li>
+                                                <div class="">
+                                                    <div class="">
+                                                        <h5>@data.OrganizationName</h5>
+                                                        <div>Role : @data.Role</div>
+                                                        @if (@data.CurrentlyWorking == true)
+                                                        {
+                                                            <h6>Currently Working Here...</h6>
+                                                        }
+                                                        <h6>@data.StartMonth/@data.StartYear - @data.EndMonth/@data.EndYear</h6>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="languages">
+                            <div class="text-center text-primary font-size-heading">Languages</div>
+                            <div class="ml-4">
+                                @if (Model.Languages != null)
+                                {
+                                    var count = Model.Languages.Count;
+                                    var counter = 0;
+                                    foreach (var data in Model.Languages)
+                                    {
+                                        counter++;
+                                        if (counter == count - 1) {
+                                            <span><b>@data</b> and </span>
+                                        }
+                                        else if (counter == count) {
+                                            <span><b>@data</b></span>
+                                        }
+                                        else {
+                                            <span><b>@data</b>, </span>
+                                        }
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success"><i class="fa fa-download"> Download</i></button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
 
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script type="text/javascript" src="~/Content/Profile_Data/bootstrap-4.3.1-dist/js/bootstrap.js"></script>
+</body>
+</html>
+}
