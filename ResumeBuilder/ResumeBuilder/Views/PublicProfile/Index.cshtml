@@ -263,48 +263,49 @@ else
         <script type="text/javascript" src="~/Scripts/Profile_Scripts/profileDefaultScript.js"></script>
         <!-- Internal JavaScript Code -->
         <script type="text/javascript">
-            $(document).ready(function () {
+    $(document).ready(function () {
 
-                $('body').scrollspy({target: ".scroll-spy-div"});
+        $('body').scrollspy({target: ".scroll-spy-div"});
 
-                if(@Model.WorkExStatus === -1)
-                {
-                    $('#workExperience, #workExperienceNav').hide();
-                }
+        if(@Model.WorkExStatus === -1)
+        {
+            $('#workExperience, #workExperienceNav').hide();
+        }
+        else
+        {
+            console.log(@Model.WorkExList.Count);
+            for(var i = 0; i < @Model.WorkExList.Count; i++)
+            {
+                if(i % 2 === 0)
+                    $('#workExTimelineId').children().eq(i).addClass("timeline-left");
                 else
-                {
-                    for(var i = 0; i < @Model.WorkExList.Count; i++)
-                    {
-                        if(i % 2 === 0)
-                            $('#workExTimelineId').children().eq(i).addClass("timeline-left");
-                        else
-                            $('#workExTimelineId').children().eq(i).addClass("timeline-right");
-                    }
-                }
+                    $('#workExTimelineId').children().eq(i).addClass("timeline-right");
+            }
+        }
 
-                if(@Model.ProjectStatus === -1)
-                {
-                    $('#projects, #projectsNav').hide();
-                }
+        if(@Model.ProjectStatus === -1)
+        {
+            $('#projects, #projectsNav').hide();
+        }
+        else
+        {
+            for(var i = 0; i < @Model.ProjectList.Count; i++)
+            {
+                if(i % 2 === 0)
+                    $('#projectTimelineId').children().eq(i).addClass("timeline-left");
                 else
-                {
-                    for(var i = 0; i < @Model.ProjectList.Count; i++)
-                    {
-                        if(i % 2 === 0)
-                            $('#projectTimelineId').children().eq(i).addClass("timeline-left");
-                        else
-                            $('#projectTimelineId').children().eq(i).addClass("timeline-right");
-                    }
-                }
+                    $('#projectTimelineId').children().eq(i).addClass("timeline-right");
+            }
+        }
 
-                if(@Model.SkillStatus === -1)
-                    $('#skills, #skillsNav').hide();
-                if(@Model.EducationStatus === -1)
-                    $('#education, #educationNav').hide();
-                if(@Model.LanguageStatus === -1)
-                    $('#languages, #languagesNav').hide();
-            });
-        </script>
+        if(@Model.SkillStatus === -1)
+            $('#skills, #skillsNav').hide();
+        if(@Model.EducationStatus === -1)
+            $('#education, #educationNav').hide();
+        if(@Model.LanguageStatus === -1)
+            $('#languages, #languagesNav').hide();
+    });
+</script>
 
     </body>
 </html>
