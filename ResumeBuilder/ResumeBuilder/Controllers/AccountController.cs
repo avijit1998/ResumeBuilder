@@ -22,7 +22,27 @@ namespace ResumeBuilder.Controllers
         {
         }
 
-        //
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult LogOff()
+        {
+            Session.RemoveAll();
+            Session.Clear();
+            Session.Abandon();
+            return RedirectToAction("Login", "Account");
+        }
+
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        //[ActionName("LogOff")]
+        //public void LogOffPost()
+        //{
+        //    Session.RemoveAll();
+        //    Session.Clear();
+        //    Session.Abandon();
+        //}
+
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login()
@@ -75,12 +95,19 @@ namespace ResumeBuilder.Controllers
         public ActionResult UserDashBoard(User user)  
         {  
             if (Session["UserID"] != null)  
-            {  
-                return RedirectToAction("Form", "Resume");  
-            } else  
-            {  
-                return RedirectToAction("Login");  
-            }  
+            {
+                return RedirectToAction("Index", "Resume");
+                //return View("~/Views/Resume/Index.cshtml");
+                //return RedirectToAction("Form", "Resume");  
+            }
+            else if (Session.Count == 0)
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
         }    
 
         
@@ -100,12 +127,17 @@ namespace ResumeBuilder.Controllers
         public ActionResult Register(User model)
         {
             ResumeBuilderConnection dbContext = new ResumeBuilderConnection();
-            User u = dbContext.Users.Where(m => m.Username == model.Username).FirstOrDefault();
-            if (u != null)
+            
+            if (dbContext.Users.ToList().Any())
             {
-                ModelState.AddModelError("", "User already exists.");
-                return View(model);
+                User u = dbContext.Users.Where(m => m.Username == model.Username).FirstOrDefault();
+                if (u != null)
+                {
+                    ModelState.AddModelError("", "User already exists.");
+                    return View(model);
+                }
             }
+
             byte[] salt;
             new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
             var pbkdf1 = new Rfc2898DeriveBytes(model.Password, salt, 10000);
@@ -145,23 +177,7 @@ namespace ResumeBuilder.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult LogOff()
-        {
-            //AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
-        }
-
-        //
-        // GET: /Account/ExternalLoginFailure
-        [AllowAnonymous]
-        public ActionResult ExternalLoginFailure()
-        {
-            return View();
-        }
+        
 
         protected override void Dispose(bool disposing)
         {

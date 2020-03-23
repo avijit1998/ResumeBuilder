@@ -3,10 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    <link href="@Url.Content("~/Content/settings.css")" rel="stylesheet" type="text/css" />
+    <link href="~/Content/settings.css" rel="stylesheet" type="text/css" />
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
     @RenderSection("Styles", false)
 
 </head>
@@ -142,7 +144,9 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    <script src="@Url.Content("~/Scripts/settings.js")"></script>
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/AjaxScripts/ajaxLoading.js"></script>
+    <script src="~/Scripts/settings.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

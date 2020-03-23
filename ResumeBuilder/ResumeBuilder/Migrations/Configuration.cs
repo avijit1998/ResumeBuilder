@@ -26,8 +26,6 @@ namespace ResumeBuilder.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-
-            
         }
     }
 }

@@ -21,12 +21,15 @@ namespace ResumeBuilder
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
+                      "~/Scripts/bootbox.js",
+                      "~/Scripts/datatables/jquery.datatables.js",
+                      "~/Scripts/datatables/datatables.bootstrap.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-lumen-v3.css",
+                      "~/Content/datatables/css/datatables.bootstrap.css",
                       "~/Content/login.css",
-                      "~/Content/site.css",
                       "~/Content/bootstrap.css",
                       "~/Content/FormStyle.css",
                       "~/Content/home.css",

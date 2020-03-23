@@ -5,12 +5,9 @@
     
 
     $(document).on("click", "#settingsBtn", function () {
-
-        //var loginId = 1;
         $.ajax({
-            url: "settingsValue",
-            type: 'get',
-            
+            url: "/Resume/settingsValue",
+            type: 'GET',
             success: function (ob) {
 
                 if (ob.setWorkex == 0) {
@@ -56,7 +53,6 @@
 
 
     $(document).on("click", "#btnSave", function () {
-        var loginId = 1;
         result = [-1, -1, -1, -1, -1];
         if ($("#cbWorkex").prop("checked") == true)
             result[0] = 0;
@@ -68,9 +64,8 @@
             result[3] = 0;
         if ($("#cbContact").prop("checked") == true)
             result[4] = 0;
-
         $.ajax({
-            url: "DisplayDetails",
+            url: "/Resume/DisplayDetails",
             type: 'post',
             data: {
                
