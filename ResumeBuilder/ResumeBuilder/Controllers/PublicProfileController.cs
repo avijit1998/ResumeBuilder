@@ -41,7 +41,7 @@ namespace ResumeBuilder.Controllers
                 _uiModel.EducationStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setEducation;
                 if (_uiModel.EducationStatus == 0)
                 {
-                    _uiModel.EducationList = (from user in _context.EducationalDetails.Where(x => x.UserId == id).ToList()
+                    _uiModel.EducationList = (from user in _context.EducationalDetails.Where(x => x.UserId == id)
                                               select new EducationUIModel
                                               {
                                                   CourseName = (_context.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName == "10"
@@ -65,8 +65,7 @@ namespace ResumeBuilder.Controllers
 
                 // Project Details
                 _uiModel.ProjectStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setProject;
-                if (_uiModel.ProjectStatus == 0)
-                {
+                
                     _uiModel.ProjectList = (from user in _context.Projects.Where(x => x.UserId == id)
                                             select new ProjectUIModel
                                             {
@@ -75,12 +74,10 @@ namespace ResumeBuilder.Controllers
                                                 projectRole = user.ProjectRole,
                                                 Duration = user.Duration
                                             }).ToList();
-                }
 
                 // Work Ex.
                 _uiModel.WorkExStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setWorkex;
-                if (_uiModel.WorkExStatus == 0)
-                {
+                
                     _uiModel.WorkExList = (from user in _context.WorkExperiences.Where(x => x.UserID == id)
                                            select new WorkExUIModel
                                            {
@@ -92,7 +89,6 @@ namespace ResumeBuilder.Controllers
                                                Role = user.Role,
                                                CurrentlyWorking = user.CurrentlyWorking
                                            }).OrderByDescending(x => x.StartYear).ToList();
-                }
 
                 // Languages 
                 _uiModel.LanguageStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setContact;

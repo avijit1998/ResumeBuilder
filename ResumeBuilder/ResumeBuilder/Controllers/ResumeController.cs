@@ -379,7 +379,7 @@ namespace ResumeBuilder.Controllers
                         _uiModel.Summary = db.Users.FirstOrDefault(a => a.UserID == id).Summary;
 
                         // Education Details
-                        _uiModel.EducationList = (from user in db.EducationalDetails.Where(x => x.UserId == id).ToList()
+                        _uiModel.EducationList = (from user in db.EducationalDetails.Where(x => x.UserId == id)
                                                   select new EducationUIModel
                                                   {
                                                       CourseName = (db.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName == "10"
