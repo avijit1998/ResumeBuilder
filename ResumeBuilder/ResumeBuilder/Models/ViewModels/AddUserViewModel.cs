@@ -17,6 +17,8 @@ namespace ResumeBuilder.Models.ViewModels
 
         public DateTime? DateOfBirth { get; set; }
 
+        public string Summary { get; set; }
+
         public int[] LanguageIds { get; set; }
     }
 }

@@ -41,13 +41,18 @@ namespace ResumeBuilder.Controllers
                 var user = db.Users.Where(m => m.UserID == id).FirstOrDefault();
                 var projects = db.Projects.Where(m => m.UserId == id).ToList();
                 var workExperiences = db.WorkExperiences.Where(m => m.UserID == id).ToList();
-               
+                var educationDetails = db.EducationalDetails.Where(m => m.UserId == id).ToList();
+
+                ViewBag.Languages = db.Languages.ToList();
+
                 ViewBag.Projects = projects;
                 ViewBag.WorkExperiences = workExperiences;
+                ViewBag.Education = educationDetails;
+
                 return PartialView(user);
             }
             return RedirectToAction("Login", "Account");
-            
+
         }
 
         //public ActionResult GetAllData()
@@ -110,13 +115,14 @@ namespace ResumeBuilder.Controllers
 
             project.Title = model.Title;
             project.ProjectRole = model.ProjectRole;
-            project.Description = model.Description; 
+            project.Description = model.Description;
             project.Duration = model.Duration;
 
             db.Entry(project).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
             return Json("Success");
         }
+
 
         public ActionResult Form()
         {
@@ -150,9 +156,9 @@ namespace ResumeBuilder.Controllers
 
         }
 
-        public ActionResult GetWorkExperienceById(int workExperienceId)
+        public ActionResult GetWorkExperienceById(int id)
         {
-            var workex = db.WorkExperiences.FirstOrDefault(x => x.WorkExperienceid == workExperienceId);
+            var workex = db.WorkExperiences.FirstOrDefault(x => x.WorkExperienceid == id);
             var workExperience = new WorkExperience
             {
                 WorkExperienceid = workex.WorkExperienceid,
@@ -168,9 +174,9 @@ namespace ResumeBuilder.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateWorkExperience(int workExpeienceId, WorkExperience model)
+        public ActionResult UpdateWorkExperience(int WorkExperienceid, WorkExperience model)
         {
-            var workEx = db.WorkExperiences.FirstOrDefault(x => x.WorkExperienceid == workExpeienceId);
+            var workEx = db.WorkExperiences.FirstOrDefault(x => x.WorkExperienceid == WorkExperienceid);
             workEx.OrganizationName = model.OrganizationName;
             workEx.Role = model.Role;
             //workEx.StartMonth = model.StartMonth;
@@ -184,7 +190,7 @@ namespace ResumeBuilder.Controllers
             return Json("Success");
         }
 
-        [HttpDelete]
+        [HttpPost]
         public ActionResult DeleteWorkExperience(int workExId)
         {
             var workEx = db.WorkExperiences.FirstOrDefault(x => x.WorkExperienceid == workExId);
@@ -451,6 +457,60 @@ namespace ResumeBuilder.Controllers
             
             
             return Json(listUserSkills, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetEducationById(int id)
+        {
+            var edu = db.EducationalDetails.FirstOrDefault(x => x.EducationalDetailID == id);
+
+            var education = new EducationalDetails
+            {
+                EducationalDetailID = edu.EducationalDetailID,
+                CourseId = edu.CourseId,
+                Board = edu.Board,
+                PassingYear = edu.PassingYear,
+                Stream = edu.Stream,
+                TotalPercentorCGPAValue = edu.TotalPercentorCGPAValue,
+                CGPAOrPercentage = edu.CGPAOrPercentage
+            };
+            return Json(education, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpPost]
+        public ActionResult UpdateEducation(int EducationalDetailID, EducationalDetails model)
+        {
+            var edu = db.EducationalDetails.FirstOrDefault(x => x.EducationalDetailID == EducationalDetailID);
+
+            edu.EducationalDetailID = model.EducationalDetailID;
+            edu.CourseId = model.CourseId;
+            edu.PassingYear = model.PassingYear;
+            edu.Stream = model.Stream;
+            edu.Board = model.Board;
+            edu.CGPAOrPercentage = model.CGPAOrPercentage;
+            edu.TotalPercentorCGPAValue = model.TotalPercentorCGPAValue;
+
+            db.Entry(edu).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return Json("Success");
+        }
+
+
+        [HttpPost]
+        public ActionResult DeleteEducation(int educationId)
+        {
+            var edu = db.EducationalDetails.FirstOrDefault(x => x.EducationalDetailID == educationId);
+            if (edu != null)
+            {
+                db.EducationalDetails.Remove(edu);
+                db.SaveChanges();
+                return Json("Successfully Deleted");
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+
         }
 
     }
