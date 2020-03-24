@@ -365,6 +365,8 @@
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\FormStyle.css" />
     <Content Include="Content\home.css" />
+    <Content Include="Content\Images\bg-prev-basic.png" />
+    <Content Include="Content\Images\bg-prev-table.png" />
     <Content Include="Content\Images\Education.png" />
     <Content Include="Content\Images\Project.png" />
     <Content Include="Content\Images\Skill.png" />
@@ -380,7 +382,6 @@
     <Content Include="Content\jquery-ui.theme.css" />
     <Content Include="Content\jquery-ui.theme.min.css" />
     <Content Include="Content\login.css" />
-    <Content Include="Content\preview.css" />
     <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\css\bootstrap-grid.css" />
     <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\css\bootstrap-grid.min.css" />
     <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\css\bootstrap-reboot.css" />
