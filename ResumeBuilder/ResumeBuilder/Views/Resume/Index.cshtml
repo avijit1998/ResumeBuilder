@@ -6,7 +6,7 @@
 <div id="mySidebar" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
     <a href="#pageContent" data-url="/Resume/Form" class="ajaxLink">Data Entry</a>
-    <a href="#pageContent" data-url="/Resume/ShowData" class="ajaxLink">Edit Form</a>
+    <a href="#pageContent" data-url="/Resume/ShowData" class="ajaxLink" id="ajaxEditForm">Edit Form</a>
     <a href="#pageContent" data-url="/Resume/Preview" class="ajaxLink">Preview</a>
     <a href="#" data-toggle="modal" data-target="#myModal" id="settingsBtn">Settings</a>
     @Html.ActionLink("Public Profile", "Index", new { controller = "PublicProfile", id = Session["UserID"], target = "_blank" })
