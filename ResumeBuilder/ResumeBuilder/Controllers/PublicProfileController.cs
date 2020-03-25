@@ -22,20 +22,22 @@ namespace ResumeBuilder.Controllers
         {
             try
             {
+                // User Details
+                var userData = _context.Users.FirstOrDefault(a => a.UserID == id);
                 // User Name
-                _uiModel.Name = _context.Users.FirstOrDefault(a => a.UserID == id).Name;
+                _uiModel.Name = userData.Name;
 
                 // User Role
-                _uiModel.UserRole = _context.Users.FirstOrDefault(a => a.UserID == id).UserRole;
+                _uiModel.UserRole = userData.UserRole;
 
                 // User Phone
-                _uiModel.PhoneNumber = _context.Users.FirstOrDefault(a => a.UserID == id).PhoneNumber;
+                _uiModel.PhoneNumber = userData.PhoneNumber;
 
                 // User E-mail
-                _uiModel.Email = _context.Users.FirstOrDefault(a => a.UserID == id).Username;
+                _uiModel.Email = userData.Username;
 
                 // User Summary
-                _uiModel.Summary = _context.Users.FirstOrDefault(a => a.UserID == id).Summary;
+                _uiModel.Summary = userData.Summary;
                 
                 // Education Details
                 _uiModel.EducationStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setEducation;
@@ -60,7 +62,7 @@ namespace ResumeBuilder.Controllers
                 _uiModel.SkillStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setSkills;
                 if (_uiModel.SkillStatus == 0)
                 {
-                    _uiModel.SkillList = _context.Users.FirstOrDefault(x => x.UserID == id).Skills.Select(a => a.SkillName).ToList();
+                    _uiModel.SkillList = userData.Skills.Select(a => a.SkillName).ToList();
                 }
 
                 // Project Details
@@ -94,7 +96,7 @@ namespace ResumeBuilder.Controllers
                 _uiModel.LanguageStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setContact;
                 if (_uiModel.LanguageStatus == 0)
                 {
-                    _uiModel.Languages = _context.Users.FirstOrDefault(b => b.UserID == id).Languages.Select(a => a.Language).ToList();
+                    _uiModel.Languages = userData.Languages.Select(a => a.Language).ToList();
                 }
             }
             catch (Exception)
