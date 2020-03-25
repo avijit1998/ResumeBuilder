@@ -268,7 +268,7 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <form action="/ResumeContoller/Form" method="get">
+                                <form>
                                     
                                     @foreach (var course in courses)
                                     {
@@ -537,3 +537,24 @@
         </div>
     </div>
 </div>
+<script>
+    $("#txtSearch").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: "GetSkill",
+                method: "GET",
+                dataType: "json",
+                data: {
+                    term: request.term
+                },
+                success: function (data) {
+                    response(data);
+                },
+                error: function (data) {
+                    console.log("error");
+                }
+            });
+        },
+        appendTo: $('#autoComplete')
+    });
+</script>

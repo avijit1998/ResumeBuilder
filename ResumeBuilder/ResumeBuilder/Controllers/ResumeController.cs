@@ -240,7 +240,7 @@ namespace ResumeBuilder.Controllers
 
 
         public JsonResult GetSkill(string term)
-        {
+       {
             term = term.Trim();
             List<string> skills;
 
