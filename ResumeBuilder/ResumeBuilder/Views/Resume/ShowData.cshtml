@@ -301,9 +301,6 @@
 </div>
 
 
-
-
-
 @*Project Form*@
 <div id="modalProject" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -699,27 +696,34 @@
         });
     });
 
-    //$('body').on('click', '.js-delete-skill', function (e) {
-    //    e.preventDefault();
-    //    var $button = $(this);
+    $('body').on('click', '.js-delete-skill', function (e) {
+        e.preventDefault();
+        var $button = $(this);
 
-    //    var skillId = $button.data("skill-id");
-    //    bootbox.confirm("<p style='color:black;'>Are you sure to delete this Skill?</p>", function (result) {
-    //        if (result) {
-    //            $.ajax({
-    //                url: "DeleteProject",
-    //                method: "POST",
-    //                data: { workExId: workExId },
-    //                success: function (result) {
-    //                    location.reload(true);
-    //                },
-    //                error: function (error) {
-    //                    bootbox.alert("Error!");
-    //                }
-    //            })
-    //        }
-    //    });
-    //})
+        var skillId = $button.data("skill-id");
+        bootbox.confirm("<p style='color:black;'>Are you sure to delete this Skill?</p>", function (result) {
+            if (result) {
+                $.ajax({
+                    url: "DeleteSkill",
+                    method: "POST",
+                    data: { skillId: skillId },
+                    cache:false,
+                    success: function (result) {
+                        alert("Successfully Deleted");
+
+                        var url = $("#ajaxEditForm").data('url');
+                        $.get(url, function (data) {
+                            $('#pageContent').html(data);
+                        });
+                        $('#pageContent').load();
+                    },
+                    error: function (error) {
+                        bootbox.alert("Error!");
+                    }
+                })
+            }
+        });
+    })
 
 
     $('body').on('click', '.js-edit-education', function (e) {

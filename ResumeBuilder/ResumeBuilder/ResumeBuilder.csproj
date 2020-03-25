@@ -394,6 +394,7 @@
     <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\js\bootstrap.min.js" />
     <Content Include="Content\Profile_Data\css\style.css" />
     <Content Include="Content\Images\logo_img.jpg" />
+    <Content Include="Content\ResumeIndex.css" />
     <Content Include="Content\settings.css" />
     <Content Include="Content\register.css" />
     <Content Include="Content\Site.css" />
@@ -518,6 +519,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\ModelScripts\FormScript.js" />
     <Content Include="Scripts\ModelScripts\PreviewScript.js" />
+    <Content Include="Scripts\ModelScripts\ResumeFormScript.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\Profile_Scripts\profileDefaultScript.js" />
     <Content Include="Scripts\respond.js" />

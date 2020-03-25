@@ -55,45 +55,6 @@ namespace ResumeBuilder.Controllers
 
         }
 
-        //public ActionResult GetAllData()
-        //{
-        //    if (Session["UserID"] != null)
-        //    {
-        //        int id;
-        //        var re = Int32.TryParse(Session["UserID"] as String, out id);
-        //        var userFromDb = db.Users.Include("Projects").Include("WorkExperiences")
-        //                        .Include("EducationalDetails").Include("UsersLanguages.Language")
-        //                        .Include("UsersSkills.Skill").FirstOrDefault(x => x.UserID == id);
-
-                
-        //        if (userFromDb != null)
-        //        {
-
-        //            var data=new AllInformation()
-        //            {
-        //                UserInfo = new UserInfoVM
-        //                {
-        //                    Name = userFromDb.Name,
-        //                    Username=userFromDb.Username,
-        //                    PhoneNumber=userFromDb.PhoneNumber,
-        //                    Summary=userFromDb.Summary,
-        //                    Gender=userFromDb.Gender
-        //                }
-        //            };
-
-        //            data.ProjectInfo.AddRange(CustomMapper.Map(userFromDb.Projects));
-        //            data.WorkExperiences.AddRange(CustomMapper.Map(userFromDb.WorkExperiences));
-        //            //data.Languages.AddRange(CustomMapper.Map(userFromDb.));
-        //            //data.Skills.AddRange(CustomMapper.Map(userFromDb.Skills));
-
-        //            return Json(data, JsonRequestBehavior.AllowGet);
-        //        }
-                
-        //    }
-            
-        //    return RedirectToAction("Login", "Account");
-        //}
-
         public ActionResult GetProjectById(int Id)
         {
             var proj = db.Projects.FirstOrDefault(x => x.ProjectId == Id);
@@ -511,6 +472,28 @@ namespace ResumeBuilder.Controllers
                 return HttpNotFound();
             }
 
+        }
+
+
+        [HttpPost]
+        public ActionResult DeleteSkill(int skillId)
+        {
+            int id;
+            var re = Int32.TryParse(Session["UserID"] as String, out id);
+            var user = db.Users.FirstOrDefault(x => x.UserID == id);
+            var skill = db.Skills.FirstOrDefault(x => x.SkillID == skillId);
+
+            if(user!=null && skill!=null)
+            {
+                user.Skills.Remove(skill);
+
+                db.SaveChanges();
+                return Json("Successfully Deleted");
+            }
+            else
+            {
+                return HttpNotFound();
+            }
         }
 
     }

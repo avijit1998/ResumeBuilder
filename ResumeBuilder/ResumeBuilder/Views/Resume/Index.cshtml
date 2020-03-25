@@ -2,120 +2,121 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">Resume Builder</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li>@Html.ActionLink("Log Out", "LogOff", "Account")</li>
-            </ul>
-        </div>
-    </div>
-</nav>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
-                <li><a href="#"><strong> Name </strong><span class="sr-only">(current)</span></a></li>
-                <li><a href="#pageContent" data-url="/Resume/Form" class="ajaxLink">Hello</a></li>
-                <li><a href="#pageContent" data-url="/Resume/ShowData" class="ajaxLink" id="ajaxEditForm">Edit Form</a></li>
-                <li><a href="#pageContent" data-url="/Resume/Preview" class="ajaxLink">Preview</a></li>
-                <li><a href="#" data-toggle="modal" data-target="#myModal" id="settingsBtn">Settings</a></li>
-                <li>@Html.ActionLink("Public Profile", "Index", new { controller = "PublicProfile", id = Session["UserID"], target = "_blank" })</li>
-                <li id="btnSearchNav" style="display:none;"><a href="#pageContent" data-url="/Resume/Search" class="ajaxLink">Search</a></li>
-            </ul>
-        </div>
-
-        <div id="modal">
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                            <h4 class="modal-title">Settings</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div id="divWorkex" class="[ form-group ]">
-                                <!-- checkbox -->
-                                <input type="checkbox" name="workex" id="workex" autocomplete="off" />
-                                <div class="[ btn-group ]">
-                                    <label for="workex" class="[ btn btn-default ]">
-                                        <span class="[ glyphicon glyphicon-ok ]"></span>
-                                        <span></span>
-                                    </label>
-                                    <label for="workex" class="[ btn btn-default active ]">
-                                        Work Experience
-                                    </label>
-
-                                </div>
-                            </div><!-- checkbox -->
-                            <div id="divProjects" class="[ form-group ]">
-                                <!-- checkbox -->
-                                <input type="checkbox" name="projects" id="projects" autocomplete="off" />
-                                <div class="[ btn-group ]">
-                                    <label for="projects" class="[ btn btn-default ]">
-                                        <span class="[ glyphicon glyphicon-ok ]"></span>
-                                        <span> </span>
-                                    </label>
-                                    <label for="projects" class="[ btn btn-default active ]">
-                                        Projects
-                                    </label>
-                                </div>
-                            </div><!-- checkbox -->
-                            <div class="[ form-group ]">
-                                <!-- checkbox -->
-                                <input type="checkbox" name="education" id="education" autocomplete="off" />
-                                <div class="[ btn-group ]">
-                                    <label for="education" class="[ btn btn-default ]">
-                                        <span class="[ glyphicon glyphicon-ok ]"></span>
-                                        <span> </span>
-                                    </label>
-                                    <label for="education" class="[ btn btn-default active ]">
-                                        Educational Details
-                                    </label>
-                                </div>
-                            </div><!-- checkbox -->
-                            <div class="[ form-group ]">
-                                <!-- checkbox -->
-                                <input type="checkbox" name="skills" id="skills" autocomplete="off" />
-                                <div class="[ btn-group ]">
-                                    <label for="skills" class="[ btn btn-default ]">
-                                        <span class="[ glyphicon glyphicon-ok ]"></span>
-                                        <span> </span>
-                                    </label>
-                                    <label for="skills" class="[ btn btn-default active ]">
-                                        Skills
-                                    </label>
-                                </div>
-                            </div><!-- checkbox -->
-                            <div class="[ form-group ]">
-                                <!-- checkbox -->
-                                <input type="checkbox" name="contact" id="contact" autocomplete="off" />
-                                <div class="[ btn-group ]">
-                                    <label for="contact" class="[ btn btn-default ]">
-                                        <span class="[ glyphicon glyphicon-ok ]"></span>
-                                        <span> </span>
-                                    </label>
-                                    <label for="contact" class="[ btn btn-default active ]">
-                                        Contact Details
-                                    </label>
-                                </div>
-                            </div><!-- checkbox -->
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" id="btnSave">Save changes</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-        </div>
-
-        <div class="col-sm-9 col-md-10 main" id="pageContent">
-        </div>
-
-    </div>
+<div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <a href="#pageContent" data-url="/Resume/Form" class="ajaxLink">Data Entry</a>
+    <a href="#pageContent" data-url="/Resume/ShowData" class="ajaxLink" id="ajaxEditForm">Edit Form</a>
+    <a href="#pageContent" data-url="/Resume/Preview" class="ajaxLink">Preview</a>
+    <a href="#" data-toggle="modal" data-target="#myModal" id="settingsBtn">Settings</a>
+    @Html.ActionLink("Public Profile", "Index", new { controller = "PublicProfile", id = Session["UserID"], target = "_blank" })
+    <a href="#pageContent" data-url="/Resume/Search" class="ajaxLink" id="btnSearchNav" style="display:none;">Search</a>
+    @Html.ActionLink("Log Out", "LogOff", "Account")
 </div>
+
+
+<div id="modal">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Settings</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="divWorkex" class="[ form-group ]">
+                        <!-- checkbox -->
+                        <input type="checkbox" name="workex" id="workex" autocomplete="off" />
+                        <div class="[ btn-group ]">
+                            <label for="workex" class="[ btn btn-default ]">
+                                <span class="[ glyphicon glyphicon-ok ]"></span>
+                                <span></span>
+                            </label>
+                            <label for="workex" class="[ btn btn-default active ]">
+                                Work Experience
+                            </label>
+
+                        </div>
+                    </div><!-- checkbox -->
+                    <div id="divProjects" class="[ form-group ]">
+                        <!-- checkbox -->
+                        <input type="checkbox" name="projects" id="projects" autocomplete="off" />
+                        <div class="[ btn-group ]">
+                            <label for="projects" class="[ btn btn-default ]">
+                                <span class="[ glyphicon glyphicon-ok ]"></span>
+                                <span> </span>
+                            </label>
+                            <label for="projects" class="[ btn btn-default active ]">
+                                Projects
+                            </label>
+                        </div>
+                    </div><!-- checkbox -->
+                    <div class="[ form-group ]">
+                        <!-- checkbox -->
+                        <input type="checkbox" name="education" id="education" autocomplete="off" />
+                        <div class="[ btn-group ]">
+                            <label for="education" class="[ btn btn-default ]">
+                                <span class="[ glyphicon glyphicon-ok ]"></span>
+                                <span> </span>
+                            </label>
+                            <label for="education" class="[ btn btn-default active ]">
+                                Educational Details
+                            </label>
+                        </div>
+                    </div><!-- checkbox -->
+                    <div class="[ form-group ]">
+                        <!-- checkbox -->
+                        <input type="checkbox" name="skills" id="skills" autocomplete="off" />
+                        <div class="[ btn-group ]">
+                            <label for="skills" class="[ btn btn-default ]">
+                                <span class="[ glyphicon glyphicon-ok ]"></span>
+                                <span> </span>
+                            </label>
+                            <label for="skills" class="[ btn btn-default active ]">
+                                Skills
+                            </label>
+                        </div>
+                    </div><!-- checkbox -->
+                    <div class="[ form-group ]">
+                        <!-- checkbox -->
+                        <input type="checkbox" name="contact" id="contact" autocomplete="off" />
+                        <div class="[ btn-group ]">
+                            <label for="contact" class="[ btn btn-default ]">
+                                <span class="[ glyphicon glyphicon-ok ]"></span>
+                                <span> </span>
+                            </label>
+                            <label for="contact" class="[ btn btn-default active ]">
+                                Contact Details
+                            </label>
+                        </div>
+                    </div><!-- checkbox -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="btnSave">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>
+
+
+<div id="main">
+    <button class="openbtn" onclick="openNav()">
+        ☰ Open Sidebar
+    </button>
+</div>
+
+<div id="pageContent"></div>
+
+<script>
+    function openNav() {
+        document.getElementById("mySidebar").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidebar").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+    }
+</script>
