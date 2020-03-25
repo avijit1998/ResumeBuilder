@@ -28,7 +28,7 @@
                     Create a new account.
                 </div>
                 <div class="form-content">
-                    <div>
+                    <div style="display:none" id="validationSummaryDiv">
                         @Html.ValidationSummary()
                     </div>
                     <div class="form-group">
@@ -72,8 +72,16 @@
         @Scripts.Render("~/bundles/modernizr")
     </body>
 </html>
+<script>
+    if ($.trim($("#validationSummaryDiv").text()) === "User already exists.")
+        bootbox.alert("<b style='color:black;'>User already exists.</b>");
 
+    $("#btnSubmit").on("click",function(){
+        if($.trim($("#validationSummaryDiv").text()) === "")
+        {
+            bootbox.alert("<b class='alert-success' style='color:black;'>Registration Successful</b>");
+        }
+    })
+    
 
-
-
-
+</script>
