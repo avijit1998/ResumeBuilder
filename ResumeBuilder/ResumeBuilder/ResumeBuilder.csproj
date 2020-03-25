@@ -403,6 +403,9 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\AjaxScripts\ajaxLoading.js" />
     <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\Preview_Scripts\jspdf.debug.js" />
+    <Content Include="Scripts\Preview_Scripts\jspdf.min.js" />
+    <Content Include="Scripts\Preview_Scripts\previewDefault.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -566,6 +569,9 @@
     <Content Include="Views\PublicProfile\Index.cshtml" />
     <Content Include="Views\Resume\ShowData.cshtml" />
     <Content Include="Views\Resume\Search.cshtml" />
+    <Content Include="Views\Resume\_BasicPreviewPartialView.cshtml" />
+    <Content Include="Views\Resume\_TabularPreviewPartialView.cshtml" />
+    <Content Include="Views\Resume\PdfDownload.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
