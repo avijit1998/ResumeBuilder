@@ -27,7 +27,6 @@ namespace ResumeBuilder
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap-lumen-v3.css",
                       "~/Content/datatables/css/datatables.bootstrap.css",
                       "~/Content/login.css",
                       "~/Content/bootstrap.css",
