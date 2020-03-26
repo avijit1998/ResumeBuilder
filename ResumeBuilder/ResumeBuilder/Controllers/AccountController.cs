@@ -160,11 +160,11 @@ namespace ResumeBuilder.Controllers
                 {
                     UserID = user.UserID,
                     User=user,
-                    setContact=-1,
-                    setEducation=-1,
-                    setProject=-1,
-                    setSkills=-1,
-                    setWorkex=-1,
+                    setContact=0,
+                    setEducation=0,
+                    setProject=0,
+                    setSkills=0,
+                    setWorkex=0,
 
                 };
                 db.Users.Add(user);
