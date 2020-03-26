@@ -10,15 +10,6 @@
 
 }
 
-
-
-<style>
-    .left-margin {
-        padding-left: 10px;
-    }
-</style>
-
-
 <div id="pageContent">
     <div id="userDetails">
         <h3>User Details</h3>
@@ -51,7 +42,7 @@
         @foreach (var e in educationDetails)
         {
             <p>
-
+                
                 <b>
                     Course Details:@e.CourseId
                 </b>
@@ -205,13 +196,6 @@
                                             </label>
                                         </div>
                                     }
-                                    @*for (var i = 0; i < result.LanguageIds.length; i++) {
-                                        $('input[type="checkbox"]').each(function (e, el) {
-                                        if ($(el).val() == result.LanguageIds[i]) {
-                                        $(el).prop('checked', true);
-                                        }
-                                        })
-                                        }*@
                                 </div>
                             </div>
                             <div class="row">
@@ -232,7 +216,6 @@
 </div>
 
 
-
 @*Education Details Form*@
 <div id="modalEducationDetails" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -250,11 +233,15 @@
                             <input type="hidden" name="EducationalDetailID" />
                             <input type="hidden" name="CourseId" />
 
-                            <div>
-                                <div class="form-group stream">
-                                    <label>Stream:</label>
-                                    <input type="text" class="form-control" name="Stream" id="Stream">
+                            
+                                <div class="stream">
+                                    <div class="form-group stream">
+                                        <label>Stream:</label>
+                                        <input type="text" class="form-control" name="Stream" id="Stream">
+                                    </div>
                                 </div>
+                                
+                            <div class="all-other">
                                 <div class="form-group">
                                     <label>Board or University:</label>
                                     <select id="boardType" class="form-control" name="Board">
@@ -283,6 +270,8 @@
                                     <input type="text" class="form-control marks" id="txtMarks" name="TotalPercentorCGPAValue" placeholder="Enter CGPA">
                                 </div>
                             </div>
+
+                            
                             <div class="row">
                                 <div class="col-md-12">
                                     <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
@@ -379,8 +368,8 @@
                                 <div class="form-group">
                                     <label>Start Month:</label>
                                     <select class="form-control" name="StartMonth" id="selectStartMonth">
-                                        <option class="form-control">Select Month</option>
-                                        <option class="form-control">Select Month</option>
+                                        <option class="form-control" value="0">Select Month</option>
+                                        
                                         <option class="form-control" value="1">1</option>
                                         <option class="form-control" value="2">2</option>
                                         <option class="form-control" value="3">3</option>
@@ -400,7 +389,7 @@
                                 <div class="form-group">
                                     <label>Start Year:</label>
                                     <select class="form-control" name="StartYear" id="selectStartYear">
-                                        <option class="form-control">Select Year</option>
+                                        <option class="form-control" value="0">Select Year</option>
                                         <option class="form-control" value="2015">2015</option>
                                         <option class="form-control" value="2016">2016</option>
                                         <option class="form-control" value="2017">2017</option>
@@ -415,8 +404,8 @@
                                     <div class="form-group">
                                         <label>End Month:</label>
                                         <select class="form-control" name="EndMonth" id="selectEndMonth">
-                                            <option class="form-control">Select Month</option>
-                                            <option class="form-control">Select Month</option>
+                                            <option class="form-control" value="0">Select Month</option>
+                                            
                                             <option class="form-control" value="1">1</option>
                                             <option class="form-control" value="2">2</option>
                                             <option class="form-control" value="3">3</option>
@@ -436,7 +425,7 @@
                                     <div class="form-group">
                                         <label>End Year:</label>
                                         <select class="form-control" name="EndYear" id="selectEndYear">
-                                            <option class="form-control">Select Year</option>
+                                            <option class="form-control" value="0">Select Year</option>
                                             <option class="form-control" value="2015">2015</option>
                                             <option class="form-control" value="2016">2016</option>
                                             <option class="form-control" value="2017">2017</option>
@@ -447,7 +436,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-check">
                                 <input type="checkbox" class="checkbox-inline" name="CurrentlyWorking" id="checkWorking">
                                 <label for="checkWorking">Currently Working</label>
                             </div>
@@ -467,355 +456,5 @@
 </div>
 
 
-<script src="~ /scripts/bootbox.js"></script>
 
-<script>
-
-
-
-    $("body").on("click", ".js-edit-user", function () {
-        @*debugger;
-        if(@Model.Gender==$('input[name="Gender"]').val()){
-            $('input[name="Gender"]').prop("checked",true);
-        }*@
-        $('#modalBasicInfo').modal('show');
-
-    });
-
-
-    $("body").on("click", ".js-save-user", function () {
-        var user = {
-            "UserID": $("#userId").val(),
-            "Name": $("#txtFullName").val(),
-            "Gender": $('input[name="Gender"]:checked').val(),
-            "DateOfBirth": $("#dateDOB").val(),
-            "PhoneNumber": $("#txtPhoneNumber").val(),
-            "LanguageIds": [],
-            "Summary": $("#txtSummary").val()
-        };
-
-
-        $('input[type="checkbox"]:checked').each(function (e, el) {
-            user.LanguageIds.push($(el).val());
-        })
-        $.ajax({
-            type: "POST",
-            url: '/Resume/SaveBasicInformation',
-            data: '{addUserViewModel: ' + JSON.stringify(user) + '}',
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function () {
-                $("#modalBasicInfo").modal("hide");
-                alert("Basic information successfully saved.");
-
-                var url = $("#ajaxEditForm").data('url');
-                $.get(url, function (data) {
-                    $('#pageContent').html(data);
-                });
-                $('#pageContent').load();
-            },
-            error: function () {
-                bootbox.alert("Error!");
-
-            }
-        });
-        return false;
-    });
-
-    $('body').on('click', '.js-edit-project', function (e) {
-        debugger;
-        e.preventDefault();
-        var $button = $(this);
-
-        var projectId = $button.data("project-id");
-        $.ajax({
-            url: "GetProjectById/" + projectId,
-            method: "GET",
-            success: function (result) {
-                console.log(result);
-                $('input[name="ProjectId"]').val(result.ProjectId);
-                $('input[name="Title"]').val(result.Title);
-                $('input[name="ProjectRole"]').val(result.ProjectRole);
-                $('input[name="Duration"]').val(result.Duration);
-                $('textarea[name="Description"]').val(result.Description);
-                $('#modalProject').find('.modal-title').html('UPDATE PROJECT DETAILS');
-                $('#modalProject').modal('show');
-            },
-            error: function (error) {
-                console.log(error);
-                alert("Sorry ! Unable to edit project");
-            }
-        });
-    });
-
-    $('body').on('click', '.js-save-project', function (e) {
-        //debugger;
-        e.preventDefault();
-        var Id = $('input[name="ProjectId"]').val();
-        var formData = {
-            "ProjectId": $('input[name="ProjectId"]').val(),
-            "Title": $('input[name="Title"]').val(),
-            "ProjectRole": $('input[name="ProjectRole"]').val(),
-            "Duration": $('input[name="Duration"]').val(),
-            "Description": $('textarea[name="Description"]').val()
-        };
-        $.ajax({
-            url: "UpdateProject",
-            method: "POST",
-            data: formData,
-            success: function (result) {
-                console.log(result);
-                $('#modalProject').modal('hide');
-                alert("Project Details updated sucessfully");
-
-                var url = $("#ajaxEditForm").data('url');
-                $.get(url, function (data) {
-                    $('#pageContent').html(data);
-                });
-                $('#pageContent').load();
-
-            },
-            error: function (error) {
-                console.log(error);
-                alert("Sorry ! Unable to update project");
-            }
-        });
-
-    });
-
-    $('body').on('click', '.js-delete-project', function (e) {
-        debugger;
-        e.preventDefault();
-        var $button = $(this);
-
-        var projectID = $button.data("project-id");
-        bootbox.confirm("<p style='color:black;'>Are you sure to delete this Project Record?</p>", function (result) {
-            if (result) {
-                $.ajax({
-                    url: "DeleteProject",
-                    method: "POST",
-                    data: { projectID: projectID },
-                    success: function (resultfinal) {
-                        alert("Project Details updated sucessfully");
-                        var url = $("#ajaxEditForm").data('url');
-                        $.get(url, function (data) {
-                            $('#pageContent').html(data);
-                        });
-                        $('#pageContent').load();
-                    },
-                    error: function (error) {
-                        bootbox.alert("Error!");
-                    }
-                })
-            }
-        });
-    });
-
-    $('body').on('click', '.js-edit-workex', function (e) {
-        e.preventDefault();
-        var $button = $(this);
-        var id = $button.data("workex-id");
-        $.ajax({
-            url: "GetWorkExperienceById/" + id,
-            method: "GET",
-            success: function (result) {
-                console.log(result);
-                $('input[name="WorkExperienceid"]').val(result.WorkExperienceid);
-                $('input[name="OrganizationName"]').val(result.OrganizationName);
-                $('input[name="Role"]').val(result.Role);
-                $('input[name="StartMonth"]').val("");
-                $('input[name="StartYear"]').val("");
-                $('input[name="EndMonth"]').val("");
-                $('input[name="EndYear"]').val("");
-                $('#modalWorkExperience').find('.modal-title').html('UPDATE WORK EXPERIENCE DETAILS');
-                $('#modalWorkExperience').modal('show');
-            },
-            error: function (error) {
-                console.log(error);
-                alert("Sorry ! Unable to edit WorkEx");
-            }
-        });
-    });
-
-    $('body').on('click', '.js-save-workex', function (e) {
-        e.preventDefault();
-        var formData = {
-            "WorkExperienceid": $('input[name="WorkExperienceid"]').val(),
-            "OrganizationName": $('input[name="OrganizationName"]').val(),
-            "Role": $('input[name="Role"]').val()
-        };
-        $.ajax({
-            url: "UpdateWorkExperience",
-            method: "POST",
-            data: formData,
-            success: function (result) {
-                console.log(result);
-                $('#modalWorkExperience').modal('hide');
-                alert("WorkEx Updated Successfully");
-
-                var url = $("#ajaxEditForm").data('url');
-                $.get(url, function (data) {
-                    $('#pageContent').html(data);
-                });
-                $('#pageContent').load();
-            },
-            error: function (error) {
-                console.log(error);
-                alert("Sorry ! Unable to update details");
-            }
-        });
-
-    });
-
-    $('body').on('click', '.js-delete-workex', function (e) {
-        debugger;
-        e.preventDefault();
-        var $button = $(this);
-
-        var workExId = $button.data("workex-id");
-        bootbox.confirm("<p style='color:black;'>Are you sure to delete this Work Experience Record?</p>", function (result) {
-            if (result) {
-                $.ajax({
-                    url: "DeleteWorkExperience",
-                    method: "POST",
-                    data: { workExId: workExId },
-                    success: function (result) {
-                        alert("Successfully Deleted");
-
-                        var url = $("#ajaxEditForm").data('url');
-                        $.get(url, function (data) {
-                            $('#pageContent').html(data);
-                        });
-                        $('#pageContent').load();
-                    },
-                    error: function (error) {
-                        bootbox.alert("Error!");
-                    }
-                })
-            }
-        });
-    });
-
-    $('body').on('click', '.js-delete-skill', function (e) {
-        e.preventDefault();
-        var $button = $(this);
-
-        var skillId = $button.data("skill-id");
-        bootbox.confirm("<p style='color:black;'>Are you sure to delete this Skill?</p>", function (result) {
-            if (result) {
-                $.ajax({
-                    url: "DeleteSkill",
-                    method: "POST",
-                    data: { skillId: skillId },
-                    cache:false,
-                    success: function (result) {
-                        alert("Successfully Deleted");
-
-                        var url = $("#ajaxEditForm").data('url');
-                        $.get(url, function (data) {
-                            $('#pageContent').html(data);
-                        });
-                        $('#pageContent').load();
-                    },
-                    error: function (error) {
-                        bootbox.alert("Error!");
-                    }
-                })
-            }
-        });
-    })
-
-
-    $('body').on('click', '.js-edit-education', function (e) {
-        debugger;
-        e.preventDefault();
-        var $button = $(this);
-
-        var id = $button.data("education-id");
-        $.ajax({
-            url: "GetEducationById/" + id,
-            method: "GET",
-            success: function (result) {
-                console.log(result);
-                $('input[name="EducationalDetailID"]').val(result.EducationalDetailID);
-                $('input[name="CourseId"]').val(result.CourseId);
-                $('input[name="Stream"]').val(result.Stream);
-                $('input[name="PassingYear"]').val(result.PassingYear);
-                $('input[name="TotalPercentorCGPAValue"]').val(result.TotalPercentorCGPAValue);
-                $('#modalEducationDetails').find('.modal-title').html('UPDATE EDUCATION DETAILS');
-                $('#modalEducationDetails').modal('show');
-            },
-            error: function (error) {
-                console.log(error);
-                alert("Sorry ! Unable to edit education");
-            }
-        });
-    });
-
-
-    $('body').on('click', '.js-save-education', function (e) {
-        debugger;
-        e.preventDefault();
-        var id = $('input[name="EducationalDetailID"]').val();
-        var formData = {
-            "EducationalDetailID": $('input[name="EducationalDetailID"]').val(),
-            "CourseID": $('input[name="CourseId"]').val(),
-            "Stream": $('input[name="Stream"]').val(),
-            "PassingYear": $('input[name="PassingYear"]').val(),
-            "TotalPercentorCGPAValue": $('input[name="TotalPercentorCGPAValue"]').val(),
-            "CGPAOrPercentage": $('input[name="CGPAOrPercentage"]:checked').val(),
-            "Board": $('#boardType option:selected').text()
-        };
-        $.ajax({
-            url: "UpdateEducation",
-            method: "POST",
-            data: formData,
-            success: function (result) {
-                console.log(result);
-                $('#modalEducationDetails').modal('hide');
-                alert("Education Details updated sucessfully");
-
-                var url = $("#ajaxEditForm").data('url');
-                $.get(url, function (data) {
-                    $('#pageContent').html(data);
-                });
-                $('#pageContent').load();
-
-            },
-            error: function (error) {
-                console.log(error);
-                alert("Sorry ! Unable to edit education");
-            }
-        });
-
-    });
-
-    $('body').on('click', '.js-delete-education', function (e) {
-        e.preventDefault();
-        var $button = $(this);
-
-        var educationId = $button.data("education-id");
-        bootbox.confirm("<p style='color:black;'>Are you sure to delete this Project Record?</p>", function (result) {
-            if (result) {
-                $.ajax({
-                    url: "DeleteEducation",
-                    method: "POST",
-                    data: { educationId: educationId },
-                    success: function (result) {
-                        alert("Education Details deleted sucessfully");
-
-                        var url = $("#ajaxEditForm").data('url');
-                        $.get(url, function (data) {
-                            $('#pageContent').html(data);
-                        });
-                        $('#pageContent').load();
-                    },
-                    error: function (error) {
-                        bootbox.alert("Error!");
-                    }
-                })
-            }
-        });
-    });
-</script>
 
