@@ -86,7 +86,7 @@ namespace ResumeBuilder.Controllers
                 }
                 catch(Exception)
                 {
-                    ModelState.AddModelError("","Invalid Username or Password.");
+                    ModelState.AddModelError("","Invalid Email Address or Password.");
                     return View(model);
                 }
             }
