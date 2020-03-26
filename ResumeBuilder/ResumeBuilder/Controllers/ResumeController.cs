@@ -140,11 +140,11 @@ namespace ResumeBuilder.Controllers
             var workEx = db.WorkExperiences.FirstOrDefault(x => x.WorkExperienceid == WorkExperienceid);
             workEx.OrganizationName = model.OrganizationName;
             workEx.Role = model.Role;
-            //workEx.StartMonth = model.StartMonth;
-            //workEx.StartYear = model.StartYear;
-            //workEx.EndMonth = model.EndMonth;
-            //workEx.EndYear = model.EndYear;
-            //workEx.CurrentlyWorking = model.CurrentlyWorking;
+            workEx.StartMonth = model.StartMonth;
+            workEx.StartYear = model.StartYear;
+            workEx.EndMonth = model.EndMonth;
+            workEx.EndYear = model.EndYear;
+            workEx.CurrentlyWorking = model.CurrentlyWorking;
 
             db.Entry(workEx).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
@@ -182,7 +182,6 @@ namespace ResumeBuilder.Controllers
         }
 
         [HttpPost]
-        //public ActionResult SaveBasicInformation(User user)
         public ActionResult SaveBasicInformation(AddUserViewModel addUserViewModel)
         {
             var userFromDb = db.Users.FirstOrDefault(u => u.UserID == addUserViewModel.UserID);
@@ -496,5 +495,46 @@ namespace ResumeBuilder.Controllers
             }
         }
 
+
+        public ActionResult GetCurrentUser(int id)
+        {
+            var data = db.Users.Include("Languages").FirstOrDefault(x => x.UserID == id);
+            var user = new EditUserLanguageViewModel
+            {
+                UserID = data.UserID,
+                Username = data.Username,
+                Gender = data.Gender,
+                Summary=data.Summary,
+                PhoneNumber=data.PhoneNumber,
+                DateOfBirth=data.DateOfBirth,
+                LanguageIds = data.Languages.Select(s => s.LanguageID).ToArray()
+            };
+
+            return Json(user, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateUser(int UserID, UpdateUserLanguageViewModel userLanguageViewModel)
+        {
+
+            var user = db.Users.Include("Languages").FirstOrDefault(x => x.UserID == UserID);
+           
+            user.Username = userLanguageViewModel.Username;
+            user.Gender = userLanguageViewModel.Gender;
+            user.Summary = userLanguageViewModel.Summary;
+            user.PhoneNumber = userLanguageViewModel.PhoneNumber;
+            user.DateOfBirth = userLanguageViewModel.DateOfBirth;
+            user.Languages.Clear();
+
+            if (userLanguageViewModel.LanguageIds.Any())
+            {
+                var languages = db.Languages.Where(x => userLanguageViewModel.LanguageIds.Contains(x.LanguageID)).ToList();
+                user.Languages.AddRange(languages);
+            }
+
+            db.Entry(user).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return Json("Success");
+        }
     }
 }
