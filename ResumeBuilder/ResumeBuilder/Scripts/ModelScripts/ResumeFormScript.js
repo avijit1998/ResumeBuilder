@@ -74,7 +74,8 @@
 
         $('input[type="checkbox"]:checked').each(function (e, el) {
             user.LanguageIds.push($(el).val());
-        })
+        });
+
         $.ajax({
             type: "POST",
             url: '/Resume/SaveBasicInformation',

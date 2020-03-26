@@ -67,6 +67,8 @@ $("body").on("click", ".js-save-user", function () {
         user.LanguageIds.push($(el).val());
     });
 
+    user.LanguageIds.pop();
+
     $.ajax({
         type: "POST",
         url: 'UpdateUser',

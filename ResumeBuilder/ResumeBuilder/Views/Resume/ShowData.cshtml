@@ -188,7 +188,9 @@
 
                             <div class="form-group">
                                 <label>Date of Birth</label>
-                                <input type="date" class="form-control" name="DateOfBirth" id="dateDOB">
+                                @Html.TextBoxFor(model => model.DateOfBirth, new { @type = "date", @Value = Model.DateOfBirth.Value.ToString("yyyy-MM-dd"), @Class = "form-control", @Name="DateOfBirth", @Id="dateDOB", style = "color:black;" })
+                                @*@Html.EditorFor(model => model.DateOfBirth, new { @type = "date" , @class="form-control", @name="DateOfBirth", @id="dateDOB"})*@
+                                @*<input type="date" class="form-control" name="DateOfBirth" id="dateDOB" value="@Model.DateOfBirth">*@
                             </div>
 
                             <div class="form-group">
