@@ -1,0 +1,92 @@
+﻿.note {
+    text-align: center;
+    height: 80px;
+    background: -webkit-linear-gradient(left, #0072ff, #8811c5);
+    color: #fff;
+    margin: 2% 20%;
+    padding-top: 3%;
+    font-size: 24px;
+}
+
+.divValidationErrorText{
+    margin-left: 25%;
+    margin-top: -1%;
+}
+
+html{
+    min-height: 100%;
+}
+
+.validation-summary-errors {
+    color:red;
+}
+
+body {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #222;
+    font-weight: 400;
+    background-image: url("../Content/Images/signup-bg.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position:top center;
+    padding: 115px 0;
+}
+
+.form-content {
+    background: #fff;
+    padding: 5%;
+    border: 1px solid #ced4da;
+    margin: 0 20% 5%;
+}
+
+.form-control {
+    border-radius: 2px;
+}
+
+#btnSubmit {
+    font-weight:bold;
+    border: none;
+    padding: 1%;
+    cursor: pointer;
+    background: #0062cc;
+    color: #fff;
+    margin-left: 50%;
+    background: -webkit-linear-gradient(left, #0072ff, #8811c5);
+}
+
+@media (min-width: 992px) {
+    .registerLabelSpacing {
+        margin-left: 51px;
+    }
+
+    .registerTextSpacing {
+        margin-left: 139px;
+        margin-top: -27px;
+    }
+  
+    .divValidationErrorText {
+        margin-left: 29%;
+        margin-top: -1%;
+    }
+}
+
+@media (max-width: 545px) {
+    .note{
+        font-size:20px;
+        padding-top: 5%;
+    }
+
+    #btnSubmit {
+        font-size: x-small;
+    }
+}
+
+
+@media (max-width: 992px) {
+    #btnSubmit {
+        margin-left:0;
+        font-size:smaller;
+    }
+}
+

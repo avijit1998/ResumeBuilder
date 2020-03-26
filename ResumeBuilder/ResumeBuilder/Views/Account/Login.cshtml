@@ -1,0 +1,50 @@
+﻿@model ResumeBuilder.ViewModels.LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+    Layout = null;
+}
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/login.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Site.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap-lumen-v3.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
+</head>
+
+<body>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <div id="loginHeader">
+                <div id="divLoginText"><h1 id="loginText">Login</h1></div>
+            </div>
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.TextBoxFor(m => m.UserName, new { @placeholder = "User Name", @class = "fadeIn second userNameField" })
+                <div>
+                    @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                </div>
+
+                @Html.PasswordFor(m => m.Password, new { @placeholder = "Password", @class = "fadeIn third passwordField" })
+                <div>
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+                <input type="submit" class="fadeIn fourth loginButton" value="Log In">
+                <a href="~/Account/Register"><input id="registerButton" type="button" class="fadeIn fourth" value="Register"></a>
+
+            }
+            <div id="formFooter">
+                <div>
+                    <b>
+                        @Html.ValidationSummary()
+                    </b>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

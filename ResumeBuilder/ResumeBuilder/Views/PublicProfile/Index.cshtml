@@ -1,0 +1,312 @@
+﻿@model ResumeBuilder.ViewModels.PublicProfileViewModel
+@{
+    Layout = null;
+}
+@if (Model.ErrorMsg != null)
+{
+    <script>
+        alert('@Model.ErrorMsg');
+    </script>
+}
+else
+{
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Profile</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="~/Content/Profile_Data/bootstrap-4.3.1-dist/css/bootstrap.css" type="text/css">
+        <link rel="stylesheet" href="~/Content/Profile_Data/css/style.css" type="text/css">
+    </head>
+    <body data-spy="scroll" data-target=".scroll-spy-div" data-offset="50">
+        <div class="d-flex fixed-top bg-primary justify-content-around scroll-spy-div">
+            <a href="https://www.mindfiresolutions.com/" class="no-underline text-white">
+                <div class="p-1 logo-container-div">
+                    <i>
+                        <img src="~/Content/Images/logo_img.jpg" alt="Logo_Img" />
+                        <span class="logo"><b>mindfire</b> solutions</span>
+                        <small class="logo-small">BURN IGNORANCE</small>
+                    </i>
+                </div>
+            </a>
+            <div class="d-flex justify-content-end">
+                <div id="basicInfoNav">
+                    <a href="#basicInfo" class="text-white no-underline">
+                        <div class="p-3">
+                            <i class="fa fa-home"></i> Basic Info
+                        </div>
+                    </a>
+                </div>
+                <div id="workExperienceNav">
+                    <a href="#workExperience" class="text-white no-underline">
+                        <div class="p-3">
+                            <i class="fa fa-folder"></i> Work Ex.
+                        </div>
+                    </a>
+                </div>
+                <div id="projectsNav">
+                    <a href="#projects" class="text-white no-underline">
+                        <div class="p-3">
+                            <i class="fa fa-tasks"></i> Projects
+                        </div>
+                    </a>
+                </div>
+                <div id="skillsNav">
+                    <a href="#skills" class="text-white no-underline">
+                        <div class="p-3">
+                            <i class="fa fa-line-chart"></i> Skills
+                        </div>
+                    </a>
+                </div>
+                <div id="educationNav">
+                    <a href="#education" class="text-white no-underline">
+                        <div class="p-3">
+                            <i class="fa fa-graduation-cap"></i> Education
+                        </div>
+                    </a>
+                </div>
+                <div id="languagesNav">
+                    <a href="#languages" class="text-white no-underline">
+                        <div class="p-3">
+                            <i class="fa fa-language"></i> Languages
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Basic Information -->
+        <div class="container pseudo-element" id="basicInfo">
+            <div class="no-gutters">
+                <div class="col-lg-12 col-md-12">
+                    <div class="p-4 bg-dark text-white">
+                        <div class="row">
+                            <div class="col-lg-9 col-md-7 col-sm-6">
+                                <h1 class="display-5 d-block">@Model.Name</h1>
+                                <h6 class="display-5" style="opacity: .5;">@Model.UserRole</h6>
+                            </div>
+                            <div class="col-lg-3 col-md-5 col-sm-6" style="opacity: .65;">
+                                <div class="row">
+                                    <a href="#" class="text-white">
+                                        <i class="fa fa-phone"> @Model.PhoneNumber</i>
+                                    </a>
+                                </div>
+                                <div class="row">
+                                    <a href="http://gmail.com" class="text-white">
+                                        <i class="fa fa-envelope"> @Model.Email</i>
+                                    </a>
+                                </div>
+                                <div class="row">
+                                    <a href="https://in.linkedin.com/in/dummy-link-775982111" class="text-white">
+                                        <i class="fa fa-linkedin"> @Model.LinkedinLink</i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 bg-summary">
+                        <div class="text-white text-center p-2  css-summary" style="opacity: .8">
+                            @Model.Summary
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Work Experience -->
+        <div class="container">
+            <div id="workExperience" class="pseudo-element">
+                <div class="p-2 text-primary bg-blue-design">
+                    <i class="fa fa-folder fa-2x text-primary pl-4"> Work Experiences</i>
+                </div>
+                <div class="p-3 bg-light">
+                    <div id="workExTimelineId" class="timeline bg-light">
+                        @if (Model.WorkExList != null)
+                        {
+                            foreach (var data in Model.WorkExList)
+                            {
+                                <div class="container-timeline">
+                                    <div class="content text-center">
+                                        <h2>@data.OrganizationName</h2>
+                                        <div>Role : @data.Role</div>
+                                        @if (@data.CurrentlyWorking == true)
+                                        {
+                                            <h5>Currently Working Here...</h5>
+                                        }
+                                        <h4>@data.StartMonth/@data.StartYear - @data.EndMonth/@data.EndYear</h4>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects -->
+        <div class="container">
+            <div id="projects" class="pseudo-element">
+                <div class="p-2 text-primary bg-blue-design">
+                    <i class="fa fa-tasks fa-2x text-primary pl-4"> Projects</i>
+                </div>
+                <div class="p-3 bg-light">
+                    <div id="projectTimelineId" class="timeline bg-light">
+                        @if (Model.ProjectList != null)
+                        {
+                            foreach (var data in Model.ProjectList)
+                            {
+                                <div class="container-timeline">
+                                    <div class="content text-center">
+                                        <h2>@data.Title</h2>
+                                        <p>@data.Description</p>
+                                        <h4>Duration : @data.Duration Months</h4>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills -->
+        <div class="container">
+            <div id="skills" class="pseudo-element">
+                <div class="d-flex p-2 flex-fill bg-blue-design text-center">
+                    <i class="fa fa-line-chart fa-2x text-primary pl-4"> Skills</i>
+                </div>
+                <div class="d-flex flex-wrap align-items-stretch align-content-center justify-content-around bg-light">
+                    @if (Model.SkillList != null)
+                    {
+                        foreach (var data in Model.SkillList)
+                        {
+                            <div class="mb-3 mt-4 ml-2 mr-2 text-center bg-card">
+                                <div class="card-header education-text-header-size">@data</div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Education -->
+        <div class="container">
+            <div id="education" class="pseudo-element">
+                <div class="d-flex p-2 flex-fill bg-blue-design text-center">
+                    <i class="fa fa-graduation-cap fa-2x text-primary pl-4"> Educational Details</i>
+                </div>
+                <div class="d-flex flex-wrap align-items-stretch align-content-center justify-content-around bg-light">
+                    @if (Model.EducationList != null)
+                    {
+                        foreach (var data in Model.EducationList)
+                        {
+                            <div class="mb-3 mt-4 ml-2 mr-2 text-center bg-card">
+                                <div class="card-header education-text-header-size">@data.CourseName (@data.Stream)</div>
+                                <div class="card-body">
+                                    <h4>@data.Board</h4>
+                                    <h5>@data.CGPAOrPercentage : <label>@data.TotalPercentorCGPAValue</label></h5>
+                                </div>
+                                <div class="card-footer">Passing Year - @data.PassingYear</div>
+                            </div>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+
+        <!--Languages-->
+        <div class="container">
+            <div id="languages" class="pseudo-element">
+                <div class="d-flex p-2 flex-fill bg-blue-design text-center">
+                    <i class="fa fa-language fa-2x text-primary pl-4"> Language Known</i>
+                </div>
+                <div class="d-flex flex-wrap align-items-stretch align-content-center justify-content-around bg-light">
+                    @if (Model.Languages != null)
+                    {
+                        foreach (var data in Model.Languages)
+                        {
+                            <div class="mb-3 mt-4 ml-2 mr-2 text-center bg-card">
+                                <div class="card-header education-text-header-size">@data</div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 bg-dark p-2">
+                    <div class="row p-1">
+                        <div class="pull-left col-lg-4 col-xs-12 text-white">
+                            Copyright &copy;2020 by<span style="opacity: .7;"> Mindfire Solutions</span>
+                        </div>
+                        <div class="col-lg-4 offset-lg-4 col-xs-12">
+                            <div class="pull-right">
+                                <a href="https://www.linkedin.com/company/mindfire-solutions"><i class="fa fa-linkedin-square text-white"></i></a>
+                                <a href="https://twitter.com/mindfires"><i class="fa fa-twitter-square text-white"></i></a>
+                                <a href="https://plus.google.com/111970111220820687030?prsrc=3"><i class="fa fa-google-plus-square text-white"></i></a>
+                                <a href="https://www.facebook.com/MindfireSolutions"><i class="fa fa-facebook-square text-white"></i></a>
+                                <a href="https://www.mindfiresolutions.com/blog/"><i class="fa fa-book text-white"></i></a>
+                                <a href="https://www.youtube.com/user/MindfireSolutions"><i class="fa fa-youtube-square text-white"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- CDN / Script Links -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script type="text/javascript" src="~/Content/Profile_Data/bootstrap-4.3.1-dist/js/bootstrap.js"></script>
+        <script type="text/javascript" src="~/Scripts/Profile_Scripts/profileDefaultScript.js"></script>
+        <!-- Internal JavaScript Code -->
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                $('body').scrollspy({target: ".scroll-spy-div"});
+
+                if(@Model.WorkExStatus === 0)
+                {
+                    $('#workExperience, #workExperienceNav').hide();
+                }
+                else
+                {
+                    for(var i = 0; i < @Model.WorkExList.Count; i++)
+                    {
+                        if(i % 2 === 0)
+                            $('#workExTimelineId').children().eq(i).addClass("timeline-left");
+                        else
+                            $('#workExTimelineId').children().eq(i).addClass("timeline-right");
+                    }
+                }
+
+                if(@Model.ProjectStatus === 0)
+                {
+                    $('#projects, #projectsNav').hide();
+                }
+                else
+                {
+                    for(var i = 0; i < @Model.ProjectList.Count; i++)
+                    {
+                        if(i % 2 === 0)
+                            $('#projectTimelineId').children().eq(i).addClass("timeline-left");
+                        else
+                            $('#projectTimelineId').children().eq(i).addClass("timeline-right");
+                    }
+                }
+
+                if(@Model.SkillStatus === 0)
+                    $('#skills, #skillsNav').hide();
+                if(@Model.EducationStatus === 0)
+                    $('#education, #educationNav').hide();
+            });
+        </script>
+
+    </body>
+</html>
+}
