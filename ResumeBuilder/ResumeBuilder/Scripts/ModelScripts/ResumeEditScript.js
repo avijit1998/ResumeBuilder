@@ -50,6 +50,7 @@ $("body").on("click", ".js-edit-user", function (e) {
 });
  
 $("body").on("click", ".js-save-user", function () {
+    debugger;
     var user = {
         "UserID":$("#userId").val(),
         "Name": $("#txtFullName").val(),
@@ -64,7 +65,9 @@ $("body").on("click", ".js-save-user", function () {
 
     $('input[type="checkbox"]:checked').each(function (e, el) {
         user.LanguageIds.push($(el).val());
-    })
+    });
+
+    user.LanguageIds.pop();
     $.ajax({
         type: "POST",
         url: 'UpdateUser',
@@ -79,7 +82,6 @@ $("body").on("click", ".js-save-user", function () {
             $.get(url, function (data) {
                 $('#pageContent').html(data);
             });
-            $('#pageContent').load();
         },
         error: function () {
             alert("Error!");
@@ -139,7 +141,7 @@ $('body').on('click', '.js-save-project', function (e) {
             $.get(url, function (data) {
                 $('#pageContent').html(data);
             });
-            $('#pageContent').load();
+            //$('#pageContent').load();
 
         },
         error: function (error) {
@@ -168,7 +170,7 @@ $('body').on('click', '.js-delete-project', function (e) {
                     $.get(url, function (data) {
                         $('#pageContent').html(data);
                     });
-                    $('#pageContent').load();
+                    //$('#pageContent').load();
                 },
                 error: function (error) {
                     bootbox.alert("Error!");
@@ -223,7 +225,7 @@ $('body').on('click', '.js-save-workex', function (e) {
         "StartMonth": $("#selectStartMonth").val(),
         "StartYear":  $("#selectStartYear").val(),
         "EndMonth":  $("#selectEndMonth").val(),
-        "EndYear": $("#selectEndMonth").val(),
+        "EndYear": $("#selectEndYear").val(),
         "CurrentlyWorking": $('#checkWorking').is(":checked")
     };
     $.ajax({
