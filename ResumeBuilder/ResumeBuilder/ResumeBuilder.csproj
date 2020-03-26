@@ -519,6 +519,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\ModelScripts\FormScript.js" />
     <Content Include="Scripts\ModelScripts\PreviewScript.js" />
+    <Content Include="Scripts\ModelScripts\RegisterScript.js" />
     <Content Include="Scripts\ModelScripts\ResumeFormScript.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\Profile_Scripts\profileDefaultScript.js" />
