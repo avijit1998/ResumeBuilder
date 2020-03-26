@@ -1,18 +1,152 @@
-﻿@{
+﻿@model ResumeBuilder.ViewModels.PublicProfileViewModel
+
+@{
+    Layout = null;
     ViewBag.Title = "Preview";
-    //Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="~/Content/preview.css">
-    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap-lumen-v3.css">
-    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
-</head>
-<div class="preview-card">
-    <div class="preview-text">Preview</div>
-    @*<i class="glyphicon glyphicon-plus plus-symbol"></i>*@
-</div>
+
+@if (Model.ErrorMsg != null)
+{
+    <script>
+        alert('@Model.ErrorMsg');
+    </script>
+}
+else
+{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .text-blk {
+            color: black !important;
+        }
+        .skill-language-margin {
+            padding: 1% 0% 1% 3%;
+        }
+        .font-size-heading {
+            font-size: 24px;
+            background-color: #86b9d68f;
+        }
+        .preview-card {
+            border-radius: 10px;
+            background-color: #fff;
+            width:240px;
+            height:270px;
+            display:flex;
+            margin-top: 38px;
+            box-shadow: 0 20px 60px 0 rgba(0,0,0,0.3);
+            position: relative;
+            cursor: pointer;
+        }
+        .preview-img {
+            width: 100%;
+            filter: blur(1px);
+        }
+        .preview-text{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 64%;
+            text-align: center;
+            font-size:20px;
+        }
+        .preview-card:hover{
+            background:rgba(191, 200, 252, 0.884);
+        }
+        .preview-text::after {
+          position: absolute;
+          content: "";
+          width: 100%;
+          height: 3px;
+          top: 100%;
+          left: 0;
+          background: #ff7000;
+          transition: transform 0.5s;
+          transform: scaleX(0);
+          transform-origin: right;
+        }
+        .preview-text:hover::after {
+          transform: scaleX(1);
+          transform-origin: left;
+        }
+        .preview-text:hover {
+            background-color: white;
+        }
+        .name-size {
+            font-size: 50px;
+        }
+        .small-heading {
+            font-size: 16px;
+        }
+        th {
+            vertical-align: middle !important;
+            font-size: 17px;
+        }
+        
+    </style>
+    
+    <div class="row">
+        <div class="preview-card text-center col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-5 col-sm-offset-1" data-toggle="modal" data-target="#resumeBasicPreviewModal">
+            <img class="preview-img" src="~/Content/Images/bg-prev-basic.png" />
+            <div class="preview-text text-primary"><b>Basic Preview</b></div>
+        </div>
+        <div class="preview-card text-center col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-5 col-sm-offset-1" data-toggle="modal" data-target="#resumeTabularPreviewModal">
+            <img class="preview-img" src="~/Content/Images/bg-prev-table.png" />
+            <div class="preview-text text-primary"><b>Tabular Preview</b></div>
+        </div>
+    </div>
+    <!-- Basic View Modal-->
+    <div id="resumeBasicPreviewModal" class="modal fade text-blk" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">RESUME</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Partial("_BasicPreviewPartialView")
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success js-print-btn"><i class="fa fa-download"> Download</i></button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="fade" style="border: 2px solid blue;border-radius: 7px;">
+            <h1 style="font-size: 40px; color: blue">@Model.Name</h1>
+
+            <h3 style="font-size: 25px;color: blue;background-color: green">Personal Details</h3>
+            <div><b>Gender : </b>@Model.Gender</div>
+            <div><b>DOB : </b>@Model.DOB</div>
+            <div><b>E-mail : </b>@Model.Email</div>
+            <div><b>Phone No. : </b>@Model.PhoneNumber</div>
+
+        </div>
+    </div>
+
+    <!-- Tabular View Modal-->
+    <div id="resumeTabularPreviewModal" class="modal fade text-blk" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">RESUME</h4>
+                </div>
+                <div class="modal-body">
+                   @Html.Partial("_TabularPreviewPartialView")
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success js-print-btn"><i class="fa fa-download"> Download</i></button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+    <script src="~/Scripts/Preview_Scripts/previewDefault.js"></script>
+}

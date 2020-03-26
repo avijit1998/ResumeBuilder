@@ -23,32 +23,34 @@ namespace ResumeBuilder.Controllers
         {
             try
             {
+                // User Details
+                var userData = _context.Users.FirstOrDefault(a => a.UserID == id);
                 // User Name
-                _uiModel.Name = _context.Users.FirstOrDefault(a => a.UserID == id).Name;
+                _uiModel.Name = userData.Name;
 
                 // User Role
-                _uiModel.UserRole = _context.Users.FirstOrDefault(a => a.UserID == id).UserRole;
+                _uiModel.UserRole = userData.UserRole;
 
                 // User Phone
-                _uiModel.PhoneNumber = _context.Users.FirstOrDefault(a => a.UserID == id).PhoneNumber;
+                _uiModel.PhoneNumber = userData.PhoneNumber;
 
                 // User E-mail
-                _uiModel.Email = _context.Users.FirstOrDefault(a => a.UserID == id).Username;
-
-                //User Linkedin Link
-                _uiModel.LinkedinLink = "https://www.linkedin.com/user";
+                _uiModel.Email = userData.Username;
 
                 // User Summary
-                _uiModel.Summary = _context.Users.FirstOrDefault(a => a.UserID == id).Summary;
+                _uiModel.Summary = userData.Summary;
                 
                 // Education Details
                 _uiModel.EducationStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setEducation;
                 if (_uiModel.EducationStatus == 0)
                 {
-                    _uiModel.EducationList = (from user in _context.EducationalDetails.ToList()
+                    _uiModel.EducationList = (from user in _context.EducationalDetails.Where(x => x.UserId == id)
                                               select new EducationUIModel
                                               {
-                                                  CourseName = _context.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName,
+                                                  CourseName = (_context.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName == "10"
+                                                               || _context.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName == "12")?
+                                                               _context.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName + " TH" :
+                                                               _context.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName,
                                                   CGPAOrPercentage = user.CGPAOrPercentage,
                                                   Board = user.Board,
                                                   Stream = user.Stream,
@@ -61,26 +63,24 @@ namespace ResumeBuilder.Controllers
                 _uiModel.SkillStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setSkills;
                 if (_uiModel.SkillStatus == 1)
                 {
-                    //_uiModel.SkillList = _context.Users.FirstOrDefault(x => x.UserID == id).Skills.Select(a => a.SkillName).ToList();
+                    _uiModel.SkillList = userData.Skills.Select(a => a.SkillName).ToList();
                 }
 
                 // Project Details
                 _uiModel.ProjectStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setProject;
-                if (_uiModel.ProjectStatus == 1)
-                {
+                
                     _uiModel.ProjectList = (from user in _context.Projects.Where(x => x.UserId == id)
                                             select new ProjectUIModel
                                             {
                                                 Title = user.Title,
                                                 Description = user.Description,
+                                                projectRole = user.ProjectRole,
                                                 Duration = user.Duration
                                             }).ToList();
-                }
 
                 // Work Ex.
                 _uiModel.WorkExStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setWorkex;
-                if (_uiModel.WorkExStatus == 0)
-                {
+                
                     _uiModel.WorkExList = (from user in _context.WorkExperiences.Where(x => x.UserID == id)
                                            select new WorkExUIModel
                                            {
@@ -91,14 +91,13 @@ namespace ResumeBuilder.Controllers
                                                EndYear = user.EndYear,
                                                Role = user.Role,
                                                CurrentlyWorking = user.CurrentlyWorking
-                                           }).ToList();
-                }
+                                           }).OrderByDescending(x => x.StartYear).ToList();
 
                 // Languages 
                 _uiModel.LanguageStatus = _context.settings.FirstOrDefault(a => a.UserID == id).setContact;
                 if (_uiModel.LanguageStatus == 1)
                 {
-                    _uiModel.Languages = _context.Users.FirstOrDefault(b => b.UserID == id).Languages.Select(a => a.Language).ToList();
+                    _uiModel.Languages = userData.Languages.Select(a => a.Language).ToList();
                 }
             }
             catch (Exception)

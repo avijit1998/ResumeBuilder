@@ -22,7 +22,27 @@ namespace ResumeBuilder.Controllers
         {
         }
 
-        //
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult LogOff()
+        {
+            Session.RemoveAll();
+            Session.Clear();
+            Session.Abandon();
+            return RedirectToAction("Login", "Account");
+        }
+
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        //[ActionName("LogOff")]
+        //public void LogOffPost()
+        //{
+        //    Session.RemoveAll();
+        //    Session.Clear();
+        //    Session.Abandon();
+        //}
+
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login()
@@ -66,7 +86,7 @@ namespace ResumeBuilder.Controllers
                 }
                 catch(Exception)
                 {
-                    ModelState.AddModelError("","Invalid Username or Password.");
+                    ModelState.AddModelError("","Invalid Email Address or Password.");
                     return View(model);
                 }
             }
@@ -76,12 +96,18 @@ namespace ResumeBuilder.Controllers
         {  
             if (Session["UserID"] != null)  
             {
-                return View("~/Views/Resume/Index.cshtml");
+                return RedirectToAction("Index", "Resume");
+                //return View("~/Views/Resume/Index.cshtml");
                 //return RedirectToAction("Form", "Resume");  
-            } else  
-            {  
-                return RedirectToAction("Login");  
-            }  
+            }
+            else if (Session.Count == 0)
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
         }    
 
         
@@ -134,11 +160,11 @@ namespace ResumeBuilder.Controllers
                 {
                     UserID = user.UserID,
                     User=user,
-                    setContact=-1,
-                    setEducation=-1,
-                    setProject=-1,
-                    setSkills=-1,
-                    setWorkex=-1,
+                    setContact=0,
+                    setEducation=0,
+                    setProject=0,
+                    setSkills=0,
+                    setWorkex=0,
 
                 };
                 db.Users.Add(user);
@@ -150,6 +176,8 @@ namespace ResumeBuilder.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+        
 
         protected override void Dispose(bool disposing)
         {

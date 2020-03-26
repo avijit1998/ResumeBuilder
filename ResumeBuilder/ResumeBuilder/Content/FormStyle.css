@@ -36,16 +36,13 @@ label{
     color:darkblue;
 }
 
-#mainDivModal{
-    position:absolute;
-}
-
-#divPreview{
-    position:absolute;
-    display:none;
-}
-
 #txtSummary{
     width:100%;
     resize:none;
+}
+
+@media screen and (max-width: 990px) {
+  .div-design{
+      margin-bottom: 10%;
+  }
 }

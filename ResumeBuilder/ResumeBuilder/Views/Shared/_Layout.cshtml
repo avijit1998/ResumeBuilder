@@ -3,8 +3,20 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
     <title>@ViewBag.Title - My ASP.NET Application</title>
     <link href="~/Content/settings.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/ResumeIndex.css" rel="stylesheet" />
+
+    <link href="~/Content/ShowDatacss.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
+
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+
+    <link href="~/Content/jquery-ui.structure.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.theme.css" rel="stylesheet" />
     @Styles.Render("~/Content/css")
     @RenderSection("Styles", false)
 
@@ -13,9 +25,11 @@
     @RenderBody()
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/modernizr")
     <script src="~/Scripts/AjaxScripts/ajaxLoading.js"></script>
     <script src="~/Scripts/settings.js"></script>
+    <script src="~/Scripts/ModelScripts/PreviewScript.js"></script>
+    <script src="~/Scripts/ModelScripts/ResumeFormScript.js"></script>
+    <script src="~/Scripts/ModelScripts/ResumeEditScript.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

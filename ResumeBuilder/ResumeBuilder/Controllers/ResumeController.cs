@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ResumeBuilder.ViewModels;
 using ResumeBuilder.Helpers;
 
 
@@ -25,7 +24,12 @@ namespace ResumeBuilder.Controllers
         // GET: Resume
         public ActionResult Index()
         {
-            return View();
+            if(Session.Count != 0)
+                return View();
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
         }
 
         public ActionResult ShowData()
@@ -37,16 +41,18 @@ namespace ResumeBuilder.Controllers
                 var user = db.Users.Where(m => m.UserID == id).FirstOrDefault();
                 var projects = db.Projects.Where(m => m.UserId == id).ToList();
                 var workExperiences = db.WorkExperiences.Where(m => m.UserID == id).ToList();
-               
+                var educationDetails = db.EducationalDetails.Where(m => m.UserId == id).ToList();
+
+                ViewBag.Languages = db.Languages.ToList();
+
                 ViewBag.Projects = projects;
                 ViewBag.WorkExperiences = workExperiences;
+                ViewBag.Education = educationDetails;
+
                 return PartialView(user);
             }
             return RedirectToAction("Login", "Account");
-            
-        }
 
-        
         public ActionResult GetProjectById(int Id)
         {
             var proj = db.Projects.FirstOrDefault(x => x.ProjectId == Id);
@@ -68,13 +74,14 @@ namespace ResumeBuilder.Controllers
 
             project.Title = model.Title;
             project.ProjectRole = model.ProjectRole;
-            project.Description = model.Description; 
+            project.Description = model.Description;
             project.Duration = model.Duration;
 
             db.Entry(project).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
             return Json("Success");
         }
+
 
         public ActionResult Form()
         {
@@ -108,9 +115,9 @@ namespace ResumeBuilder.Controllers
 
         }
 
-        public ActionResult GetWorkExperienceById(int workExperienceId)
+        public ActionResult GetWorkExperienceById(int id)
         {
-            var workex = db.WorkExperiences.FirstOrDefault(x => x.WorkExperienceid == workExperienceId);
+            var workex = db.WorkExperiences.FirstOrDefault(x => x.WorkExperienceid == id);
             var workExperience = new WorkExperience
             {
                 WorkExperienceid = workex.WorkExperienceid,
@@ -126,23 +133,23 @@ namespace ResumeBuilder.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateWorkExperience(int workExpeienceId, WorkExperience model)
+        public ActionResult UpdateWorkExperience(int WorkExperienceid, WorkExperience model)
         {
-            var workEx = db.WorkExperiences.FirstOrDefault(x => x.WorkExperienceid == workExpeienceId);
+            var workEx = db.WorkExperiences.FirstOrDefault(x => x.WorkExperienceid == WorkExperienceid);
             workEx.OrganizationName = model.OrganizationName;
             workEx.Role = model.Role;
-            //workEx.StartMonth = model.StartMonth;
-            //workEx.StartYear = model.StartYear;
-            //workEx.EndMonth = model.EndMonth;
-            //workEx.EndYear = model.EndYear;
-            //workEx.CurrentlyWorking = model.CurrentlyWorking;
+            workEx.StartMonth = model.StartMonth;
+            workEx.StartYear = model.StartYear;
+            workEx.EndMonth = model.EndMonth;
+            workEx.EndYear = model.EndYear;
+            workEx.CurrentlyWorking = model.CurrentlyWorking;
 
             db.Entry(workEx).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
             return Json("Success");
         }
 
-        [HttpDelete]
+        [HttpPost]
         public ActionResult DeleteWorkExperience(int workExId)
         {
             var workEx = db.WorkExperiences.FirstOrDefault(x => x.WorkExperienceid == workExId);
@@ -158,83 +165,6 @@ namespace ResumeBuilder.Controllers
             }
         }
 
-        public ActionResult Preview()
-        {
-            return PartialView("~/Views/PartialViews/PreviewPartial.cshtml");
-        }
-
-        public ActionResult PreviewUser(int id)
-        {
-            // User Name
-            _uiModel.Name = db.Users.FirstOrDefault(a => a.UserID == id).Name;
-
-            // User Role
-            _uiModel.UserRole = "Web Developer";
-
-            // User Phone
-            _uiModel.PhoneNumber = db.Users.FirstOrDefault(a => a.UserID == id).PhoneNumber;
-
-            // User E-mail
-            _uiModel.Email = db.Users.FirstOrDefault(a => a.UserID == id).Username;
-
-            //User Linkedin Link
-            _uiModel.LinkedinLink = "https://www.linkedin.com/user";
-
-            // User Summary
-            _uiModel.Summary = "Oh, I misunderstood the problem. ResumeBuilder ResumeBuilder Setting a padding on, ResumeBuilder ResumeBuilder bin the padding won't help you.";
-
-            //Education Details
-            ViewBag.education = 1;
-            //var ob=new PublicProfileViewModel
-            //{
-                
-            //}
-
-            //var language = (from u in db.UsersLanguage.Where(m=>m.UserID==id)
-            //                from l in db.Languages.Where(m=>m.LanguageID==u.LanguageID).ToList()
-            //                select new
-            //                {
-                                
-            //                }
-
-            var data = new AllDetailsVM
-            {
-                Name=db.Users.Where(m=>m.UserID==id).Select(m=>m.Name).FirstOrDefault(),
-
-                PhoneNumber=db.Users.Where(m=>m.UserID==id).Select(m=>m.PhoneNumber).FirstOrDefault(),
-
-                Email=db.Users.Where(m=>m.UserID==id).Select(m=>m.Username).FirstOrDefault(),
-
-                UserRole=db.Users.Where(m=>m.UserID==id).Select(m=>m.UserRole).FirstOrDefault(),
-                
-                Summary=db.Users.Where(m=>m.UserID==id).Select(m=>m.Summary).FirstOrDefault(),
-                
-                Title=db.Projects.Where(m=>m.UserId==id).Select(m=>m.Title).FirstOrDefault(),
-
-                Description=db.Projects.Where(m=>m.UserId==id).Select(m=>m.Description).FirstOrDefault(),
-
-
-
-
-                //Languages=language,
-
-                //SkillList=db.
-
-                //IEnumerable < EducationUIModel > EducationList = db.EducationalDetails.Where(m => m.UserId == id).ToList(),
-
-
-            };
-           
-            var UserData = db.Users.Where(m=>m.UserID==id).Select(m=>m.Name).ToList();
-            var coursesData = db.Courses.Where(m => m.CourseId == id).ToList();
-            var educationalData=db.EducationalDetails.Where(m => m.CourseId == id).ToList();
-
-            return Json(data, JsonRequestBehavior.AllowGet);
-            //return Json("Success", JsonRequestBehavior.AllowGet);
-
-            //return View(_uiModel);
-            
-        }
 
         [HttpPost]
         public ActionResult SaveSummary(User user)
@@ -250,7 +180,6 @@ namespace ResumeBuilder.Controllers
         }
 
         [HttpPost]
-        //public ActionResult SaveBasicInformation(User user)
         public ActionResult SaveBasicInformation(AddUserViewModel addUserViewModel)
         {
             var userFromDb = db.Users.FirstOrDefault(u => u.UserID == addUserViewModel.UserID);
@@ -306,19 +235,9 @@ namespace ResumeBuilder.Controllers
             return Json(new { Message = message, JsonRequestBehavior.AllowGet });
         }
 
-        public ActionResult LogOff()
-        {
-            if (Session["UserID"] != null)
-            {
-                Session.Remove("UserID");
-                Session.RemoveAll();
-            }
-
-            return RedirectToAction("Login", "Account");
-        }
 
         public JsonResult GetSkill(string term)
-        {
+       {
             term = term.Trim();
             List<string> skills;
 
@@ -389,9 +308,314 @@ namespace ResumeBuilder.Controllers
             ob1.setEducation = ob.setEducation;
             ob1.setContact = ob.setContact;
 
-            return Json("success", JsonRequestBehavior.AllowGet);
+            return Json(ob1, JsonRequestBehavior.AllowGet);
+        }
+        // GET: Resume/Preview
+        public ActionResult Preview()
+        {
+            if (Session["UserID"] != null)
+            {
+                int id;
+                var result = Int32.TryParse(Session["UserID"] as String, out id);
+                if (result)
+                {
+                    try
+                    {
+                        // user details
+                        var userData = db.Users.FirstOrDefault(a => a.UserID == id);
+                        // User Name
+                        _uiModel.Name = userData.Name;
+
+                        // User Gender
+                        _uiModel.Gender = userData.Gender;
+
+                        // User Gender
+                        _uiModel.DOB = (userData.DateOfBirth.ToString().Split(' '))[0];
+
+                        // User Role
+                        _uiModel.UserRole = userData.UserRole;
+
+                        // User Phone
+                        _uiModel.PhoneNumber = userData.PhoneNumber;
+
+                        // User E-mail
+                        _uiModel.Email = userData.Username;
+
+                        // User Summary
+                        _uiModel.Summary = userData.Summary;
+
+                        // Education Details
+                        _uiModel.EducationList = (from user in db.EducationalDetails.Where(x => x.UserId == id)
+                                                  select new EducationUIModel
+                                                  {
+                                                      CourseName = (db.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName == "10"
+                                                                   || db.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName == "12") ?
+                                                                   db.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName + " TH" :
+                                                                   db.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName,
+                                                      CGPAOrPercentage = user.CGPAOrPercentage,
+                                                      Board = user.Board,
+                                                      Stream = (user.Stream == null) ? "N/A" : user.Stream,
+                                                      TotalPercentorCGPAValue = user.TotalPercentorCGPAValue,
+                                                      PassingYear = user.PassingYear
+                                                  }).OrderByDescending(x => x.PassingYear).ToList();
+
+                        // Skills
+                        _uiModel.SkillList = userData.Skills.Select(a => a.SkillName).ToList();
+
+                        // Project Details
+                        _uiModel.ProjectList = (from user in db.Projects.Where(x => x.UserId == id)
+                                                select new ProjectUIModel
+                                                {
+                                                    Title = user.Title,
+                                                    Description = user.Description,
+                                                    Duration = user.Duration
+                                                }).ToList();
+
+                        // Work Ex.
+                        _uiModel.WorkExList = (from user in db.WorkExperiences.Where(x => x.UserID == id)
+                                               select new WorkExUIModel
+                                               {
+                                                   OrganizationName = user.OrganizationName,
+                                                   StartMonth = (user.StartMonth <= 9) ? "0" + user.StartMonth : user.StartMonth.ToString(),
+                                                   StartYear = user.StartYear,
+                                                   EndMonth = (user.EndMonth <= 9) ? "0" + user.EndMonth : user.EndMonth.ToString(),
+                                                   EndYear = user.EndYear,
+                                                   Role = user.Role,
+                                                   CurrentlyWorking = user.CurrentlyWorking
+                                               }).OrderByDescending(x => x.StartYear).ToList();
+
+                        // Languages 
+                        _uiModel.Languages = userData.Languages.Select(a => a.Language).ToList();
+
+                    }
+                    catch (Exception)
+                    {
+                        _uiModel.ErrorMsg = "Unexpected error occured, try again...";
+                    }
+                }
+                return PartialView(_uiModel);
+            }
+            return RedirectToAction("Login", "Account");
         }
 
+        public ActionResult Search()
+        {
+            return PartialView();
+        }
+
+        public ActionResult GetUserSkills()
+        {
+            //db.Configuration.ProxyCreationEnabled = false;
+            List<UserSkillVM> listUserSkills = new List<UserSkillVM>();
+            listUserSkills = (from user in db.Users.Include("Skills").ToList()
+                                    select new UserSkillVM
+                                    {
+                                        UserID = user.UserID,
+                                        UserName = user.Username,
+                                        SkillNames = user.Skills.Select(x => x.SkillName).ToList()
+                                    }).ToList();
+            
+            
+            return Json(listUserSkills, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetEducationById(int id)
+        {
+            var edu = db.EducationalDetails.FirstOrDefault(x => x.EducationalDetailID == id);
+
+            var education = new EducationalDetails
+            {
+                EducationalDetailID = edu.EducationalDetailID,
+                CourseId = edu.CourseId,
+                Board = edu.Board,
+                PassingYear = edu.PassingYear,
+                Stream = edu.Stream,
+                TotalPercentorCGPAValue = edu.TotalPercentorCGPAValue,
+                CGPAOrPercentage = edu.CGPAOrPercentage
+            };
+            return Json(education, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpPost]
+        public ActionResult UpdateEducation(int EducationalDetailID, EducationalDetails model)
+        {
+            var edu = db.EducationalDetails.FirstOrDefault(x => x.EducationalDetailID == EducationalDetailID);
+
+            edu.EducationalDetailID = model.EducationalDetailID;
+            edu.CourseId = model.CourseId;
+            edu.PassingYear = model.PassingYear;
+            edu.Stream = model.Stream;
+            edu.Board = model.Board;
+            edu.CGPAOrPercentage = model.CGPAOrPercentage;
+            edu.TotalPercentorCGPAValue = model.TotalPercentorCGPAValue;
+
+            db.Entry(edu).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return Json("Success");
+        }
+
+
+        [HttpPost]
+        public ActionResult DeleteEducation(int educationId)
+        {
+            var edu = db.EducationalDetails.FirstOrDefault(x => x.EducationalDetailID == educationId);
+            if (edu != null)
+            {
+                db.EducationalDetails.Remove(edu);
+                db.SaveChanges();
+                return Json("Successfully Deleted");
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult DeleteSkill(int skillId)
+        {
+            int id;
+            var re = Int32.TryParse(Session["UserID"] as String, out id);
+            var user = db.Users.FirstOrDefault(x => x.UserID == id);
+            var skill = db.Skills.FirstOrDefault(x => x.SkillID == skillId);
+
+            if(user!=null && skill!=null)
+            {
+                user.Skills.Remove(skill);
+
+                db.SaveChanges();
+                return Json("Successfully Deleted");
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+        }
         
+
+        // Get: Resume/PdfDownload//id
+        //public ActionResult PdfDownload(int id)
+        //{
+        //    try
+        //    {
+        //        // user details
+        //        var userData = db.Users.FirstOrDefault(a => a.UserID == id);
+        //        // User Name
+        //        _uiModel.Name = userData.Name;
+
+        //        // User Gender
+        //        _uiModel.Gender = userData.Gender;
+
+        //        // User Gender
+        //        _uiModel.DOB = (userData.DateOfBirth.ToString().Split(' '))[0];
+
+        //        // User Role
+        //        _uiModel.UserRole = userData.UserRole;
+
+        //        // User Phone
+        //        _uiModel.PhoneNumber = userData.PhoneNumber;
+
+        //        // User E-mail
+        //        _uiModel.Email = userData.Username;
+
+        //        // User Summary
+        //        _uiModel.Summary = userData.Summary;
+
+        //        // Education Details
+        //        _uiModel.EducationList = (from user in db.EducationalDetails.Where(x => x.UserId == id)
+        //                                  select new EducationUIModel
+        //                                  {
+        //                                      CourseName = (db.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName == "10"
+        //                                                  || db.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName == "12") ?
+        //                                                  db.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName + " TH" :
+        //                                                  db.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName,
+        //                                      CGPAOrPercentage = user.CGPAOrPercentage,
+        //                                      Board = user.Board,
+        //                                      Stream = (user.Stream == null) ? "N/A" : user.Stream,
+        //                                      TotalPercentorCGPAValue = user.TotalPercentorCGPAValue,
+        //                                      PassingYear = user.PassingYear
+        //                                  }).OrderByDescending(x => x.PassingYear).ToList();
+
+        //        // Skills
+        //        _uiModel.SkillList = userData.Skills.Select(a => a.SkillName).ToList();
+
+        //        // Project Details
+        //        _uiModel.ProjectList = (from user in db.Projects.Where(x => x.UserId == id)
+        //                                select new ProjectUIModel
+        //                                {
+        //                                    Title = user.Title,
+        //                                    Description = user.Description,
+        //                                    Duration = user.Duration
+        //                                }).ToList();
+
+        //        // Work Ex.
+        //        _uiModel.WorkExList = (from user in db.WorkExperiences.Where(x => x.UserID == id)
+        //                               select new WorkExUIModel
+        //                               {
+        //                                   OrganizationName = user.OrganizationName,
+        //                                   StartMonth = (user.StartMonth <= 9) ? "0" + user.StartMonth : user.StartMonth.ToString(),
+        //                                   StartYear = user.StartYear,
+        //                                   EndMonth = (user.EndMonth <= 9) ? "0" + user.EndMonth : user.EndMonth.ToString(),
+        //                                   EndYear = user.EndYear,
+        //                                   Role = user.Role,
+        //                                   CurrentlyWorking = user.CurrentlyWorking
+        //                               }).OrderByDescending(x => x.StartYear).ToList();
+
+        //        // Languages 
+        //        _uiModel.Languages = userData.Languages.Select(a => a.Language).ToList();
+        //         }
+        //        catch (Exception)
+        //    {
+        //        _uiModel.ErrorMsg = "Unexpected error occured, try again...";
+        //    }
+        //   }
+        //        return PartialView(_uiModel);
+        //    }
+        //    return RedirectToAction("Login", "Account");
+        //}
+
+        public ActionResult GetCurrentUser(int id)
+        {
+            var data = db.Users.Include("Languages").FirstOrDefault(x => x.UserID == id);
+            var user = new EditUserLanguageViewModel
+            {
+                UserID = data.UserID,
+                Username = data.Username,
+                Gender = data.Gender,
+                Summary=data.Summary,
+                PhoneNumber=data.PhoneNumber,
+                DateOfBirth=data.DateOfBirth,
+                LanguageIds = data.Languages.Select(s => s.LanguageID).ToArray()
+            };
+
+            return Json(user, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateUser(int UserID, UpdateUserLanguageViewModel userLanguageViewModel)
+        {
+
+            var user = db.Users.Include("Languages").FirstOrDefault(x => x.UserID == UserID);
+
+            user.Name = userLanguageViewModel.Name;
+            user.Username = userLanguageViewModel.Username;
+            user.Gender = userLanguageViewModel.Gender;
+            user.Summary = userLanguageViewModel.Summary;
+            user.PhoneNumber = userLanguageViewModel.PhoneNumber;
+            user.DateOfBirth = userLanguageViewModel.DateOfBirth;
+            user.Languages.Clear();
+
+            if (userLanguageViewModel.LanguageIds.Any())
+            {
+                var languages = db.Languages.Where(x => userLanguageViewModel.LanguageIds.Contains(x.LanguageID)).ToList();
+                user.Languages.AddRange(languages);
+            }
+
+            db.Entry(user).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return Json("Success");                  
+        }
     }
 }

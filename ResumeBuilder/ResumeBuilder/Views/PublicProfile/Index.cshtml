@@ -82,11 +82,11 @@ else
                 <div class="col-lg-12 col-md-12">
                     <div class="p-4 bg-dark text-white">
                         <div class="row">
-                            <div class="col-lg-9 col-md-7 col-sm-6">
+                            <div class="col-lg-10 col-md-8 col-sm-7">
                                 <h1 class="display-5 d-block">@Model.Name</h1>
                                 <h6 class="display-5" style="opacity: .5;">@Model.UserRole</h6>
                             </div>
-                            <div class="col-lg-3 col-md-5 col-sm-6" style="opacity: .65;">
+                            <div class="col-lg-2 col-md-4 col-sm-5" style="opacity: .65;">
                                 <div class="row">
                                     <a href="#" class="text-white">
                                         <i class="fa fa-phone"> @Model.PhoneNumber</i>
@@ -95,11 +95,6 @@ else
                                 <div class="row">
                                     <a href="http://gmail.com" class="text-white">
                                         <i class="fa fa-envelope"> @Model.Email</i>
-                                    </a>
-                                </div>
-                                <div class="row">
-                                    <a href="https://in.linkedin.com/in/dummy-link-775982111" class="text-white">
-                                        <i class="fa fa-linkedin"> @Model.LinkedinLink</i>
                                     </a>
                                 </div>
                             </div>
@@ -158,9 +153,10 @@ else
                             {
                                 <div class="container-timeline">
                                     <div class="content text-center">
-                                        <h2>@data.Title</h2>
+                                        <h4>@data.Title</h4>
+                                        <h5>Role : @data.projectRole</h5>
                                         <p>@data.Description</p>
-                                        <h4>Duration : @data.Duration Months</h4>
+                                        <h6>Duration : @data.Duration Months</h6>
                                     </div>
                                 </div>
                             }
@@ -266,46 +262,49 @@ else
         <script type="text/javascript" src="~/Scripts/Profile_Scripts/profileDefaultScript.js"></script>
         <!-- Internal JavaScript Code -->
         <script type="text/javascript">
-            $(document).ready(function () {
+    $(document).ready(function () {
 
-                $('body').scrollspy({target: ".scroll-spy-div"});
+        $('body').scrollspy({target: ".scroll-spy-div"});
 
-                if(@Model.WorkExStatus === 0)
-                {
-                    $('#workExperience, #workExperienceNav').hide();
-                }
+        if(@Model.WorkExStatus === -1)
+        {
+            $('#workExperience, #workExperienceNav').hide();
+        }
+        else
+        {
+            console.log(@Model.WorkExList.Count);
+            for(var i = 0; i < @Model.WorkExList.Count; i++)
+            {
+                if(i % 2 === 0)
+                    $('#workExTimelineId').children().eq(i).addClass("timeline-left");
                 else
-                {
-                    for(var i = 0; i < @Model.WorkExList.Count; i++)
-                    {
-                        if(i % 2 === 0)
-                            $('#workExTimelineId').children().eq(i).addClass("timeline-left");
-                        else
-                            $('#workExTimelineId').children().eq(i).addClass("timeline-right");
-                    }
-                }
+                    $('#workExTimelineId').children().eq(i).addClass("timeline-right");
+            }
+        }
 
-                if(@Model.ProjectStatus === 0)
-                {
-                    $('#projects, #projectsNav').hide();
-                }
+        if(@Model.ProjectStatus === -1)
+        {
+            $('#projects, #projectsNav').hide();
+        }
+        else
+        {
+            for(var i = 0; i < @Model.ProjectList.Count; i++)
+            {
+                if(i % 2 === 0)
+                    $('#projectTimelineId').children().eq(i).addClass("timeline-left");
                 else
-                {
-                    for(var i = 0; i < @Model.ProjectList.Count; i++)
-                    {
-                        if(i % 2 === 0)
-                            $('#projectTimelineId').children().eq(i).addClass("timeline-left");
-                        else
-                            $('#projectTimelineId').children().eq(i).addClass("timeline-right");
-                    }
-                }
+                    $('#projectTimelineId').children().eq(i).addClass("timeline-right");
+            }
+        }
 
-                if(@Model.SkillStatus === 0)
-                    $('#skills, #skillsNav').hide();
-                if(@Model.EducationStatus === 0)
-                    $('#education, #educationNav').hide();
-            });
-        </script>
+        if(@Model.SkillStatus === -1)
+            $('#skills, #skillsNav').hide();
+        if(@Model.EducationStatus === -1)
+            $('#education, #educationNav').hide();
+        if(@Model.LanguageStatus === -1)
+            $('#languages, #languagesNav').hide();
+    });
+</script>
 
     </body>
 </html>
