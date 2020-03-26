@@ -496,7 +496,7 @@ namespace ResumeBuilder.Controllers
             }
         }
         
-        // Get: Resume/PdfDownload//id
+         Get: Resume/PdfDownload//id
         public ActionResult PdfDownload(int id)
         {
             try
