@@ -239,7 +239,7 @@ namespace ResumeBuilder.Controllers
 
 
         public JsonResult GetSkill(string term)
-        {
+       {
             term = term.Trim();
             List<string> skills;
 
@@ -312,7 +312,7 @@ namespace ResumeBuilder.Controllers
 
             return Json(ob1, JsonRequestBehavior.AllowGet);
         }
-        // GET: Resume/Preview/id
+        // GET: Resume/Preview
         public ActionResult Preview()
         {
             if (Session["UserID"] != null)
@@ -323,26 +323,28 @@ namespace ResumeBuilder.Controllers
                 {
                     try
                     {
+                        // user details
+                        var userData = db.Users.FirstOrDefault(a => a.UserID == id);
                         // User Name
-                        _uiModel.Name = db.Users.FirstOrDefault(a => a.UserID == id).Name;
+                        _uiModel.Name = userData.Name;
 
                         // User Gender
-                        _uiModel.Gender = db.Users.FirstOrDefault(a => a.UserID == id).Gender;
+                        _uiModel.Gender = userData.Gender;
 
                         // User Gender
-                        _uiModel.DOB = (db.Users.FirstOrDefault(a => a.UserID == id).DateOfBirth.ToString().Split(' '))[0];
+                        _uiModel.DOB = (userData.DateOfBirth.ToString().Split(' '))[0];
 
                         // User Role
-                        _uiModel.UserRole = db.Users.FirstOrDefault(a => a.UserID == id).UserRole;
+                        _uiModel.UserRole = userData.UserRole;
 
                         // User Phone
-                        _uiModel.PhoneNumber = db.Users.FirstOrDefault(a => a.UserID == id).PhoneNumber;
+                        _uiModel.PhoneNumber = userData.PhoneNumber;
 
                         // User E-mail
-                        _uiModel.Email = db.Users.FirstOrDefault(a => a.UserID == id).Username;
+                        _uiModel.Email = userData.Username;
 
                         // User Summary
-                        _uiModel.Summary = db.Users.FirstOrDefault(a => a.UserID == id).Summary;
+                        _uiModel.Summary = userData.Summary;
 
                         // Education Details
                         _uiModel.EducationList = (from user in db.EducationalDetails.Where(x => x.UserId == id)
@@ -360,7 +362,7 @@ namespace ResumeBuilder.Controllers
                                                   }).OrderByDescending(x => x.PassingYear).ToList();
 
                         // Skills
-                        _uiModel.SkillList = db.Users.FirstOrDefault(x => x.UserID == id).Skills.Select(a => a.SkillName).ToList();
+                        _uiModel.SkillList = userData.Skills.Select(a => a.SkillName).ToList();
 
                         // Project Details
                         _uiModel.ProjectList = (from user in db.Projects.Where(x => x.UserId == id)
@@ -385,7 +387,7 @@ namespace ResumeBuilder.Controllers
                                                }).OrderByDescending(x => x.StartYear).ToList();
 
                         // Languages 
-                        _uiModel.Languages = db.Users.FirstOrDefault(b => b.UserID == id).Languages.Select(a => a.Language).ToList();
+                        _uiModel.Languages = userData.Languages.Select(a => a.Language).ToList();
 
                     }
                     catch (Exception)
@@ -473,7 +475,6 @@ namespace ResumeBuilder.Controllers
 
         }
 
-
         [HttpPost]
         public ActionResult DeleteSkill(int skillId)
         {
@@ -494,6 +495,88 @@ namespace ResumeBuilder.Controllers
                 return HttpNotFound();
             }
         }
+        
+        // Get: Resume/PdfDownload//id
+        public ActionResult PdfDownload(int id)
+        {
+            try
+            {
+                // user details
+                var userData = db.Users.FirstOrDefault(a => a.UserID == id);
+                // User Name
+                _uiModel.Name = userData.Name;
+
+                // User Gender
+                _uiModel.Gender = userData.Gender;
+
+                // User Gender
+                _uiModel.DOB = (userData.DateOfBirth.ToString().Split(' '))[0];
+
+                // User Role
+                _uiModel.UserRole = userData.UserRole;
+
+                // User Phone
+                _uiModel.PhoneNumber = userData.PhoneNumber;
+
+                // User E-mail
+                _uiModel.Email = userData.Username;
+
+                // User Summary
+                _uiModel.Summary = userData.Summary;
+
+                // Education Details
+                _uiModel.EducationList = (from user in db.EducationalDetails.Where(x => x.UserId == id)
+                                          select new EducationUIModel
+                                          {
+                                              CourseName = (db.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName == "10"
+                                                          || db.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName == "12") ?
+                                                          db.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName + " TH" :
+                                                          db.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName,
+                                              CGPAOrPercentage = user.CGPAOrPercentage,
+                                              Board = user.Board,
+                                              Stream = (user.Stream == null) ? "N/A" : user.Stream,
+                                              TotalPercentorCGPAValue = user.TotalPercentorCGPAValue,
+                                              PassingYear = user.PassingYear
+                                          }).OrderByDescending(x => x.PassingYear).ToList();
+
+                // Skills
+                _uiModel.SkillList = userData.Skills.Select(a => a.SkillName).ToList();
+
+                // Project Details
+                _uiModel.ProjectList = (from user in db.Projects.Where(x => x.UserId == id)
+                                        select new ProjectUIModel
+                                        {
+                                            Title = user.Title,
+                                            Description = user.Description,
+                                            Duration = user.Duration
+                                        }).ToList();
+
+                // Work Ex.
+                _uiModel.WorkExList = (from user in db.WorkExperiences.Where(x => x.UserID == id)
+                                       select new WorkExUIModel
+                                       {
+                                           OrganizationName = user.OrganizationName,
+                                           StartMonth = (user.StartMonth <= 9) ? "0" + user.StartMonth : user.StartMonth.ToString(),
+                                           StartYear = user.StartYear,
+                                           EndMonth = (user.EndMonth <= 9) ? "0" + user.EndMonth : user.EndMonth.ToString(),
+                                           EndYear = user.EndYear,
+                                           Role = user.Role,
+                                           CurrentlyWorking = user.CurrentlyWorking
+                                       }).OrderByDescending(x => x.StartYear).ToList();
+
+                // Languages 
+                _uiModel.Languages = userData.Languages.Select(a => a.Language).ToList();
+                 }
+                catch (Exception)
+            {
+                _uiModel.ErrorMsg = "Unexpected error occured, try again...";
+            }
+           }
+                return PartialView(_uiModel);
+            }
+            return RedirectToAction("Login", "Account");
+        }
+
 
 
         public ActionResult GetCurrentUser(int id)
@@ -534,7 +617,7 @@ namespace ResumeBuilder.Controllers
 
             db.Entry(user).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
-            return Json("Success");
+            return Json("Success");                  
         }
     }
 }

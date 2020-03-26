@@ -20,20 +20,23 @@
             $(".hide-if-currently-working").show();
         }
     });
-
-    $('input[type=radio][name=courseOption]').change(function () {
-        if ($(this).val() == '1') {
-            $(".all-other").show();
-            $(".stream").hide();
-        }
-        else {
-            $(".stream").show();
-            $(".all-other").show();
-        }
+    $("body").on("click", "#educationDetails", function () {
+        $('input[type=radio][name=courseOption]').change(function () {
+            debugger;
+            if ($(this).val() == '1') {
+                $(".all-other").show();
+                $(".stream").hide();
+            }
+            else {
+                $(".stream").show();
+                $(".all-other").show();
+            }
+        });
     });
 
     //save summary info of user
     $("body").on("click", "#btnSaveSummary", function () {
+        debugger;
         var user = {};
         user.Summary = $("#txtSummary").val();
         debugger;
@@ -212,15 +215,37 @@
         return false;
     });
 
-    $('#txtSearch').autocomplete({
-        source: '@Url.Action("GetSkill")',
-        appendTo: $('#autoComplete')
+
+
+    var selector = 'input#txtSearch';
+    $(document).on('keydown.autocomplete', selector, function () {
+        $(this).autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "GetSkill",
+                    method: "GET",
+                    dataType: "json",
+                    data: {
+                        term: request.term
+                    },
+                    success: function (data) {
+                        console.log("data");
+                        response(data);
+                    },
+                    error: function (data) {
+                        console.log("error");
+                    }
+                });
+            },
+            appendTo: $('#autoComplete')
+        });
     });
+
 
     $("body").on('click', '#addSkill', function () {
         var item = $("#txtSearch").val();
         var isSkillFound = 0;
-
+        debugger;
         $(".skillItem").each(function (index) {
             var skillValue = $(this).text();
             if (skillValue == item) {

@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
     $("body").on("click", "#educationDetails", function () {
         var radioValue = $('input[name="courseOption"]:checked').val();
+        debugger;
         if (radioValue == "10th") {
             $(".tenth-form").show();
             $(".all-other").hide();
@@ -19,6 +20,7 @@
         }
     });
 });
+
 
 ﻿//$(document).ready(function () {
 //    $(body).on("click", "#educationDetails", function () {
