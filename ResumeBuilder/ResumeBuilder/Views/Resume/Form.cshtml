@@ -537,24 +537,3 @@
         </div>
     </div>
 </div>
-<script>
-    $("#txtSearch").autocomplete({
-        source: function (request, response) {
-            $.ajax({
-                url: "GetSkill",
-                method: "GET",
-                dataType: "json",
-                data: {
-                    term: request.term
-                },
-                success: function (data) {
-                    response(data);
-                },
-                error: function (data) {
-                    console.log("error");
-                }
-            });
-        },
-        appendTo: $('#autoComplete')
-    });
-</script>
