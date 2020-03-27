@@ -16,9 +16,22 @@ $(document).ready(function () {
    
 
     //empty auto fill data
-    $("body").on('click', 'hidden.bs.modal', function () {
-       //
+
+    $("body").on('click', '[data-dismiss=modal]', function () {
+        $('#modalWorkExperience').on('hidden.bs.modal', function () {
+            clearFields();      
+        });
+        $('#modalProject').on('hidden.bs.modal', function () {
+            clearFields();
+        });
+        $('#modalSkills').on('hidden.bs.modal', function () {
+            clearFields();
+        });
+        $('#modalEducationDetails').on('hidden.bs.modal', function () {
+            clearFields();
+        });   
     });
+
 
     $("body").on('change', 'input[type=radio][name=marksOption]', function () {
         if ($(this).val() == 'CGPA') {
@@ -35,9 +48,10 @@ $(document).ready(function () {
             $(".hide-if-currently-working").show();
         }
     });
+
     $("body").on("click", "#educationDetails", function () {
         $('input[type=radio][name=courseOption]').change(function () {
-            debugger;
+          
             if ($(this).val() == '1') {
                 $(".all-other").show();
                 $(".stream").hide();
@@ -67,7 +81,7 @@ $(document).ready(function () {
                 bootbox.alert("<b style='color:black;'>Summary details successfully saved.</b>");
             },
             error: function () {
-                bootbox.alert("Error!");
+                bootbox.alert("<b style='color:black;'>Error!</b>");
 
             }
         });
@@ -85,11 +99,10 @@ $(document).ready(function () {
             "PhoneNumber": $("#txtPhoneNumber").val(),
             "LanguageIds": []
         };
-        debugger;
-
         $('input[type="checkbox"]:checked').each(function (e, el) {
             user.LanguageIds.push($(el).val());
-        })
+        });
+
         $.ajax({
             type: "POST",
             url: '/Resume/SaveBasicInformation',
@@ -101,7 +114,7 @@ $(document).ready(function () {
                 bootbox.alert("<b style='color:black;'>Basic information successfully saved.</b>");
             },
             error: function () {
-                bootbox.alert("Error!");
+                bootbox.alert("<b style='color:black;'>Error!</b>");
 
             }
         });
@@ -124,11 +137,12 @@ $(document).ready(function () {
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function () {
+                clearFields();
                 $("#modalProject").modal("hide");
                 bootbox.alert("<b style='color:black;'>Project details successfully saved.</b>");
             },
             error: function () {
-                bootbox.alert("Error!");
+                bootbox.alert("<b style='color:black;'>Error!</b>");
 
             }
         });
@@ -157,12 +171,13 @@ $(document).ready(function () {
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function () {
+                clearFields();
                 $("#modalWorkExperience").modal("hide");
                 bootbox.alert("<b style='color:black;'>Work experience successfully saved.</b>");
 
             },
             error: function () {
-                bootbox.alert("Error!");
+                bootbox.alert("<b style='color:black;'>Error!</b>");
 
             }
         });
@@ -200,11 +215,12 @@ $(document).ready(function () {
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function () {
+                clearFields();
                 $("#modalEducationDetails").modal("hide");
                 bootbox.alert("<b style='color:black;'>Educational details successfully saved.</b>");
             },
             error: function () {
-                bootbox.alert("Error!");
+                bootbox.alert("<b style='color:black;'>Error!</b>");
             }
         });
         return false;
@@ -227,6 +243,7 @@ $(document).ready(function () {
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function () {
+                clearFields();
                 $("#modalSkills").modal("hide");
                 bootbox.alert("<b style='color:black;'>Skills successfully saved.</b>");
             },
@@ -236,8 +253,6 @@ $(document).ready(function () {
         });
         return false;
     });
-
-
 
     var selector = 'input#txtSearch';
     $(document).on('keydown.autocomplete', selector, function () {
@@ -251,11 +266,9 @@ $(document).ready(function () {
                         term: request.term
                     },
                     success: function (data) {
-                        console.log("data");
                         response(data);
                     },
                     error: function (data) {
-                        console.log("error");
                     }
                 });
             },
@@ -278,8 +291,9 @@ $(document).ready(function () {
 
         if (isSkillFound == 0) {
             $("#skillMenu").append('<li class="skillItem">' + item + '</li>');
+            clearFields();
         } else {
-            alert(item + " already added.");
+            bootbox.alert("<b style='color:black;'>"+item + " already added.</b>");
         }
     });
 
@@ -290,7 +304,7 @@ $(document).ready(function () {
             url: "/Resume/PreviewUser/" + ids,
             method: "GET",
             success: function (result) {
-                console.log(result);
+  
                 $("#modalUserName").html(result.Name);
                 $("#modalUserPhone").html(result.PhoneNumber);
                 $("#modalUserEmail").html(result.Email);
@@ -301,12 +315,16 @@ $(document).ready(function () {
                 }
             },
             error: function () {
-                console.log("error!");
+                bootbox.alert("<b style='color:black;'>Error!</b>")
+   
             }
         });
     });
-
-  
-
-    
 });
+
+function clearFields()
+{
+    $('input[type="text"]').val('');
+    $('select').val('');
+    $('input[type="checkbox"]').prop('checked', false);
+}

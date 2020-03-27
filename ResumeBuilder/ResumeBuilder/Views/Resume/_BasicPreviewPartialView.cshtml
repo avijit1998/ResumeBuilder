@@ -1,148 +1,170 @@
 ﻿@model ResumeBuilder.ViewModels.PublicProfileViewModel
 
-<h1 class="text-primary text-center name-size">@Model.Name</h1>
-<div id="basicInfoModal">
-    <div class="text-center text-primary font-size-heading">Personal Details</div>
+<style>
+    .font-size-heading {
+        font-size: 24px;
+        background-color: rgba(134, 185, 214, 0.5607843137254902);
+    }
+    .name-size {
+        font-size: 50px;
+    }
+    #basicDiv {
+        background-color: white;
+        color: black;
+        margin-top: -50px;
+        padding-top: 1px;
+        margin-bottom: -20px;
+        padding-bottom: 10px;
+    }
+    .skill-language-margin, .basicInfo-Preview {
+        padding: 1% 0% 1% 3%;
+    }
+</style>
+<div id="basicDiv">
+    <h1 class="text-primary text-center name-size">@Model.Name</h1>
     <div>
-        <div><b>Gender : </b>@Model.Gender</div>
-        <div><b>DOB : </b>@Model.DOB</div>
-        <div><b>E-mail : </b>@Model.Email</div>
-        <div><b>Phone No. : </b>@Model.PhoneNumber</div>
+        <div class="text-primary text-center font-size-heading">Personal Details</div>
+        <div class="basicInfo-Preview">
+            <div><b>Gender : </b>@Model.Gender</div>
+            <div><b>DOB : </b>@Model.DOB</div>
+            <div><b>E-mail : </b>@Model.Email</div>
+            <div><b>Phone No. : </b>@Model.PhoneNumber</div>
+        </div>
     </div>
-</div>
-@if (Model.EducationList.Count != 0)
-{
-    <div class="text-center text-primary font-size-heading">Education Details</div>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Sl. No.</th>
-                <th>Course</th>
-                <th>Stream</th>
-                <th>Board</th>
-                <th>CGPA / Percentage</th>
-                <th>Passing Year</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model.EducationList != null)
+    @if (Model.EducationList.Count != 0)
+    {
+        <div class="text-center text-primary font-size-heading">Education Details</div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Sl. No.</th>
+                    <th>Course</th>
+                    <th>Stream</th>
+                    <th>Board</th>
+                    <th>CGPA / Percentage</th>
+                    <th>Passing Year</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.EducationList != null)
+                {
+                    var counter = 0;
+                    foreach (var data in Model.EducationList)
+                    {
+                        counter++;
+                        <tr>
+                            <td>@counter</td>
+                            <td>@data.CourseName</td>
+                            <td>@data.Stream</td>
+                            <td>@data.Board</td>
+                            <td>@data.CGPAOrPercentage : @data.TotalPercentorCGPAValue</td>
+                            <td>@data.PassingYear</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    }
+    @if (Model.SkillList.Count != 0)
+    {
+        <div class="text-center text-primary font-size-heading">Skills</div>
+
+        <div class="skill-language-margin">
+            @if (Model.SkillList != null)
             {
+                var count = Model.SkillList.Count;
                 var counter = 0;
-                foreach (var data in Model.EducationList)
+                foreach (var data in Model.SkillList)
                 {
                     counter++;
-                    <tr>
-                        <td>@counter</td>
-                        <td>@data.CourseName</td>
-                        <td>@data.Stream</td>
-                        <td>@data.Board</td>
-                        <td>@data.CGPAOrPercentage : @data.TotalPercentorCGPAValue</td>
-                        <td>@data.PassingYear</td>
-                    </tr>
+                    if (counter == count - 1)
+                    {
+                        <span><b>@data</b> and </span>
+                    }
+                    else if (counter == count)
+                    {
+                        <span><b>@data</b></span>
+                    }
+                    else
+                    {
+                        <span><b>@data</b>, </span>
+                    }
                 }
             }
-        </tbody>
-    </table>
-}
-@if (Model.SkillList.Count != 0)
-{
-    <div class="text-center text-primary font-size-heading">Skills</div>
-
-    <div class="skill-language-margin">
-        @if (Model.SkillList != null)
-        {
-            var count = Model.SkillList.Count;
-            var counter = 0;
-            foreach (var data in Model.SkillList)
-            {
-                counter++;
-                if (counter == count - 1)
-                {
-                    <span><b>@data</b> and </span>
-                }
-                else if (counter == count)
-                {
-                    <span><b>@data</b></span>
-                }
-                else
-                {
-                    <span><b>@data</b>, </span>
-                }
-            }
-        }
-    </div>
-}
-@if (Model.ProjectList.Count != 0)
-{
-    <div class="text-center text-primary font-size-heading">Projects</div>
-    <ul class="mt-2">
-        @if (Model.ProjectList != null)
-        {
-            foreach (var data in Model.ProjectList)
-            {
-                <li>
-                    <div>
-                        <h5><b>@data.Title</b></h5>
-                        <p>@data.Description</p>
-                        <h6>Duration : @data.Duration Months</h6>
-                    </div>
-                </li>
-            }
-        }
-    </ul>
-}
-@if (Model.WorkExList.Count != 0)
-{
-    <div class="text-center text-primary font-size-heading">Work Experience</div>
-    <div class="">
+        </div>
+    }
+    @if (Model.ProjectList.Count != 0)
+    {
+        <div class="text-center text-primary font-size-heading">Projects</div>
         <ul class="mt-2">
-            @if (Model.WorkExList != null)
+            @if (Model.ProjectList != null)
             {
-                foreach (var data in Model.WorkExList)
+                foreach (var data in Model.ProjectList)
                 {
                     <li>
                         <div>
-                            @if (@data.CurrentlyWorking == true)
-                            {
-                                <h5><b>@data.OrganizationName</b> (Currently Working Here)</h5>
-                            }
-                            else
-                            {
-                                <h5><b>@data.OrganizationName</b></h5>
-                            }
-                            <div>Role : @data.Role</div>
-                            <h6>@data.StartMonth/@data.StartYear - @data.EndMonth/@data.EndYear</h6>
+                            <h5><b>@data.Title</b></h5>
+                            <p>@data.Description</p>
+                            <h6>Duration : @data.Duration Months</h6>
                         </div>
                     </li>
                 }
             }
         </ul>
-    </div>
-}
-@if (Model.Languages.Count != 0)
-{
-    <div class="text-center text-primary font-size-heading">Languages</div>
-    <div class="skill-language-margin">
-        @if (Model.Languages != null)
-        {
-            var count = Model.Languages.Count;
-            var counter = 0;
-            foreach (var data in Model.Languages)
+    }
+    @if (Model.WorkExList.Count != 0)
+    {
+        <div class="text-center text-primary font-size-heading">Work Experience</div>
+        <div class="">
+            <ul class="mt-2">
+                @if (Model.WorkExList != null)
+                {
+                    foreach (var data in Model.WorkExList)
+                    {
+                        <li>
+                            <div>
+                                @if (@data.CurrentlyWorking == true)
+                                {
+                                    <h5><b>@data.OrganizationName</b> (Currently Working Here)</h5>
+                                }
+                                else
+                                {
+                                    <h5><b>@data.OrganizationName</b></h5>
+                                }
+                                <div>Role : @data.Role</div>
+                                <h6>@data.StartMonth/@data.StartYear - @data.EndMonth/@data.EndYear</h6>
+                            </div>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+    }
+    @if (Model.Languages.Count != 0)
+    {
+        <div class="text-center text-primary font-size-heading">Languages</div>
+        <div class="skill-language-margin">
+            @if (Model.Languages != null)
             {
-                counter++;
-                if (counter == count - 1)
+                var count = Model.Languages.Count;
+                var counter = 0;
+                foreach (var data in Model.Languages)
                 {
-                    <span><b>@data</b> and </span>
-                }
-                else if (counter == count)
-                {
-                    <span><b>@data</b></span>
-                }
-                else
-                {
-                    <span><b>@data</b>, </span>
+                    counter++;
+                    if (counter == count - 1)
+                    {
+                        <span><b>@data</b> and </span>
+                    }
+                    else if (counter == count)
+                    {
+                        <span><b>@data</b></span>
+                    }
+                    else
+                    {
+                        <span><b>@data</b>, </span>
+                    }
                 }
             }
-        }
-    </div>
-}
+        </div>
+    }
+</div>
