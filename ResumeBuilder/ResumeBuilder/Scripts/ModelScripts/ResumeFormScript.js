@@ -1,25 +1,35 @@
-﻿$(document).ready(function () {
+﻿
+$(document).ready(function () {
+    $("body").on('click', '#educationDetails', function () {
+        
+        if ($('#spanId1').data('value') == 1) {
+            var disableValue = $('#spanId1').data('value');
+            $("input[type=radio][value=" + disableValue + "]").prop("disabled", true);
+        }
+
+        if ($('#spanId2').data('value') == 2) {
+            var disableValue = $('#spanId2').data('value');
+            $("input[type=radio][value=" + disableValue + "]").prop("disabled", true);
+        }
+    });
+    
+   
 
     //empty auto fill data
-    //$("body").on('click', 'hidden.bs.modal', function () {
-    //    //$('input:not(:radio),textarea').val('');
-    //});
+
     $("body").on('click', '[data-dismiss=modal]', function () {
         $('#modalWorkExperience').on('hidden.bs.modal', function () {
             clearFields();      
-    });
-    $('#modalProject').on('hidden.bs.modal', function () {
-        clearFields();
-
-    });
-    $('#modalSkills').on('hidden.bs.modal', function () {
-        clearFields();
-
-    });
-    $('#modalEducationDetails').on('hidden.bs.modal', function () {
-        clearFields();
-    });
-           
+        });
+        $('#modalProject').on('hidden.bs.modal', function () {
+            clearFields();
+        });
+        $('#modalSkills').on('hidden.bs.modal', function () {
+            clearFields();
+        });
+        $('#modalEducationDetails').on('hidden.bs.modal', function () {
+            clearFields();
+        });   
     });
 
 
@@ -51,7 +61,7 @@
                 $(".all-other").show();
             }
         });
-    });
+});
 
     //save summary info of user
     $("body").on("click", "#btnSaveSummary", function () {
@@ -190,6 +200,13 @@
 
         educationalDetails.CGPAOrPercentage = $('input[name="marksOption"]:checked').val();
         educationalDetails.TotalPercentorCGPAValue = $("#txtMarks").val();
+
+        //disable radio button for client-side
+        if (educationalDetails.CourseId == 1 || educationalDetails.CourseId == 2) {
+            $("input[type=radio][value=" + educationalDetails.CourseId + "]").prop("disabled", true);
+            $("input[type=radio][value=" + educationalDetails.CourseId + "]").prop("checked", false);
+            $(".all-other").hide();
+        }
 
         $.ajax({
             type: "POST",
