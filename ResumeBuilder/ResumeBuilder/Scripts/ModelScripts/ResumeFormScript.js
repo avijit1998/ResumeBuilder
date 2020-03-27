@@ -13,7 +13,66 @@ $(document).ready(function () {
         }
     });
     
-   
+    $("body").on('click', '.basicInfo', function () {
+        var userId = $(this).data("id");
+        $.ajax({
+            url: "GetCurrentUser/" + userId,
+            method: "GET",
+            success: function (result) {
+                $('#userId').val(result.UserID);
+                $('#txtFullName').val(result.Name);
+                $('#txtEmail').val(result.Username);
+                $('#txtPhoneNumber').val(result.PhoneNumber);
+                
+                $('input[name="Gender"]').each(function (e, el) {
+                    if ($(el).val() == result.Gender) {
+                        $(el).prop('checked', true);
+                    }
+                })
+                for (var i = 0; i < result.LanguageIds.length; i++) {
+                    $('input[type="checkbox"]').each(function (e, el) {
+                        if ($(el).val() == result.LanguageIds[i]) {
+                            $(el).prop('checked', true);
+                        }
+                    })
+                }
+                $('#modalBasicInfo').modal('show');
+            },
+            error: function (error) {
+                botbox.alert("<p style='color:black;'>Sorry ! Unable to edit user</p>");
+            }
+        });
+
+    });
+
+    $("body").on('click', '.summary', function () {
+        var userId = $(this).data("id");
+        $.ajax({
+            url: "GetCurrentUser/" + userId,
+            method: "GET",
+            success: function (result) {                
+                $('#txtSummary').val(result.Summary);
+
+                $('input[name="Gender"]').each(function (e, el) {
+                    if ($(el).val() == result.Gender) {
+                        $(el).prop('checked', true);
+                    }
+                })
+                for (var i = 0; i < result.LanguageIds.length; i++) {
+                    $('input[type="checkbox"]').each(function (e, el) {
+                        if ($(el).val() == result.LanguageIds[i]) {
+                            $(el).prop('checked', true);
+                        }
+                    })
+                }
+                $('#modalSummary').modal('show');
+            },
+            error: function (error) {
+                botbox.alert("<p style='color:black;'>Sorry ! Unable to edit user</p>");
+            }
+        });
+
+    });
 
     //empty auto fill data
 
