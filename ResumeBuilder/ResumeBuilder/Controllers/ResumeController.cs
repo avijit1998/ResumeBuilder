@@ -99,11 +99,6 @@ namespace ResumeBuilder.Controllers
                                              where course.UserId == id
                                              select course.CourseId).ToList();
 
-                //ViewBag.CheckIfEntered = find from db
-                //property for SaveBasicInformation : boolean
-                //    property for SaveSummary : Boolean
-
-
                 ViewBag.Languages = db.Languages.ToList();
                 return PartialView(user);                               
             }
@@ -578,6 +573,7 @@ namespace ResumeBuilder.Controllers
             var user = new EditUserLanguageViewModel
             {
                 UserID = data.UserID,
+                Name=data.Name,
                 Username = data.Username,
                 Gender = data.Gender,
                 Summary=data.Summary,

@@ -12,6 +12,8 @@
         var res = Int32.TryParse(Session["UserID"] as String, out ids);
     }
     <span style="display:none;" data-sessionid="@ids" id="sessionIdFetch"></span>
+
+
     <div class="box">
         <div class="container">
 
@@ -34,7 +36,7 @@
             @*1st Row*@
             <div class="row">
                 @*Personal Summary*@
-                <a href="#" data-toggle="modal" data-target="#modalSummary" id="summary">
+                <a href="#" data-toggle="modal" data-target="#modalSummary" id="summary" data-id="@Model.UserID" class="summary">
                     <div class="col-sm-3 basic-info div-design">
 
                         <div class="box-part text-center">
@@ -51,7 +53,7 @@
 
 
                 @*Basic Information*@
-                <a href="#" data-toggle="modal" data-target="#modalBasicInfo">
+                <a href="#" data-toggle="modal" data-target="#modalBasicInfo" data-id="@Model.UserID" class="basicInfo">
                     <div class="col-sm-3 basic-info div-design">
 
                         <div class="box-part text-center">
@@ -143,9 +145,7 @@
 
 
     <div id="close-modal">
-        <div>
-            <input type="hidden" name="UserID" id="userId" value="@Model.UserID" />
-        </div>
+       
         @*Basic Information Form*@
         <div id="modalBasicInfo" class="modal fade" role="dialog">
             <div class="modal-dialog">
@@ -160,6 +160,9 @@
                             <div class="col-md-12">
                                 <form action="/Resume/SaveBasicInfo" method="post">
 
+                                    <div>
+                                        <input type="hidden" name="UserID" id="userId" value="@Model.UserID" />
+                                    </div>
 
                                     <div class="form-group">
                                         <label>Full Name:</label>
@@ -181,11 +184,24 @@
                                         </label>
                                     </div>
 
-                                    <div class="form-group">
+                                    @*<div class="form-group">
                                         <label>Date of Birth</label>
                                         <input type="date" class="form-control" name="DateOfBirth" id="dateDOB">
-                                    </div>
+                                    </div>*@
 
+                                    <div class="form-group">
+                                        <label>Date of Birth</label>
+                                        @if (@Model.DateOfBirth != null)
+                                        {
+                                            @Html.TextBoxFor(model => model.DateOfBirth, new { @type = "date", @Value = Model.DateOfBirth.Value.ToString("yyyy-MM-dd"), @Class = "form-control", @Name = "DateOfBirth", @Id = "dateDOB", style = "color:black;" })
+                                        }
+
+                                        else
+                                        {
+                                            <input type="date" class="form-control" name="DateOfBirth" id="dateDOB" value="@Model.DateOfBirth">
+                                        }
+
+                                    </div>
                                     <div class="form-group">
                                         <label>Phone Number</label>
                                         <input type="text" class="form-control" name="PhoneNumber" id="txtPhoneNumber">
@@ -239,7 +255,14 @@
 
                                     <div class="form-group">
                                         <label>Summary:</label>
+                                        @if (@Model.Summary != null)
+                                        {
+                                            <textarea class="form-control" name="Summary" id="txtSummary" value="@Model.Summary"></textarea>
+                                        }
+                                        else
+                                        {
                                         <textarea class="form-control" name="Summary" id="txtSummary"></textarea>
+                                        }
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
@@ -551,11 +574,3 @@
     </div>
 </div>
 
-<!--There are no script here-->
-
-@*<script>
-    //myFunction();
-    function myFunction() {
-        document.getElementById("radioDisabled").disabled = true;
-    }
-</script>*@
