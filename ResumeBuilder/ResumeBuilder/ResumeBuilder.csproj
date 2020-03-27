@@ -41,11 +41,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HiQPdf.Free, Version=11.4.0.0, Culture=neutral, PublicKeyToken=acd8b62594985b24, processorArchitecture=MSIL">
+      <HintPath>..\packages\hiqpdf.free.11.4.0\lib\net40\HiQPdf.Free.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HtmlRenderer, Version=1.5.0.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlRenderer.Core.1.5.0.5\lib\net45\HtmlRenderer.dll</HintPath>
+    </Reference>
     <Reference Include="IronPdf.Assets.Rendering.Windows, Version=18.0.0.0, Culture=neutral, PublicKeyToken=94e1c31412563c75, processorArchitecture=MSIL">
       <HintPath>..\packages\Iron.Assets.Rendering.Windows.18.0.1\lib\net40\IronPdf.Assets.Rendering.Windows.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PdfSharp, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.Charting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -55,6 +70,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -410,6 +426,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\AjaxScripts\ajaxLoading.js" />
     <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\ModelScripts\SearchScript.js" />
     <Content Include="Scripts\Preview_Scripts\jspdf.debug.js" />
     <Content Include="Scripts\Preview_Scripts\jspdf.min.js" />
     <Content Include="Scripts\Preview_Scripts\previewDefault.js" />
@@ -529,11 +546,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\ModelScripts\FormScript.js" />
     <Content Include="Scripts\ModelScripts\PreviewScript.js" />
-
     <Content Include="Scripts\ModelScripts\ResumeEditScript.js" />
-
     <Content Include="Scripts\ModelScripts\RegisterScript.js" />
-
     <Content Include="Scripts\ModelScripts\ResumeFormScript.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\Profile_Scripts\profileDefaultScript.js" />
@@ -583,7 +597,6 @@
     <Content Include="Views\Resume\Search.cshtml" />
     <Content Include="Views\Resume\_BasicPreviewPartialView.cshtml" />
     <Content Include="Views\Resume\_TabularPreviewPartialView.cshtml" />
-    <Content Include="Views\Resume\PdfDownload.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -593,98 +606,6 @@
       <SubType>Designer</SubType>
     </Content>
     <None Include="Project_Readme.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="Content\plugins\filterizr\ActiveFilter.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\animate.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\BrowserWindow.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\config\cssEasingValuesRegexp.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\config\filterizrState.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\config\index.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\config\layout.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\EventReceiver.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\FilterContainer.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\FilterContainer\FilterContainer.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\FilterContainer\index.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\FilterContainer\StyledFilterContainer.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\FilterContainer\styles.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\FilterControls.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\FilterItem.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\FilterItems.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\FilterItems\FilterItems.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\FilterItems\index.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\FilterItems\StyledFilterItems.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\FilterItem\FilterItem.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\FilterItem\index.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\FilterItem\StyledFilterItem.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\FilterItem\styles.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\Filterizr.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\FilterizrElement.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\FilterizrOptions\defaultOptions.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\FilterizrOptions\FilterizrOptions.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\FilterizrOptions\index.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\Filterizr\Filterizr.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\Filterizr\index.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\Filterizr\installAsJQueryPlugin.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\getLayoutPositions.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\index.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\index.jquery.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\installAsJQueryPlugin.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\layouts\getHorizontalLayoutPositions.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\layouts\getPackedLayoutPositions.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\layouts\getSameHeightLayoutPositions.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\layouts\getSameSizeLayoutPosition.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\layouts\getSameWidthLayoutPositions.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\layouts\getVerticalLayoutPositions.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\layouts\Packer.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\makeLayoutPositions\index.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\makeLayoutPositions\makeHorizontalLayoutPositions.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\makeLayoutPositions\makeLayoutPositions.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\makeLayoutPositions\makePackedLayoutPositions.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\makeLayoutPositions\makeSameHeightLayoutPositions.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\makeLayoutPositions\makeSameSizeLayoutPosition.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\makeLayoutPositions\makeSameWidthLayoutPositions.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\makeLayoutPositions\makeVerticalLayoutPositions.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\makeLayoutPositions\Packer.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\Spinner\index.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\Spinner\makeSpinner.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\Spinner\Spinner.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\Spinner\StyledSpinner.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\StyledFilterizrElement.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\StyledFilterizrElements.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\types\index.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\types\interfaces\BaseOptions.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\types\interfaces\ContainerLayout.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\types\interfaces\Destructible.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\types\interfaces\Dictionary.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\types\interfaces\Dimensions.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\types\interfaces\index.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\types\interfaces\Options.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\types\interfaces\Position.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\types\interfaces\RawOptions.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\types\interfaces\RawOptionsCallbacks.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\types\interfaces\Resizable.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\types\interfaces\SpinnerOptions.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\types\interfaces\Styleable.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\utils.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\utils\allStringsOfArray1InArray2.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\utils\checkOptionForErrors.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\utils\debounce.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\utils\filterItemArraysHaveSameSorting.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\utils\getDataAttributesOfHTMLNode.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\utils\getHTMLElement.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\utils\index.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\utils\intersection.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\utils\merge.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\utils\noop.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\utils\setStyles.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\utils\shuffle.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\filterizr\utils\sortBy.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\fullcalendar-bootstrap\main.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\fullcalendar-daygrid\main.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\fullcalendar-interaction\main.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\fullcalendar-timegrid\main.d.ts" />
-    <TypeScriptCompile Include="Content\plugins\fullcalendar\main.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202003181302557_new database.resx">

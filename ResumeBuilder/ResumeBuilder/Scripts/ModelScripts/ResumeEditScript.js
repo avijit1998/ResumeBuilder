@@ -58,7 +58,12 @@ $("body").on("click", ".js-save-user", function () {
     $('input[type="checkbox"]:checked').each(function (e, el) {
         user.LanguageIds.push($(el).val());
     });
-    user.LanguageIds.pop();
+
+    if (user.LanguageIds[user.LanguageIds.length - 1] == "on") {
+        debugger;
+        user.LanguageIds.pop();
+    }
+
     $.ajax({
         type: "POST",
         url: 'UpdateUser',

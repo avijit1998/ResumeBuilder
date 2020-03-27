@@ -38,13 +38,30 @@
 
     <div id="educationDetails">
         <h3>Education History</h3>
-
+        @{var courseName = "";}
         @foreach (var e in educationDetails)
         {
+            if(e.CourseId==1)
+            {
+                courseName="10th";
+            }
+            else if (e.CourseId == 2)
+            {
+                courseName="12th";
+            }
+            else if (e.CourseId == 3)
+            {
+                courseName="Graduation";
+            }
+            else
+            {
+                courseName="Post Graduation";
+            }
+                
             <p>
                 
                 <b>
-                    Course Details:@e.CourseId
+                    Degree:@courseName
                 </b>
                 <button type="button" value="Edit" class="btn btn-info pull-right js-edit-education" data-education-id="@e.EducationalDetailID">Edit</button>
                 <button type="button" class="btn btn-danger pull-right js-delete-education" value="Delete" data-education-id="@e.EducationalDetailID">Delete</button>
@@ -171,7 +188,9 @@
 
                             <div class="form-group">
                                 <label>Date of Birth</label>
-                                <input type="date" class="form-control" name="DateOfBirth" id="dateDOB">
+                                @Html.TextBoxFor(model => model.DateOfBirth, new { @type = "date", @Value = Model.DateOfBirth.Value.ToString("yyyy-MM-dd"), @Class = "form-control", @Name="DateOfBirth", @Id="dateDOB", style = "color:black;" })
+                                @*@Html.EditorFor(model => model.DateOfBirth, new { @type = "date" , @class="form-control", @name="DateOfBirth", @id="dateDOB"})*@
+                                @*<input type="date" class="form-control" name="DateOfBirth" id="dateDOB" value="@Model.DateOfBirth">*@
                             </div>
 
                             <div class="form-group">
