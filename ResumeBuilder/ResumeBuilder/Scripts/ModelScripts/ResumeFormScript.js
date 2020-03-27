@@ -1,7 +1,7 @@
 ﻿
 $(document).ready(function () {
     $("body").on('click', '#educationDetails', function () {
-        
+        debugger;
         if ($('#spanId1').data('value') == 1) {
             var disableValue = $('#spanId1').data('value');
             $("input[type=radio][value=" + disableValue + "]").prop("disabled", true);

@@ -336,11 +336,13 @@ $('body').on('click', '.js-save-education', function (e) {
         data: formData,
         success: function (result) {
             $('#modalEducationDetails').modal('hide');
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
             bootbox.alert("<p style='color:black;'>Education Details updated sucessfully</p>");
-
             var url = $("#ajaxEditForm").data('url');
             $.get(url, function (data) {
                 $('#pageContent').html(data);
+                $('#pageContent').show();
             });
         },
         error: function (error) {
