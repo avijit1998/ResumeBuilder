@@ -4,6 +4,7 @@
     List<ResumeBuilder.Models.Languages> languages = ViewBag.Languages;
     string str = "test";
     List<ResumeBuilder.Models.Course> courses = ViewBag.Courses;
+    List<int> alreadyDoneCourses = ViewBag.AlreadyDoneCourses;
 }
 <div id="mainDivModal">
     @{
@@ -256,6 +257,16 @@
             </div>
         </div>
 
+        @if (alreadyDoneCourses.Contains(1))
+        {
+            <span style="display:none;" id="spanId1" data-value="1"></span>
+        }
+        
+        @if (alreadyDoneCourses.Contains(2))
+        {
+            <span style="display:none;" id="spanId2" data-value="2"></span>
+        }
+
         @*Education Details Form*@
         <div id="modalEducationDetails" class="modal fade" role="dialog">
             <div class="modal-dialog">
@@ -273,13 +284,15 @@
                                     @foreach (var course in courses)
                                     {
                                         <label class="radio-inline">
-                                            <input type="radio" name="courseOption" value="@course.CourseId">@course.CourseName
+                                            <input type="radio" name="courseOption" class="radioDisabled" value="@course.CourseId">@course.CourseName
                                         </label>
+                                        
                                     }
 
+                                    
                                     <div class="all-other" style="display:none;">
                                         <div class="form-group stream">
-                                            <label>Stream:</label>
+                                            <label>Stream(with Branch Name (if any):</label>
                                             <input type="text" class="form-control" name="stream" id="stream" placeholder="Enter stream">
                                         </div>
                                         <div class="form-group">
@@ -539,3 +552,10 @@
 </div>
 
 <!--There are no script here-->
+
+@*<script>
+    //myFunction();
+    function myFunction() {
+        document.getElementById("radioDisabled").disabled = true;
+    }
+</script>*@

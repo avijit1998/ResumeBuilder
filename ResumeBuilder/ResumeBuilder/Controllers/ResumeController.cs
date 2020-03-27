@@ -94,6 +94,11 @@ namespace ResumeBuilder.Controllers
                 var re = Int32.TryParse(Session["UserID"] as String, out id);
                 var user = db.Users.Where(m => m.UserID == id).FirstOrDefault();
                 ViewBag.Courses = db.Courses.ToList();
+
+                ViewBag.AlreadyDoneCourses = (from course in db.EducationalDetails
+                                             where course.UserId == id
+                                             select course.CourseId).ToList();
+
                 ViewBag.Languages = db.Languages.ToList();
                 return PartialView(user);                               
             }
