@@ -25,7 +25,7 @@
             {
                 @Html.AntiForgeryToken()
 
-                @Html.TextBoxFor(m => m.UserName, new { @placeholder = "User Name", @class = "fadeIn second userNameField" })
+                @Html.TextBoxFor(m => m.UserName, new { @placeholder = "Email Address", @class = "fadeIn second userNameField" })
                 <div>
                     @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
                 </div>

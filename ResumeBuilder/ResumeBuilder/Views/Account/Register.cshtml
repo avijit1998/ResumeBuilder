@@ -37,7 +37,7 @@
                             @Html.TextBoxFor(m => m.Username, new { @class = "form-control registerTextSpacing" })
                         </div>
                     </div>
-                    <div class="divValidationErrorText">
+                    <div style="color:#A94442" id="emailErrorText" class="divValidationErrorText">
                         @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger registerError" })
                     </div>
                     <div class="form-group">
@@ -46,8 +46,8 @@
                             @Html.PasswordFor(m => m.Password, new { @class = "form-control registerTextSpacing" })
                         </div>
                     </div>
-                    <div class="divValidationErrorText">
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger registerError" })
+                    <div style="color:#A94442" id="passwordErrorText" class="divValidationErrorText">
+                        @*@Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger registerError" })*@
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.ConfirmPassword, "Confirm", new { @class = "col-md-2 control-label registerLabelSpacing" })
@@ -70,18 +70,7 @@
         @Scripts.Render("~/bundles/bootstrap")
         @Scripts.Render("~/bundles/jqueryval")
         @Scripts.Render("~/bundles/modernizr")
+        <script src="~/Scripts/ModelScripts/RegisterScript.js"></script>
     </body>
 </html>
-<script>
-    if ($.trim($("#validationSummaryDiv").text()) === "User already exists.")
-        bootbox.alert("<b style='color:black;'>User already exists.</b>");
 
-    $("#btnSubmit").on("click",function(){
-        if($.trim($("#validationSummaryDiv").text()) === "")
-        {
-            bootbox.alert("<b class='alert-success' style='color:black;'>Registration Successful</b>");
-        }
-    })
-    
-
-</script>

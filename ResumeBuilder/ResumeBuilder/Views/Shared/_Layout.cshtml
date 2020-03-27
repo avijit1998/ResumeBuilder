@@ -9,7 +9,12 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     <link href="~/Content/settings.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/ResumeIndex.css" rel="stylesheet" />
+
+    <link href="~/Content/ShowDatacss.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
+
     <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+
     <link href="~/Content/jquery-ui.structure.css" rel="stylesheet" />
     <link href="~/Content/jquery-ui.theme.css" rel="stylesheet" />
     @Styles.Render("~/Content/css")
@@ -20,10 +25,11 @@
     @RenderBody()
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    <script src="~/Scripts/jquery-ui.js"></script>
     <script src="~/Scripts/AjaxScripts/ajaxLoading.js"></script>
     <script src="~/Scripts/settings.js"></script>
     <script src="~/Scripts/ModelScripts/PreviewScript.js"></script>
     <script src="~/Scripts/ModelScripts/ResumeFormScript.js"></script>
+    <script src="~/Scripts/ModelScripts/ResumeEditScript.js"></script>
+    @RenderSection("scripts", required: false)
 </body>
 </html>
