@@ -28,7 +28,7 @@ img {
 }
 .bg-blue-design
 {
-    background-color: #86b9d68f;
+    background-color: #bcd6e4;
 }
 .bg-card
 {
@@ -58,14 +58,19 @@ html
 {
     text-decoration: none !important;
 }
+.nav-hover:hover {
+    background-color: #1b60ab;
+    border-radius: 5px;
+}
 .education-text-header-size {
-    font-size: 30px;
+    font-size: 20px;
 }
 * {
     box-sizing: border-box;
   }
 body {
     font-family: Helvetica, sans-serif;
+    background-color: gray;
 } 
 /* The actual timeline (the vertical ruler) */
 .timeline {
