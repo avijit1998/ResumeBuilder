@@ -427,9 +427,6 @@
     <Content Include="Scripts\AjaxScripts\ajaxLoading.js" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\ModelScripts\SearchScript.js" />
-    <Content Include="Scripts\Preview_Scripts\jspdf.debug.js" />
-    <Content Include="Scripts\Preview_Scripts\jspdf.min.js" />
-    <Content Include="Scripts\Preview_Scripts\previewDefault.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
