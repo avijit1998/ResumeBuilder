@@ -67,7 +67,10 @@ $("body").on("click", ".js-save-user", function () {
         user.LanguageIds.push($(el).val());
     });
 
-    user.LanguageIds.pop();
+    if (user.LanguageIds[user.LanguageIds.length - 1] == "on") {
+        debugger;
+        user.LanguageIds.pop();
+    }
 
     $.ajax({
         type: "POST",
