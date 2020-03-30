@@ -71,7 +71,7 @@
 //        }
 
 //        [HttpPost]
-//        public ActionResult UpdateProject(int projectId, ProjectService model)
+//        public ActionResult UpdateProject(int projectId, Project model)
 //        {
 //            var project = db.Projects.FirstOrDefault(x => x.ProjectId == projectId);
 
@@ -141,7 +141,7 @@
 //        }
 
 //        [HttpPost]
-//        public ActionResult UpdateWorkExperience(int WorkExperienceid, WorkExperienceService model)
+//        public ActionResult UpdateWorkExperience(int WorkExperienceid, WorkExperience model)
 //        {
 //            var workEx = db.WorkExperiences.FirstOrDefault(x => x.WorkExperienceid == WorkExperienceid);
 //            workEx.OrganizationName = model.OrganizationName;
@@ -175,9 +175,9 @@
 
 
 //        [HttpPost]
-//        public ActionResult SaveSummary(UserDetailService user)
+//        public ActionResult SaveSummary(UserDetail user)
 //        {
-//            var userFromDb = db.UserDetailService.FirstOrDefault(u => u.UserServiceID == user.UserServiceID);
+//            var userFromDb = db.UserDetail.FirstOrDefault(u => u.UserID == user.UserID);
 
 //            userFromDb.Summary = user.Summary;
 //            db.SaveChanges();
@@ -190,7 +190,7 @@
 //        [HttpPost]
 //        public ActionResult SaveBasicInformation(AddUserViewModel addUserViewModel)
 //        {
-//            var userFromDb = db.UserDetailService.FirstOrDefault(u => u.UserServiceID == addUserViewModel.UserID);
+//            var userFromDb = db.UserDetail.FirstOrDefault(u => u.UserID == addUserViewModel.UserID);
 
 //            userFromDb.Name = addUserViewModel.Name;
 //            userFromDb.Gender = addUserViewModel.Gender;
@@ -200,7 +200,7 @@
 //            if (addUserViewModel.LanguageIds.Any())
 //            {
 //                var languages = db.Languages.Where(x => addUserViewModel.LanguageIds.Contains(x.LanguageID)).ToList();
-//                userFromDb.LanguageService.AddRange(languages);
+//                userFromDb.Language.AddRange(languages);
 //            }
 
 //            db.SaveChanges();
@@ -211,9 +211,9 @@
 //        }
 
 //        [HttpPost]
-//        public ActionResult SaveProjectDetails(ProjectService project)
+//        public ActionResult SaveProjectDetails(Project project)
 //        {
-//            db.ProjectService.Add(project);
+//            db.Project.Add(project);
 //            db.SaveChanges();
 
 //            string message = "SUCCESS";
@@ -222,9 +222,9 @@
 //        }
 
 //        [HttpPost]
-//        public ActionResult SaveWorkExperience(WorkExperienceService workExperience)
+//        public ActionResult SaveWorkExperience(WorkExperience workExperience)
 //        {
-//            db.WorkExperienceService.Add(workExperience);
+//            db.WorkExperience.Add(workExperience);
 //            db.SaveChanges();
 
 //            string message = "SUCCESS";
@@ -233,9 +233,9 @@
 //        }
 
 //        [HttpPost]
-//        public ActionResult SaveEducationalDetails(EducationalDetailsService educationalDetails)
+//        public ActionResult SaveEducationalDetails(EducationalDetails educationalDetails)
 //        {
-//            db.EducationalDetailsService.Add(educationalDetails);
+//            db.EducationalDetails.Add(educationalDetails);
 //            db.SaveChanges();
 
 //            string message = "SUCCESS";
@@ -454,7 +454,7 @@
 
 
 //        [HttpPost]
-//        public ActionResult UpdateEducation(int EducationalDetailID, EducationalDetailsService model)
+//        public ActionResult UpdateEducation(int EducationalDetailID, EducationalDetails model)
 //        {
 //            var edu = db.EducationalDetails.FirstOrDefault(x => x.EducationalDetailID == EducationalDetailID);
 
@@ -609,6 +609,6 @@
 //            db.Entry(user).State = System.Data.Entity.EntityState.Modified;
 //            db.SaveChanges();
 //            return Json("Success");
-//        }
-//    }
+        //}
+    //}
 //}

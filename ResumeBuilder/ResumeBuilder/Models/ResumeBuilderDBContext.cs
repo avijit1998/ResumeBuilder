@@ -8,22 +8,22 @@ namespace ResumeBuilder.Models
 {
     public class ResumeBuilderDBContext : DbContext
     {
-        public DbSet<CourseService> CourseService{ get; set; }
+        public DbSet<Course> Courses { get; set; }
 
-        public DbSet<EducationalDetailsService> EducationalDetailsService { get; set; }
+        public DbSet<EducationalDetails> EducationalDetails { get; set; }
 
         public DbSet<Language> Languages { get; set; }
 
-        public DbSet<LoginService> LoginService { get; set; }
+        public DbSet<Login> Logins { get; set; }
 
-        public DbSet<ProjectService> ProjectService { get; set; }
+        public DbSet<Project> Projects { get; set; }
 
-        public DbSet<SettingService> SettingService { get; set; }
+        public DbSet<Setting> Settings { get; set; }
 
         public DbSet<Skill> Skills { get; set; }
 
-        public DbSet<UserDetailService> UserDetailService { get; set; }
+        public DbSet<UserDetails> UserDetails { get; set; }
 
-        public DbSet<WorkExperienceService> WorkExperienceService { get; set; }
+        public DbSet<WorkExperience> WorkExperiences { get; set; }
     }
 }

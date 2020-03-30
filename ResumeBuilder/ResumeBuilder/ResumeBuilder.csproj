@@ -184,21 +184,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003291135558_created new fresh database.cs" />
-    <Compile Include="Migrations\202003291135558_created new fresh database.Designer.cs">
-      <DependentUpon>202003291135558_created new fresh database.cs</DependentUpon>
+    <Compile Include="Migrations\202003301000591_New Database.cs" />
+    <Compile Include="Migrations\202003301000591_New Database.Designer.cs">
+      <DependentUpon>202003301000591_New Database.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\CourseService.cs" />
-    <Compile Include="Models\EducationalDetailsService.cs" />
+    <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\EducationalDetails.cs" />
     <Compile Include="Models\Language.cs" />
-    <Compile Include="Models\LoginService.cs" />
-    <Compile Include="Models\ProjectService.cs" />
+    <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\Project.cs" />
     <Compile Include="Models\ResumeBuilderDBContext.cs" />
     <Compile Include="Models\SettingService.cs" />
     <Compile Include="Models\Skill.cs" />
-    <Compile Include="Models\UserDetailService.cs" />
-    <Compile Include="Models\WorkExperienceService.cs" />
+    <Compile Include="Models\UserDetails.cs" />
+    <Compile Include="Models\WorkExperience.cs" />
     <Compile Include="ViewModels\AddUserSkillsViewModel.cs" />
     <Compile Include="ViewModels\AddUserViewModel.cs" />
     <Compile Include="ViewModels\EditUserLanguageViewModel.cs" />
@@ -590,8 +590,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003291135558_created new fresh database.resx">
-      <DependentUpon>202003291135558_created new fresh database.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003301000591_New Database.resx">
+      <DependentUpon>202003301000591_New Database.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

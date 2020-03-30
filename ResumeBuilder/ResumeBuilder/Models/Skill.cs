@@ -14,6 +14,6 @@ namespace ResumeBuilder.Models
 
         public string SkillName { get; set; }
 
-        public virtual List<UserDetailService> UserService { get; set; }
+        public virtual List<UserDetails> Users { get; set; }
     }
 }

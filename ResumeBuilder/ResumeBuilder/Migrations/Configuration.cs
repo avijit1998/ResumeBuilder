@@ -4,7 +4,6 @@ namespace ResumeBuilder.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
-    
 
     internal sealed class Configuration : DbMigrationsConfiguration<ResumeBuilder.Models.ResumeBuilderDBContext>
     {
@@ -81,29 +80,30 @@ namespace ResumeBuilder.Migrations
                 });
             }
 
-            if (!context.CourseService.Any())
+            if (!context.Courses.Any())
             {
-                context.CourseService.Add(new Models.CourseService
+                context.Courses.Add(new Models.Course
                 {
                     CourseName = "10th"
                 });
 
-                context.CourseService.Add(new Models.CourseService
+                context.Courses.Add(new Models.Course
                 {
                     CourseName = "12th"
                 });
 
-                context.CourseService.Add(new Models.CourseService
+                context.Courses.Add(new Models.Course
                 {
                     CourseName = "Under Graduation"
                 });
 
-                context.CourseService.Add(new Models.CourseService
+                context.Courses.Add(new Models.Course
                 {
                     CourseName = "Post Graduation"
                 });
             }
 
         }
+
     }
 }

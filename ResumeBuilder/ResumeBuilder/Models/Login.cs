@@ -7,10 +7,10 @@ using System.Web;
 
 namespace ResumeBuilder.Models
 {
-    public class LoginService
+    public class Login
     {
         [Key]
-        public int UserServiceID { get; set; }
+        public int UserID { get; set; }
 
         public string  Username { get; set; }
 
@@ -18,6 +18,6 @@ namespace ResumeBuilder.Models
 
         public string Salt { get; set; }
         
-        public virtual UserDetailService UserDetailService { get; set; }
+        public virtual UserDetails UserDetails { get; set; }
     }
 }

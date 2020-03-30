@@ -8,30 +8,30 @@ using System.Web;
 
 namespace ResumeBuilder.Models
 {
-    public class SettingService
+    public class Setting
     {
-        [Key, ForeignKey("UserDetailService")]
-        public int UserServiceID { get; set; }
+        [Key, ForeignKey("UserDetails")]
+        public int UserID { get; set; }
 
-        public bool CheckWorkExperince { get; set; }
+        public bool WorkExperienceStatus { get; set; }
 
-        public bool CheckEducationalDetails { get; set; }
+        public bool EducationalDetailsStatus { get; set; }
 
-        public bool CheckProjectDetails { get; set; }
+        public bool ProjectDetailsStatus { get; set; }
 
-        public bool CheckSkillsDetails { get; set; }
+        public bool SkillsDetailsStatus { get; set; }
 
-        public bool CheckLanguages { get; set; }
+        public bool LanguagesStatus { get; set; }
 
-        public virtual UserDetailService UserDetailService { get; set; }
+        public virtual UserDetails UserDetails { get; set; }
 
-        public SettingService()
+        public Setting()
         {
-            CheckEducationalDetails = true;
-            CheckWorkExperince = true;
-            CheckProjectDetails = true;
-            CheckSkillsDetails = true;
-            CheckLanguages = true;
+            WorkExperienceStatus = true;
+            EducationalDetailsStatus = true;
+            ProjectDetailsStatus = true;
+            SkillsDetailsStatus = true;
+            LanguagesStatus = true;
         }
     }
 }

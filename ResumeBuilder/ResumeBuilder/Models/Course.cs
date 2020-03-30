@@ -6,13 +6,12 @@ using System.Web;
 
 namespace ResumeBuilder.Models
 {
-    public class CourseService
+    public class Course
     {
         [Key]
-        public int CourseServiceID { get; set; }
+        public int CourseID { get; set; }
 
         public string CourseName { get; set; }
 
-        
     }
 }

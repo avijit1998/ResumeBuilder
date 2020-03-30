@@ -7,12 +7,12 @@ using System.Web;
 
 namespace ResumeBuilder.Models
 {
-    public class ProjectService
+    public class Project
     {
         [Key]
-        public int ProjectServiceID { get; set; }
+        public int ProjectID { get; set; }
 
-        public int UserServiceID { get; set; }
+        public int UserID { get; set; }
         
         public string ProjectTitle { get; set; }
 
@@ -22,7 +22,7 @@ namespace ResumeBuilder.Models
 
         public string Description { get; set; }
 
-        [ForeignKey("UserServiceID")]
-        public virtual UserDetailService UserDetailService { get; set; }
+        [ForeignKey("UserID")]
+        public virtual UserDetails UserDetails { get; set; }
     }
 }
