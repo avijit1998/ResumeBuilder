@@ -18,10 +18,10 @@
                 }
 
                 if (ob.setContact == 0) {
-                    $("#cbContact").prop('checked', true);
+                    $("#cbLanguage").prop('checked', true);
                 }
                 else {
-                    $("#cbContact").prop('checked', false);
+                    $("#cbLanguage").prop('checked', false);
                 }
                 if (ob.setSkills == 0) {
                     $("#cbSkills").prop('checked', true);
@@ -62,7 +62,7 @@
             result[2] = 0;
         if ($("#cbSkills").prop("checked") == true)
             result[3] = 0;
-        if ($("#cbContact").prop("checked") == true)
+        if ($("#cbLanguage").prop("checked") == true)
             result[4] = 0;
         $.ajax({
             url: "/Resume/DisplayDetails",

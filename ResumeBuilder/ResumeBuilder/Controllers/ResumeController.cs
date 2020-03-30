@@ -94,6 +94,16 @@ namespace ResumeBuilder.Controllers
                 var re = Int32.TryParse(Session["UserID"] as String, out id);
                 var user = db.Users.Where(m => m.UserID == id).FirstOrDefault();
                 ViewBag.Courses = db.Courses.ToList();
+
+                ViewBag.AlreadyDoneCourses = (from course in db.EducationalDetails
+                                             where course.UserId == id
+                                             select course.CourseId).ToList();
+
+                //ViewBag.CheckIfEntered = find from db
+                //property for SaveBasicInformation : boolean
+                //    property for SaveSummary : Boolean
+
+
                 ViewBag.Languages = db.Languages.ToList();
                 return PartialView(user);                               
             }
@@ -532,9 +542,11 @@ namespace ResumeBuilder.Controllers
                 HtmlToPdf htmlToPdfConverter = new HtmlToPdf();
                 htmlToPdfConverter.Document.Margins = new PdfMargins(20, 20, 20, 20);
                 htmlToPdfConverter.BrowserWidth = 740;
-                // set PDF page size and orientation
                 htmlToPdfConverter.Document.PageSize = new PdfPageSize();
                 htmlToPdfConverter.Document.PageOrientation = new PdfPageOrientation();
+
+                
+
                 byte[] pdfBuffer = htmlToPdfConverter.ConvertHtmlToMemory(htmlToConvert, baseUrl);
                 FileResult fileResult = new FileContentResult(pdfBuffer, "application/pdf");
                 fileResult.FileDownloadName = "Resume.pdf";
