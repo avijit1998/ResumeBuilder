@@ -1,9 +1,9 @@
-﻿//using ResumeBuilder.Models;
-//using ResumeBuilder.ViewModels;
-//using System.Linq;
-//using System.Web.Mvc;
-//using System;
-//using ResumeMaker.Models;
+﻿using ResumeBuilder.Models;
+using ResumeBuilder.ViewModels;
+using System.Linq;
+using System.Web.Mvc;
+using System;
+using ResumeBuilder.Models;
 
 //namespace ResumeBuilder.Controllers
 //{
