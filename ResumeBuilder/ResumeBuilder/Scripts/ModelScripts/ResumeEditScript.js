@@ -25,12 +25,12 @@ $("body").on("click", ".js-edit-user", function (e) {
         url: "GetCurrentUser/" + userId,
         method: "GET",
         success: function (result) {
+            $('#modalBasicInfo').modal('show');
             $('#userId').val(result.UserID);
             $('#txtFullName').val(result.Name);
             $('#txtEmail').val(result.Username);
             $('#txtPhoneNumber').val(result.PhoneNumber); 
             $('#txtSummary').val(result.Summary);
-            
             $('input[name="Gender"]').each(function (e, el) {
                 if ($(el).val() == result.Gender) {
                     $(el).prop('checked', true);
@@ -351,6 +351,8 @@ $('body').on('click', '.js-save-education', function (e) {
         data: formData,
         success: function (result) {
             $('#modalEducationDetails').modal('hide');
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
             removeBackdrop();
             bootbox.alert("<p style='color:black;'>Education Details updated sucessfully</p>");
             var url = $("#ajaxEditForm").data('url');

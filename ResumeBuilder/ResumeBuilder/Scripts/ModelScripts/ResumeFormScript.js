@@ -12,7 +12,7 @@ $(document).ready(function () {
             $("input[type=radio][value=" + disableValue + "]").prop("disabled", true);
         }
     });
-    
+  
     $("body").on('click', '.basicInfo', function () {
         var userId = $(this).data("id");
         $.ajax({
