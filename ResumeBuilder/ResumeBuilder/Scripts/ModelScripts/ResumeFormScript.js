@@ -1,9 +1,96 @@
-﻿$(document).ready(function () {
+﻿
+$(document).ready(function () {
+    $("body").on('click', '#educationDetails', function () {
+        debugger;
+        if ($('#spanId1').data('value') == 1) {
+            var disableValue = $('#spanId1').data('value');
+            $("input[type=radio][value=" + disableValue + "]").prop("disabled", true);
+        }
+
+        if ($('#spanId2').data('value') == 2) {
+            var disableValue = $('#spanId2').data('value');
+            $("input[type=radio][value=" + disableValue + "]").prop("disabled", true);
+        }
+    });
+    
+    $("body").on('click', '.basicInfo', function () {
+        var userId = $(this).data("id");
+        $.ajax({
+            url: "GetCurrentUser/" + userId,
+            method: "GET",
+            success: function (result) {
+                $('#userId').val(result.UserID);
+                $('#txtFullName').val(result.Name);
+                $('#txtEmail').val(result.Username);
+                $('#txtPhoneNumber').val(result.PhoneNumber);
+                
+                $('input[name="Gender"]').each(function (e, el) {
+                    if ($(el).val() == result.Gender) {
+                        $(el).prop('checked', true);
+                    }
+                })
+                for (var i = 0; i < result.LanguageIds.length; i++) {
+                    $('input[type="checkbox"]').each(function (e, el) {
+                        if ($(el).val() == result.LanguageIds[i]) {
+                            $(el).prop('checked', true);
+                        }
+                    })
+                }
+                $('#modalBasicInfo').modal('show');
+            },
+            error: function (error) {
+                botbox.alert("<p style='color:black;'>Sorry ! Unable to edit user</p>");
+            }
+        });
+
+    });
+
+    $("body").on('click', '.summary', function () {
+        var userId = $(this).data("id");
+        $.ajax({
+            url: "GetCurrentUser/" + userId,
+            method: "GET",
+            success: function (result) {                
+                $('#txtSummary').val(result.Summary);
+
+                $('input[name="Gender"]').each(function (e, el) {
+                    if ($(el).val() == result.Gender) {
+                        $(el).prop('checked', true);
+                    }
+                })
+                for (var i = 0; i < result.LanguageIds.length; i++) {
+                    $('input[type="checkbox"]').each(function (e, el) {
+                        if ($(el).val() == result.LanguageIds[i]) {
+                            $(el).prop('checked', true);
+                        }
+                    })
+                }
+                $('#modalSummary').modal('show');
+            },
+            error: function (error) {
+                botbox.alert("<p style='color:black;'>Sorry ! Unable to edit user</p>");
+            }
+        });
+
+    });
 
     //empty auto fill data
-    $("body").on('click', 'hidden.bs.modal', function () {
-        //$('input:not(:radio),textarea').val('');
+
+    $("body").on('click', '[data-dismiss=modal]', function () {
+        $('#modalWorkExperience').on('hidden.bs.modal', function () {
+            clearFields();      
+        });
+        $('#modalProject').on('hidden.bs.modal', function () {
+            clearFields();
+        });
+        $('#modalSkills').on('hidden.bs.modal', function () {
+            clearFields();
+        });
+        $('#modalEducationDetails').on('hidden.bs.modal', function () {
+            clearFields();
+        });   
     });
+
 
     $("body").on('change', 'input[type=radio][name=marksOption]', function () {
         if ($(this).val() == 'CGPA') {
@@ -20,9 +107,10 @@
             $(".hide-if-currently-working").show();
         }
     });
+
     $("body").on("click", "#educationDetails", function () {
         $('input[type=radio][name=courseOption]').change(function () {
-            debugger;
+          
             if ($(this).val() == '1') {
                 $(".all-other").show();
                 $(".stream").hide();
@@ -32,7 +120,7 @@
                 $(".all-other").show();
             }
         });
-    });
+});
 
     //save summary info of user
     $("body").on("click", "#btnSaveSummary", function () {
@@ -52,7 +140,7 @@
                 bootbox.alert("<b style='color:black;'>Summary details successfully saved.</b>");
             },
             error: function () {
-                bootbox.alert("Error!");
+                bootbox.alert("<b style='color:black;'>Error!</b>");
 
             }
         });
@@ -70,11 +158,10 @@
             "PhoneNumber": $("#txtPhoneNumber").val(),
             "LanguageIds": []
         };
-        debugger;
-
         $('input[type="checkbox"]:checked').each(function (e, el) {
             user.LanguageIds.push($(el).val());
-        })
+        });
+
         $.ajax({
             type: "POST",
             url: '/Resume/SaveBasicInformation',
@@ -86,7 +173,7 @@
                 bootbox.alert("<b style='color:black;'>Basic information successfully saved.</b>");
             },
             error: function () {
-                bootbox.alert("Error!");
+                bootbox.alert("<b style='color:black;'>Error!</b>");
 
             }
         });
@@ -109,11 +196,12 @@
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function () {
+                clearFields();
                 $("#modalProject").modal("hide");
                 bootbox.alert("<b style='color:black;'>Project details successfully saved.</b>");
             },
             error: function () {
-                bootbox.alert("Error!");
+                bootbox.alert("<b style='color:black;'>Error!</b>");
 
             }
         });
@@ -142,12 +230,13 @@
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function () {
+                clearFields();
                 $("#modalWorkExperience").modal("hide");
                 bootbox.alert("<b style='color:black;'>Work experience successfully saved.</b>");
 
             },
             error: function () {
-                bootbox.alert("Error!");
+                bootbox.alert("<b style='color:black;'>Error!</b>");
 
             }
         });
@@ -171,6 +260,13 @@
         educationalDetails.CGPAOrPercentage = $('input[name="marksOption"]:checked').val();
         educationalDetails.TotalPercentorCGPAValue = $("#txtMarks").val();
 
+        //disable radio button for client-side
+        if (educationalDetails.CourseId == 1 || educationalDetails.CourseId == 2) {
+            $("input[type=radio][value=" + educationalDetails.CourseId + "]").prop("disabled", true);
+            $("input[type=radio][value=" + educationalDetails.CourseId + "]").prop("checked", false);
+            $(".all-other").hide();
+        }
+
         $.ajax({
             type: "POST",
             url: '/Resume/SaveEducationalDetails',
@@ -178,11 +274,12 @@
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function () {
+                clearFields();
                 $("#modalEducationDetails").modal("hide");
                 bootbox.alert("<b style='color:black;'>Educational details successfully saved.</b>");
             },
             error: function () {
-                bootbox.alert("Error!");
+                bootbox.alert("<b style='color:black;'>Error!</b>");
             }
         });
         return false;
@@ -205,6 +302,7 @@
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function () {
+                clearFields();
                 $("#modalSkills").modal("hide");
                 bootbox.alert("<b style='color:black;'>Skills successfully saved.</b>");
             },
@@ -214,8 +312,6 @@
         });
         return false;
     });
-
-
 
     var selector = 'input#txtSearch';
     $(document).on('keydown.autocomplete', selector, function () {
@@ -229,11 +325,9 @@
                         term: request.term
                     },
                     success: function (data) {
-                        console.log("data");
                         response(data);
                     },
                     error: function (data) {
-                        console.log("error");
                     }
                 });
             },
@@ -256,8 +350,9 @@
 
         if (isSkillFound == 0) {
             $("#skillMenu").append('<li class="skillItem">' + item + '</li>');
+            clearFields();
         } else {
-            alert(item + " already added.");
+            bootbox.alert("<b style='color:black;'>"+item + " already added.</b>");
         }
     });
 
@@ -268,7 +363,7 @@
             url: "/Resume/PreviewUser/" + ids,
             method: "GET",
             success: function (result) {
-                console.log(result);
+  
                 $("#modalUserName").html(result.Name);
                 $("#modalUserPhone").html(result.PhoneNumber);
                 $("#modalUserEmail").html(result.Email);
@@ -279,8 +374,16 @@
                 }
             },
             error: function () {
-                console.log("error!");
+                bootbox.alert("<b style='color:black;'>Error!</b>")
+   
             }
         });
     });
 });
+
+function clearFields()
+{
+    $('input[type="text"]').val('');
+    $('select').val('');
+    $('input[type="checkbox"]').prop('checked', false);
+}

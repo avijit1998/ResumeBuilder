@@ -6,7 +6,7 @@
         if ($("#Password").val() === "") {
             $("#passwordErrorText").text("The Password field is required.");
         }
-        else if ((/((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@@#$%!+-_=]).{8,})/).test($.trim($("#Password").val())) == false) {
+        else if ((/((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!+-_=]).{8,})/).test($.trim($("#Password").val())) == false) {
             $("#passwordErrorText").text("The password must be of at least 8 characters including one upper and lower case letter,one " +
                 "digit and one special character.");
         }
@@ -21,13 +21,15 @@
 
     });
     $("#Username").on("blur", function () {
-        if ((/^([a-z A-Z 0-9\. -]+)@@([a-z A-Z]+)\.([a-z]{2,10})$/).test($.trim($("#Username").val())) === false) {
-            $("#emailErrorText").text("Enter valid Email.")
+        if ((/^([a-z A-Z 0-9\. -]+)@([a-z A-Z]+)\.([a-z]{2,10})$/).test($.trim($("#Username").val())) === false) {
+            $("#emailErrorText").text("Enter valid Email.");
+        }
+        else {
+            $("#emailErrorText").text("");
         }
     });
 
     $("#btnSubmit").on("click", function () {
-        ConfirmPassword
         if (($.trim($("#validationSummaryDiv").text()) === "") && ($.trim($("#Username").text()) !== "") &&
             ($.trim($("#Password").text()) !== "") && ($.trim($("#ConfirmPassword").text()) !== "")) {
             bootbox.alert("<b class='alert-success' style='color:black;'>Registration Successful</b>");

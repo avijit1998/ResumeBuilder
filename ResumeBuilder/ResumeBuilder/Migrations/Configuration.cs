@@ -4,28 +4,106 @@ namespace ResumeBuilder.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ResumeBuilder.Models.ResumeBuilderConnection>
+    internal sealed class Configuration : DbMigrationsConfiguration<ResumeBuilder.Models.ResumeBuilderDBContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(ResumeBuilder.Models.ResumeBuilderConnection context)
+        protected override void Seed(ResumeBuilder.Models.ResumeBuilderDBContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            if (!context.Languages.Any())
+            {
+                context.Languages.Add(new Models.Language
+                {
+                    LanguageName = "English"
+                });
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+                context.Languages.Add(new Models.Language
+                {
+                    LanguageName = "Hindi"
+                });
+
+                context.Languages.Add(new Models.Language
+                {
+                    LanguageName = "Oriya"
+                });
+
+                context.Languages.Add(new Models.Language
+                {
+                    LanguageName = "Gujrati"
+                });
+
+                context.Languages.Add(new Models.Language
+                {
+                    LanguageName = "Bengali"
+                });
+            }
+
+            if (!context.Skills.Any())
+            {
+                context.Skills.Add(new Models.Skill
+                {
+                    SkillName = "HTML/HTML5"
+                });
+
+                context.Skills.Add(new Models.Skill
+                {
+                    SkillName = "CSS/CSS3"
+                });
+
+                context.Skills.Add(new Models.Skill
+                {
+                    SkillName = "JQuery"
+                });
+
+                context.Skills.Add(new Models.Skill
+                {
+                    SkillName = "JavaScript"
+                });
+
+                context.Skills.Add(new Models.Skill
+                {
+                    SkillName = "C#"
+                });
+
+                context.Skills.Add(new Models.Skill
+                {
+                    SkillName = "ASP .NET MVC"
+                });
+
+                context.Skills.Add(new Models.Skill
+                {
+                    SkillName = "SQL SERVER"
+                });
+            }
+
+            if (!context.CourseService.Any())
+            {
+                context.CourseService.Add(new Models.CourseService
+                {
+                    CourseName = "10th"
+                });
+
+                context.CourseService.Add(new Models.CourseService
+                {
+                    CourseName = "12th"
+                });
+
+                context.CourseService.Add(new Models.CourseService
+                {
+                    CourseName = "Under Graduation"
+                });
+
+                context.CourseService.Add(new Models.CourseService
+                {
+                    CourseName = "Post Graduation"
+                });
+            }
+
         }
     }
 }

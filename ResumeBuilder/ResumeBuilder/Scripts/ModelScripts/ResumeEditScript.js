@@ -1,8 +1,10 @@
 ﻿$("body").on('change', 'input[type=radio][name=CGPAOrPercentage]', function () {
     if ($(this).val() == 'CGPA') {
         $('.marks').attr('placeholder', 'Enter CGPA');
+        $('.marks').val('');
     } else {
         $('.marks').attr('placeholder', 'Enter percentage ');
+        $('.marks').val('');
     }
 });
 
@@ -15,25 +17,25 @@ $("body").on('click', '#checkWorking',function(){
 });
 
 $("body").on("click", ".js-edit-user", function (e) {
-    debugger;
     e.preventDefault();
     var $button = $(this);
 
     var userId = $button.data("user-id");
-    debugger;
     $.ajax({
         url: "GetCurrentUser/" + userId,
         method: "GET",
         success: function (result) {
-            console.log(result);
-            $('#modalBasicInfo').modal('show');
-
+            $('#userId').val(result.UserID);
+            $('#txtFullName').val(result.Name);
+            $('#txtEmail').val(result.Username);
+            $('#txtPhoneNumber').val(result.PhoneNumber); 
+            $('#txtSummary').val(result.Summary);
+            
             $('input[name="Gender"]').each(function (e, el) {
                 if ($(el).val() == result.Gender) {
                     $(el).prop('checked', true);
                 }
             })
-
             for (var i = 0; i < result.LanguageIds.length; i++) {
                 $('input[type="checkbox"]').each(function (e, el) {
                     if ($(el).val() == result.LanguageIds[i]) {
@@ -41,16 +43,15 @@ $("body").on("click", ".js-edit-user", function (e) {
                     }
                 })
             }
+            $('#modalBasicInfo').modal('show');
         },
         error: function (error) {
-            console.log(error);
-            alert("Sorry ! Unable to edit user");
+            botbox.alert("<p style='color:black;'>Sorry ! Unable to edit user</p>");
         }
     });
 });
  
 $("body").on("click", ".js-save-user", function () {
-    debugger;
     var user = {
         "UserID":$("#userId").val(),
         "Name": $("#txtFullName").val(),
@@ -62,30 +63,30 @@ $("body").on("click", ".js-save-user", function () {
         "Summary": $("#txtSummary").val()
     };
 
-
     $('input[type="checkbox"]:checked').each(function (e, el) {
         user.LanguageIds.push($(el).val());
     });
 
-    user.LanguageIds.pop();
+    if (user.LanguageIds[user.LanguageIds.length - 1] == "on") {
+        debugger;
+        user.LanguageIds.pop();
+    }
+
     $.ajax({
         type: "POST",
         url: 'UpdateUser',
         data: user,
-        //dataType: "json",
-        //contentType: "application/json; charset=utf-8",
-        success: function () {
+        success: function () {           
+            bootbox.alert("<p style='color:black;'>Basic information successfully saved.</p>");
             $("#modalBasicInfo").modal("hide");
-            alert("Basic information successfully saved.");
-
+            removeBackdrop();
             var url = $("#ajaxEditForm").data('url');
             $.get(url, function (data) {
                 $('#pageContent').html(data);
             });
         },
         error: function () {
-            alert("Error!");
-
+            bootbox.alert("<p style='color:black;'>Error!</p>");
         }
     });
     return false;
@@ -95,13 +96,11 @@ $('body').on('click', '.js-edit-project', function (e) {
     debugger;
     e.preventDefault();
     var $button = $(this);
-
     var projectId = $button.data("project-id");
     $.ajax({
         url: "GetProjectById/" + projectId,
         method: "GET",
         success: function (result) {
-            console.log(result);
             $('input[name="ProjectId"]').val(result.ProjectId);
             $('input[name="Title"]').val(result.Title);
             $('input[name="ProjectRole"]').val(result.ProjectRole);
@@ -110,15 +109,13 @@ $('body').on('click', '.js-edit-project', function (e) {
             $('#modalProject').find('.modal-title').html('UPDATE PROJECT DETAILS');
             $('#modalProject').modal('show');
         },
-        error: function (error) {
-            console.log(error);
-            alert("Sorry ! Unable to edit project");
+        error: function (error) {           
+            bootbox.alert("<p style='color:black;'>Sorry ! Unable to edit project</p>");
         }
     });
 });
 
 $('body').on('click', '.js-save-project', function (e) {
-    //debugger;
     e.preventDefault();
     var Id = $('input[name="ProjectId"]').val();
     var formData = {
@@ -133,20 +130,16 @@ $('body').on('click', '.js-save-project', function (e) {
         method: "POST",
         data: formData,
         success: function (result) {
-            console.log(result);
             $('#modalProject').modal('hide');
-            alert("Project Details updated sucessfully");
-
+            removeBackdrop();
+            bootbox.alert("<p style='color:black;'>Project Details updated sucessfully</p>");
             var url = $("#ajaxEditForm").data('url');
             $.get(url, function (data) {
                 $('#pageContent').html(data);
-            });
-            //$('#pageContent').load();
-
+            });           
         },
         error: function (error) {
-            console.log(error);
-            alert("Sorry ! Unable to update project");
+            bootbox.alert("<p style='color:black;'>Sorry ! Unable to update project</p>");
         }
     });
 
@@ -156,7 +149,6 @@ $('body').on('click', '.js-delete-project', function (e) {
     debugger;
     e.preventDefault();
     var $button = $(this);
-
     var projectID = $button.data("project-id");
     bootbox.confirm("<p style='color:black;'>Are you sure to delete this Project Record?</p>", function (result) {
         if (result) {
@@ -165,15 +157,14 @@ $('body').on('click', '.js-delete-project', function (e) {
                 method: "POST",
                 data: { projectID: projectID },
                 success: function (resultfinal) {
-                    alert("Project Details updated sucessfully");
+                    
                     var url = $("#ajaxEditForm").data('url');
                     $.get(url, function (data) {
                         $('#pageContent').html(data);
-                    });
-                    //$('#pageContent').load();
+                    });                    
                 },
                 error: function (error) {
-                    bootbox.alert("Error!");
+                    bootbox.alert("<p style='color:black;'>Error!</p>");
                 }
             })
         }
@@ -188,7 +179,6 @@ $('body').on('click', '.js-edit-workex', function (e) {
         url: "GetWorkExperienceById/" + id,
         method: "GET",
         success: function (result) {
-            console.log(result);
             $('input[name="WorkExperienceid"]').val(result.WorkExperienceid);
             $('input[name="OrganizationName"]').val(result.OrganizationName);
             $('input[name="Role"]').val(result.Role);
@@ -210,13 +200,13 @@ $('body').on('click', '.js-edit-workex', function (e) {
             $('#modalWorkExperience').modal('show');
         },
         error: function (error) {
-            console.log(error);
-            alert("Sorry ! Unable to edit WorkEx");
+            bootbox.alert("<p style='color:black;'>Sorry ! Unable to edit WorkEx</p>");
         }
     });
 });
 
 $('body').on('click', '.js-save-workex', function (e) {
+    debugger;
     e.preventDefault();
     var formData = {
         "WorkExperienceid": $('input[name="WorkExperienceid"]').val(),
@@ -233,19 +223,18 @@ $('body').on('click', '.js-save-workex', function (e) {
         method: "POST",
         data: formData,
         success: function (result) {
-            console.log(result);
             $('#modalWorkExperience').modal('hide');
-            alert("WorkEx Updated Successfully");
-
+            removeBackdrop();
+            bootbox.alert("<p style='color:black;'>WorkEx Updated Successfully</p>");
             var url = $("#ajaxEditForm").data('url');
             $.get(url, function (data) {
                 $('#pageContent').html(data);
             });
-            $('#pageContent').load();
+           
+
         },
         error: function (error) {
-            console.log(error);
-            alert("Sorry ! Unable to update details");
+            bootbox.alert("<p style='color:black;'>Sorry ! Unable to update details</p>");
         }
     });
 
@@ -264,16 +253,14 @@ $('body').on('click', '.js-delete-workex', function (e) {
                 method: "POST",
                 data: { workExId: workExId },
                 success: function (result) {
-                    alert("Successfully Deleted");
-
+                  
                     var url = $("#ajaxEditForm").data('url');
                     $.get(url, function (data) {
                         $('#pageContent').html(data);
-                    });
-                    $('#pageContent').load();
+                    });                   
                 },
                 error: function (error) {
-                    bootbox.alert("Error!");
+                    bootbox.alert("<p style='color:black;'>Error!</p>");
                 }
             })
         }
@@ -283,7 +270,6 @@ $('body').on('click', '.js-delete-workex', function (e) {
 $('body').on('click', '.js-delete-skill', function (e) {
     e.preventDefault();
     var $button = $(this);
-
     var skillId = $button.data("skill-id");
     bootbox.confirm("<p style='color:black;'>Are you sure to delete this Skill?</p>", function (result) {
         if (result) {
@@ -293,16 +279,14 @@ $('body').on('click', '.js-delete-skill', function (e) {
                 data: { skillId: skillId },
                 cache:false,
                 success: function (result) {
-                    alert("Successfully Deleted");
-
+                    
                     var url = $("#ajaxEditForm").data('url');
                     $.get(url, function (data) {
                         $('#pageContent').html(data);
                     });
-                    $('#pageContent').load();
                 },
                 error: function (error) {
-                    bootbox.alert("Error!");
+                    bootbox.alert("<p style='color:black;'>Error!</p>");
                 }
             })
         }
@@ -313,18 +297,21 @@ $('body').on('click', '.js-edit-education', function (e) {
     debugger;
     e.preventDefault();
     var $button = $(this);
-
     var id = $button.data("education-id");
     $.ajax({
         url: "GetEducationById/" + id,
         method: "GET",
         success: function (result) {
-            console.log(result);
             $('input[name="EducationalDetailID"]').val(result.EducationalDetailID);
             $('input[name="CourseId"]').val(result.CourseId);
             $('input[name="Stream"]').val(result.Stream);
             $('input[name="PassingYear"]').val(result.PassingYear);
             $('input[name="TotalPercentorCGPAValue"]').val(result.TotalPercentorCGPAValue);
+            $('input[name="CGPAOrPercentage"]').each(function (e, el) {
+                if ($(el).val() == result.CGPAOrPercentage) {
+                    $(el).prop('checked', true);
+                }
+            })
 
             if (result.CourseId == "1")
             {
@@ -340,8 +327,7 @@ $('body').on('click', '.js-edit-education', function (e) {
             $('#modalEducationDetails').modal('show');
         },
         error: function (error) {
-            console.log(error);
-            alert("Sorry ! Unable to edit education");
+            bootbox.alert("<p style='color:black;'>Sorry ! Unable to edit education</p>");
         }
     });
 });
@@ -364,30 +350,25 @@ $('body').on('click', '.js-save-education', function (e) {
         method: "POST",
         data: formData,
         success: function (result) {
-            console.log(result);
             $('#modalEducationDetails').modal('hide');
-            alert("Education Details updated sucessfully");
-
+            removeBackdrop();
+            bootbox.alert("<p style='color:black;'>Education Details updated sucessfully</p>");
             var url = $("#ajaxEditForm").data('url');
             $.get(url, function (data) {
                 $('#pageContent').html(data);
+                $('#pageContent').show();
             });
-            $('#pageContent').load();
-
         },
         error: function (error) {
-            console.log(error);
-            alert("Sorry ! Unable to edit education");
+            bootbox.alert("<p style='color:black;'>Sorry ! Unable to edit education</p>");
         }
     });
 
 });
 
 $('body').on('click', '.js-delete-education', function (e) {
-    debugger;
     e.preventDefault();
     var $button = $(this);
-
     var educationId = $button.data("education-id");
     bootbox.confirm("<p style='color:black;'>Are you sure to delete this Project Record?</p>", function (result) {
         if (result) {
@@ -396,18 +377,22 @@ $('body').on('click', '.js-delete-education', function (e) {
                 method: "POST",
                 data: { educationId: educationId },
                 success: function (result) {
-                    alert("Education Details deleted sucessfully");
-
+                   
                     var url = $("#ajaxEditForm").data('url');
                     $.get(url, function (data) {
                         $('#pageContent').html(data);
                     });
-                    $('#pageContent').load();
                 },
                 error: function (error) {
-                    bootbox.alert("Error!");
+                    bootbox.alert("<p style='color:black;'>Error!</p>");
                 }
             })
         }
     });
 });
+
+function removeBackdrop()
+{
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+}

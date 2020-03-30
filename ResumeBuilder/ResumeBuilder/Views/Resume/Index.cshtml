@@ -8,7 +8,7 @@
     <a href="#pageContent" data-url="/Resume/Form" class="ajaxLink">Data Entry</a>
     <a href="#pageContent" data-url="/Resume/ShowData" class="ajaxLink" id="ajaxEditForm">Edit Form</a>
     <a href="#pageContent" data-url="/Resume/Preview" class="ajaxLink">Preview</a>
-    <a href="#" data-toggle="modal" data-target="#myModal" id="settingsBtn">Settings</a>
+    <a href="#" data-toggle="modal" data-target="#settingsModal" id="settingsBtn">Settings</a>
     @Html.ActionLink("Public Profile", "Index", new { controller = "PublicProfile", id = Session["UserID"], target = "_blank" })
     <a href="#pageContent" data-url="/Resume/Search" class="ajaxLink" id="btnSearchNav" style="display:none;">Search</a>
     @Html.ActionLink("Log Out", "LogOff", "Account")
@@ -16,7 +16,7 @@
 
 
 <div id="modal">
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+    <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -26,13 +26,13 @@
                 <div class="modal-body">
                     <div id="divWorkex" class="[ form-group ]">
                         <!-- checkbox -->
-                        <input type="checkbox" name="workex" id="workex" autocomplete="off" />
+                        <input type="checkbox" name="workex" id="cbWorkex" autocomplete="off" />
                         <div class="[ btn-group ]">
-                            <label for="workex" class="[ btn btn-default ]">
+                            <label for="cbWorkex" class="[ btn btn-default ]">
                                 <span class="[ glyphicon glyphicon-ok ]"></span>
                                 <span></span>
                             </label>
-                            <label for="workex" class="[ btn btn-default active ]">
+                            <label for="cbWorkex" class="[ btn btn-default active ]">
                                 Work Experience
                             </label>
 
@@ -40,53 +40,53 @@
                     </div><!-- checkbox -->
                     <div id="divProjects" class="[ form-group ]">
                         <!-- checkbox -->
-                        <input type="checkbox" name="projects" id="projects" autocomplete="off" />
+                        <input type="checkbox" name="projects" id="cbProjects" autocomplete="off" />
                         <div class="[ btn-group ]">
-                            <label for="projects" class="[ btn btn-default ]">
+                            <label for="cbProjects" class="[ btn btn-default ]">
                                 <span class="[ glyphicon glyphicon-ok ]"></span>
                                 <span> </span>
                             </label>
-                            <label for="projects" class="[ btn btn-default active ]">
+                            <label for="cbProjects" class="[ btn btn-default active ]">
                                 Projects
                             </label>
                         </div>
                     </div><!-- checkbox -->
                     <div class="[ form-group ]">
                         <!-- checkbox -->
-                        <input type="checkbox" name="education" id="education" autocomplete="off" />
+                        <input type="checkbox" name="education" id="cbEducation" autocomplete="off" />
                         <div class="[ btn-group ]">
-                            <label for="education" class="[ btn btn-default ]">
+                            <label for="cbEducation" class="[ btn btn-default ]">
                                 <span class="[ glyphicon glyphicon-ok ]"></span>
                                 <span> </span>
                             </label>
-                            <label for="education" class="[ btn btn-default active ]">
+                            <label for="cbEducation" class="[ btn btn-default active ]">
                                 Educational Details
                             </label>
                         </div>
                     </div><!-- checkbox -->
                     <div class="[ form-group ]">
                         <!-- checkbox -->
-                        <input type="checkbox" name="skills" id="skills" autocomplete="off" />
+                        <input type="checkbox" name="skills" id="cbSkills" autocomplete="off" />
                         <div class="[ btn-group ]">
-                            <label for="skills" class="[ btn btn-default ]">
+                            <label for="cbSkills" class="[ btn btn-default ]">
                                 <span class="[ glyphicon glyphicon-ok ]"></span>
                                 <span> </span>
                             </label>
-                            <label for="skills" class="[ btn btn-default active ]">
+                            <label for="cbSkills" class="[ btn btn-default active ]">
                                 Skills
                             </label>
                         </div>
                     </div><!-- checkbox -->
                     <div class="[ form-group ]">
                         <!-- checkbox -->
-                        <input type="checkbox" name="contact" id="contact" autocomplete="off" />
+                        <input type="checkbox" name="contact" id="cbLanguage" autocomplete="off" />
                         <div class="[ btn-group ]">
-                            <label for="contact" class="[ btn btn-default ]">
+                            <label for="cbLanguage" class="[ btn btn-default ]">
                                 <span class="[ glyphicon glyphicon-ok ]"></span>
                                 <span> </span>
                             </label>
-                            <label for="contact" class="[ btn btn-default active ]">
-                                Contact Details
+                            <label for="cbLanguage" class="[ btn btn-default active ]">
+                                Languages
                             </label>
                         </div>
                     </div><!-- checkbox -->
@@ -103,7 +103,7 @@
 
 <div id="main">
     <button class="openbtn" onclick="openNav()">
-        ☰ Open Sidebar
+        ☰ Open Menu
     </button>
 </div>
 
