@@ -177,40 +177,32 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PublicProfileController.cs" />
     <Compile Include="Controllers\ResumeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\CustomMapper.cs" />
-    <Compile Include="Migrations\202003181302557_new database.cs" />
-    <Compile Include="Migrations\202003181302557_new database.Designer.cs">
-      <DependentUpon>202003181302557_new database.cs</DependentUpon>
+    <Compile Include="Migrations\202003291135558_created new fresh database.cs" />
+    <Compile Include="Migrations\202003291135558_created new fresh database.Designer.cs">
+      <DependentUpon>202003291135558_created new fresh database.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Course.cs" />
-    <Compile Include="Models\EducationalDetails.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Languages.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Project.cs" />
-    <Compile Include="Models\ResumeBuilderConnection.cs" />
-    <Compile Include="Models\Skills.cs" />
-    <Compile Include="Models\User.cs" />
-    <Compile Include="Models\ViewModels\AddUserSkillsViewModel.cs" />
-    <Compile Include="Models\ViewModels\AddUserViewModel.cs" />
-    <Compile Include="Models\UserSetting.cs" />
-    <Compile Include="Models\ViewModels\EditUserLanguageViewModel.cs" />
-    <Compile Include="Models\ViewModels\UpdateUserLanguageViewModel.cs" />
-    <Compile Include="Models\WorkExperience.cs" />
+    <Compile Include="Models\CourseService.cs" />
+    <Compile Include="Models\EducationalDetailsService.cs" />
+    <Compile Include="Models\Language.cs" />
+    <Compile Include="Models\LoginService.cs" />
+    <Compile Include="Models\ProjectService.cs" />
+    <Compile Include="Models\ResumeBuilderDBContext.cs" />
+    <Compile Include="Models\SettingService.cs" />
+    <Compile Include="Models\Skill.cs" />
+    <Compile Include="Models\UserDetailService.cs" />
+    <Compile Include="Models\WorkExperienceService.cs" />
+    <Compile Include="ViewModels\AddUserSkillsViewModel.cs" />
+    <Compile Include="ViewModels\AddUserViewModel.cs" />
+    <Compile Include="ViewModels\EditUserLanguageViewModel.cs" />
+    <Compile Include="ViewModels\UpdateUserLanguageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AllDetailsVM.cs" />
@@ -563,9 +555,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -578,15 +567,8 @@
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\SendCode.cshtml" />
     <Content Include="Views\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Resume\Index.cshtml" />
-    <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Resume\Form.cshtml" />
     <Content Include="Views\Resume\Preview.cshtml" />
     <Content Include="Views\PublicProfile\Index.cshtml" />
@@ -605,8 +587,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003181302557_new database.resx">
-      <DependentUpon>202003181302557_new database.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003291135558_created new fresh database.resx">
+      <DependentUpon>202003291135558_created new fresh database.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

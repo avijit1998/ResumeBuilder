@@ -7,16 +7,13 @@ using System.Web;
 
 namespace ResumeBuilder.Models
 {
-    public class WorkExperience
+    public class WorkExperienceService
     {
         [Key]
-        public int WorkExperienceid { get; set; }
+        public int WorkExperienceServiceID { get; set; }
 
-        [ForeignKey("UserID")]
-        public User User { get; set; }
-
-        public int UserID { get; set; }
-
+        public int UserServiceID { get; set; }
+        
         public int StartMonth { get; set; }
 
         public int StartYear { get; set; }
@@ -27,9 +24,12 @@ namespace ResumeBuilder.Models
 
         public string OrganizationName { get; set; }
 
-        public string Role { get; set; }
+        public string Designation { get; set; }
 
-        public bool CurrentlyWorking { get; set; }
+        public bool IsCurrentlyWorking { get; set; }
+
+        [ForeignKey("UserServiceID")]
+        public virtual UserDetailService UserDetailService { get; set; }
 
     }
 }

@@ -1,8 +1,10 @@
 ﻿$("body").on('change', 'input[type=radio][name=CGPAOrPercentage]', function () {
     if ($(this).val() == 'CGPA') {
         $('.marks').attr('placeholder', 'Enter CGPA');
+        $('.marks').val('');
     } else {
         $('.marks').attr('placeholder', 'Enter percentage ');
+        $('.marks').val('');
     }
 });
 
@@ -24,6 +26,11 @@ $("body").on("click", ".js-edit-user", function (e) {
         method: "GET",
         success: function (result) {
             $('#modalBasicInfo').modal('show');
+            $('#userId').val(result.UserID);
+            $('#txtFullName').val(result.Name);
+            $('#txtEmail').val(result.Username);
+            $('#txtPhoneNumber').val(result.PhoneNumber); 
+            $('#txtSummary').val(result.Summary);
             $('input[name="Gender"]').each(function (e, el) {
                 if ($(el).val() == result.Gender) {
                     $(el).prop('checked', true);
@@ -36,6 +43,7 @@ $("body").on("click", ".js-edit-user", function (e) {
                     }
                 })
             }
+            $('#modalBasicInfo').modal('show');
         },
         error: function (error) {
             botbox.alert("<p style='color:black;'>Sorry ! Unable to edit user</p>");
@@ -71,7 +79,7 @@ $("body").on("click", ".js-save-user", function () {
         success: function () {           
             bootbox.alert("<p style='color:black;'>Basic information successfully saved.</p>");
             $("#modalBasicInfo").modal("hide");
-
+            removeBackdrop();
             var url = $("#ajaxEditForm").data('url');
             $.get(url, function (data) {
                 $('#pageContent').html(data);
@@ -123,6 +131,7 @@ $('body').on('click', '.js-save-project', function (e) {
         data: formData,
         success: function (result) {
             $('#modalProject').modal('hide');
+            removeBackdrop();
             bootbox.alert("<p style='color:black;'>Project Details updated sucessfully</p>");
             var url = $("#ajaxEditForm").data('url');
             $.get(url, function (data) {
@@ -215,6 +224,7 @@ $('body').on('click', '.js-save-workex', function (e) {
         data: formData,
         success: function (result) {
             $('#modalWorkExperience').modal('hide');
+            removeBackdrop();
             bootbox.alert("<p style='color:black;'>WorkEx Updated Successfully</p>");
             var url = $("#ajaxEditForm").data('url');
             $.get(url, function (data) {
@@ -297,6 +307,11 @@ $('body').on('click', '.js-edit-education', function (e) {
             $('input[name="Stream"]').val(result.Stream);
             $('input[name="PassingYear"]').val(result.PassingYear);
             $('input[name="TotalPercentorCGPAValue"]').val(result.TotalPercentorCGPAValue);
+            $('input[name="CGPAOrPercentage"]').each(function (e, el) {
+                if ($(el).val() == result.CGPAOrPercentage) {
+                    $(el).prop('checked', true);
+                }
+            })
 
             if (result.CourseId == "1")
             {
@@ -338,6 +353,7 @@ $('body').on('click', '.js-save-education', function (e) {
             $('#modalEducationDetails').modal('hide');
             $('body').removeClass('modal-open');
             $('.modal-backdrop').remove();
+            removeBackdrop();
             bootbox.alert("<p style='color:black;'>Education Details updated sucessfully</p>");
             var url = $("#ajaxEditForm").data('url');
             $.get(url, function (data) {
@@ -376,3 +392,9 @@ $('body').on('click', '.js-delete-education', function (e) {
         }
     });
 });
+
+function removeBackdrop()
+{
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+}
