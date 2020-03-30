@@ -1,13 +1,13 @@
-﻿using HiQPdf;
-using ResumeBuilder.Models;
-using ResumeBuilder.Models.ViewModels;
-using ResumeBuilder.ViewModels;
-using ResumeBuilder.Models;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Web.Mvc;
+﻿//using HiQPdf;
+//using ResumeBuilder.Models;
+//using ResumeBuilder.Models.ViewModels;
+//using ResumeBuilder.ViewModels;
+//using ResumeBuilder.Models;
+//using System;
+//using System.Collections.Generic;
+//using System.IO;
+//using System.Linq;
+//using System.Web.Mvc;
 
 
 //namespace ResumeBuilder.Controllers
