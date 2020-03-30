@@ -31,8 +31,6 @@ namespace ResumeBuilder.Controllers
                 return RedirectToAction("Login", "Account");
             }
         }
-    }
-}
 
 //        public ActionResult ShowData()
 //        {
