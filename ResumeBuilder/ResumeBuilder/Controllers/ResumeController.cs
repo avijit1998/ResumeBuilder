@@ -2,8 +2,6 @@
 using ResumeBuilder.Models;
 using ResumeBuilder.Models.ViewModels;
 using ResumeBuilder.ViewModels;
-using ResumeBuilder.Models;
-
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,7 +21,7 @@ namespace ResumeBuilder.Controllers
             db = new ResumeBuilderDBContext();
         }
 
-        //        // GET: Resume
+        // GET: Resume
         public ActionResult Index()
         {
             if (Session.Count != 0)
@@ -33,6 +31,180 @@ namespace ResumeBuilder.Controllers
                 return RedirectToAction("Login", "Account");
             }
         }
+    }
+}
+
+//        public ActionResult ShowData()
+//        {
+//            if (Session["UserID"] != null)
+//            {
+//                int id;
+//                var re = Int32.TryParse(Session["UserID"] as String, out id);
+//                var user = db.Users.Where(m => m.UserID == id).FirstOrDefault();
+//                var projects = db.Projects.Where(m => m.UserId == id).ToList();
+//                var workExperiences = db.WorkExperiences.Where(m => m.UserID == id).ToList();
+//                var educationDetails = db.EducationalDetails.Where(m => m.UserId == id).ToList();
+
+//                ViewBag.Languages = db.Languages.ToList();
+
+//                ViewBag.Projects = projects;
+//                ViewBag.WorkExperiences = workExperiences;
+//                ViewBag.Education = educationDetails;
+
+//                return PartialView(user);
+//            }
+//            return RedirectToAction("Login", "Account");
+
+//        }
+
+//        public ActionResult GetProjectById(int Id)
+//        {
+//            var proj = db.Projects.FirstOrDefault(x => x.ProjectId == Id);
+//            var project = new Project
+//            {
+//                ProjectId = proj.ProjectId,
+//                Title = proj.Title,
+//                Duration = proj.Duration,
+//                ProjectRole = proj.ProjectRole,
+//                Description = proj.Description
+//            };
+//            return Json(project, JsonRequestBehavior.AllowGet);
+//        }
+
+//        [HttpPost]
+//        public ActionResult UpdateProject(int projectId, Project model)
+//        {
+//            var project = db.Projects.FirstOrDefault(x => x.ProjectId == projectId);
+
+//            project.Title = model.Title;
+//            project.ProjectRole = model.ProjectRole;
+//            project.Description = model.Description;
+//            project.Duration = model.Duration;
+
+//            db.Entry(project).State = System.Data.Entity.EntityState.Modified;
+//            db.SaveChanges();
+//            return Json("Success");
+//        }
+
+
+//        public ActionResult Form()
+//        {
+//            //var summary = user.Summary;
+//            if (Session["UserID"] != null)
+//            {
+//                int id;
+//                var re = Int32.TryParse(Session["UserID"] as String, out id);
+//                var user = db.Users.Where(m => m.UserID == id).FirstOrDefault();
+//                ViewBag.Courses = db.Courses.ToList();
+
+//                ViewBag.AlreadyDoneCourses = (from course in db.EducationalDetails
+//                                             where course.UserId == id
+//                                             select course.CourseId).ToList();
+
+//                ViewBag.Languages = db.Languages.ToList();
+//                return PartialView(user);                               
+//            }
+//            return RedirectToAction("Login", "Account");
+//        }
+
+//        [HttpPost]
+//        public ActionResult DeleteProject(int projectID)
+//        {
+//            var proj = db.Projects.FirstOrDefault(x => x.ProjectId == projectID);
+//            if (proj != null)
+//            {
+//                db.Projects.Remove(proj);
+//                db.SaveChanges();
+//                return Json("Successfully Deleted");
+//            }
+//            else
+//            {
+//                return HttpNotFound();
+//            }
+
+//        }
+
+//        public ActionResult GetWorkExperienceById(int id)
+//        {
+//            var workex = db.WorkExperiences.FirstOrDefault(x => x.WorkExperienceid == id);
+//            var workExperience = new WorkExperience
+//            {
+//                WorkExperienceid = workex.WorkExperienceid,
+//                OrganizationName = workex.OrganizationName,
+//                Role = workex.Role,
+//                StartMonth = workex.StartMonth,
+//                StartYear = workex.StartYear,
+//                EndMonth = workex.EndMonth,
+//                EndYear = workex.EndYear,
+//                CurrentlyWorking = workex.CurrentlyWorking
+//            };
+//            return Json(workExperience, JsonRequestBehavior.AllowGet);
+//        }
+
+//        [HttpPost]
+//        public ActionResult UpdateWorkExperience(int WorkExperienceid, WorkExperience model)
+//        {
+//            var workEx = db.WorkExperiences.FirstOrDefault(x => x.WorkExperienceid == WorkExperienceid);
+//            workEx.OrganizationName = model.OrganizationName;
+//            workEx.Role = model.Role;
+//            workEx.StartMonth = model.StartMonth;
+//            workEx.StartYear = model.StartYear;
+//            workEx.EndMonth = model.EndMonth;
+//            workEx.EndYear = model.EndYear;
+//            workEx.CurrentlyWorking = model.CurrentlyWorking;
+
+//            db.Entry(workEx).State = System.Data.Entity.EntityState.Modified;
+//            db.SaveChanges();
+//            return Json("Success");
+//        }
+
+//        [HttpPost]
+//        public ActionResult DeleteWorkExperience(int workExId)
+//        {
+//            var workEx = db.WorkExperiences.FirstOrDefault(x => x.WorkExperienceid == workExId);
+//            if (workEx != null)
+//            {
+//                db.WorkExperiences.Remove(workEx);
+//                db.SaveChanges();
+//                return Json("Successfully Deleted");
+//            }
+//            else
+//            {
+//                return HttpNotFound();
+//            }
+//        }
+
+
+//        [HttpPost]
+//        public ActionResult SaveSummary(UserDetail user)
+//        {
+//            var userFromDb = db.UserDetail.FirstOrDefault(u => u.UserID == user.UserID);
+
+//            userFromDb.Summary = user.Summary;
+//            db.SaveChanges();
+
+//            string message = "SUCCESS";
+
+//            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+//        }
+
+//        [HttpPost]
+//        public ActionResult SaveBasicInformation(AddUserViewModel addUserViewModel)
+//        {
+//            var userFromDb = db.UserDetail.FirstOrDefault(u => u.UserID == addUserViewModel.UserID);
+
+//            userFromDb.Name = addUserViewModel.Name;
+//            userFromDb.Gender = addUserViewModel.Gender;
+//            userFromDb.Phone = addUserViewModel.PhoneNumber;
+//            userFromDb.DateofBirth = addUserViewModel.DateOfBirth;
+
+//            if (addUserViewModel.LanguageIds.Any())
+//            {
+//                var languages = db.Languages.Where(x => addUserViewModel.LanguageIds.Contains(x.LanguageID)).ToList();
+//                userFromDb.Language.AddRange(languages);
+//            }
+
+//            db.SaveChanges();
 
         public ActionResult ShowData()
         {
