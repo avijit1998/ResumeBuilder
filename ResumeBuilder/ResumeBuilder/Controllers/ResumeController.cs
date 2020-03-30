@@ -1,37 +1,39 @@
-﻿//using HiQPdf;
-//using ResumeBuilder.Models;
-//using ResumeBuilder.Models.ViewModels;
-//using ResumeBuilder.ViewModels;
-//using ResumeBuilder.Models;
-//using System;
-//using System.Collections.Generic;
-//using System.IO;
-//using System.Linq;
-//using System.Web.Mvc;
+﻿using HiQPdf;
+using ResumeBuilder.Models;
+using ResumeBuilder.Models.ViewModels;
+using ResumeBuilder.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Web.Mvc;
 
 
-//namespace ResumeBuilder.Controllers
-//{
-//    public class ResumeController : Controller
-//    {
-//        private ResumeBuilderDBContext db;
-//        private PublicProfileViewModel _uiModel;
-//        public ResumeController()
-//        {
-//            _uiModel = new PublicProfileViewModel();
-//            db = new ResumeBuilderDBContext();
-//        }
+namespace ResumeBuilder.Controllers
+{
+    [Authorize]
+    public class ResumeController : Controller
+    {
+        //        private ResumeBuilderDBContext db;
+        //        private PublicProfileViewModel _uiModel;
+        //        public ResumeController()
+        //        {
+        //            _uiModel = new PublicProfileViewModel();
+        //            db = new ResumeBuilderDBContext();
+        //        }
 
-//        // GET: Resume
-//        public ActionResult Index()
-//        {
-//            if(Session.Count != 0)
-//                return View();
-//            else
-//            {
-//                return RedirectToAction("Login", "Account");
-//            }
-//        }
+        // GET: Resume
+        public ActionResult Index()
+        {
+            if (Session.Count != 0)
+                return View();
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+        }
+    }
+}
 
 //        public ActionResult ShowData()
 //        {
