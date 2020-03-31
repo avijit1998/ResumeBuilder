@@ -49,7 +49,34 @@ namespace ResumeBuilder.Controllers
 //                ViewBag.WorkExperiences = workExperiences;
 //                ViewBag.Education = educationDetails;
 
+
+          if (user != null)
+             {
+                 AllInformation allinfo = new AllInformation();
+                 {
+                     allinfo.Name = user.Name;
+                     allinfo.Gender = user.Gender;
+                     allinfo.PhoneNumber = user.Phone;
+                     allinfo.DateOfBirth = user.DateOfBirth;
+                     allinfo.Summary = user.Summary;
+                     allinfo.Languages = user.Languages;
+                     allinfo.WorkExperiences = user.WorkExperiences;
+                     allinfo.Projects = user.Projects;
+                     allinfo.Login.Username=user.Login.Username;
+                     allinfo.Skills = user.Skills;
+                     allinfo.EducationalDetail = user.EducationalDetails;
+                 }
+                  return View(allinfo);
+             }
+             else
+             {
+                 return new HttpNotFoundResult(); 
+             }  
+
+        }
+
 //                return PartialView(user);
+
 //            }
 //            return RedirectToAction("Login", "Account");
 
@@ -464,30 +491,7 @@ namespace ResumeBuilder.Controllers
 //            db.Entry(user).State = System.Data.Entity.EntityState.Modified;
 //            db.SaveChanges();
 //            return Json("Success");
-             if (user != null)
-             {
-                 AllInformation allinfo = new AllInformation();
-                 {
-                     allinfo.Name = user.Name;
-                     allinfo.Gender = user.Gender;
-                     allinfo.PhoneNumber = user.Phone;
-                     allinfo.DateOfBirth = user.DateOfBirth;
-                     allinfo.Summary = user.Summary;
-                     allinfo.Languages = user.Languages;
-                     allinfo.WorkExperiences = user.WorkExperiences;
-                     allinfo.Projects = user.Projects;
-                     allinfo.Login.Username=user.Login.Username;
-                     allinfo.Skills = user.Skills;
-                     allinfo.EducationalDetail = user.EducationalDetails;
-                 }
-                  return View(allinfo);
-             }
-             else
-             {
-                 return new HttpNotFoundResult(); 
-             }  
-
-        }
+           
 
         //        public ActionResult GetProjectById(int Id)
         //        {
