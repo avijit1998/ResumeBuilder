@@ -144,6 +144,7 @@ namespace ResumeBuilder.Controllers
 
 					dbContext.Logins.Add(newLogin);
 					dbContext.SaveChanges();
+                    return RedirectToAction("Login", "Account");
 				}
 				catch(Exception)
 				{

@@ -21,7 +21,7 @@
         </div>
         <div class="container body-content">
             <br />
-            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal register-form", role = "form" }))
             {
                 @Html.AntiForgeryToken()
                 <div class="note">
