@@ -20,58 +20,237 @@ namespace ResumeBuilder.Controllers
         }
 
         // GET: Resume
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    if (Session.Count != 0)
+        //        return View();
+        //    else
+        //    {
+        //        return RedirectToAction("Login", "Account");
+        //    }
+        //}
+
+        public ActionResult ShowData()        
         {
-            if (Session.Count != 0)
-                return View();
+            if (Session["UserID"] != null)
+            {
+                int id;
+                var re = Int32.TryParse(Session["UserID"] as String, out id);
+                var user = db.UserDetails.Include("EducationalDetails").Include("Projects")
+                    .Include("Login").Include("Languages").Include("Skills")
+                    .Include("WorkExperiences").FirstOrDefault(x => x.UserID == 2);
+
+                ViewBag.Languages = db.Languages.ToList();
+                ViewBag.Courses = db.Courses.ToList();
+                var langIds = user.Languages.Select(x => x.LanguageID).ToList();
+                if (user != null)
+                {
+                    AllInformation allinfo = new AllInformation();
+                    {
+                        allinfo.Name = user.Name==null ? "N/A" : user.Name;
+                        allinfo.Gender = user.Gender==null ? "N/A" :user.Gender;
+                        allinfo.PhoneNumber = user.Phone==null? "N/A" : user.Phone;
+                        allinfo.DateOfBirth = user.DateOfBirth;
+                        allinfo.Summary = user.Summary==null? "N/A" : user.Summary;
+                        allinfo.Languages = user.Languages==null? new List<Language>() :  user.Languages;
+                        allinfo.WorkExperiences = user.WorkExperiences==null? new List<WorkExperience>() : user .WorkExperiences;
+                        allinfo.Projects = user.Projects==null ? new List<Project>() : user.Projects ;
+                        //allinfo.Login.Username = user.Login.Username;
+                        allinfo.Skills = user.Skills==null ? new List<Skill>() : user.Skills;
+                        allinfo.EducationalDetail = user.EducationalDetails==null?new List<EducationalDetails>() : user.EducationalDetails;
+                        allinfo.LanguageIds = langIds.Count()==0 ? new List<int>() : langIds;
+                    }
+                    return View(allinfo);
+                }
+                else
+                {
+                    return new HttpNotFoundResult();
+                }
+            }
             else
             {
                 return RedirectToAction("Login", "Account");
             }
         }
 
-        public ActionResult ShowData()
+        [HttpPost]
+        public ActionResult SaveBasicInformation(UserInfoVM userInfoVM)
         {
-            
-            var user = db.UserDetails.Include("EducationalDetails").Include("Projects")
-                .Include("Login").Include("Languages").Include("Skills")
-                .Include("WorkExperiences").FirstOrDefault(x => x.UserID == 1);
+            if (!ModelState.IsValid)
+            {
+                return null;
+            }
+            try
+            {
+                var userFromDb = db.UserDetails.FirstOrDefault(u => u.UserID == userInfoVM.UserID);
 
-            ViewBag.Languages = db.Languages.ToList();
-            ViewBag.Courses = db.Courses.ToList();
-             if (user != null)
-             {
-                 AllInformation allinfo = new AllInformation();
-                 {
-                     allinfo.Name = user.Name;
-                     allinfo.Gender = user.Gender;
-                     allinfo.PhoneNumber = user.Phone;
-                     allinfo.DateOfBirth = user.DateOfBirth;
-                     allinfo.Summary = user.Summary;
-                     allinfo.Languages = user.Languages;
-                     allinfo.WorkExperiences = user.WorkExperiences;
-                     allinfo.Projects = user.Projects;
-                     allinfo.Login.Username=user.Login.Username;
-                     allinfo.Skills = user.Skills;
-                     allinfo.EducationalDetail = user.EducationalDetails;
-                     allinfo.LanguageIds = user.Languages.Select(x => x.LanguageID).ToList();
-                 }
-                  return View(allinfo);
-             }
-             else
-             {
-                 return new HttpNotFoundResult(); 
-             }  
+                if (userFromDb == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    userFromDb.Name = userInfoVM.Name;
+                    userFromDb.Gender = userInfoVM.Gender;
+                    userFromDb.Phone = userInfoVM.PhoneNumber;
+                    userFromDb.DateOfBirth = userInfoVM.DateOfBirth;
+                    userFromDb.Summary = userInfoVM.Summary;
 
-           
+                    if (userInfoVM.LanguageIds.Any())
+                    {
+                        var languages = db.Languages.Where(x => userInfoVM.LanguageIds.Contains(x.LanguageID)).ToList();
+                        if (languages == null)
+                        {
+                            return null;
+                        }
+                        userFromDb.Languages.AddRange(languages);
+                    }
 
+                    db.SaveChanges();
+
+                    return Json("Success", JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
-//                return PartialView(user);
+        [HttpPost]
+        public ActionResult SaveProjectDetails(ProjectInfoVM projectInfoVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                return null;
+            }
+            try
+            {
+                if (projectInfoVM == null)
+                {
+                    return null;
+                }
+                db.Projects.Add(new Project
+                {
+                    UserID = projectInfoVM.UserID,
+                    ProjectTitle = projectInfoVM.ProjectTitle,
+                    DurationInMonth = projectInfoVM.DurationInMonth,
+                    ProjectRole = projectInfoVM.ProjectRole,
+                    Description = projectInfoVM.Description
+                });
+                db.SaveChanges();
+                return Json("Success", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
 
-//            }
-//            return RedirectToAction("Login", "Account");
+        [HttpPost]
+        public ActionResult SaveWorkExperience(WorkExperienceVM workExperienceVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                return null;
+            }
 
+            try
+            {
+                if (workExperienceVM == null)
+                {
+                    return null;
+                }
+
+                db.WorkExperiences.Add(new WorkExperience
+                {
+                    UserID = workExperienceVM.UserID,
+                    StartMonth = workExperienceVM.StartMonth,
+                    StartYear = workExperienceVM.StartYear,
+                    EndMonth = workExperienceVM.EndMonth,
+                    EndYear = workExperienceVM.EndYear,
+                    OrganizationName = workExperienceVM.OrganizationName,
+                    Designation = workExperienceVM.Designation,
+                    IsCurrentlyWorking = workExperienceVM.IsCurrentlyWorking,
+                });
+                db.SaveChanges();
+                return Json("SUCCESS", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        [HttpPost]
+        public ActionResult SaveEducationalDetails(EducationalDetailsVM educationalDetailsVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                return null;
+            }
+            try
+            {
+                if (educationalDetailsVM == null)
+                {
+                    return null;
+                }
+
+                db.EducationalDetails.Add(new EducationalDetails 
+                {
+                    UserID = educationalDetailsVM.UserID,
+                    CourseID = educationalDetailsVM.CourseID,
+                    BoardOrUniversity = educationalDetailsVM.BoardOrUniversity,
+                    PassingYear = educationalDetailsVM.PassingYear,
+                    Stream = educationalDetailsVM.Stream,
+                    CGPAOrPercentage = educationalDetailsVM.CGPAOrPercentage,
+                    TotalPercentageOrCGPAValue = educationalDetailsVM.TotalPercentageOrCGPAValue
+                });
+                db.SaveChanges();
+                return Json("SUCCESS", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+          }
+
+        [HttpPost]
+        public ActionResult SaveUserSkills(SkillsVM skillsVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                return null;
+            }
+            try
+            {
+                UserDetails user = db.UserDetails.Where(x => x.UserID == skillsVM.UserID).FirstOrDefault();
+                if (user == null)
+                {
+                    return null;
+                }
+
+                var skillIdsList = db.Skills.Where(x => skillsVM.SkillNames.Contains(x.SkillName)).Select(m => m.SkillID).ToList();
+                
+                List<Skill> refer = new List<Skill>();
+                
+                foreach (var item in skillIdsList)
+                {
+                    refer.Add(db.Skills.Where(x => x.SkillID == item).FirstOrDefault());
+                }
+
+                user.Skills.AddRange(refer);
+                db.SaveChanges();
+                return Json("SUCCESS", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }       
+
+    }
+}
 
 //        public ActionResult GetProjectById(int Id)
 //        {
@@ -204,36 +383,9 @@ namespace ResumeBuilder.Controllers
 //            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
 //        }
 
-//        [HttpPost]
-//        public ActionResult SaveBasicInformation(AddUserViewModel addUserViewModel)
-//        {
-//            var userFromDb = db.UserDetail.FirstOrDefault(u => u.UserID == addUserViewModel.UserID);
-
-//            userFromDb.Name = addUserViewModel.Name;
-//            userFromDb.Gender = addUserViewModel.Gender;
-//            userFromDb.Phone = addUserViewModel.PhoneNumber;
-//            userFromDb.DateofBirth = addUserViewModel.DateOfBirth;
-
-//            if (addUserViewModel.LanguageIds.Any())
-//            {
-//                var languages = db.Languages.Where(x => addUserViewModel.LanguageIds.Contains(x.LanguageID)).ToList();
-//                userFromDb.Language.AddRange(languages);
-//            }
-
-//            db.SaveChanges();
-
-        
-            
-
-//            user.Skills.AddRange(refer);
        
-//            db.SaveChanges();
 
-//            string message = "SUCCESS";
 
-//            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
-
-//        }
         
 //        public ActionResult DisplayDetails(int[] finalresult)
 //        {
@@ -415,6 +567,33 @@ namespace ResumeBuilder.Controllers
 //            db.Entry(user).State = System.Data.Entity.EntityState.Modified;
 //            db.SaveChanges();
 //            return Json("Success");
+
+        //     if (user != null)
+        //     {
+        //         AllInformation allinfo = new AllInformation();
+        //         {
+        //             allinfo.Name = user.Name;
+        //             allinfo.Gender = user.Gender;
+        //             allinfo.PhoneNumber = user.Phone;
+        //             allinfo.DateOfBirth = user.DateOfBirth;
+        //             allinfo.Summary = user.Summary;
+        //             allinfo.Languages = user.Languages;
+        //             allinfo.WorkExperiences = user.WorkExperiences;
+        //             allinfo.Projects = user.Projects;
+        //             allinfo.Login.Username=user.Login.Username;
+        //             allinfo.Skills = user.Skills;
+        //             allinfo.EducationalDetail = user.EducationalDetails;
+        //         }
+        //          return View(allinfo);
+        //     }
+        //     else
+        //     {
+        //         return new HttpNotFoundResult(); 
+        //     }  
+
+        //}
+
+
         //        public ActionResult GetProjectById(int Id)
         //        {
         //            var proj = db.Projects.FirstOrDefault(x => x.ProjectId == Id);
@@ -533,75 +712,11 @@ namespace ResumeBuilder.Controllers
         //        }
 
 
-        //        [HttpPost]
-        //        public ActionResult SaveSummary(UserDetail user)
-        //        {
-        //            var userFromDb = db.UserDetail.FirstOrDefault(u => u.UserID == user.UserID);
+        
 
-        //            userFromDb.Summary = user.Summary;
-        //            db.SaveChanges();
+        
 
-        //            string message = "SUCCESS";
-
-        //            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
-        //        }
-
-        //        [HttpPost]
-        //        public ActionResult SaveBasicInformation(UserInfoVM userInfoVM)
-        //        {
-        //            var userFromDb = db.UserDetail.FirstOrDefault(u => u.UserID == addUserViewModel.UserID);
-
-        //            userFromDb.Name = addUserViewModel.Name;
-        //            userFromDb.Gender = addUserViewModel.Gender;
-        //            userFromDb.Phone = addUserViewModel.PhoneNumber;
-        //            userFromDb.DateofBirth = addUserViewModel.DateOfBirth;
-
-        //            if (addUserViewModel.LanguageIds.Any())
-        //            {
-        //                var languages = db.Languages.Where(x => addUserViewModel.LanguageIds.Contains(x.LanguageID)).ToList();
-        //                userFromDb.Language.AddRange(languages);
-        //            }
-
-        //            db.SaveChanges();
-
-        //            string message = "SUCCESS";
-
-        //            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
-        //        }
-
-        //        [HttpPost]
-        //        public ActionResult SaveProjectDetails(Project project)
-        //        {
-        //            db.Project.Add(project);
-        //            db.SaveChanges();
-
-        //            string message = "SUCCESS";
-
-        //            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
-        //        }
-
-        //        [HttpPost]
-        //        public ActionResult SaveWorkExperience(WorkExperience workExperience)
-        //        {
-        //            db.WorkExperience.Add(workExperience);
-        //            db.SaveChanges();
-
-        //            string message = "SUCCESS";
-
-        //            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
-        //        }
-
-        //        [HttpPost]
-        //        public ActionResult SaveEducationalDetails(EducationalDetails educationalDetails)
-        //        {
-        //            db.EducationalDetails.Add(educationalDetails);
-        //            db.SaveChanges();
-
-        //            string message = "SUCCESS";
-
-        //            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
-        //        }
-
+        
 
         //        public JsonResult GetSkill(string term)
         //       {
@@ -969,5 +1084,4 @@ namespace ResumeBuilder.Controllers
         //            db.SaveChanges();
         //            return Json("Success");
         //}
-    }
-}
+

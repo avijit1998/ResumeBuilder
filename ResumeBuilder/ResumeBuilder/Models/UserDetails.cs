@@ -38,5 +38,11 @@ namespace ResumeBuilder.Models
         
         public virtual List<Language> Languages { get; set; }
 
+        public UserDetails()
+        {
+            Languages = new List<Language>();
+            Skills = new List<Skill>();
+        }
+
     }
 }
