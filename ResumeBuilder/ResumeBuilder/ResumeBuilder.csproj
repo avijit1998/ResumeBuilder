@@ -182,6 +182,7 @@
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\PublicProfileController.cs" />
     <Compile Include="Controllers\ResumeController.cs" />
+    <Compile Include="Controllers\SearchUserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -586,6 +587,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\SearchUser\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
