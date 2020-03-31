@@ -180,7 +180,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
-    <Compile Include="Controllers\PublicProfileController.cs" />
     <Compile Include="Controllers\ResumeController.cs" />
     <Compile Include="Controllers\SearchUserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -211,10 +210,10 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AllInformation.cs" />
     <Compile Include="ViewModels\LoginDetailsViewModel.cs" />
-    <Compile Include="ViewModels\PublicProfileViewModel.cs" />
-    <Compile Include="ViewModels\UI Models\EducationUIModel.cs" />
-    <Compile Include="ViewModels\UI Models\ProjectUIModel.cs" />
-    <Compile Include="ViewModels\UI Models\WorkExUIModel.cs" />
+    <Compile Include="ViewModels\Profile VM\ProfileViewModel.cs" />
+    <Compile Include="ViewModels\Profile VM\EducationUIModel.cs" />
+    <Compile Include="ViewModels\Profile VM\ProjectUIModel.cs" />
+    <Compile Include="ViewModels\Profile VM\WorkExUIModel.cs" />
     <Compile Include="ViewModels\UserSkillVM.cs" />
     <Compile Include="ViewModels\WorkExperienceVM.cs" />
   </ItemGroup>
@@ -577,7 +576,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Resume\Index.cshtml" />
     <Content Include="Views\Resume\Form.cshtml" />
-    <Content Include="Views\PublicProfile\Index.cshtml" />
     <Content Include="Views\Resume\ShowData.cshtml" />
     <Content Include="Views\Resume\Search.cshtml" />
     <Content Include="Views\Profile\_BasicPreviewPartialView.cshtml" />
