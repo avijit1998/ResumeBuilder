@@ -9,6 +9,8 @@ namespace ResumeBuilder.ViewModels
     public class UserSkillVM
     {
         public int UserID { get; set; }
+
+        public string UserName { get; set; }
         
         public List<String> SkillNames { get; set; }
     }
