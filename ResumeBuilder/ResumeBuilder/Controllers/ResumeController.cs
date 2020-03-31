@@ -14,10 +14,8 @@ namespace ResumeBuilder.Controllers
     public class ResumeController : Controller
     {
         private ResumeBuilderDBContext db;
-        private PublicProfileViewModel _uiModel;
         public ResumeController()
         {
-            _uiModel = new PublicProfileViewModel();
             db = new ResumeBuilderDBContext();
         }
 
@@ -210,28 +208,40 @@ namespace ResumeBuilder.Controllers
     }
 }
 
-//        public ActionResult ShowData()
-//        {
-//            if (Session["UserID"] != null)
-//            {
-//                int id;
-//                var re = Int32.TryParse(Session["UserID"] as String, out id);
-//                var user = db.Users.Where(m => m.UserID == id).FirstOrDefault();
-//                var projects = db.Projects.Where(m => m.UserId == id).ToList();
-//                var workExperiences = db.WorkExperiences.Where(m => m.UserID == id).ToList();
-//                var educationDetails = db.EducationalDetails.Where(m => m.UserId == id).ToList();
+        public ActionResult ShowData()
+        {
+            
+            var user = db.UserDetails.Include("EducationalDetails").Include("Projects")
+                .Include("Login").Include("Languages").Include("Skills")
+                .Include("WorkExperiences").FirstOrDefault(x => x.UserID == 1);
+            ViewBag.Languages = db.Languages.ToList();
+            ViewBag.Courses = db.Courses.ToList();
+             if (user != null)
+             {
+                 AllInformation allinfo = new AllInformation();
+                 {
+                     allinfo.Name = user.Name;
+                     allinfo.Gender = user.Gender;
+                     allinfo.PhoneNumber = user.Phone;
+                     allinfo.DateOfBirth = user.DateOfBirth;
+                     allinfo.Summary = user.Summary;
+                     allinfo.Languages = user.Languages;
+                     allinfo.WorkExperiences = user.WorkExperiences;
+                     allinfo.Projects = user.Projects;
+                     allinfo.Login.Username=user.Login.Username;
+                     allinfo.Skills = user.Skills;
+                     allinfo.EducationalDetail = user.EducationalDetails;
+                     allinfo.LanguageIds = user.Languages.Select(x => x.LanguageID).ToList();
+                 }
+                  return View(allinfo);
+             }
+             else
+             {
+                 return new HttpNotFoundResult(); 
+             }  
+        }
 
-//                ViewBag.Languages = db.Languages.ToList();
 
-//                ViewBag.Projects = projects;
-//                ViewBag.WorkExperiences = workExperiences;
-//                ViewBag.Education = educationDetails;
-
-//                return PartialView(user);
-//            }
-//            return RedirectToAction("Login", "Account");
-
-//        }
 
 //        public ActionResult GetProjectById(int Id)
 //        {
@@ -366,29 +376,7 @@ namespace ResumeBuilder.Controllers
 
        
 
-        //public ActionResult ShowData()
-        //{
-        //    //if (Session["UserID"] != null)
-        //    //{
-        //        //int id;
-        //        //var re = Int32.TryParse(Session["UserID"] as String, out id);
-        //     var user = db.UserDetails.Include("EducationalDetails").Include("Projects")
-        //         .Include("Login").Include("Languages").Include("Skills")
-        //         .Include("WorkExperiences").FirstOrDefault(x => x.UserID == 1);
 
-        //     ViewBag.Languages = db.Languages.ToList();
-        //     ViewBag.Courses = db.Courses.ToList();
-            
-
-//            user.Skills.AddRange(refer);
-       
-//            db.SaveChanges();
-
-//            string message = "SUCCESS";
-
-//            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
-
-//        }
         
 //        public ActionResult DisplayDetails(int[] finalresult)
 //        {
@@ -527,63 +515,7 @@ namespace ResumeBuilder.Controllers
 //            }
 //        }
         
-//        [NonAction]
-//        public string RenderViewAsString(string viewName, object model)
-//        {
-//            // create a string writer to receive the HTML code
-//            StringWriter stringWriter = new StringWriter();
 
-//            // get the view to render
-//            ViewEngineResult viewResult = ViewEngines.Engines.FindView(ControllerContext, viewName, null);
-//            // create a context to render a view based on a model
-//            ViewContext viewContext = new ViewContext(
-//                ControllerContext,
-//                viewResult.View,
-//                new ViewDataDictionary(model),
-//                new TempDataDictionary(),
-//                stringWriter
-//            );
-
-//            // render the view to a HTML code
-//            viewResult.View.Render(viewContext, stringWriter);
-
-//            // return the HTML code
-//            return stringWriter.ToString();
-//        }
-
-//        [HttpGet]
-//        public ActionResult ConvertHtmlPageToPdf(string targetPreview)
-//        {
-//            if (Session["UserID"] != null)
-//            {
-//                _uiModel = GetUserDetails();
-//                // get the HTML code of this view
-//                string htmlToConvert = RenderViewAsString(targetPreview, _uiModel);
-
-//                // the base URL to resolve relative images and css
-//                String thisPageUrl = this.ControllerContext.HttpContext.Request.Url.AbsoluteUri;
-//                String baseUrl = thisPageUrl.Substring(0, thisPageUrl.Length - "Home/ConvertThisPageToPdf".Length);
-
-//                // instantiate the HiQPdf HTML to PDF converter
-//                HtmlToPdf htmlToPdfConverter = new HtmlToPdf();
-
-//                // set PDF page margins 
-//                htmlToPdfConverter.Document.Margins = new PdfMargins(20, 20, 20, 20);
-
-//                // set browser width
-//                htmlToPdfConverter.BrowserWidth = 740;
-
-//                // render the HTML code as PDF in memory
-//                byte[] pdfBuffer = htmlToPdfConverter.ConvertHtmlToMemory(htmlToConvert, baseUrl);
-
-//                // send the PDF file to browser
-//                FileResult fileResult = new FileContentResult(pdfBuffer, "application/pdf");
-//                fileResult.FileDownloadName = "Resume.pdf";
-
-//                return fileResult;
-//            }
-//            return RedirectToAction("Login", "Account");
-//        }
         
 //        public ActionResult GetCurrentUser(int id)
 //        {
@@ -626,6 +558,7 @@ namespace ResumeBuilder.Controllers
 //            db.Entry(user).State = System.Data.Entity.EntityState.Modified;
 //            db.SaveChanges();
 //            return Json("Success");
+
         //     if (user != null)
         //     {
         //         AllInformation allinfo = new AllInformation();
@@ -650,6 +583,7 @@ namespace ResumeBuilder.Controllers
         //     }  
 
         //}
+
 
         //        public ActionResult GetProjectById(int Id)
         //        {

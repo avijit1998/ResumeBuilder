@@ -2,7 +2,7 @@
 
 namespace ResumeBuilder.ViewModels
 {
-    public class PublicProfileViewModel
+    public class ProfileViewModel
     {
         // Basic Details
         public string Name { get; set; }
