@@ -2,65 +2,60 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 
 namespace ResumeBuilder.Helpers
 {
     public class PasswordSecurity
     {
-        /// <summary>
-        /// Return a newly generated salt.
-        /// </summary>
-        public static byte[] GenerateSalt()
+        public static string GenerateSalt()
         {
-            using (var rng = new RNGCryptoServiceProvider())
-            {
-                var randomNumber = new byte[32];
+            // Define min and max salt sizes.
+            var minSaltSize = 32;
+            var maxSaltSize = 64;
 
-                rng.GetBytes(randomNumber);
+            // Generate a random number for the size of the salt.
+            var random = new Random();
+            var saltSize = random.Next(minSaltSize, maxSaltSize);
 
-                return randomNumber;
+            // Allocate a byte array, which will hold the salt.
+            var saltBytes = new byte[saltSize];
 
-            }
+            // Initialize a random number generator.
+            var rng = RandomNumberGenerator.Create();
+
+            // Fill the salt with cryptographically strong byte values.
+            //rng.GetNonZeroBytes(saltBytes);
+            rng.GetBytes(saltBytes);
+
+            return Convert.ToBase64String(saltBytes);
         }
 
         /// <summary>
-        /// If the two SHA1 hashes are the same, returns true.
-        /// Otherwise returns false.
+        /// Check if the supplied password is valid
         /// </summary>
-        /// <param name="savedPasswordBytes"></param>
-        /// <param name="enteredPasswordBytes"></param>
-        public static bool MatchSHA(byte[] savedPasswordBytes, byte[] enteredPasswordBytes)
+        /// <param name="password">The password sent by the user</param>
+        /// <param name="passwordSalt">The stored password salt</param>
+        /// <param name="hashedPassword">The stored hashed password</param>
+        /// <returns></returns>
+        public static bool IsValid(string password, string passwordSalt, string hashedPassword)
         {
-            bool result = false;
-            if (savedPasswordBytes != null && enteredPasswordBytes != null)
+            using (var hash = SHA512.Create())
             {
-                if (savedPasswordBytes.Length == enteredPasswordBytes.Length)
-                {
-                    result = true;
-                    for (int i = 0; i < savedPasswordBytes.Length; i++)
-                    {
-                        if (savedPasswordBytes[i] != enteredPasswordBytes[i])
-                        {
-                            result = false;
-                            break;
-                        }
-                    }
-                }
+                var saltedPlainTextBytes = Encoding.UTF8.GetBytes(password).Concat(Convert.FromBase64String(passwordSalt)).ToArray();
+                var hashedBytes = hash.ComputeHash(saltedPlainTextBytes);
+                return hashedBytes.SequenceEqual(Convert.FromBase64String(hashedPassword));
             }
-            return result;
         }
-        /// <summary>
-        /// Returns the SHA256 hash of the password with the help of salt.
-        /// </summary>
-        /// <param name="password"></param>
-        /// <param name="salt"></param>
-        /// <returns>Byte Array of Hashed Password</returns>
-        public static byte[] ComputeHMAC_SHA256(byte[] password, byte[] salt)
+
+        public static string HashPassword(string value, string passwordSalt)
         {
-            using (var hmac = new HMACSHA256(salt))
+            using (var hash = SHA512.Create())
             {
-                return hmac.ComputeHash(password);
+                var saltedPlainTextBytes = Encoding.UTF8.GetBytes(value).Concat(Convert.FromBase64String(passwordSalt)).ToArray();
+                var hashedBytes = hash.ComputeHash(saltedPlainTextBytes);
+                return Convert.ToBase64String(hashedBytes);
             }
         }
     }

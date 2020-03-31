@@ -28,7 +28,7 @@ namespace ResumeBuilder.Controllers
             listUserSkills = (from user in db.UserDetails.Include("Skills").ToList()
                               select new UserSkillVM
                               {
-                                  UserID = user.UserID,
+                                  UserID = user.UserID,                               
                                   UserName = user.Name,
                                   SkillNames = user.Skills.Select(x => x.SkillName).ToList()
                               }).ToList();

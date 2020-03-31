@@ -12,16 +12,13 @@ namespace ResumeBuilder.Controllers
 	[Authorize]
 	public class AccountController : Controller
 	{
-
         [HttpGet]
         public ActionResult LogOff()
         {
-            Session.RemoveAll();
-            Session.Clear();
             Session.Abandon();
             return RedirectToAction("Login", "Account");
         }
-
+        
 		// GET: /Account/Login
 		[AllowAnonymous]
 		public ActionResult Login()
@@ -52,7 +49,7 @@ namespace ResumeBuilder.Controllers
 
 			ResumeBuilderDBContext dbContext = new ResumeBuilderDBContext();
 			
-            if (!dbContext.Logins.Any(m => m.Username == loginData.UserName))
+			if (!dbContext.Logins.Any(m => m.Username == loginData.UserName))
 			{
 				ModelState.AddModelError("", "Username does not exist.");
 				return View(loginData);
@@ -62,22 +59,22 @@ namespace ResumeBuilder.Controllers
 				try
 				{
 					var userLoginDetails = dbContext.Logins.FirstOrDefault(m => m.Username == loginData.UserName);
-					var saltBytes = Encoding.UTF8.GetBytes(userLoginDetails.Salt);
-					byte[] enteredPasswordBytes = PasswordSecurity.ComputeHMAC_SHA256(Encoding.UTF8.GetBytes(loginData.Password), saltBytes);
-					byte[] savedPasswordBytes = Encoding.UTF8.GetBytes(userLoginDetails.Password);
+					var salt = userLoginDetails.Salt;
+          string enterPassword = loginData.Password;
+          string savedPassword = userLoginDetails.Password;
 					
-                    if (PasswordSecurity.MatchSHA(savedPasswordBytes, enteredPasswordBytes))
+          if (PasswordSecurity.IsValid(enterPassword,salt,savedPassword))
 					{
-                        if (Session.Count == 0)
-                        {
-                            Session["UserID"] = userLoginDetails.UserID;
-                            return RedirectToAction("Index", "Resume");
-                        }
-                        else
-                        {
-                            ModelState.AddModelError("", "Session already exists. Try Again.");
-                            return View(loginData);
-                        }
+						if (Session.Count == 0)
+						{
+							Session["UserID"] = userLoginDetails.UserID;
+							return RedirectToAction("Index", "Resume");
+						}
+						else
+						{
+							ModelState.AddModelError("", "Session already exists. Try Again.");
+							return View(loginData);
+						}
 					}
 					else
 					{
@@ -86,16 +83,16 @@ namespace ResumeBuilder.Controllers
 				}
 				catch (UnauthorizedAccessException)
 				{
-                    ModelState.AddModelError("", "Wrong Password. Try Again.");
-                    return View(loginData);
+					ModelState.AddModelError("", "Wrong Password. Try Again.");
+					return View(loginData);
 				}
 				catch (Exception)
 				{
-                    ModelState.AddModelError("", "Oops!!! Something went wrong. Try Again.");
-                    return View(loginData);
+					ModelState.AddModelError("", "Oops!!! Something went wrong. Try Again.");
+					return View(loginData);
 				}
 			}
-        }
+		}
 
 		// GET: /Account/Register
 		[AllowAnonymous]
@@ -126,21 +123,19 @@ namespace ResumeBuilder.Controllers
 			{
 				try
 				{
-					byte[] saltBytes = PasswordSecurity.GenerateSalt();
-					string saltString = Convert.ToBase64String(saltBytes);
-					byte[] hashedPasswordBytes = PasswordSecurity.ComputeHMAC_SHA256(Encoding.UTF8.GetBytes(registrationDetails.Password), saltBytes);
-					string hashedPasswordString = Convert.ToBase64String(hashedPasswordBytes);
+                    string salt = PasswordSecurity.GenerateSalt();
+                    string hashedPassword = PasswordSecurity.HashPassword(registrationDetails.Password, salt);
 
-                    UserDetails newUser = new UserDetails
-                    {
-                        DateOfBirth = DateTime.Now                    
-                    };
+					UserDetails newUser = new UserDetails
+					{
+						DateOfBirth = DateTime.Now                    
+					};
 
 					Login newLogin = new Login
 					{
 						Username = registrationDetails.UserName,
-						Password = hashedPasswordString,
-						Salt = saltString,
+						Password = hashedPassword,
+						Salt = salt,
 						UserDetails = newUser
 					};
 
