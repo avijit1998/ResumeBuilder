@@ -576,16 +576,16 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Resume\Index.cshtml" />
     <Content Include="Views\Resume\Form.cshtml" />
-    <Content Include="Views\Resume\Preview.cshtml" />
     <Content Include="Views\PublicProfile\Index.cshtml" />
     <Content Include="Views\Resume\ShowData.cshtml" />
     <Content Include="Views\Resume\Search.cshtml" />
-    <Content Include="Views\Resume\_BasicPreviewPartialView.cshtml" />
-    <Content Include="Views\Resume\_TabularPreviewPartialView.cshtml" />
+    <Content Include="Views\Profile\_BasicPreviewPartialView.cshtml" />
+    <Content Include="Views\Profile\_TabularPreviewPartialView.cshtml" />
+    <Content Include="Views\Profile\Preview.cshtml" />
+    <Content Include="Views\Profile\PublicProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Profile\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
