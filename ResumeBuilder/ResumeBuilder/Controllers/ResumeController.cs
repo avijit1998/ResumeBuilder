@@ -20,10 +20,53 @@ namespace ResumeBuilder.Controllers
         }
 
         // GET: Resume
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    if (Session.Count != 0)
+        //        return View();
+        //    else
+        //    {
+        //        return RedirectToAction("Login", "Account");
+        //    }
+        //}
+
+        public ActionResult ShowData()        
         {
-            if (Session.Count != 0)
-                return View();
+            if (Session["UserID"] != null)
+            {
+                int id;
+                var re = Int32.TryParse(Session["UserID"] as String, out id);
+                var user = db.UserDetails.Include("EducationalDetails").Include("Projects")
+                    .Include("Login").Include("Languages").Include("Skills")
+                    .Include("WorkExperiences").FirstOrDefault(x => x.UserID == 2);
+
+                ViewBag.Languages = db.Languages.ToList();
+                ViewBag.Courses = db.Courses.ToList();
+                var langIds = user.Languages.Select(x => x.LanguageID).ToList();
+                if (user != null)
+                {
+                    AllInformation allinfo = new AllInformation();
+                    {
+                        allinfo.Name = user.Name==null ? "N/A" : user.Name;
+                        allinfo.Gender = user.Gender==null ? "N/A" :user.Gender;
+                        allinfo.PhoneNumber = user.Phone==null? "N/A" : user.Phone;
+                        allinfo.DateOfBirth = user.DateOfBirth;
+                        allinfo.Summary = user.Summary==null? "N/A" : user.Summary;
+                        allinfo.Languages = user.Languages==null? new List<Language>() :  user.Languages;
+                        allinfo.WorkExperiences = user.WorkExperiences==null? new List<WorkExperience>() : user .WorkExperiences;
+                        allinfo.Projects = user.Projects==null ? new List<Project>() : user.Projects ;
+                        //allinfo.Login.Username = user.Login.Username;
+                        allinfo.Skills = user.Skills==null ? new List<Skill>() : user.Skills;
+                        allinfo.EducationalDetail = user.EducationalDetails==null?new List<EducationalDetails>() : user.EducationalDetails;
+                        allinfo.LanguageIds = langIds.Count()==0 ? new List<int>() : langIds;
+                    }
+                    return View(allinfo);
+                }
+                else
+                {
+                    return new HttpNotFoundResult();
+                }
+            }
             else
             {
                 return RedirectToAction("Login", "Account");
@@ -238,6 +281,7 @@ namespace ResumeBuilder.Controllers
              {
                  return new HttpNotFoundResult(); 
              }  
+
         }
 
     }
