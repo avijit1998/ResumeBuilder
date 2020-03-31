@@ -2,10 +2,8 @@
 using ResumeBuilder.Models;
 using ResumeBuilder.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ResumeBuilder.Controllers
@@ -17,12 +15,7 @@ namespace ResumeBuilder.Controllers
         {
             db = new ResumeBuilderDBContext();
         }
-        // GET: Profile
-        public ActionResult Index()
-        {
-            return View();
-        }
-
+       
         [NonAction]
         private ProfileViewModel GetUserDetails()
         {
@@ -43,7 +36,7 @@ namespace ResumeBuilder.Controllers
                     uiModel.Gender = userData.Gender;
 
                     // User Gender
-                    uiModel.DOB = (userData.DateOfBirth.ToString().Split(' '))[0];
+                    uiModel.DOB = userData.DateOfBirth.ToShortDateString();
 
                     // User Phone
                     uiModel.PhoneNumber = userData.Phone;
@@ -104,6 +97,7 @@ namespace ResumeBuilder.Controllers
         }
 
         // GET: Resume/Preview
+        [HttpGet]
         public ActionResult Preview()
         {
             //if (Session["UserID"] != null)
@@ -170,6 +164,8 @@ namespace ResumeBuilder.Controllers
             //}
             //return RedirectToAction("Login", "Account");
         }
+
+        [HttpGet]
         public ActionResult PublicProfile()
         {
             var uiModel = GetUserDetails();

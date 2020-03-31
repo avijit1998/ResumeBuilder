@@ -12,16 +12,13 @@ namespace ResumeBuilder.Controllers
 	[Authorize]
 	public class AccountController : Controller
 	{
-
-		[HttpGet]
-		public ActionResult LogOff()
-		{
-			Session.RemoveAll();
-			Session.Clear();
-			Session.Abandon();
-			return RedirectToAction("Login", "Account");
-		}
-
+        [HttpGet]
+        public ActionResult LogOff()
+        {
+            Session.Abandon();
+            return RedirectToAction("Login", "Account");
+        }
+        
 		// GET: /Account/Login
 		[AllowAnonymous]
 		public ActionResult Login()
@@ -62,11 +59,11 @@ namespace ResumeBuilder.Controllers
 				try
 				{
 					var userLoginDetails = dbContext.Logins.FirstOrDefault(m => m.Username == loginData.UserName);
-					var saltBytes = Encoding.UTF8.GetBytes(userLoginDetails.Salt);
-					byte[] enteredPasswordBytes = PasswordSecurity.ComputeHMAC_SHA256(Encoding.UTF8.GetBytes(loginData.Password), saltBytes);
-					byte[] savedPasswordBytes = Encoding.UTF8.GetBytes(userLoginDetails.Password);
+					var salt = userLoginDetails.Salt;
+          string enterPassword = loginData.Password;
+          string savedPassword = userLoginDetails.Password;
 					
-					if (PasswordSecurity.MatchSHA(savedPasswordBytes, enteredPasswordBytes))
+          if (PasswordSecurity.IsValid(enterPassword,salt,savedPassword))
 					{
 						if (Session.Count == 0)
 						{
@@ -126,10 +123,8 @@ namespace ResumeBuilder.Controllers
 			{
 				try
 				{
-					byte[] saltBytes = PasswordSecurity.GenerateSalt();
-					string saltString = Convert.ToBase64String(saltBytes);
-					byte[] hashedPasswordBytes = PasswordSecurity.ComputeHMAC_SHA256(Encoding.UTF8.GetBytes(registrationDetails.Password), saltBytes);
-					string hashedPasswordString = Convert.ToBase64String(hashedPasswordBytes);
+                    string salt = PasswordSecurity.GenerateSalt();
+                    string hashedPassword = PasswordSecurity.HashPassword(registrationDetails.Password, salt);
 
 					UserDetails newUser = new UserDetails
 					{
@@ -139,8 +134,8 @@ namespace ResumeBuilder.Controllers
 					Login newLogin = new Login
 					{
 						Username = registrationDetails.UserName,
-						Password = hashedPasswordString,
-						Salt = saltString,
+						Password = hashedPassword,
+						Salt = salt,
 						UserDetails = newUser
 					};
 
