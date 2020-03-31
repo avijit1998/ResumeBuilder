@@ -29,7 +29,7 @@ namespace ResumeBuilder.Controllers
                               select new UserSkillVM
                               {
                                   UserID = user.UserID,
-                                  UserName = user.Name,
+                                  //UserName = user.Name,
                                   SkillNames = user.Skills.Select(x => x.SkillName).ToList()
                               }).ToList();
 
