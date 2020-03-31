@@ -247,42 +247,7 @@ namespace ResumeBuilder.Controllers
             {
                 return null;
             }
-        }
- 
-
-        public ActionResult ShowData()
-        {
-            
-            var user = db.UserDetails.Include("EducationalDetails").Include("Projects")
-                .Include("Login").Include("Languages").Include("Skills")
-                .Include("WorkExperiences").FirstOrDefault(x => x.UserID == 1);
-            ViewBag.Languages = db.Languages.ToList();
-            ViewBag.Courses = db.Courses.ToList();
-            if (user != null)
-            {
-                AllInformation allinfo = new AllInformation();
-                {
-                    allinfo.Name = user.Name;
-                    allinfo.Gender = user.Gender;
-                    allinfo.PhoneNumber = user.Phone;
-                    allinfo.DateOfBirth = user.DateOfBirth;
-                    allinfo.Summary = user.Summary;
-                    allinfo.Languages = user.Languages;
-                    allinfo.WorkExperiences = user.WorkExperiences;
-                    allinfo.Projects = user.Projects;
-                    //allinfo.Login.Username = user.Login.Username;
-                    allinfo.Skills = user.Skills;
-                    allinfo.EducationalDetail = user.EducationalDetails;
-                    allinfo.LanguageIds = user.Languages.Select(x => x.LanguageID).ToList();
-                }
-                return View(allinfo);
-            }
-             else
-             {
-                 return new HttpNotFoundResult(); 
-             }  
-
-        }
+        }       
 
     }
 }
