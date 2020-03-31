@@ -21,7 +21,7 @@
                     data-phone="@Model.PhoneNumber"
                     data-gender="@Model.Gender"
                     data-summary="@Model.Summary"
-                    data-languages="@(JsonConvert.SerializeObject(@Model.Languages))>
+                    data-languages="@(JsonConvert.SerializeObject(@Model.LanguageIds))" >
                 Edit
             </button>
         </p>
@@ -190,16 +190,16 @@
                             <div class="col-md-12">
                                 <form action="/Resume/SaveBasicInfo" method="post">
 
-                                    <input type="hidden" name="UserID" id="userId" value="@Model.UserID" />
+                                    <input type="hidden" name="UserID" id="userId" />
 
                                     <div class="form-group">
                                         <label>Full Name:</label>
-                                        <input type="text" class="form-control" name="Name" id="txtFullName" value="@Model.Name">
+                                        <input type="text" class="form-control" name="Name" id="txtFullName" >
                                     </div>
 
                                     <div class="form-group">
                                         <label>Email ID:</label>
-                                        <input type="email" class="form-control" name="Username" id="txtEmail" value="@Model.Login.Username">
+                                        <input type="email" class="form-control" name="Username" id="txtEmail" >
                                     </div>
 
                                     <div class="form-group">
@@ -222,19 +222,19 @@
 
                                         else
                                         {
-                                            <input type="date" class="form-control" name="DateOfBirth" id="dateDOB" value="@Model.DateOfBirth">
+                                            <input type="date" class="form-control" name="DateOfBirth" id="dateDOB" >
                                         }
 
                                     </div>
 
                                     <div class="form-group">
                                         <label>Phone Number</label>
-                                        <input type="text" class="form-control" name="PhoneNumber" id="txtPhoneNumber" value="@Model.PhoneNumber">
+                                        <input type="text" class="form-control" name="PhoneNumber" id="txtPhoneNumber" >
                                     </div>
 
                                     <div class="form-group">
                                         <label>Summary:</label>
-                                        <textarea class="form-control" name="Summary" id="txtSummary">@Model.Summary</textarea>
+                                        <textarea class="form-control" name="Summary" id="txtSummary"></textarea>
                                     </div>
 
                                     <div class="form-check">

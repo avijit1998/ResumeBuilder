@@ -36,6 +36,8 @@ namespace ResumeBuilder.ViewModels
 
         public string Summary { get; set; }
 
+        public List<int> LanguageIds { get; set; }
+
         public List<EducationalDetails> EducationalDetail { get; set; }
 
         public List<Project> Projects { get; set; }
