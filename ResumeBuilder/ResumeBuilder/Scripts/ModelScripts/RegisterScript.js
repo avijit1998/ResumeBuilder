@@ -10,7 +10,8 @@
         if (email === false || password === false || confirmPassword === false) {
             $("#btnSubmit").prop('disabled', true);
         }
-        else {
+        else
+        {
             $("#btnSubmit").prop('disabled', false);
         }
     }
@@ -36,7 +37,7 @@
             $("#confirmPasswordErrorText").text("Confirm your password!");
             confirmPassword = false;
         }
-        if (($.trim($("#confirmPassword").val())) !== ($.trim($("#Password").val()))) {
+        else if (($.trim($("#confirmPassword").val())) !== ($.trim($("#Password").val()))) {
             $("#confirmPasswordErrorText").text("The passwords doesn't match!");
             confirmPassword = false;
         }
@@ -56,12 +57,12 @@
         register();
     });
 
-    $("#Username").on("blur", function () {
-        if ($("#Username").val() === "") {
+    $("#UserName").on("blur", function () {
+        if ($("#UserName").val() === "") {
             $("#emailErrorText").text("Email field is required.");
             email = false;
         }
-        else if ((/^([a-z A-Z 0-9\. -]+)@([a-z A-Z]+)\.([a-z]{2,10})$/).test($.trim($("#Username").val())) === false) {
+        else if ((/^([a-z A-Z 0-9\. -]+)@([a-z A-Z]+)\.([a-z]{2,10})$/).test($.trim($("#UserName").val())) === false) {
             $("#emailErrorText").text("Enter valid Email.");
             email = false;
         }
