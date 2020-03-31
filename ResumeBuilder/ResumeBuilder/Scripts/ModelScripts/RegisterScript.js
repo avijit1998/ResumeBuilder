@@ -3,18 +3,7 @@
     var password = false;
     var confirmPassword = false;
 
-    if ($.trim($("#validationSummaryDiv").text()) === "User already exists.")
-        bootbox.alert("<b style='color:black;'>This User already exists.</b>");
-
-    function register() {
-        if (email === false || password === false || confirmPassword === false) {
-            $("#btnSubmit").prop('disabled', true);
-        }
-        else
-        {
-            $("#btnSubmit").prop('disabled', false);
-        }
-    }
+    
 
     function validatePassword() {
         if ($.trim($("#Password").val()) === "") {
@@ -29,6 +18,21 @@
         else {
             $("#passwordErrorText").text("");
             password = true;
+        }
+    }
+
+    function validateEmail() {
+        if ($("#UserName").val() === "") {
+            $("#emailErrorText").text("Email field is required.");
+            email = false;
+        }
+        else if ((/^([a-z A-Z 0-9\. -]+)@([a-z A-Z]+)\.([a-z]{2,10})$/).test($.trim($("#UserName").val())) === false) {
+            $("#emailErrorText").text("Enter valid Email.");
+            email = false;
+        }
+        else {
+            $("#emailErrorText").text("");
+            email = true;
         }
     }
 
@@ -49,34 +53,33 @@
 
     $("#Password").on("blur", function () {
         validatePassword();
-        register();
     });
 
     $("#confirmPassword").on("blur", function () {
         validateConfirmPassword();
-        register();
     });
 
     $("#UserName").on("blur", function () {
-        if ($("#UserName").val() === "") {
-            $("#emailErrorText").text("Email field is required.");
-            email = false;
-        }
-        else if ((/^([a-z A-Z 0-9\. -]+)@([a-z A-Z]+)\.([a-z]{2,10})$/).test($.trim($("#UserName").val())) === false) {
-            $("#emailErrorText").text("Enter valid Email.");
-            email = false;
-        }
-        else {
-            $("#emailErrorText").text("");
-            email = true;
-        }
-        register();
+        validateEmail();
     });
 
-    $("#btnSubmit").on("click", function () {
-        if (($.trim($("#validationSummaryDiv").text()) === "") && ($.trim($("#Username").text()) !== "") &&
-            ($.trim($("#Password").text()) !== "") && ($.trim($("#ConfirmPassword").text()) !== "")) {
+    $("#btnSubmit").on("click", function (e) {
+        e.preventDefault();
+
+        if ($.trim($("#validationSummaryDiv").text()) === "User already exists.")
+            bootbox.alert("<b style='color:black;'>This User already exists.</b>");
+
+        if (($.trim($("#validationSummaryDiv").text()) === "") && ($.trim($("#UserName").val()) !== "") &&
+            ($.trim($("#Password").val()) !== "") && ($.trim($("#confirmPassword").val()) !== "")) {
             bootbox.alert("<b class='alert-success' style='color:black;'>Registration Successful</b>");
+        }
+        validateEmail();
+        validatePassword();
+        validateConfirmPassword();
+
+        if (email === true && password === true && confirmPassword === true)
+        {
+            $(".register-form").submit();
         }
     });
 });
