@@ -27,9 +27,9 @@ namespace ResumeBuilder.Controllers
         private PublicProfileViewModel GetUserDetails()
         {
             var uiModel = new PublicProfileViewModel();
-            int id;
-            var result = Int32.TryParse(Session["UserID"] as String, out id);
-            if (result)
+            int id = 1;
+            //var result = Int32.TryParse(Session["UserID"] as String, out id);
+            if (true)
             {
                 try
                 {
@@ -55,20 +55,16 @@ namespace ResumeBuilder.Controllers
                     uiModel.Summary = userData.Summary;
 
                     // Education Details
-                    //uiModel.EducationList = (from user in userData.EducationalDetails
-                    //                          select new EducationUIModel
-                    //                          {
-                    //                              CourseName = (userData.EducationalDetails.FirstOrDefault
-                    //                              db.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName == "10"
-                    //                                           || db.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName == "12") ?
-                    //                                           db.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName + " TH" :
-                    //                                           db.Courses.FirstOrDefault(x => x.CourseId == user.CourseId).CourseName,
-                    //                              CGPAOrPercentage = user.CGPAOrPercentage,
-                    //                              Board = user.Board,
-                    //                              Stream = (user.Stream == null) ? "N/A" : user.Stream,
-                    //                              TotalPercentorCGPAValue = user.TotalPercentorCGPAValue,
-                    //                              PassingYear = user.PassingYear
-                    //                          }).OrderByDescending(x => x.PassingYear).ToList();
+                    uiModel.EducationList = (from user in userData.EducationalDetails
+                                              select new EducationUIModel
+                                              {
+                                                  CourseName = user.Course.CourseName,
+                                                  CGPAOrPercentage = user.CGPAOrPercentage,
+                                                  Board = user.BoardOrUniversity,
+                                                  Stream = (user.Stream == null) ? "N/A" : user.Stream,
+                                                  TotalPercentorCGPAValue = user.TotalPercentageOrCGPAValue,
+                                                  PassingYear = user.PassingYear
+                                              }).OrderByDescending(x => x.PassingYear).ToList();
 
                     // Skills
                     uiModel.SkillList = userData.Skills.Select(a => a.SkillName).ToList();
@@ -83,7 +79,7 @@ namespace ResumeBuilder.Controllers
                                             }).ToList();
 
                     // Work Ex.
-                    uiModel.WorkExList = (from user in db.WorkExperiences.Where(x => x.UserID == id)
+                    uiModel.WorkExList = (from user in userData.WorkExperiences.Where(x => x.UserID == id)
                                            select new WorkExUIModel
                                            {
                                                OrganizationName = user.OrganizationName,
@@ -93,7 +89,7 @@ namespace ResumeBuilder.Controllers
                                                EndYear = user.EndYear,
                                                Role = user.Designation,
                                                CurrentlyWorking = user.IsCurrentlyWorking
-                                           }).OrderByDescending(x => x.StartYear).ToList();
+                                           }).OrderByDescending(x => x.StartYear).OrderByDescending(y => y.StartMonth).ToList();
 
                     // Languages 
                     uiModel.Languages = userData.Languages.Select(a => a.LanguageName).ToList();
@@ -110,18 +106,12 @@ namespace ResumeBuilder.Controllers
         // GET: Resume/Preview
         public ActionResult Preview()
         {
-            if (Session["UserID"] != null)
-            {
+            //if (Session["UserID"] != null)
+            //{
                 var uiModel = GetUserDetails();
                 return PartialView(uiModel);
-            }
-            return RedirectToAction("Login", "Account");
-        }
-
-        public ActionResult data()
-        {
-            var x = db.UserDetails.FirstOrDefault(a => a.UserID == 1).Name;
-            return Json(x,JsonRequestBehavior.AllowGet);
+            //}
+            //return RedirectToAction("Login", "Account");
         }
     }
 }
