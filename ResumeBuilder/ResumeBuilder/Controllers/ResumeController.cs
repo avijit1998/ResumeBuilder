@@ -217,6 +217,253 @@ namespace ResumeBuilder.Controllers
              ViewBag.Languages = db.Languages.ToList();
              ViewBag.Courses = db.Courses.ToList();
             
+
+//            user.Skills.AddRange(refer);
+       
+//            db.SaveChanges();
+
+//            string message = "SUCCESS";
+
+//            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+
+//        }
+        
+//        public ActionResult DisplayDetails(int[] finalresult)
+//        {
+//            int id = 1;
+//            if (Session["UserID"] != null)
+//            {
+
+//                var re = Int32.TryParse(Session["UserID"] as String, out id);
+//            }
+//            var ob = db.settings.Where(user => user.UserID == id).FirstOrDefault();
+//            ob.setWorkex = finalresult[0];
+//            ob.setProject = finalresult[1];
+//            ob.setEducation = finalresult[2];
+//            ob.setSkills = finalresult[3];
+//            ob.setContact = finalresult[4];
+//            TryUpdateModel(ob);
+//            db.SaveChanges();
+//            return Json("success",JsonRequestBehavior.AllowGet);
+//        }
+
+//        public ActionResult settingsValue()
+//        {
+//            int id = 1;
+//            if (Session["UserID"] != null)
+//            {
+
+//                var re = Int32.TryParse(Session["UserID"] as String, out id);
+//            }
+//            var ob = db.settings.SingleOrDefault(user => user.UserID == id);
+//            UserSetting ob1 = new UserSetting();
+//            ob1.setWorkex = ob.setWorkex;
+//            ob1.UserSettingId = ob.UserSettingId;
+//            ob1.setSkills = ob.setSkills;
+//            ob1.setProject = ob.setProject;
+//            ob1.setEducation = ob.setEducation;
+//            ob1.setContact = ob.setContact;
+
+//            return Json(ob1, JsonRequestBehavior.AllowGet);
+//        }
+
+//        
+
+//        public ActionResult Search()
+//        {
+//            return PartialView();
+//        }
+
+//        public ActionResult GetUserSkills()
+//        {
+//            //db.Configuration.ProxyCreationEnabled = false;
+//            List<UserSkillVM> listUserSkills = new List<UserSkillVM>();
+//            listUserSkills = (from user in db.Users.Include("Skills").ToList()
+//                                    select new UserSkillVM
+//                                    {
+//                                        UserID = user.UserID,
+//                                        UserName = user.Name,
+//                                        SkillNames = user.Skills.Select(x => x.SkillName).ToList()
+//                                    }).ToList();
+            
+            
+//            return Json(listUserSkills, JsonRequestBehavior.AllowGet);
+//        }
+
+//        public ActionResult GetEducationById(int id)
+//        {
+//            var edu = db.EducationalDetails.FirstOrDefault(x => x.EducationalDetailID == id);
+
+//            var education = new EducationalDetails
+//            {
+//                EducationalDetailID = edu.EducationalDetailID,
+//                CourseId = edu.CourseId,
+//                Board = edu.Board,
+//                PassingYear = edu.PassingYear,
+//                Stream = edu.Stream,
+//                TotalPercentorCGPAValue = edu.TotalPercentorCGPAValue,
+//                CGPAOrPercentage = edu.CGPAOrPercentage
+//            };
+//            return Json(education, JsonRequestBehavior.AllowGet);
+//        }
+
+
+//        [HttpPost]
+//        public ActionResult UpdateEducation(int EducationalDetailID, EducationalDetails model)
+//        {
+//            var edu = db.EducationalDetails.FirstOrDefault(x => x.EducationalDetailID == EducationalDetailID);
+
+//            edu.EducationalDetailID = model.EducationalDetailID;
+//            edu.CourseId = model.CourseId;
+//            edu.PassingYear = model.PassingYear;
+//            edu.Stream = model.Stream;
+//            edu.Board = model.Board;
+//            edu.CGPAOrPercentage = model.CGPAOrPercentage;
+//            edu.TotalPercentorCGPAValue = model.TotalPercentorCGPAValue;
+
+//            db.Entry(edu).State = System.Data.Entity.EntityState.Modified;
+//            db.SaveChanges();
+//            return Json("Success");
+//        }
+
+
+//        [HttpPost]
+//        public ActionResult DeleteEducation(int educationId)
+//        {
+//            var edu = db.EducationalDetails.FirstOrDefault(x => x.EducationalDetailID == educationId);
+//            if (edu != null)
+//            {
+//                db.EducationalDetails.Remove(edu);
+//                db.SaveChanges();
+//                return Json("Successfully Deleted");
+//            }
+//            else
+//            {
+//                return HttpNotFound();
+//            }
+
+//        }
+
+//        [HttpPost]
+//        public ActionResult DeleteSkill(int skillId)
+//        {
+//            int id;
+//            var re = Int32.TryParse(Session["UserID"] as String, out id);
+//            var user = db.Users.FirstOrDefault(x => x.UserID == id);
+//            var skill = db.Skills.FirstOrDefault(x => x.SkillID == skillId);
+
+//            if(user!=null && skill!=null)
+//            {
+//                user.Skills.Remove(skill);
+
+//                db.SaveChanges();
+//                return Json("Successfully Deleted");
+//            }
+//            else
+//            {
+//                return HttpNotFound();
+//            }
+//        }
+        
+//        [NonAction]
+//        public string RenderViewAsString(string viewName, object model)
+//        {
+//            // create a string writer to receive the HTML code
+//            StringWriter stringWriter = new StringWriter();
+
+//            // get the view to render
+//            ViewEngineResult viewResult = ViewEngines.Engines.FindView(ControllerContext, viewName, null);
+//            // create a context to render a view based on a model
+//            ViewContext viewContext = new ViewContext(
+//                ControllerContext,
+//                viewResult.View,
+//                new ViewDataDictionary(model),
+//                new TempDataDictionary(),
+//                stringWriter
+//            );
+
+//            // render the view to a HTML code
+//            viewResult.View.Render(viewContext, stringWriter);
+
+//            // return the HTML code
+//            return stringWriter.ToString();
+//        }
+
+//        [HttpGet]
+//        public ActionResult ConvertHtmlPageToPdf(string targetPreview)
+//        {
+//            if (Session["UserID"] != null)
+//            {
+//                _uiModel = GetUserDetails();
+//                // get the HTML code of this view
+//                string htmlToConvert = RenderViewAsString(targetPreview, _uiModel);
+
+//                // the base URL to resolve relative images and css
+//                String thisPageUrl = this.ControllerContext.HttpContext.Request.Url.AbsoluteUri;
+//                String baseUrl = thisPageUrl.Substring(0, thisPageUrl.Length - "Home/ConvertThisPageToPdf".Length);
+
+//                // instantiate the HiQPdf HTML to PDF converter
+//                HtmlToPdf htmlToPdfConverter = new HtmlToPdf();
+
+//                // set PDF page margins 
+//                htmlToPdfConverter.Document.Margins = new PdfMargins(20, 20, 20, 20);
+
+//                // set browser width
+//                htmlToPdfConverter.BrowserWidth = 740;
+
+//                // render the HTML code as PDF in memory
+//                byte[] pdfBuffer = htmlToPdfConverter.ConvertHtmlToMemory(htmlToConvert, baseUrl);
+
+//                // send the PDF file to browser
+//                FileResult fileResult = new FileContentResult(pdfBuffer, "application/pdf");
+//                fileResult.FileDownloadName = "Resume.pdf";
+
+//                return fileResult;
+//            }
+//            return RedirectToAction("Login", "Account");
+//        }
+        
+//        public ActionResult GetCurrentUser(int id)
+//        {
+//            var data = db.Users.Include("Languages").FirstOrDefault(x => x.UserID == id);
+//            var user = new EditUserLanguageViewModel
+//            {
+//                UserID = data.UserID,
+//                Name=data.Name,
+//                Username = data.Username,
+//                Gender = data.Gender,
+//                Summary=data.Summary,
+//                PhoneNumber=data.PhoneNumber,
+//                DateOfBirth=data.DateOfBirth,
+//                LanguageIds = data.Languages.Select(s => s.LanguageID).ToArray()
+//            };
+
+//            return Json(user, JsonRequestBehavior.AllowGet);
+//        }
+
+//        [HttpPost]
+//        public ActionResult UpdateUser(int UserID, UpdateUserLanguageViewModel userLanguageViewModel)
+//        {
+
+//            var user = db.Users.Include("Languages").FirstOrDefault(x => x.UserID == UserID);
+
+//            user.Name = userLanguageViewModel.Name;
+//            user.Username = userLanguageViewModel.Username;
+//            user.Gender = userLanguageViewModel.Gender;
+//            user.Summary = userLanguageViewModel.Summary;
+//            user.PhoneNumber = userLanguageViewModel.PhoneNumber;
+//            user.DateOfBirth = userLanguageViewModel.DateOfBirth;
+//            user.Languages.Clear();
+
+//            if (userLanguageViewModel.LanguageIds.Any())
+//            {
+//                var languages = db.Languages.Where(x => userLanguageViewModel.LanguageIds.Contains(x.LanguageID)).ToList();
+//                user.Languages.AddRange(languages);
+//            }
+
+//            db.Entry(user).State = System.Data.Entity.EntityState.Modified;
+//            db.SaveChanges();
+//            return Json("Success");
              if (user != null)
              {
                  AllInformation allinfo = new AllInformation();
