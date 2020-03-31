@@ -110,6 +110,7 @@ namespace ResumeBuilder.Controllers
 		{
 			if (!ModelState.IsValid)
 			{
+                ModelState.AddModelError("", "Either username or password is empty.");
 				return View(registrationDetails);
 			}
 
@@ -139,6 +140,8 @@ namespace ResumeBuilder.Controllers
 						Salt = salt,
 						UserDetails = newUser
 					};
+
+                    newLogin.UserDetails.Setting = new Setting();
 
 					dbContext.Logins.Add(newLogin);
 					dbContext.SaveChanges();
