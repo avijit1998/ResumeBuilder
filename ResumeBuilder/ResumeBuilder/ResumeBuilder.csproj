@@ -201,6 +201,7 @@
     <Compile Include="Models\Skill.cs" />
     <Compile Include="Models\UserDetails.cs" />
     <Compile Include="Models\WorkExperience.cs" />
+    <Compile Include="ViewModels\EducationalDetailsVM.cs" />
     <Compile Include="ViewModels\ProjectInfoVM.cs" />
     <Compile Include="ViewModels\SkillsVM.cs" />
     <Compile Include="ViewModels\UserInfoVM.cs" />
