@@ -30,28 +30,42 @@ namespace ResumeBuilder.Controllers
             }
         }
 
-//        public ActionResult ShowData()
-//        {
-//            if (Session["UserID"] != null)
-//            {
-//                int id;
-//                var re = Int32.TryParse(Session["UserID"] as String, out id);
-//                var user = db.Users.Where(m => m.UserID == id).FirstOrDefault();
-//                var projects = db.Projects.Where(m => m.UserId == id).ToList();
-//                var workExperiences = db.WorkExperiences.Where(m => m.UserID == id).ToList();
-//                var educationDetails = db.EducationalDetails.Where(m => m.UserId == id).ToList();
+        public ActionResult ShowData()
+        {
+            
+            var user = db.UserDetails.Include("EducationalDetails").Include("Projects")
+                .Include("Login").Include("Languages").Include("Skills")
+                .Include("WorkExperiences").FirstOrDefault(x => x.UserID == 1);
 
-//                ViewBag.Languages = db.Languages.ToList();
+            ViewBag.Languages = db.Languages.ToList();
+            ViewBag.Courses = db.Courses.ToList();
+             if (user != null)
+             {
+                 AllInformation allinfo = new AllInformation();
+                 {
+                     allinfo.Name = user.Name;
+                     allinfo.Gender = user.Gender;
+                     allinfo.PhoneNumber = user.Phone;
+                     allinfo.DateOfBirth = user.DateOfBirth;
+                     allinfo.Summary = user.Summary;
+                     allinfo.Languages = user.Languages;
+                     allinfo.WorkExperiences = user.WorkExperiences;
+                     allinfo.Projects = user.Projects;
+                     allinfo.Login.Username=user.Login.Username;
+                     allinfo.Skills = user.Skills;
+                     allinfo.EducationalDetail = user.EducationalDetails;
+                     allinfo.LanguageIds = user.Languages.Select(x => x.LanguageID).ToList();
+                 }
+                  return View(allinfo);
+             }
+             else
+             {
+                 return new HttpNotFoundResult(); 
+             }  
 
-//                ViewBag.Projects = projects;
-//                ViewBag.WorkExperiences = workExperiences;
-//                ViewBag.Education = educationDetails;
+        }
 
-//                return PartialView(user);
-//            }
-//            return RedirectToAction("Login", "Account");
-
-//        }
+ 
 
 //        public ActionResult GetProjectById(int Id)
 //        {
@@ -202,18 +216,7 @@ namespace ResumeBuilder.Controllers
 
 //            db.SaveChanges();
 
-        public ActionResult ShowData()
-        {
-            //if (Session["UserID"] != null)
-            //{
-                //int id;
-                //var re = Int32.TryParse(Session["UserID"] as String, out id);
-             var user = db.UserDetails.Include("EducationalDetails").Include("Projects")
-                 .Include("Login").Include("Languages").Include("Skills")
-                 .Include("WorkExperiences").FirstOrDefault(x => x.UserID == 1);
-
-             ViewBag.Languages = db.Languages.ToList();
-             ViewBag.Courses = db.Courses.ToList();
+        
             
 
 //            user.Skills.AddRange(refer);
@@ -406,31 +409,7 @@ namespace ResumeBuilder.Controllers
 //            db.Entry(user).State = System.Data.Entity.EntityState.Modified;
 //            db.SaveChanges();
 //            return Json("Success");
-             if (user != null)
-             {
-                 AllInformation allinfo = new AllInformation();
-                 {
-                     allinfo.Name = user.Name;
-                     allinfo.Gender = user.Gender;
-                     allinfo.PhoneNumber = user.Phone;
-                     allinfo.DateOfBirth = user.DateOfBirth;
-                     allinfo.Summary = user.Summary;
-                     allinfo.Languages = user.Languages;
-                     allinfo.WorkExperiences = user.WorkExperiences;
-                     allinfo.Projects = user.Projects;
-                     allinfo.Login.Username=user.Login.Username;
-                     allinfo.Skills = user.Skills;
-                     allinfo.EducationalDetail = user.EducationalDetails;
-                 }
-                  return View(allinfo);
-             }
-             else
-             {
-                 return new HttpNotFoundResult(); 
-             }  
-
-        }
-
+            
         //        public ActionResult GetProjectById(int Id)
         //        {
         //            var proj = db.Projects.FirstOrDefault(x => x.ProjectId == Id);

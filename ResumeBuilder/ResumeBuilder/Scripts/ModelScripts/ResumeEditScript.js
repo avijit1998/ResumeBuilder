@@ -21,41 +21,39 @@ $("body").on("click", ".js-edit-user", function (e) {
     var $button = $(this);
 
     var userId = $button.data("user-id");
-    $.ajax({
-        url: "GetCurrentUser/" + userId,
-        method: "GET",
-        success: function (result) {
-            $('#userId').val(result.UserID);
-            $('#txtFullName').val(result.Name);
-            $('#txtEmail').val(result.Username);
-            $('#txtPhoneNumber').val(result.PhoneNumber); 
-            $('#txtSummary').val(result.Summary);
-            
-            $('input[name="Gender"]').each(function (e, el) {
-                if ($(el).val() == result.Gender) {
-                    $(el).prop('checked', true);
-                }
-            })
-            for (var i = 0; i < result.LanguageIds.length; i++) {
-                $('input[type="checkbox"]').each(function (e, el) {
-                    if ($(el).val() == result.LanguageIds[i]) {
-                        $(el).prop('checked', true);
-                    }
-                })
-            }
-            $('#modalBasicInfo').modal('show');
-        },
-        error: function (error) {
-            botbox.alert("<p style='color:black;'>Sorry ! Unable to edit user</p>");
+    var name = $button.data("name");
+    var emailId = $button.data("emailid");
+    var phoneNumber = $button.data("phone");
+    var summary = $button.data("summary");
+    var gender = $button.data("gender");
+    var languages = $button.data("languages");
+
+    $('#userId').val(userId);
+    $('#txtFullName').val(name);
+    $('#txtEmail').val(emailId);
+    $('#txtPhoneNumber').val(phoneNumber);
+    $('#txtSummary').val(result.Summary);
+   
+    $('input[name="Gender"]').each(function (e, el) {
+        if ($(el).val() == gender) {
+            $(el).prop('checked', true);
         }
-    });
+    })
+    for (var i = 0; i < languages.length; i++) {
+        $('input[type="checkbox"]').each(function (e, el) {
+            if ($(el).val() == languages[i]) {
+                $(el).prop('checked', true);
+            }
+        })
+    }    
+     $('#modalBasicInfo').modal('show');
 });
  
 $("body").on("click", ".js-save-user", function () {
-    var user = {
+    var userData = {
         "UserID":$("#userId").val(),
         "Name": $("#txtFullName").val(),
-        "Username": $("#txtEmail").val(),
+        "EmailID": $("#txtEmail").val(),
         "Gender": $('input[name="Gender"]:checked').val(),
         "DateOfBirth": $("#dateDOB").val(),
         "PhoneNumber": $("#txtPhoneNumber").val(),
@@ -68,29 +66,51 @@ $("body").on("click", ".js-save-user", function () {
     });
 
     if (user.LanguageIds[user.LanguageIds.length - 1] == "on") {
-        debugger;
         user.LanguageIds.pop();
     }
 
-    $.ajax({
-        type: "POST",
-        url: 'UpdateUser',
-        data: user,
-        success: function () {           
-            bootbox.alert("<p style='color:black;'>Basic information successfully saved.</p>");
-            $("#modalBasicInfo").modal("hide");
-            removeBackdrop();
-            var url = $("#ajaxEditForm").data('url');
-            $.get(url, function (data) {
-                $('#pageContent').html(data);
-            });
-        },
-        error: function () {
-            bootbox.alert("<p style='color:black;'>Error!</p>");
-        }
-    });
+
+    var params = $.extend({}, params_default);
+    params['url'] = '/Resume/SaveBasicInfo';
+    params['data'] = userData;
+    params['requestType'] = 'POST';
+    params['successCallbackFunction'] = function () {
+        bootbox.alert("<p style='color:black;'>Basic information successfully saved.</p>");
+                    $("#modalBasicInfo").modal("hide");
+                    //removeBackdrop();
+                    //var url = $("#ajaxEditForm").data('url');
+                    //$.get(url, function (data) {
+                    //    $('#pageContent').html(data);
+                    //});
+    };
+    params['errorCallBackFunction'] = function () {
+        bootbox.alert("<p style='color:black;'>Error!</p>");
+    }
+    commonAjax(params);
+
     return false;
 });
+
+
+//    $.ajax({
+//        type: "POST",
+//        url: 'UpdateUser',
+//        data: user,
+//        success: function () {           
+//            bootbox.alert("<p style='color:black;'>Basic information successfully saved.</p>");
+//            $("#modalBasicInfo").modal("hide");
+//            removeBackdrop();
+//            var url = $("#ajaxEditForm").data('url');
+//            $.get(url, function (data) {
+//                $('#pageContent').html(data);
+//            });
+//        },
+//        error: function () {
+//            bootbox.alert("<p style='color:black;'>Error!</p>");
+//        }
+//    });
+//    return false;
+//});
 
 $('body').on('click', '.js-edit-project', function (e) {
     debugger;

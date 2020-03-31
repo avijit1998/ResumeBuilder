@@ -12,14 +12,13 @@ namespace ResumeBuilder.Controllers
 	[Authorize]
 	public class AccountController : Controller
 	{
-
         [HttpGet]
         public ActionResult LogOff()
         {
             Session.Abandon();
             return RedirectToAction("Login", "Account");
         }
-
+        
 		// GET: /Account/Login
 		[AllowAnonymous]
 		public ActionResult Login()
@@ -50,7 +49,7 @@ namespace ResumeBuilder.Controllers
 
 			ResumeBuilderDBContext dbContext = new ResumeBuilderDBContext();
 			
-            if (!dbContext.Logins.Any(m => m.Username == loginData.UserName))
+			if (!dbContext.Logins.Any(m => m.Username == loginData.UserName))
 			{
 				ModelState.AddModelError("", "Username does not exist.");
 				return View(loginData);
@@ -61,21 +60,21 @@ namespace ResumeBuilder.Controllers
 				{
 					var userLoginDetails = dbContext.Logins.FirstOrDefault(m => m.Username == loginData.UserName);
 					var salt = userLoginDetails.Salt;
-                    string enterPassword = loginData.Password;
-                    string savedPassword = userLoginDetails.Password;
+          string enterPassword = loginData.Password;
+          string savedPassword = userLoginDetails.Password;
 					
-                    if (PasswordSecurity.IsValid(enterPassword,salt,savedPassword))
+          if (PasswordSecurity.IsValid(enterPassword,salt,savedPassword))
 					{
-                        if (Session.Count == 0)
-                        {
-                            Session["UserID"] = userLoginDetails.UserID;
-                            return RedirectToAction("Index", "Resume");
-                        }
-                        else
-                        {
-                            ModelState.AddModelError("", "Session already exists. Try Again.");
-                            return View(loginData);
-                        }
+						if (Session.Count == 0)
+						{
+							Session["UserID"] = userLoginDetails.UserID;
+							return RedirectToAction("Index", "Resume");
+						}
+						else
+						{
+							ModelState.AddModelError("", "Session already exists. Try Again.");
+							return View(loginData);
+						}
 					}
 					else
 					{
@@ -84,16 +83,16 @@ namespace ResumeBuilder.Controllers
 				}
 				catch (UnauthorizedAccessException)
 				{
-                    ModelState.AddModelError("", "Wrong Password. Try Again.");
-                    return View(loginData);
+					ModelState.AddModelError("", "Wrong Password. Try Again.");
+					return View(loginData);
 				}
 				catch (Exception)
 				{
-                    ModelState.AddModelError("", "Oops!!! Something went wrong. Try Again.");
-                    return View(loginData);
+					ModelState.AddModelError("", "Oops!!! Something went wrong. Try Again.");
+					return View(loginData);
 				}
 			}
-        }
+		}
 
 		// GET: /Account/Register
 		[AllowAnonymous]
@@ -127,10 +126,10 @@ namespace ResumeBuilder.Controllers
                     string salt = PasswordSecurity.GenerateSalt();
                     string hashedPassword = PasswordSecurity.HashPassword(registrationDetails.Password, salt);
 
-                    UserDetails newUser = new UserDetails
-                    {
-                        DateOfBirth = DateTime.Now                    
-                    };
+					UserDetails newUser = new UserDetails
+					{
+						DateOfBirth = DateTime.Now                    
+					};
 
 					Login newLogin = new Login
 					{

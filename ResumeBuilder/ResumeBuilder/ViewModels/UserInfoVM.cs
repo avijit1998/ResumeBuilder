@@ -11,6 +11,8 @@ namespace ResumeBuilder.ViewModels
 
         public string Name { get; set; }
 
+        public string EmailID { get; set; }
+
         public string Gender { get; set; }
 
         public string PhoneNumber { get; set; }

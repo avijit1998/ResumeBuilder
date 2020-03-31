@@ -1,4 +1,4 @@
-﻿function doAjax(params) {
+﻿function commonAjax(params) {
 
     var url = params['url'];
     var requestType = params['requestType'];
@@ -27,9 +27,14 @@
                 beforeSendCallbackFunction();
             }
         },
-        success: function (data, textStatus, jqXHR) {
+        success: function ( textStatus, jqXHR) {
             if (typeof successCallbackFunction === "function") {
-                successCallbackFunction(data);
+                successCallbackFunction();
+                removeBackdrop();
+                var url = $("#ajaxEditForm").data('url');
+                $.get(url, function (data) {
+                    $('#pageContent').html(data);
+                });
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
