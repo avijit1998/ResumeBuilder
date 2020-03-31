@@ -24,9 +24,9 @@ namespace ResumeBuilder.Controllers
         }
 
         [NonAction]
-        private PublicProfileViewModel GetUserDetails()
+        private ProfileViewModel GetUserDetails()
         {
-            var uiModel = new PublicProfileViewModel();
+            var uiModel = new ProfileViewModel();
             int id = 1;
             //var result = Int32.TryParse(Session["UserID"] as String, out id);
             if (true)
