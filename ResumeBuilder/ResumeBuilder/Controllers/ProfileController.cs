@@ -1,7 +1,9 @@
-﻿using ResumeBuilder.Models;
+﻿using HiQPdf;
+using ResumeBuilder.Models;
 using ResumeBuilder.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -20,8 +22,6 @@ namespace ResumeBuilder.Controllers
         {
             return View();
         }
-
-
 
         [NonAction]
         private PublicProfileViewModel GetUserDetails()
@@ -112,6 +112,68 @@ namespace ResumeBuilder.Controllers
                 return PartialView(uiModel);
             //}
             //return RedirectToAction("Login", "Account");
+        }
+
+        [NonAction]
+        public string RenderViewAsString(string viewName, object model)
+        {
+            // create a string writer to receive the HTML code
+            StringWriter stringWriter = new StringWriter();
+
+            // get the view to render
+            ViewEngineResult viewResult = ViewEngines.Engines.FindView(ControllerContext, viewName, null);
+            // create a context to render a view based on a model
+            ViewContext viewContext = new ViewContext(
+                ControllerContext,
+                viewResult.View,
+                new ViewDataDictionary(model),
+                new TempDataDictionary(),
+                stringWriter
+            );
+
+            // render the view to a HTML code
+            viewResult.View.Render(viewContext, stringWriter);
+
+            // return the HTML code
+            return stringWriter.ToString();
+        }
+
+        [HttpGet]
+        public ActionResult ConvertHtmlPageToPdf(string targetPreview)
+        {
+            //if (Session["UserID"] != null)
+            //{
+                var uiModel = GetUserDetails();
+                // get the HTML code of this view
+                string htmlToConvert = RenderViewAsString(targetPreview, uiModel);
+
+                // the base URL to resolve relative images and css
+                String thisPageUrl = this.ControllerContext.HttpContext.Request.Url.AbsoluteUri;
+                String baseUrl = thisPageUrl.Substring(0, thisPageUrl.Length - "Home/ConvertThisPageToPdf".Length);
+
+                // instantiate the HiQPdf HTML to PDF converter
+                HtmlToPdf htmlToPdfConverter = new HtmlToPdf();
+
+                // set PDF page margins 
+                htmlToPdfConverter.Document.Margins = new PdfMargins(20, 20, 20, 20);
+
+                // set browser width
+                htmlToPdfConverter.BrowserWidth = 740;
+
+                // render the HTML code as PDF in memory
+                byte[] pdfBuffer = htmlToPdfConverter.ConvertHtmlToMemory(htmlToConvert, baseUrl);
+
+                // send the PDF file to browser
+                FileResult fileResult = new FileContentResult(pdfBuffer, "application/pdf");
+                fileResult.FileDownloadName = "Resume.pdf";
+                return fileResult;
+            //}
+            //return RedirectToAction("Login", "Account");
+        }
+        public ActionResult PublicProfile()
+        {
+            var uiModel = GetUserDetails();
+            return View(uiModel);
         }
     }
 }
