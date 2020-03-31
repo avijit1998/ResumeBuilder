@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ResumeBuilder.Models.ViewModels
+namespace ResumeBuilder.ViewModels
 {
-    public class AddUserViewModel
+    public class UserInfoVM
     {
         public int UserID { get; set; }
 
