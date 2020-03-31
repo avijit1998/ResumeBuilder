@@ -6,13 +6,24 @@
     List<ResumeBuilder.Models.Course> courses = ViewBag.Courses;
 }
 
+@using Newtonsoft.Json;
+
 <div id="pageContent">
     <div id="userDetails">
         <h3>User Details</h3>
 
         <p>
             <span>@Model.Name</span>
-            <button type="button" value="Edit" class="btn btn-info pull-right js-edit-user" data-user-id="@Model.UserID">Edit</button>
+            <button type="button" value="Edit" class="btn btn-info pull-right js-edit-user" data-user-id="@Model.UserID"
+                    data-name="@Model.Name"
+                    data-emailid="@Model.Login.Username"
+                    data-dob="@Model.DateOfBirth"
+                    data-phone="@Model.PhoneNumber"
+                    data-gender="@Model.Gender"
+                    data-summary="@Model.Summary"
+                    data-languages="@(JsonConvert.SerializeObject(@Model.Languages))>
+                Edit
+            </button>
         </p>
         <p><span>@Model.Login.Username</span></p>
         <p><span>@Model.DateOfBirth</span></p>
@@ -59,8 +70,15 @@
                     <b>
                         Degree:@courseName
                     </b>
-                    <button type="button" value="Edit" class="btn btn-info pull-right js-edit-education" data-education-id="@e.EducationalDetailsID">Edit</button>
-                    <button type="button" class="btn btn-danger pull-right js-delete-education" value="Delete" data-education-id="@e.EducationalDetailsID">Delete</button>
+                    <button type="button" value="Edit" class="btn btn-info pull-right js-edit-education" data-education-id="@e.EducationalDetailsID"
+                            data-courseid="@e.CourseID" data-board="@e.BoardOrUniversity" data-passingyear="@e.PassingYear"
+                            data-stream="@e.TotalPercentageOrCGPAValue">
+                        Edit
+                    </button>
+                    <button type="button" class="btn btn-danger pull-right js-delete-education" value="Delete" data-education-id="@e.EducationalDetailsID"
+                            data-courseid="@e.CourseID" data-board="@e.BoardOrUniversity" data-passingyear="@e.PassingYear" 
+                            data-stream="@e.TotalPercentageOrCGPAValue">
+                            Delete</button>
                 </p>
                 <div class="left-margin">
                     <p>Board: @e.BoardOrUniversity</p>
@@ -75,7 +93,6 @@
 
     <hr />
 
-
     <div id="projectDetails">
         <h3>Project Details</h3>
 
@@ -85,8 +102,14 @@
                     <div>
                         <p>
                             <b>Project Title: @p.ProjectTitle</b>
-                            <button type="button" value="Edit" class="btn btn-info pull-right js-edit-project" data-project-id="@p.ProjectID">Edit</button>
-                            <button type="button" class="btn btn-danger pull-right js-delete-project" value="Delete" data-project-id="@p.ProjectID">Delete</button>
+                            <button type="button" value="Edit" class="btn btn-info pull-right js-edit-project" data-project-id="@p.ProjectID"
+                                    data-title="@p.ProjectTitle" data-role="@p.ProjectRole" data-duration="@p.DurationInMonth" data-description="@p.Description">
+                                Edit
+                            </button>
+                            <button type="button" class="btn btn-danger pull-right js-delete-project" value="Delete" data-project-id="@p.ProjectID"
+                                 data-title="@p.ProjectTitle"   data-role="@p.ProjectRole" data-duration="@p.DurationInMonth" data-description="@p.Description">
+                                Delete
+                            </button>
                         </p>
                         <div class="left-margin">
                             <p>Role: @p.ProjectRole</p>
@@ -107,8 +130,16 @@
                     <div>
                         <p>
                             <b>Organisation Name: @w.OrganizationName</b>
-                            <button type="button" value="Edit" class="btn btn-info pull-right js-edit-workex" data-workex-id="@w.WorkExperienceID">Edit</button>
-                            <button type="button" class="btn btn-danger pull-right js-delete-workex" value="Delete" data-workex-id="@w.WorkExperienceID">Delete</button>
+                            <button type="button" value="Edit" class="btn btn-info pull-right js-edit-workex" data-workex-id="@w.WorkExperienceID"
+                                    data-designation="@w.Designation" data-start-month="@w.StartMonth" data-end-month="@w.EndMonth"
+                                    data-start-year="@w.StartYear" data-end-year="@w.EndYear" data-isworking="@w.IsCurrentlyWorking">
+                                Edit
+                            </button>
+                            <button type="button" class="btn btn-danger pull-right js-delete-workex" value="Delete" data-workex-id="@w.WorkExperienceID"
+                                    data-designation="@w.Designation" data-start-month="@w.StartMonth" data-end-month="@w.EndMonth"
+                                    data-start-year="@w.StartYear" data-end-year="@w.EndYear" data-isworking="@w.IsCurrentlyWorking">
+                                Delete
+                            </button>
                         </p>
                         <div class="left-margin">
                             <p>Role: @w.Designation</p>

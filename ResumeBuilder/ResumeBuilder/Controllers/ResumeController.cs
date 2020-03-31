@@ -55,6 +55,20 @@ namespace ResumeBuilder.Controllers
 
 //        }
 
+        public ActionResult ShowData()
+        {
+            //if (Session["UserID"] != null)
+            //{
+            //int id;
+            //var re = Int32.TryParse(Session["UserID"] as String, out id);
+            var user = db.UserDetails.Include("EducationalDetails").Include("Projects")
+                .Include("Login").Include("Languages").Include("Skills")
+                .Include("WorkExperiences").FirstOrDefault(x => x.UserID == 1);
+
+            ViewBag.Languages = db.Languages.ToList();
+            ViewBag.Courses = db.Courses.ToList();
+        }
+
 //        public ActionResult GetProjectById(int Id)
 //        {
 //            var proj = db.Projects.FirstOrDefault(x => x.ProjectId == Id);
@@ -204,18 +218,7 @@ namespace ResumeBuilder.Controllers
 
 //            db.SaveChanges();
 
-        public ActionResult ShowData()
-        {
-            //if (Session["UserID"] != null)
-            //{
-                //int id;
-                //var re = Int32.TryParse(Session["UserID"] as String, out id);
-             var user = db.UserDetails.Include("EducationalDetails").Include("Projects")
-                 .Include("Login").Include("Languages").Include("Skills")
-                 .Include("WorkExperiences").FirstOrDefault(x => x.UserID == 1);
-
-             ViewBag.Languages = db.Languages.ToList();
-             ViewBag.Courses = db.Courses.ToList();
+        
             
 
 //            user.Skills.AddRange(refer);

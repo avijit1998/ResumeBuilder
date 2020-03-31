@@ -21,34 +21,36 @@ $("body").on("click", ".js-edit-user", function (e) {
     var $button = $(this);
 
     var userId = $button.data("user-id");
-    $.ajax({
-        url: "GetCurrentUser/" + userId,
-        method: "GET",
-        success: function (result) {
-            $('#userId').val(result.UserID);
-            $('#txtFullName').val(result.Name);
-            $('#txtEmail').val(result.Username);
-            $('#txtPhoneNumber').val(result.PhoneNumber); 
-            $('#txtSummary').val(result.Summary);
-            
-            $('input[name="Gender"]').each(function (e, el) {
-                if ($(el).val() == result.Gender) {
-                    $(el).prop('checked', true);
-                }
-            })
-            for (var i = 0; i < result.LanguageIds.length; i++) {
-                $('input[type="checkbox"]').each(function (e, el) {
-                    if ($(el).val() == result.LanguageIds[i]) {
-                        $(el).prop('checked', true);
-                    }
-                })
-            }
-            $('#modalBasicInfo').modal('show');
-        },
-        error: function (error) {
-            botbox.alert("<p style='color:black;'>Sorry ! Unable to edit user</p>");
+    var name = $button.data("name");
+    var emailId = $button.data("emailid");
+    var phoneNumber = $button.data("phone");
+    var summary = $button.data("phone");
+    var gender = $button.data("phone");
+    var languages = $button.data("phone");
+    
+
+
+    $('#userId').val(userId);
+    $('#txtFullName').val(name);
+    $('#txtEmail').val(emailId);
+    $('#txtPhoneNumber').val(phoneNumber);
+    $('#txtSummary').val(result.Summary);
+
+    $('input[name="Gender"]').each(function (e, el) {
+        if ($(el).val() == result.Gender) {
+            $(el).prop('checked', true);
         }
-    });
+    })
+    for (var i = 0; i < result.LanguageIds.length; i++) {
+        $('input[type="checkbox"]').each(function (e, el) {
+            if ($(el).val() == result.LanguageIds[i]) {
+                $(el).prop('checked', true);
+            }
+        })
+    }
+
+    
+     $('#modalBasicInfo').modal('show');
 });
  
 $("body").on("click", ".js-save-user", function () {
