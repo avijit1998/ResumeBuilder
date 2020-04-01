@@ -38,7 +38,7 @@ namespace ResumeBuilder.Controllers
                 var re = Int32.TryParse(Session["UserID"] as String, out id);
                 var user = db.UserDetails.Include("EducationalDetails").Include("Projects")
                     .Include("Login").Include("Languages").Include("Skills")
-                    .Include("WorkExperiences").FirstOrDefault(x => x.UserID == 2);
+                    .Include("WorkExperiences").FirstOrDefault(x => x.UserID == id);
 
                 ViewBag.Languages = db.Languages.ToList();
                 ViewBag.Courses = db.Courses.ToList();

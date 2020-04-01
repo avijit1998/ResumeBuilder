@@ -78,7 +78,7 @@
         $('#txtFullName').val(name);
         $('#txtEmail').val(emailId);
         $('#txtPhoneNumber').val(phoneNumber);
-        $('#txtSummary').val(result.Summary);
+        $('#txtSummary').val(summary);
 
         $('input[name="Gender"]').each(function (e, el) {
             if ($(el).val() == gender) {
@@ -112,9 +112,9 @@
             user.LanguageIds.push($(el).val());
         });
 
-        if (user.LanguageIds[user.LanguageIds.length - 1] == "on") {
-            user.LanguageIds.pop();
-        }
+        //if (user.LanguageIds[user.LanguageIds.length - 1] == "on") {
+        //    user.LanguageIds.pop();
+        //}
 
         var params = $.extend({}, params_default);
         params['url'] = '/Resume/SaveBasicInfo';
