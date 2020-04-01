@@ -13,9 +13,9 @@
 
         <p>
             <span>@Model.Name</span>
-            <button type="button" value="Edit" class="btn btn-info pull-right js-edit-user" data-user-id="@Model.UserID"
+            <button type="button" value="Edit" class="btn btn-info pull-right js-edit-user" 
+                    data-user-id="@Model.UserID"
                     data-name="@Model.Name"
-                   
                     data-dob="@Model.DateOfBirth"
                     data-phone="@Model.PhoneNumber"
                     data-gender="@Model.Gender"
@@ -59,7 +59,7 @@
                 }
                 else if (e.CourseID == 3)
                 {
-                    courseName = "Graduation";
+                    courseName = "Under Graduation";
                 }
                 else
                 {
@@ -160,13 +160,13 @@
                     <p>Role: @w.Designation</p>
                     <p>From: @w.StartMonth <span>/</span>  <span>@w.StartYear</span></p>
                     @if (@w.IsCurrentlyWorking)
-                            {
-                            <p>Currently Working</p>
-                            }
-                            else
-                            {
-                            <p>To: @w.EndMonth / @w.EndYear</p>
-                            }
+                    {
+                        <p>Currently Working</p>
+                    }
+                    else
+                    {
+                        <p>To: @w.EndMonth / @w.EndYear</p>
+                    }
                 </div>
             </div>
                 }
@@ -233,14 +233,14 @@
                             <div class="form-group">
                                 <label>Date of Birth</label>
                                 @if (@Model.DateOfBirth != null)
-                                        {
-                                        @Html.TextBoxFor(model => model.DateOfBirth, new { @type = "date", @Value = Model.DateOfBirth.Value.ToString("yyyy-MM-dd"), @Class = "form-control", @Name = "DateOfBirth", @Id = "dateDOB", style = "color:black;" })
-                                        }
+                                {
+                                    @Html.TextBoxFor(model => model.DateOfBirth, new { @type = "date", @Value = Model.DateOfBirth.Value.ToString("yyyy-MM-dd"), @Class = "form-control", @Name = "DateOfBirth", @Id = "dateDOB", style = "color:black;" })
+                                }
 
-                                        else
-                                        {
-                                        <input type="date" class="form-control" name="DateOfBirth" id="dateDOB">
-                                        }
+                                else
+                                {
+                                    <input type="date" class="form-control" name="DateOfBirth" id="dateDOB">
+                                }
 
                             </div>
 
@@ -304,6 +304,12 @@
                             <input type="hidden" name="EducationalDetailsID" />
                             <input type="hidden" name="CourseID" />
 
+                            @foreach (var course in courses)
+                            {
+                                <label class="radio-inline">
+                                    <input type="radio" name="courseOption" value="@course.CourseID">@course.CourseName
+                                </label>
+                            }
 
                             <div class="stream">
                                 <div class="form-group stream">
