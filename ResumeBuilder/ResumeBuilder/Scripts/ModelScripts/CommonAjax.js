@@ -28,9 +28,10 @@
                 beforeSendCallbackFunction();
             }
         },
-        success: function (textStatus, jqXHR) {
+        success: function (data, textStatus, jqXHR) {
             if (typeof successCallbackFunction === "function") {
-                successCallbackFunction();
+                successCallbackFunction(data);
+                bootbox.hideAll();
                 removeBackdrop();
                 var url = $("#ajaxEditForm").data('url');
                 $.get(url, function (data) {
