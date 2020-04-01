@@ -20,22 +20,24 @@ namespace ResumeBuilder.Controllers
         }
 
         // GET: Resume
-        //public ActionResult Index()
-        //{
-        //    if (Session.Count != 0)
-        //        return View();
-        //    else
-        //    {
-        //        return RedirectToAction("Login", "Account");
-        //    }
-        //}
+        public ActionResult Index()
+        {
+            if (Session.Count != 0)
+                return View();
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+        }
 
         public ActionResult ShowData()        
         {
             if (Session["UserID"] != null)
             {
-                int id;
-                var re = Int32.TryParse(Session["UserID"] as String, out id);
+                
+                var session = Session["UserID"];
+                int id = (Int32)session;
+                //var re = Int32.TryParse(session as string, out id);
                 var user = db.UserDetails.Include("EducationalDetails").Include("Projects")
                     .Include("Login").Include("Languages").Include("Skills")
                     .Include("WorkExperiences").FirstOrDefault(x => x.UserID == id);

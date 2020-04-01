@@ -4,7 +4,17 @@
     List<ResumeBuilder.Models.Language> languages = ViewBag.Languages;
     List<ResumeBuilder.Models.Course> courses = ViewBag.Courses;
 }
-
+@{
+    string username = "N/A";
+    int userId = 0;
+    if (Session.Count != 0)
+    {
+        username = (string)Session["Username"];
+        userId = (int)Session["UserID"];
+    }
+    
+}
+ 
 @using Newtonsoft.Json;
 
 <div id="pageContent">
@@ -216,7 +226,7 @@
 
                             <div class="form-group">
                                 <label>Email ID:</label>
-                                <input type="email" class="form-control" name="Username" id="txtEmail">
+                                <input type="email" class="form-control" name="Username" id="txtEmail" style="color:black;" value="@username" readonly>
                             </div>
 
                             <div class="form-group">
