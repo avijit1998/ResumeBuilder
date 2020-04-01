@@ -1,4 +1,5 @@
 ﻿using HiQPdf;
+using ResumeBuilder.Helpers;
 using ResumeBuilder.Models;
 using ResumeBuilder.Models.ViewModels;
 using ResumeBuilder.ViewModels;
@@ -11,6 +12,7 @@ using System.Web.Mvc;
 
 namespace ResumeBuilder.Controllers
 {
+    [AuthorizeIfSessionExists]
     public class ResumeController : Controller
     {
         private ResumeBuilderDBContext db;
