@@ -76,10 +76,6 @@
 
         $('#userId').val(userId);
         $('#txtFullName').val(name);
-<<<<<<< HEAD
-        //$('#txtEmail').val(emailId);
-=======
->>>>>>> upstream/master
         $('#txtPhoneNumber').val(phoneNumber);
         $('#txtSummary').val(summary);
 
@@ -112,7 +108,7 @@
         };
 
         $('input[type="checkbox"]:checked').each(function (e, el) {
-            user.LanguageIds.push($(el).val());
+            userData.LanguageIds.push($(el).val());
         });
 
         //if (user.LanguageIds[user.LanguageIds.length - 1] == "on") {
