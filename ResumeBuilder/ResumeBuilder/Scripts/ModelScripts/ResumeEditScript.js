@@ -78,7 +78,7 @@
         $('#txtFullName').val(name);
         $('#txtEmail').val(emailId);
         $('#txtPhoneNumber').val(phoneNumber);
-        $('#txtSummary').val(result.Summary);
+        $('#txtSummary').val(summary);
 
         $('input[name="Gender"]').each(function (e, el) {
             if ($(el).val() == gender) {
@@ -100,7 +100,7 @@
         var userData = {
             "UserID": $("#userId").val(),
             "Name": $("#txtFullName").val(),
-            "EmailID": $("#txtEmail").val(),
+            //"EmailID": $("#txtEmail").val(),
             "Gender": $('input[name="Gender"]:checked').val(),
             "DateOfBirth": $("#dateDOB").val(),
             "PhoneNumber": $("#txtPhoneNumber").val(),
@@ -117,7 +117,7 @@
         }
 
         var params = $.extend({}, params_default);
-        params['url'] = '/Resume/SaveBasicInfo';
+        params['url'] = '/Resume/SaveBasicInformation';
         params['data'] = userData;
         params['requestType'] = 'POST';
         params['successCallbackFunction'] = function () {
@@ -135,9 +135,6 @@
         commonAjax(params);
 
         return false;
-
-
-
         //    $.ajax({
         //        type: "POST",
         //        url: 'UpdateUser',
@@ -225,14 +222,14 @@
         //debugger;
         e.preventDefault();
         var formData = {
-            "WorkExperienceid": $('input[name="WorkExperienceid"]').val(),
+            "WorkExperienceID": $('input[name="WorkExperienceID"]').val(),
             "OrganizationName": $('input[name="OrganizationName"]').val(),
-            "Role": $('input[name="Role"]').val(),
+            "Designation": $('input[name="Designation"]').val(),
             "StartMonth": $("#selectStartMonth").val(),
             "StartYear": $("#selectStartYear").val(),
             "EndMonth": $("#selectEndMonth").val(),
             "EndYear": $("#selectEndYear").val(),
-            "CurrentlyWorking": $('#checkWorking').is(":checked")
+            "IsCurrentlyWorking": $('#checkWorking').is(":checked")
         };
 
         var params = $.extend({}, params_default);
@@ -298,17 +295,17 @@
 
     $('body').on('click', '.js-save-project', function (e) {
         e.preventDefault();
-        var Id = $('input[name="ProjectId"]').val();
+        var ProjectID = $('input[name="ProjectID"]').val();
         var formData = {
-            "ProjectId": $('input[name="ProjectId"]').val(),
-            "Title": $('input[name="Title"]').val(),
+            "ProjectID": $('input[name="ProjectID"]').val(),
+            "ProjectTitle": $('input[name="ProjectTitle"]').val(),
             "ProjectRole": $('input[name="ProjectRole"]').val(),
-            "Duration": $('input[name="Duration"]').val(),
+            "DurationInMonth": $('input[name="DurationInMonth"]').val(),
             "Description": $('textarea[name="Description"]').val()
         };
 
         var params = $.extend({}, params_default);
-        params['url'] = '/Resume/SaveProjectInfo';
+        params['url'] = '/Resume/SaveProjectDetails';
         params['data'] = formData;
         params['requestType'] = 'POST';
         params['successCallbackFunction'] = function () {
@@ -425,15 +422,15 @@
     $('body').on('click', '.js-save-education', function (e) {
         debugger;
         e.preventDefault();
-        var id = $('input[name="EducationalDetailID"]').val();
+        var id = $('input[name="EducationalDetailsID"]').val();
         var formData = {
-            "EducationalDetailID": $('input[name="EducationalDetailID"]').val(),
-            "CourseID": $('input[name="CourseId"]').val(),
+            "EducationalDetailsID": $('input[name="EducationalDetailsID"]').val(),
+            "CourseID": $('input[name="CourseID"]').val(),
             "Stream": $('input[name="Stream"]').val(),
             "PassingYear": $('input[name="PassingYear"]').val(),
-            "TotalPercentorCGPAValue": $('input[name="TotalPercentorCGPAValue"]').val(),
+            "TotalPercentageOrCGPAValue": $('input[name="TotalPercentageOrCGPAValue"]').val(),
             "CGPAOrPercentage": $('input[name="CGPAOrPercentage"]:checked').val(),
-            "Board": $('#boardType option:selected').text()
+            "BoardOrUniversity": $('#boardType option:selected').text()
         };
 
         var params = $.extend({}, params_default);
