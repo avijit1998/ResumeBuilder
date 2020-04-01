@@ -76,6 +76,10 @@
 
         $('#userId').val(userId);
         $('#txtFullName').val(name);
+<<<<<<< HEAD
+        //$('#txtEmail').val(emailId);
+=======
+>>>>>>> upstream/master
         $('#txtPhoneNumber').val(phoneNumber);
         $('#txtSummary').val(summary);
 
