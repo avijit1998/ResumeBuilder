@@ -41,6 +41,8 @@ $(document).ready(function () {
 
     //Anil
     $("body").on('click', '.js-save-user', function () {
+        console.log('hi u r in validation');
+        debugger;
         $('#modalBasicInfo').validate({
             rules: {
 
