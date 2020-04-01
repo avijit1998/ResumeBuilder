@@ -3,6 +3,7 @@
 @{
     List<ResumeBuilder.Models.Language> languages = ViewBag.Languages;
     List<ResumeBuilder.Models.Course> courses = ViewBag.Courses;
+    Layout = null;
 }
 @{
     string email = "N/A";
@@ -17,7 +18,7 @@
  
 @using Newtonsoft.Json;
 
-<div id="pageContent">
+<div id="editPage">
     <div id="userDetails">
         <h3>User Details</h3>
 
@@ -214,7 +215,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <form action="/Resume/SaveBasicInfo" method="post">
+                        <form>
 
                             <input type="hidden" name="UserID" id="userId" />
 
