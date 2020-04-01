@@ -66,6 +66,7 @@ namespace ResumeBuilder.Controllers
                         if (Session.Count == 0)
                         {
                             Session["UserID"] = userLoginDetails.UserID;
+                            Session["Username"] = userLoginDetails.Username;
                             return RedirectToAction("Index", "Resume");
                         }
                         else
