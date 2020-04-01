@@ -136,25 +136,6 @@
         commonAjax(params);
 
         return false;
-        //    $.ajax({
-        //        type: "POST",
-        //        url: 'UpdateUser',
-        //        data: user,
-        //        success: function () {           
-        //            bootbox.alert("<p style='color:black;'>Basic information successfully saved.</p>");
-        //            $("#modalBasicInfo").modal("hide");
-        //            removeBackdrop();
-        //            var url = $("#ajaxEditForm").data('url');
-        //            $.get(url, function (data) {
-        //                $('#pageContent').html(data);
-        //            });
-        //        },
-        //        error: function () {
-        //            bootbox.alert("<p style='color:black;'>Error!</p>");
-        //        }
-        //    });
-        //    return false;
-        //});
     });
 
     $('body').on('click', '.js-edit-workex', function (e) {
@@ -233,7 +214,7 @@
             "IsCurrentlyWorking": $('#checkWorking').is(":checked")
         };
 
-        var params = $.extend({}, params_default);
+        var params = $.extend({}, params);
         params['url'] = '/Resume/SaveWorkExperience';
         params['data'] = formData;
         params['requestType'] = 'POST';
@@ -305,7 +286,7 @@
             "Description": $('textarea[name="Description"]').val()
         };
 
-        var params = $.extend({}, params_default);
+        var params = $.extend({}, params);
         params['url'] = '/Resume/SaveProjectDetails';
         params['data'] = formData;
         params['requestType'] = 'POST';
@@ -434,8 +415,8 @@
             "BoardOrUniversity": $('#boardType option:selected').text()
         };
 
-        var params = $.extend({}, params_default);
-        params['url'] = '/Resume/SaveEducation';
+        var params = $.extend({}, params);
+        params['url'] = '/Resume/SaveEducationalDetails';
         params['data'] = formData;
         params['requestType'] = 'POST';
         params['successCallbackFunction'] = function () {
@@ -482,7 +463,7 @@
         bootbox.confirm("<p style='color:black;'>Are you sure to delete this Project Record?</p>", function (result) {
             if (result) {
 
-                var params = $.extend({}, params_default);
+                var params = $.extend({}, params);
                 params['url'] = '/Resume/DeleteProject' + projectID;
                 params['requestType'] = 'POST';
                 params['successCallbackFunction'] = function () {
@@ -521,7 +502,7 @@
         bootbox.confirm("<p style='color:black;'>Are you sure to delete this Work Experience Record?</p>", function (result) {
             if (result) {
 
-                var params = $.extend({}, params_default);
+                var params = $.extend({}, params);
                 params['url'] = '/Resume/DeleteWorkExperience' + workExId;
                 params['requestType'] = 'POST';
                 params['successCallbackFunction'] = function () {
@@ -558,7 +539,7 @@
         bootbox.confirm("<p style='color:black;'>Are you sure to delete this Skill?</p>", function (result) {
             if (result) {
 
-                var params = $.extend({}, params_default);
+                var params = $.extend({}, params);
                 params['url'] = '/Resume/DeleteSkill';
                 params['data'] = userData;
                 params['requestType'] = 'POST';
@@ -597,7 +578,7 @@
         bootbox.confirm("<p style='color:black;'>Are you sure to delete this Project Record?</p>", function (result) {
             if (result) {
 
-                var params = $.extend({}, params_default);
+                var params = $.extend({}, params);
                 params['url'] = '/Resume/DeleteEducation' + workExId;
                 params['requestType'] = 'POST';
                 params['successCallbackFunction'] = function () {
