@@ -51,6 +51,7 @@ namespace ResumeBuilder.Controllers
                 {
                     AllInformation allinfo = new AllInformation();
                     {
+                        allinfo.UserID = id;
                         allinfo.Name = user.Name==null ? "N/A" : user.Name;
                         allinfo.Gender = user.Gender==null ? "N/A" :user.Gender;
                         allinfo.PhoneNumber = user.Phone==null? "N/A" : user.Phone;
@@ -64,7 +65,7 @@ namespace ResumeBuilder.Controllers
                         allinfo.EducationalDetail = user.EducationalDetails==null?new List<EducationalDetails>() : user.EducationalDetails;
                         allinfo.LanguageIds = langIds.Count()==0 ? new List<int>() : langIds;
                     }
-                    return View(allinfo);
+                    return PartialView(allinfo);
                 }
                 else
                 {
