@@ -76,7 +76,7 @@
 
         $('#userId').val(userId);
         $('#txtFullName').val(name);
-        $('#txtEmail').val(emailId);
+        //$('#txtEmail').val(emailId);
         $('#txtPhoneNumber').val(phoneNumber);
         $('#txtSummary').val(summary);
 
