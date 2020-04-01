@@ -12,23 +12,63 @@
 
 
 $(document).ready(function () {
-    //avijeet
-    $("body").on('click', '.js-save-project', function () {
-        $('#modalProject').validate({
-            rules: {
-
-            }
-        })
-    })
 
     //avijeet
-    $("body").on('click', '.js-save-skill', function () {
-        $('#modalSkills').validate({
-            rules: {
+    $("body").on('click', '.js-add-project, .js-edit-project', function () {
 
-            }
-        })
-    })
+        $("#modalProject").on('shown.bs.modal', function () {
+            
+            $.validator.addMethod("regex", function (value, element, regexpr) {
+                return this.optional(element) || regexpr.test(value);
+            }, "Invalid input.");
+
+            $('#projectDetailsForm').validate({
+                rules: {
+                    ProjectTitle: {
+                        required: true,
+                        regex: /^[ A-Za-z0-9_@./#&+-]*$/
+                    },
+                    ProjectRole: {
+                        required: true,
+                        regex: /^[ A-Za-z0-9_@./#&+-]*$/
+                    },
+                    DurationInMonth: {
+                        required: true,
+                        regex: /^\d+$/
+                    },
+                    Description: {
+                        required: true
+                    }
+                },
+                messages: {
+                    ProjectTitle: {
+                        required: "Please enter the project title.",
+                        regex: "Please enter a valid project title."
+                    },
+                    ProjectRole: {
+                        required: "Please enter your role in the project.",
+                        regex: "Please enter a valid role"
+                    },
+                    DurationInMonth: {
+                        required: "Please enter the project duration.",
+                        regex: "Please enter a numeric data."
+                    },
+                    Description: {
+                        required: "Please enter the project description."
+                    }
+                }
+            });
+        });
+    });
+
+    //avijeet
+    //$("body").on('click', '.js-add-skill', function () {
+
+    //    $("#modalSkills").on('shown.bs.modal', function () {
+
+            
+    //    });
+    //});
 
     //Abhishek
     $("body").on('click', '.js-save-workex', function () {
