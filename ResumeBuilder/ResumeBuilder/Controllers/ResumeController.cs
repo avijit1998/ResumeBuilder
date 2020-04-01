@@ -125,25 +125,50 @@ namespace ResumeBuilder.Controllers
         [HttpPost]
         public ActionResult SaveProjectDetails(ProjectInfoVM projectInfoVM)
         {
-            if (!ModelState.IsValid)
-            {
-                return null;
-            }
-            try
-            {
-                if (projectInfoVM == null)
+            var session = Session["UserID"];
+            int id = (Int32)session;
+            projectInfoVM.UserID = id;
+            try{
+                if(projectInfoVM.ProjectID==0)
                 {
-                    return null;
+                    db.Projects.Add(new Project
+                    {
+                        UserID = projectInfoVM.UserID,
+                        ProjectTitle = projectInfoVM.ProjectTitle,
+                        DurationInMonth = projectInfoVM.DurationInMonth,
+                        ProjectRole = projectInfoVM.ProjectRole,
+                        Description = projectInfoVM.Description                        
+                    });
+
+                    db.SaveChanges();
+                    
                 }
-                db.Projects.Add(new Project
+                else
                 {
-                    UserID = projectInfoVM.UserID,
-                    ProjectTitle = projectInfoVM.ProjectTitle,
-                    DurationInMonth = projectInfoVM.DurationInMonth,
-                    ProjectRole = projectInfoVM.ProjectRole,
-                    Description = projectInfoVM.Description
-                });
-                db.SaveChanges();
+                    if (ModelState.IsValid)
+                    {
+                        var projFromDb = db.Projects.FirstOrDefault(x => x.ProjectID == projectInfoVM.ProjectID);
+                        if (projFromDb != null)
+                        {
+                            projFromDb.UserID = projectInfoVM.UserID;
+                            projFromDb.ProjectID = projectInfoVM.ProjectID;
+                            projFromDb.ProjectTitle = projectInfoVM.ProjectTitle;
+                            projFromDb.ProjectRole = projectInfoVM.ProjectRole;
+                            projFromDb.DurationInMonth = projectInfoVM.DurationInMonth;
+                            projFromDb.Description = projectInfoVM.Description;
+
+                            db.SaveChanges();
+                        }
+
+                        else
+                        {
+                            return HttpNotFound();
+                        }
+
+
+                    }
+
+                }
                 return Json("Success", JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
@@ -155,32 +180,60 @@ namespace ResumeBuilder.Controllers
         [HttpPost]
         public ActionResult SaveWorkExperience(WorkExperienceVM workExperienceVM)
         {
-            if (!ModelState.IsValid)
-            {
-                return null;
-            }
+            var session = Session["UserID"];
+            int id = (Int32)session;
+            workExperienceVM.UserID = id;
 
-            try
-            {
-                if (workExperienceVM == null)
+            try{
+                if(workExperienceVM.WorkExperienceID==0)
                 {
-                    return null;
+                    db.WorkExperiences.Add(new WorkExperience
+                    {
+                        UserID = workExperienceVM.UserID,
+                        StartMonth = workExperienceVM.StartMonth,
+                        StartYear = workExperienceVM.StartYear,
+                        EndMonth = workExperienceVM.EndMonth,
+                        EndYear = workExperienceVM.EndYear,
+                        OrganizationName = workExperienceVM.OrganizationName,
+                        Designation = workExperienceVM.Designation,
+                        IsCurrentlyWorking = workExperienceVM.IsCurrentlyWorking,                       
+                    });
+
+                    db.SaveChanges();
+                    
                 }
-
-                db.WorkExperiences.Add(new WorkExperience
+                else
                 {
-                    UserID = workExperienceVM.UserID,
-                    StartMonth = workExperienceVM.StartMonth,
-                    StartYear = workExperienceVM.StartYear,
-                    EndMonth = workExperienceVM.EndMonth,
-                    EndYear = workExperienceVM.EndYear,
-                    OrganizationName = workExperienceVM.OrganizationName,
-                    Designation = workExperienceVM.Designation,
-                    IsCurrentlyWorking = workExperienceVM.IsCurrentlyWorking,
-                });
-                db.SaveChanges();
-                return Json("SUCCESS", JsonRequestBehavior.AllowGet);
+                    if (ModelState.IsValid)
+                    {
+                        var workExFromDb = db.WorkExperiences.FirstOrDefault(x => x.WorkExperienceID == workExperienceVM.WorkExperienceID);
+                        if (workExFromDb != null)
+                        {
+                            workExFromDb.UserID = workExperienceVM.UserID;
+                            workExFromDb.StartMonth = workExperienceVM.StartMonth;
+                            workExFromDb.StartYear = workExperienceVM.StartYear;
+                            workExFromDb.EndMonth = workExperienceVM.EndMonth;
+                            workExFromDb.EndYear = workExperienceVM.EndYear;
+                            workExFromDb.OrganizationName = workExperienceVM.OrganizationName;
+                            workExFromDb.Designation = workExperienceVM.Designation;
+                            workExFromDb.IsCurrentlyWorking = workExperienceVM.IsCurrentlyWorking;   
+
+                            db.SaveChanges();
+                           // return Json("Success", JsonRequestBehavior.AllowGet);
+                        }
+
+                        else
+                        {
+                            return HttpNotFound();
+                        }
+
+
+                    }
+
+                }
+                return Json("Success", JsonRequestBehavior.AllowGet);
             }
+
             catch (Exception)
             {
                 return null;
@@ -288,6 +341,38 @@ namespace ResumeBuilder.Controllers
             return Json("success", JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public ActionResult DeleteProject(int id)
+        {
+            var proj = db.Projects.FirstOrDefault(x => x.ProjectID == id);
+            if (proj != null)
+            {
+                db.Projects.Remove(proj);
+                db.SaveChanges();
+                return Json("Successfully Deleted");
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult DeleteWorkExperience(int id)
+        {
+            var workEx = db.WorkExperiences.FirstOrDefault(x => x.WorkExperienceID == id);
+            if (workEx != null)
+            {
+                db.WorkExperiences.Remove(workEx);
+                db.SaveChanges();
+                return Json("Successfully Deleted");
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+        }
 
     }
 }
@@ -342,22 +427,7 @@ namespace ResumeBuilder.Controllers
 //            return RedirectToAction("Login", "Account");
 //        }
 
-//        [HttpPost]
-//        public ActionResult DeleteProject(int projectID)
-//        {
-//            var proj = db.Projects.FirstOrDefault(x => x.ProjectId == projectID);
-//            if (proj != null)
-//            {
-//                db.Projects.Remove(proj);
-//                db.SaveChanges();
-//                return Json("Successfully Deleted");
-//            }
-//            else
-//            {
-//                return HttpNotFound();
-//            }
-
-//        }
+     
 
 //        public ActionResult GetWorkExperienceById(int id)
 //        {
@@ -735,21 +805,7 @@ namespace ResumeBuilder.Controllers
         //            return Json("Success");
         //        }
 
-        //        [HttpPost]
-        //        public ActionResult DeleteWorkExperience(int workExId)
-        //        {
-        //            var workEx = db.WorkExperiences.FirstOrDefault(x => x.WorkExperienceid == workExId);
-        //            if (workEx != null)
-        //            {
-        //                db.WorkExperiences.Remove(workEx);
-        //                db.SaveChanges();
-        //                return Json("Successfully Deleted");
-        //            }
-        //            else
-        //            {
-        //                return HttpNotFound();
-        //            }
-        //        }
+        //        
 
 
         
