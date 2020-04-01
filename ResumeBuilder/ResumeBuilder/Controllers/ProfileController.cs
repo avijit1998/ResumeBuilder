@@ -63,7 +63,7 @@ namespace ResumeBuilder.Controllers
                     uiModel.SkillList = userData.Skills.Select(a => a.SkillName).ToList();
 
                     // Project Details
-                    uiModel.ProjectList = (from user in userData.Projects.Where(x => x.UserID == id)
+                    uiModel.ProjectList = (from user in userData.Projects
                                             select new ProjectUIModel
                                             {
                                                 Title = user.ProjectTitle,
@@ -72,7 +72,7 @@ namespace ResumeBuilder.Controllers
                                             }).ToList();
 
                     // Work Ex.
-                    uiModel.WorkExList = (from user in userData.WorkExperiences.Where(x => x.UserID == id)
+                    uiModel.WorkExList = (from user in userData.WorkExperiences
                                            select new WorkExUIModel
                                            {
                                                OrganizationName = user.OrganizationName,
