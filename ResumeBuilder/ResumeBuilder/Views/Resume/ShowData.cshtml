@@ -5,11 +5,11 @@
     List<ResumeBuilder.Models.Course> courses = ViewBag.Courses;
 }
 @{
-    string username = "N/A";
+    string email = "N/A";
     int userId = 0;
     if (Session.Count != 0)
     {
-        username = (string)Session["Username"];
+        email = (string)Session["Username"];
         userId = (int)Session["UserID"];
     }
     
@@ -226,7 +226,11 @@
 
                             <div class="form-group">
                                 <label>Email ID:</label>
+<<<<<<< HEAD
                                 <input type="email" class="form-control" name="Username" id="txtEmail" style="color:black;" value="@username" readonly>@username
+=======
+                                <input type="text" class="form-control" name="Username" id="txtEmail" value="@email" readonly>
+>>>>>>> upstream/master
                             </div>
 
                             <div class="form-group">

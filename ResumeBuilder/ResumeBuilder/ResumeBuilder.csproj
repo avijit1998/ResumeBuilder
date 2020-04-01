@@ -424,6 +424,10 @@
     <Content Include="Scripts\AjaxScripts\ajaxLoading.js" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\ModelScripts\CommonAjax.js" />
+<<<<<<< HEAD
+=======
+    <Content Include="Scripts\ModelScripts\ResumeFormValidationScript.js" />
+>>>>>>> upstream/master
     <Content Include="Scripts\ModelScripts\SearchScript.js" />
     <Content Include="Scripts\Preview_Scripts\jspdf.debug.js" />
     <Content Include="Scripts\Preview_Scripts\jspdf.min.js" />

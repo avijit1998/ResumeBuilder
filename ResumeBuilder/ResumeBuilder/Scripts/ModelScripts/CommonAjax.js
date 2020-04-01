@@ -27,7 +27,7 @@
                 beforeSendCallbackFunction();
             }
         },
-        success: function ( textStatus, jqXHR) {
+        success: function (textStatus, jqXHR) {
             if (typeof successCallbackFunction === "function") {
                 successCallbackFunction();
                 removeBackdrop();
