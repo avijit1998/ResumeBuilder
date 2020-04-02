@@ -102,7 +102,11 @@
             "LanguagesStatus": $("#cbLanguage").prop("checked")
         };
         $.ajax({
+<<<<<<< HEAD:ResumeBuilder/ResumeBuilder/Scripts/settings.js
+            url: "/SaveDetails/SaveSettingStatus",
+=======
             url: "/Settings/SaveSettingStatus",
+>>>>>>> origin/master:ResumeBuilder/ResumeBuilder/Scripts/ModelScripts/settings.js
             type: 'post',
             data: settingStatus,
             success: function () {
