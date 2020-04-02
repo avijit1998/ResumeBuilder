@@ -11,6 +11,12 @@ namespace ResumeBuilder.Controllers
 {
     public class AccountController : Controller
     {
+        private ResumeBuilderDBContext dbContext;
+        public AccountController()
+        {
+            dbContext = new ResumeBuilderDBContext();
+        }
+
         [HttpGet]
         [AuthorizeIfSessionExists]
         public ActionResult LogOff()
@@ -44,8 +50,6 @@ namespace ResumeBuilder.Controllers
                 ModelState.AddModelError("", "Invalid Username or Password.");
                 return View(loginData);
             }
-
-            ResumeBuilderDBContext dbContext = new ResumeBuilderDBContext();
 
             if (!dbContext.Logins.Any(m => m.Username == loginData.UserName))
             {
@@ -126,8 +130,6 @@ namespace ResumeBuilder.Controllers
                 ModelState.AddModelError("", "Either username or password is empty.");
                 return View(registrationDetails);
             }
-
-            ResumeBuilderDBContext dbContext = new ResumeBuilderDBContext();
 
             if (dbContext.Logins.Any(m => m.Username == registrationDetails.UserName))
             {
