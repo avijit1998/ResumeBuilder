@@ -7,23 +7,8 @@ using ResumeBuilder.Models;
 
 namespace ResumeBuilder.ViewModels
 {
-    public class AllInformation
+    public class AllInformationVM
     {
-        //public AllInformation()
-        //{
-        //    ProjectInfo = new List<ProjectInfoVM>();
-        //    WorkExperiences = new List<WorkExperienceVM>();
-        //    Skills = new List<SkillsVM>();
-        //}
-
-        //public UserInfoVM UserInfo { get; set; }
-
-        //public List<ProjectInfoVM> ProjectInfo { get; set; }
-
-        //public List<WorkExperienceVM> WorkExperiences { get; set; }
-
-        //public List<SkillsVM> Skills { get; set; }
-
         public int UserID { get; set; }
 
         public string Name { get; set; }

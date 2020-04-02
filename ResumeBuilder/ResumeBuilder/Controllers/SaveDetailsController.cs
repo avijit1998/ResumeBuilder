@@ -243,7 +243,7 @@ namespace ResumeBuilder.Controllers
             }
             try
             {
-                UserDetails user = db.UserDetails.Where(x => x.UserID == skillsVM.UserID).FirstOrDefault();
+                UserDetails user = db.UserDetails.FirstOrDefault(x => x.UserID == skillsVM.UserID);
                 if (user == null)
                 {
                     return null;
@@ -255,7 +255,7 @@ namespace ResumeBuilder.Controllers
 
                 foreach (var item in skillIdsList)
                 {
-                    refer.Add(db.Skills.Where(x => x.SkillID == item).FirstOrDefault());
+                    refer.Add(db.Skills.FirstOrDefault(x => x.SkillID == item));
                 }
 
                 user.Skills.AddRange(refer);

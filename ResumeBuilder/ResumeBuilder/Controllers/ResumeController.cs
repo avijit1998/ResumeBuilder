@@ -1,7 +1,6 @@
 ﻿using HiQPdf;
 using ResumeBuilder.Helpers;
 using ResumeBuilder.Models;
-using ResumeBuilder.Models.ViewModels;
 using ResumeBuilder.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -52,7 +51,7 @@ namespace ResumeBuilder.Controllers
                 var langIds = user.Languages.Select(x => x.LanguageID).ToList();
                 if (user != null)
                 {
-                    AllInformation allinfo = new AllInformation();
+                    AllInformationVM allinfo = new AllInformationVM();
                     {
                         allinfo.UserID = id;
                         allinfo.Name = user.Name==null ? "" : user.Name;

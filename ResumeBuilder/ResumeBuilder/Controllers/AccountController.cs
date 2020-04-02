@@ -37,7 +37,7 @@ namespace ResumeBuilder.Controllers
         //POST: /Account/Login
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginDetailsViewModel loginData)
+        public ActionResult Login(LoginDetailsVM loginData)
         {
             if (!ModelState.IsValid)
             {
@@ -57,28 +57,37 @@ namespace ResumeBuilder.Controllers
                 try
                 {
                     var userLoginDetails = dbContext.Logins.FirstOrDefault(m => m.Username == loginData.UserName);
-                    var salt = userLoginDetails.Salt;
-                    string enterPassword = loginData.Password;
-                    string savedPassword = userLoginDetails.Password;
-
-                    if (PasswordSecurity.IsValid(enterPassword, salt, savedPassword))
+                    if (userLoginDetails != null)
                     {
-                        if (Session.Count == 0)
+                        var salt = userLoginDetails.Salt;
+                        string enterPassword = loginData.Password;
+                        string savedPassword = userLoginDetails.Password;
+
+                        if (PasswordSecurity.IsValid(enterPassword, salt, savedPassword))
                         {
-                            Session["UserID"] = userLoginDetails.UserID;
-                            Session["Username"] = userLoginDetails.Username;
-                            return RedirectToAction("Index", "Resume");
+                            if (Session.Count == 0)
+                            {
+                                Session["UserID"] = userLoginDetails.UserID;
+                                Session["Username"] = userLoginDetails.Username;
+                                return RedirectToAction("Index", "Resume");
+                            }
+                            else
+                            {
+                                ModelState.AddModelError("", "Session already exists. Try Again.");
+                                return View(loginData);
+                            }
                         }
                         else
                         {
-                            ModelState.AddModelError("", "Session already exists. Try Again.");
-                            return View(loginData);
+                            throw new UnauthorizedAccessException();
                         }
                     }
                     else
                     {
-                        throw new UnauthorizedAccessException();
+                        ModelState.AddModelError("", "User not found.");
+                        return View(loginData);
                     }
+                    
                 }
                 catch (UnauthorizedAccessException)
                 {
@@ -96,13 +105,21 @@ namespace ResumeBuilder.Controllers
         // GET: /Account/Register
         public ActionResult Register()
         {
-            return View();
+            if (Session.Count == 0)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+            
         }
 
         // POST: /Account/Register
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(LoginDetailsViewModel registrationDetails)
+        public ActionResult Register(LoginDetailsVM registrationDetails)
         {
             if (!ModelState.IsValid)
             {
