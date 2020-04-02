@@ -63,22 +63,21 @@
         validateEmail();
     });
 
+    var checkUser = true;
+    if ($.trim($("#validationSummaryDiv").text()) === "User already exists.") {
+        bootbox.alert("<b style='color:black;'>This User already exists.</b>");
+        checkUser = false;
+    }
+    
     $("#btnSubmit").on("click", function (e) {
         e.preventDefault();
-
-        if ($.trim($("#validationSummaryDiv").text()) === "User already exists.")
-            bootbox.alert("<b style='color:black;'>This User already exists.</b>");
-
-        if (($.trim($("#validationSummaryDiv").text()) === "") && ($.trim($("#UserName").val()) !== "") &&
-            ($.trim($("#Password").val()) !== "") && ($.trim($("#confirmPassword").val()) !== "")) {
-            bootbox.alert("<b class='alert-success' style='color:black;'>Registration Successful</b>");
-        }
         validateEmail();
         validatePassword();
         validateConfirmPassword();
-
-        if (email === true && password === true && confirmPassword === true)
-        {
+        if (email === true && password === true && confirmPassword === true && checkUser===true) {
+            bootbox.alert("<b style='color:black;'>Registration Successful</b>");
+        }
+        if (email === true && password === true && confirmPassword === true) {
             $(".register-form").submit();
         }
     });
