@@ -8,7 +8,7 @@
     var successCallbackFunction = params['successCallbackFunction'];
     var completeCallbackFunction = params['completeCallbackFunction'];
     var errorCallBackFunction = params['errorCallBackFunction'];
-
+    //debugger;
     $.ajax({
         url: url,
         crossDomain: true,
@@ -21,6 +21,7 @@
                 beforeSendCallbackFunction();
             }
         },
+      
         success: function (data, textStatus, jqXHR) {
             if (typeof successCallbackFunction === "function") {
                 successCallbackFunction(data);

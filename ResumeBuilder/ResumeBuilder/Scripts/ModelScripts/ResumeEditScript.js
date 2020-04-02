@@ -48,6 +48,19 @@
         });
     });
 
+    $("body").on('click', '#educationDetails', function () {
+        var addedTenDetails = $('#addedTenthDetails').data('value')
+        var addedTwelfthDetails = $('#addedTwelfthDetails').data('value')
+
+        if (addedTenDetails == 1) {
+            $("input[type=radio][value=" + addedTenDetails + "]").prop("disabled", true);
+        }
+
+        if (addedTwelfthDetails == 2) {
+            $("input[type=radio][value=" + addedTwelfthDetails + "]").prop("disabled", true);
+        }
+    });
+   
     $("body").on("click", "#educationDetails", function () {
         $('input[type=radio][name=courseOption]').change(function () {
 
@@ -193,7 +206,7 @@
 
        
         var params = $.extend({}, params);
-        params['url'] = '/Resume/SaveWorkExperience';
+        params['url'] = '/SaveDetails/SaveWorkExperience';
         params['data'] = formData;
         params['requestType'] = 'POST';
         params['successCallbackFunction'] = function (result) {
@@ -246,7 +259,7 @@
             };
 
             var params = $.extend({}, params);
-            params['url'] = '/Resume/SaveProjectDetails';
+            params['url'] = '/SaveDetails/SaveProjectDetails';
             params['data'] = formData;
             params['requestType'] = 'POST';
 
@@ -328,22 +341,21 @@
                 "CGPAOrPercentage": $.trim($('input[name="CGPAOrPercentage"]:checked').val()),
                 "BoardOrUniversity": $.trim($('#boardType option:selected').text())
             };
-
-            if (formData.CourseID == 1) {
-                formData.Stream = 'N/A';
-            }
-            var params = $.extend({}, params);
-            params['url'] = '/Resume/SaveEducationalDetails';
-            params['data'] = formData;
-            params['requestType'] = 'POST';
-            params['successCallbackFunction'] = function () {
-                $("#modalEducationDetails").modal("hide");
-            };
-            params['errorCallBackFunction'] = function () {
-                bootbox.alert("<p style='color:black;'>Error!</p>");
-            }
-            commonAjax(params);
-
+        if (formData.CourseID == 1) {
+            formData.Stream = 'N/A';
+        }
+        var params = $.extend({}, params);
+        params['url'] = '/SaveDetails/SaveEducationalDetails';
+        params['data'] = formData;
+        params['requestType'] = 'POST';
+        params['successCallbackFunction'] = function () {
+            $("#modalEducationDetails").modal("hide");
+            bootbox.alert("<p style='color:black;'>Education Details updated sucessfully</p>");
+        };
+        params['errorCallBackFunction'] = function () {
+            bootbox.alert("<p style='color:black;'>Error!</p>");
+        }
+        commonAjax(params);
             //disable radio button for client-side
 
             if (formData.CourseID == 1 || formData.CourseID == 2) {
@@ -374,7 +386,7 @@
         if ($(".skillItem").text() !== "")
         {
             var params = $.extend({}, params);
-            params['url'] = '/Resume/SaveUserSkills';
+            params['url'] = '/SaveDetails/SaveUserSkills';
             params['data'] = skillDetails;
             params['requestType'] = 'POST';
             params['successCallbackFunction'] = function () {
@@ -401,7 +413,7 @@
         bootbox.confirm("<p style='color:black;'>Are you sure to delete this Project Record?</p>", function (result) {
             if (result) {
                 var params = $.extend({}, params);
-                params['url'] = '/Resume/DeleteProject?id=' + id;
+                params['url'] = '/Delete/DeleteProject?id=' + id;
                 params['requestType'] = 'POST';
                 params['successCallbackFunction'] = function (resultfinal) {
                    
@@ -429,7 +441,7 @@
             if (result) {
 
                 var params = $.extend({}, params);
-                params['url'] = '/Resume/DeleteWorkExperience?id=' + id;
+                params['url'] = '/Delete/DeleteWorkExperience?id=' + id;
                 params['requestType'] = 'POST';
                 params['successCallbackFunction'] = function (resultfinal) {
                     
@@ -460,7 +472,7 @@
             if (result) {
 
                 var params = $.extend({}, params);
-                params['url'] = '/Resume/DeleteSkill';
+                params['url'] = '/Delete/DeleteSkill';
                 params['requestType'] = 'POST';
                 params['data'] = formData;
                 params['successCallbackFunction'] = function () {
@@ -485,7 +497,7 @@
             if (result) {
 
                 var params = $.extend({}, params);
-                params['url'] = '/Resume/DeleteEducation';
+                params['url'] = '/Delete/DeleteEducation';
                 params['requestType'] = 'POST';
                 params['data'] = formData;
                 params['successCallbackFunction'] = function () {
@@ -497,6 +509,50 @@
                 commonAjax(params);
             }
         });
+    });
+
+    var selector = 'input#txtSearch';
+    $(document).on('keydown.autocomplete', selector, function () {
+        $(this).autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "GetSkill",
+                    method: "GET",
+                    dataType: "json",
+                    data: {
+                        term: request.term
+                    },
+                    success: function (data) {
+                        console.log("data");
+                        response(data);
+                    },
+                    error: function (data) {
+                        console.log("error");
+                    }
+                });
+            },
+            appendTo: $('#autoComplete')
+        });
+    });
+
+
+    $("body").on('click', '#addSkill', function () {
+        var item = $("#txtSearch").val();
+        var isSkillFound = 0;
+        $(".skillItem").each(function (index) {
+            var skillValue = $(this).text();
+            if (skillValue == item) {
+                isSkillFound = 1;
+                return false;
+            }
+        });
+
+        if (isSkillFound == 0) {
+            $("#skillMenu").append('<li class="skillItem">' + item + '</li>');
+            clearFields();
+        } else {
+            bootbox.alert("<b style='color:black;'>" + item + " already added.</b>");
+        }
     });
 
 });
