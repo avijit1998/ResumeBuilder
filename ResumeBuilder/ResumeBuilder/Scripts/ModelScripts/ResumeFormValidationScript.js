@@ -80,23 +80,32 @@ $(document).ready(function () {
     })
 
     //Anil
-    $("body").on('click', '.js-save-user', function () {
-        console.log('hi u r in validation');
+    $("body").on('click', '.js-edit-user, .js-save-user', function () {
+        event.preventDefault();
         $.validator.addMethod("regex", function (value, element, regexpr) {
-            return this.optional(element) || regexpr.test(value);
-        }, "Please check your input.");
+            return this.optional(element) || !(regexpr.test(value));
+        }, "Please enter valid data.");
+        $.validator.addMethod("notStartWithNum", function (value, element, regexpr) {
+            return this.optional(element) || !(regexpr.test(value[0]));
+        }, "Shouldn't start with number.");
 
-        $('#modalBasicInfo').validate({
+        $('#formBasicInfo').validate({
             rules: {
                 Name: {
                     required: true,
-                    regex: /^[A-Za-z ]+$/
+                    regex: /[^a-zA-Z 0-9]/,
+                    notStartWithNum : /[\d]/
                 },
                 PhoneNumber: {
                     required: true,
-                    regex: /[0-9\-\(\)]+/,
+                    regex: /[^\d]/,
                     minlength: 10,
                     maxlength: 13
+                }
+            },
+            messsages : {
+                PhoneNumber: {
+                    minlength: 'Please enter a valid phone number'
                 }
             }
         });
