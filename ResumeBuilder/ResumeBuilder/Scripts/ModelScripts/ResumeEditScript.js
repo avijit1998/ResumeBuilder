@@ -1,10 +1,10 @@
-﻿$(document).ready(function () {
+$(document).ready(function () {
     $("body").on("click", ".js-add-education", function () {
         $('#modalEducationDetails').modal('show');
     });
 
     $("body").on("click", ".js-add-project", function () {
-       $('#modalProject').modal('show');
+        $('#modalProject').modal('show');
     });
 
     $("body").on("click", ".js-add-workex", function () {
@@ -155,7 +155,7 @@
         params['successCallbackFunction'] = function () {
             bootbox.alert("<p style='color:black;'>Basic information successfully saved.</p>");
             $("#modalBasicInfo").modal("hide");
-            
+
         };
         params['errorCallBackFunction'] = function () {
             bootbox.alert("<p style='color:black;'>Error!</p>");
@@ -186,7 +186,7 @@
         $("#selectEndMonth").val(endMonth).change();
         $("#selectEndYear").val(endYear).change();
 
-        if (isWorking=="True") {
+        if (isWorking == "True") {
             $('input[name="IsCurrentlyWorking"]').prop("checked", true);
             $(".hide-if-currently-working").hide();
         }
@@ -214,7 +214,7 @@
             "IsCurrentlyWorking": $('#checkWorking').is(":checked")
         };
 
-       
+
         var params = $.extend({}, params);
         params['url'] = '/SaveDetails/SaveWorkExperience';
         params['data'] = formData;
@@ -332,7 +332,7 @@
     });
 
     $('body').on('click', '.js-save-education', function (e) {
-        
+
         e.preventDefault();
         var id = $('input[name="EducationalDetailsID"]').val();
         var formData = {
@@ -396,7 +396,7 @@
         params['successCallbackFunction'] = function () {
             $("#modalSkills").modal("hide");
             bootbox.alert("<p style='color:black;'>Skills successfully saved.</p>");
-            
+
         };
         params['errorCallBackFunction'] = function () {
             bootbox.alert("<p style='color:black;'>Error!</p>");
@@ -418,7 +418,7 @@
                 params['url'] = '/Delete/DeleteProject?id=' + id;
                 params['requestType'] = 'POST';
                 params['successCallbackFunction'] = function (resultfinal) {
-                   
+
                 };
                 params['errorCallBackFunction'] = function () {
                     bootbox.alert("<p style='color:black;'>Error!</p>");
@@ -446,7 +446,7 @@
                 params['url'] = '/Delete/DeleteWorkExperience?id=' + id;
                 params['requestType'] = 'POST';
                 params['successCallbackFunction'] = function (resultfinal) {
-                    
+
                 };
                 params['errorCallBackFunction'] = function () {
                     bootbox.alert("<p style='color:black;'>Error!</p>");
@@ -467,7 +467,7 @@
         var userID = $("#userId").val();
         var skillID = $button.data("skill-id");
         var formData = {
-            "userID":$("#userId").val(),
+            "userID": $("#userId").val(),
             "skillID": skillID,
         };
         bootbox.confirm("<p style='color:black;'>Are you sure to delete this Skill?</p>", function (result) {
@@ -568,8 +568,7 @@
 
 });
 
-function removeBackdrop()
-{
+function removeBackdrop() {
     $('body').removeClass('modal-open');
     $('.modal-backdrop').remove();
 }
