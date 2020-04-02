@@ -31,7 +31,7 @@ namespace ResumeBuilder
                       "~/Content/datatables/css/datatables.bootstrap.css",
                       "~/Content/login.css",
                       "~/Content/bootstrap.css",
-                      "~/Content/FormStyle.css",
+                      "~/Content/ShowDatacss.css",
                       "~/Content/home.css",
                       "~/Content/Site.css"));
         }
