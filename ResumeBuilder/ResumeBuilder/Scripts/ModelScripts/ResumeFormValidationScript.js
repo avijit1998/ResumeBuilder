@@ -152,6 +152,9 @@ $(document).ready(function () {
                 chkLanguages: {
                     required: 'One language should be selected.'
                 }
+            },
+            errorPlacement: function(error, element) {
+                error.insertAfter(element.closest('.error-msg'));
             }
         });
     });
