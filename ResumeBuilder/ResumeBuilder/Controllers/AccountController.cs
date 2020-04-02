@@ -152,8 +152,6 @@ namespace ResumeBuilder.Controllers
 
             }
 
-            // If we got this far, something failed, redisplay form
-            return View(registrationDetails);
         }
 
         protected override void Dispose(bool disposing)
