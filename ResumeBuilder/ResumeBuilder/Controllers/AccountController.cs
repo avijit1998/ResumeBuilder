@@ -115,7 +115,7 @@ namespace ResumeBuilder.Controllers
             if (dbContext.Logins.Any(m => m.Username == registrationDetails.UserName))
             {
                 ModelState.AddModelError("", "User already exists.");
-                return View(registrationDetails);
+                return View();
             }
             else
             {
@@ -152,8 +152,6 @@ namespace ResumeBuilder.Controllers
 
             }
 
-            // If we got this far, something failed, redisplay form
-            return View(registrationDetails);
         }
 
         protected override void Dispose(bool disposing)

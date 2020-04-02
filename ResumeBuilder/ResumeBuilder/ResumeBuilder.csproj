@@ -170,6 +170,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\SaveDetailsController.cs" />
+    <Compile Include="Controllers\DeleteController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Helpers\AuthorizeIfSessionExists.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
@@ -179,9 +182,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\PasswordSecurity.cs" />
-    <Compile Include="Migrations\202004020418409_created fresh database and filled the seed method.cs" />
-    <Compile Include="Migrations\202004020418409_created fresh database and filled the seed method.Designer.cs">
-      <DependentUpon>202004020418409_created fresh database and filled the seed method.cs</DependentUpon>
+    <Compile Include="Migrations\202004020556457_created database.cs" />
+    <Compile Include="Migrations\202004020556457_created database.Designer.cs">
+      <DependentUpon>202004020556457_created database.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
@@ -542,7 +545,7 @@
     <Content Include="Scripts\Profile_Scripts\profileDefaultScript.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\settings.js" />
+    <Content Include="Scripts\ModelScripts\settings.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -579,6 +582,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\SaveDetails\" />
+    <Folder Include="Views\Delete\" />
+    <Folder Include="Views\Settings\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -587,8 +593,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202004020418409_created fresh database and filled the seed method.resx">
-      <DependentUpon>202004020418409_created fresh database and filled the seed method.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202004020556457_created database.resx">
+      <DependentUpon>202004020556457_created database.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,90 @@
+﻿using ResumeBuilder.Helpers;
+using ResumeBuilder.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace ResumeBuilder.Controllers
+{
+    [AuthorizeIfSessionExists]
+    public class DeleteController : Controller
+    {
+        private ResumeBuilderDBContext db;
+        public DeleteController()
+        {
+            db = new ResumeBuilderDBContext();
+        }
+
+        [HttpPost]
+        public ActionResult DeleteProject(int id)
+        {
+            var proj = db.Projects.FirstOrDefault(x => x.ProjectID == id);
+            if (proj != null)
+            {
+                db.Projects.Remove(proj);
+                db.SaveChanges();
+                return Json("Successfully Deleted");
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult DeleteWorkExperience(int id)
+        {
+            var workEx = db.WorkExperiences.FirstOrDefault(x => x.WorkExperienceID == id);
+            if (workEx != null)
+            {
+                db.WorkExperiences.Remove(workEx);
+                db.SaveChanges();
+                return Json("Successfully Deleted");
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+        }
+
+
+        [HttpPost]
+        public ActionResult DeleteEducation(int educationId)
+        {
+            var educationDetails = db.EducationalDetails.FirstOrDefault(x => x.EducationalDetailsID == educationId);
+            if (educationDetails != null)
+            {
+                db.EducationalDetails.Remove(educationDetails);
+                db.SaveChanges();
+                return Json("Successfully Deleted");
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult DeleteSkill(int userID, int skillID)
+        {
+            var user = db.UserDetails.FirstOrDefault(x => x.UserID == userID);
+            var skill = db.Skills.FirstOrDefault(x => x.SkillID == skillID);
+
+            if (user != null && skill != null)
+            {
+                user.Skills.Remove(skill);
+
+                db.SaveChanges();
+                return Json("Successfully Deleted");
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+        }
+    }
+}

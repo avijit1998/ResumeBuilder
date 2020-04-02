@@ -19,7 +19,7 @@
     {
         languageList.Add(language.LanguageName);
     }
-    String withoutLastComma = String.Join(", ", languageList);
+    String languageListWithoutLastComma = String.Join(", ", languageList);
 }
  
 @using Newtonsoft.Json;
@@ -47,7 +47,7 @@
         <p><span>@Model.Gender</span></p>
         <p><span>@Model.Summary</span></p>
         <p>
-            Languages Known:@withoutLastComma
+            Languages Known:@languageListWithoutLastComma
            
         </p>
     </div>
@@ -216,21 +216,21 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <form id="formBasicInfo">
+                        <form id="basicInfoForm">
 
                             <input type="hidden" name="UserID" id="userId" value="@userId"/>
 
-                            <div class="form-group">
+                            <div class="form-group error-msg">
                                 <label>Full Name:</label>
                                 <input type="text" class="form-control" name="Name" id="txtFullName">
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group error-msg">
                                 <label>Email ID:</label>
                                 <input type="text" class="form-control" name="Username" id="txtEmail" value="@email" readonly>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group error-msg">
                                 <label>Gender</label>
                                 <label class="radio-inline">
                                     <input type="radio" name="Gender" id="optradioMale" value="Male" checked>Male
@@ -241,7 +241,7 @@
                             </div>
 
 
-                            <div class="form-group">
+                            <div class="form-group error-msg">
                                 <label>Date of Birth</label>
                                 @if (@Model.DateOfBirth != null)
                                 {
@@ -255,29 +255,30 @@
 
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group error-msg">
                                 <label>Phone Number</label>
                                 <input type="text" class="form-control" name="PhoneNumber" id="txtPhoneNumber">
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group error-msg">
                                 <label>Summary:</label>
                                 <textarea class="form-control" name="Summary" id="txtSummary"></textarea>
                             </div>
-
-                            <div class="form-check">
-                                <label>Language known:</label>
+                          <div class="form-check error-msg">
+                                <label>Languages known:</label>
                                 <div class="checkbox">
                                     @foreach (var c in languages)
-                                            {
-                                            <div>
-                                                <label>
-                                                    <input type="checkbox" value="@c.LanguageID">@c.LanguageName
-                                                </label>
-                                            </div>
-                                            }
+                                    {
+                                        <div>
+                                            <label>
+
+                                                <input type="checkbox" name="chkLanguages" value="@c.LanguageID">@c.LanguageName
+                                            </label>
+                                        </div>
+                                    }
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="col-md-12">
                                     <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
@@ -285,6 +286,8 @@
                                 </div>
                             </div>
                         </form>
+
+
 
                     </div>
                 </div>
@@ -317,15 +320,18 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <form method="post">
+                        <form id="educationDetailsForm" method="post">
 
                             <input type="hidden" name="EducationalDetailsID" value=""/>
                             <input type="hidden" name="CourseID" />
-
+                            @{var count = 0;
+                            var courseId = "";}
                             @foreach (var course in courses)
                             {
+                                count = count + 1;
+                                courseId = "course" + count;
                                 <label class="radio-inline">
-                                    <input type="radio" name="courseOption" value="@course.CourseID">@course.CourseName
+                                    <input id="@courseId" type="radio" name="courseOption" value="@course.CourseID">@course.CourseName
                                 </label>
                             }
 
@@ -354,10 +360,10 @@
 
                                 <div class="form-group">
                                     <label class="radio-inline">
-                                        <input type="radio" name="CGPAOrPercentage" value="CGPA" checked>CGPA Scored
+                                        <input id="cgpa" type="radio" name="CGPAOrPercentage" value="CGPA" checked>CGPA Scored
                                     </label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="CGPAOrPercentage" value="Percentage">Percentage Scored
+                                        <input id="percentage" type="radio" name="CGPAOrPercentage" value="Percentage">Percentage Scored
                                     </label>
                                 </div>
                                 <div>
@@ -374,6 +380,7 @@
                                 </div>
                             </div>
                         </form>
+
                     </div>
                 </div>
 
@@ -418,7 +425,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-default pull-right js-save-project">Save </button>
+                                    <input type="submit" value="Save" class="btn btn-success pull-right js-save-project" />                                 
                                 </div>
                             </div>
                         </form>
@@ -499,7 +506,6 @@
                                         <label>End Month:</label>
                                         <select class="form-control" name="EndMonth" id="selectEndMonth">
                                             <option class="form-control" value="0">Select Month</option>
-
                                             <option class="form-control" value="1">1</option>
                                             <option class="form-control" value="2">2</option>
                                             <option class="form-control" value="3">3</option>
