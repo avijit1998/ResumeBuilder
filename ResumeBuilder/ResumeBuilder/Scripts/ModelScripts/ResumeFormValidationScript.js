@@ -90,25 +90,20 @@ $(document).ready(function () {
             return this.optional(element) || !(regexpr.test(value[0]));
         }, "Shouldn't start with number.");
 
-        $.validator.addMethod("birth", function (value, element) {
-            var year = value.split('-');
-            return value.match(/^\d\d\d\d?\-\d\d?\-\d\d$/) && parseInt(year[0]) <= 2002;
-        }, "Minimum age is 18 Years.");
-
         $.validator.addMethod("notFutureDate", function (value, element) {
             var now = new Date();
             var myDate = new Date(value);
-            var past = new Date("1800-01-01")
-            var x = !(myDate > now || myDate < past);
-            return x;
+            var past = new Date("1800-01-01");
+            var year = value.split('-');
+            return this.optional(element) || value.match(/^\d\d\d\d?\-\d\d?\-\d\d$/) && !(myDate > now || myDate < past);
         }, "Please enter a valid date.");
 
         $('#formBasicInfo').validate({
             rules: {
                 Name: {
                     required: true,
-                    regex: /[^a-zA-Z 0-9]/,
-                    notStartWithNum: /[\d]/
+                    regex: /[^a-zA-Z. 0-9]/,
+                    notStartWithNum: /[\d/\.]/
                 },
                 PhoneNumber: {
                     required: true,
@@ -121,8 +116,7 @@ $(document).ready(function () {
                 },
                 DateOfBirth: {
                     required : true,
-                    notFutureDate: true,
-                    birth: true
+                    notFutureDate: true
                 },
                 Summary: {
                     required: true
