@@ -101,7 +101,7 @@
             userData.LanguageIds.pop();
         }
         var params = $.extend({}, params);
-        params['url'] = '/Resume/SaveBasicInformation';
+        params['url'] = '/SaveDetails/SaveBasicInformation';
         params['data'] = userData;
         params['requestType'] = 'POST';
         params['successCallbackFunction'] = function () {
@@ -167,7 +167,7 @@
 
        
         var params = $.extend({}, params);
-        params['url'] = '/Resume/SaveWorkExperience';
+        params['url'] = '/SaveDetails/SaveWorkExperience';
         params['data'] = formData;
         params['requestType'] = 'POST';
         params['successCallbackFunction'] = function (result) {
@@ -218,7 +218,7 @@
 
 
             var params = $.extend({}, params);
-            params['url'] = '/Resume/SaveProjectDetails';
+            params['url'] = '/SaveDetails/SaveProjectDetails';
             params['data'] = formData;
             params['requestType'] = 'POST';
 
@@ -304,7 +304,7 @@
             formData.Stream = 'N/A';
         }
         var params = $.extend({}, params);
-        params['url'] = '/Resume/SaveEducationalDetails';
+        params['url'] = '/SaveDetails/SaveEducationalDetails';
         params['data'] = formData;
         params['requestType'] = 'POST';
         params['successCallbackFunction'] = function () {
@@ -338,7 +338,7 @@
         })
 
         var params = $.extend({}, params);
-        params['url'] = '/Resume/SaveUserSkills';
+        params['url'] = '/SaveDetails/SaveUserSkills';
         params['data'] = skillDetails;
         params['requestType'] = 'POST';
         params['successCallbackFunction'] = function () {

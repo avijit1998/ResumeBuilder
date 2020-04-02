@@ -57,7 +57,7 @@
             "LanguagesStatus": $("#cbLanguage").prop("checked")
         };
         $.ajax({
-            url: "/Resume/SaveSettingStatus",
+            url: "/SaveDetails/SaveSettingStatus",
             type: 'post',
             data: settingStatus,
             success: function () {
