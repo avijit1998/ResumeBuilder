@@ -329,109 +329,76 @@ namespace ResumeBuilder.Controllers
             }
         }
 
-        public ActionResult SetUserSettingStatus()
-        {
-           
-            var session = Session["UserID"];
-            int id = (Int32)session;
 
-            var userSavedSettings = db.Settings.SingleOrDefault(user => user.UserID == id);
-            SettingsDetailsVM userSettingsStatus = new SettingsDetailsVM();
-            userSettingsStatus.EducationalDetailsStatus = userSavedSettings.EducationalDetailsStatus;
-            userSettingsStatus.LanguagesStatus = userSavedSettings.LanguagesStatus;
-            userSettingsStatus.ProjectDetailsStatus = userSavedSettings.ProjectDetailsStatus;
-            userSettingsStatus.SkillsDetailsStatus = userSavedSettings.SkillsDetailsStatus;
-            userSettingsStatus.WorkExperienceStatus = userSavedSettings.WorkExperienceStatus;
+        //[HttpPost]
+        //public ActionResult DeleteProject(int id)
+        //{
+        //    var proj = db.Projects.FirstOrDefault(x => x.ProjectID == id);
+        //    if (proj != null)
+        //    {
+        //        db.Projects.Remove(proj);
+        //        db.SaveChanges();
+        //        return Json("Successfully Deleted");
+        //    }
+        //    else
+        //    {
+        //        return HttpNotFound();
+        //    }
 
-            return Json(userSettingsStatus, JsonRequestBehavior.AllowGet);
-        }
+        //}
 
-        public ActionResult SaveSettingStatus(SettingsDetailsVM settingStatus)
-        {
-           
-            var session = Session["UserID"];
-            int id = (Int32)session;
-
-            var userSettings = db.Settings.SingleOrDefault(user => user.UserID == id);
-            userSettings.WorkExperienceStatus = settingStatus.WorkExperienceStatus;
-            userSettings.SkillsDetailsStatus = settingStatus.SkillsDetailsStatus;
-            userSettings.ProjectDetailsStatus = settingStatus.ProjectDetailsStatus;
-            userSettings.LanguagesStatus = settingStatus.LanguagesStatus;
-            userSettings.EducationalDetailsStatus = settingStatus.EducationalDetailsStatus;
-            TryUpdateModel(userSettings);
-            db.SaveChanges();
-            return Json("success", JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        public ActionResult DeleteProject(int id)
-        {
-            var proj = db.Projects.FirstOrDefault(x => x.ProjectID == id);
-            if (proj != null)
-            {
-                db.Projects.Remove(proj);
-                db.SaveChanges();
-                return Json("Successfully Deleted");
-            }
-            else
-            {
-                return HttpNotFound();
-            }
-
-        }
-
-        [HttpPost]
-        public ActionResult DeleteWorkExperience(int id)
-        {
-            var workEx = db.WorkExperiences.FirstOrDefault(x => x.WorkExperienceID == id);
-            if (workEx != null)
-            {
-                db.WorkExperiences.Remove(workEx);
-                db.SaveChanges();
-                return Json("Successfully Deleted");
-            }
-            else
-            {
-                return HttpNotFound();
-            }
-        }
+        //[HttpPost]
+        //public ActionResult DeleteWorkExperience(int id)
+        //{
+        //    var workEx = db.WorkExperiences.FirstOrDefault(x => x.WorkExperienceID == id);
+        //    if (workEx != null)
+        //    {
+        //        db.WorkExperiences.Remove(workEx);
+        //        db.SaveChanges();
+        //        return Json("Successfully Deleted");
+        //    }
+        //    else
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //}
 
 
-        [HttpPost]
-        public ActionResult DeleteEducation(int educationId)
-        {
-            var educationDetails = db.EducationalDetails.FirstOrDefault(x => x.EducationalDetailsID == educationId);
-            if (educationDetails != null)
-            {
-                db.EducationalDetails.Remove(educationDetails);
-                db.SaveChanges();
-                return Json("Successfully Deleted");
-            }
-            else
-            {
-                return HttpNotFound();
-            }
+        //[HttpPost]
+        //public ActionResult DeleteEducation(int educationId)
+        //{
+        //    var educationDetails = db.EducationalDetails.FirstOrDefault(x => x.EducationalDetailsID == educationId);
+        //    if (educationDetails != null)
+        //    {
+        //        db.EducationalDetails.Remove(educationDetails);
+        //        db.SaveChanges();
+        //        return Json("Successfully Deleted");
+        //    }
+        //    else
+        //    {
+        //        return HttpNotFound();
+        //    }
 
-        }
+        //}
 
-        [HttpPost]
-        public ActionResult DeleteSkill(int userID, int skillID)
-        {
-            var user = db.UserDetails.FirstOrDefault(x => x.UserID == userID);
-            var skill = db.Skills.FirstOrDefault(x => x.SkillID == skillID);
+        //[HttpPost]
+        //public ActionResult DeleteSkill(int userID, int skillID)
+        //{
+        //    var user = db.UserDetails.FirstOrDefault(x => x.UserID == userID);
+        //    var skill = db.Skills.FirstOrDefault(x => x.SkillID == skillID);
 
-            if (user != null && skill != null)
-            {
-                user.Skills.Remove(skill);
+        //    if (user != null && skill != null)
+        //    {
+        //        user.Skills.Remove(skill);
 
-                db.SaveChanges();
-                return Json("Successfully Deleted");
-            }
-            else
-            {
-                return HttpNotFound();
-            }
-        }
+        //        db.SaveChanges();
+        //        return Json("Successfully Deleted");
+        //    }
+        //    else
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //}
 
         public JsonResult GetSkill(string term)
         {
