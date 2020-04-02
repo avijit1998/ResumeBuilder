@@ -24,7 +24,7 @@ namespace ResumeBuilder.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return null;
+                return HttpNotFound();
             }
             try
             {
@@ -32,7 +32,7 @@ namespace ResumeBuilder.Controllers
 
                 if (userFromDb == null)
                 {
-                    return null;
+                    return HttpNotFound();
                 }
                 else
                 {
@@ -47,7 +47,7 @@ namespace ResumeBuilder.Controllers
                         var languages = db.Languages.Where(x => userInfoVM.LanguageIds.Contains(x.LanguageID)).ToList();
                         if (languages == null)
                         {
-                            return null;
+                            return HttpNotFound();
                         }
                         userFromDb.Languages.AddRange(languages);
                     }
@@ -59,7 +59,7 @@ namespace ResumeBuilder.Controllers
             }
             catch (Exception)
             {
-                return null;
+                return HttpNotFound();
             }
         }
 
@@ -115,7 +115,7 @@ namespace ResumeBuilder.Controllers
             }
             catch (Exception)
             {
-                return null;
+                return HttpNotFound();
             }
         }
 
@@ -177,7 +177,7 @@ namespace ResumeBuilder.Controllers
 
             catch (Exception)
             {
-                return null;
+                return HttpNotFound();
             }
         }
 
@@ -239,14 +239,14 @@ namespace ResumeBuilder.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return null;
+                return HttpNotFound();
             }
             try
             {
                 UserDetails user = db.UserDetails.FirstOrDefault(x => x.UserID == skillsVM.UserID);
                 if (user == null)
                 {
-                    return null;
+                    return HttpNotFound();
                 }
 
                 var skillIdsList = db.Skills.Where(x => skillsVM.SkillNames.Contains(x.SkillName)).Select(m => m.SkillID).ToList();
