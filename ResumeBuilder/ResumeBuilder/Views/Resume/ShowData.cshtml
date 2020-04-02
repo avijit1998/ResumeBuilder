@@ -3,6 +3,8 @@
 @{
     List<ResumeBuilder.Models.Language> languages = ViewBag.Languages;
     List<ResumeBuilder.Models.Course> courses = ViewBag.Courses;
+    List<int> alreadyDoneCourses = ViewBag.AlreadyDoneCourses;
+    Layout = null;
 }
 @{
     string email = "N/A";
@@ -17,7 +19,7 @@
  
 @using Newtonsoft.Json;
 
-<div id="pageContent">
+<div id="editPage">
     <div id="userDetails">
         <h3>User Details</h3>
 
@@ -40,7 +42,7 @@
         <p><span>@Model.Gender</span></p>
         <p><span>@Model.Summary</span></p>
         <p>
-            Languages Spoken:
+            Languages Known:
             @foreach (var language in @Model.Languages)
             {
             <span>@language.LanguageName</span>
@@ -58,23 +60,23 @@
 
         @{var courseName = "";}
         @foreach (var e in @Model.EducationalDetail)
+        {
+            if (e.CourseID == 1)
             {
-                if (e.CourseID == 1)
-                {
-                    courseName = "10th";
-                }
-                else if (e.CourseID == 2)
-                {
-                    courseName = "12th";
-                }
-                else if (e.CourseID == 3)
-                {
-                    courseName = "Under Graduation";
-                }
-                else
-                {
-                    courseName = "Post Graduation";
-                }
+                courseName = "10th";
+            }
+            else if (e.CourseID == 2)
+            {
+                courseName = "12th";
+            }
+            else if (e.CourseID == 3)
+            {
+                courseName = "Under Graduation";
+            }
+            else
+            {
+                courseName = "Post Graduation";
+            }
 
         <p>
 
@@ -124,8 +126,7 @@
                         data-description="@p.Description">
                     Edit
                 </button>
-                <button type="button" class="btn btn-danger pull-right js-delete-project" value="Delete" data-project-id="@p.ProjectID"
-                        data-title="@p.ProjectTitle" data-role="@p.ProjectRole" data-duration="@p.DurationInMonth" data-description="@p.Description">
+                <button type="button" class="btn btn-danger pull-right js-delete-project" value="Delete" data-project-id="@p.ProjectID">                      
                     Delete
                 </button>
             </p>
@@ -145,7 +146,7 @@
             <button type="button" value="Add" class="btn btn-success pull-right js-add-workex">Add</button>
         </h3>
 
-        <hr />
+        
 
         @foreach (var w in @Model.WorkExperiences)
                 {
@@ -200,7 +201,7 @@
                     }
 
     </div>
-
+    <hr />
 </div>
 
 @*UserDetailsForm*@
@@ -215,9 +216,9 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <form action="/Resume/SaveBasicInfo" method="post">
+                        <form>
 
-                            <input type="hidden" name="UserID" id="userId" />
+                            <input type="hidden" name="UserID" id="userId" value="@userId"/>
 
                             <div class="form-group">
                                 <label>Full Name:</label>
@@ -226,17 +227,13 @@
 
                             <div class="form-group">
                                 <label>Email ID:</label>
-<<<<<<< HEAD
-                                <input type="email" class="form-control" name="Username" id="txtEmail" style="color:black;" value="@username" readonly>@username
-=======
                                 <input type="text" class="form-control" name="Username" id="txtEmail" value="@email" readonly>
->>>>>>> upstream/master
                             </div>
 
                             <div class="form-group">
                                 <label>Gender</label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="Gender" id="optradioMale" value="Male">Male
+                                    <input type="radio" name="Gender" id="optradioMale" value="Male" checked>Male
                                 </label>
                                 <label class="radio-inline">
                                     <input type="radio" name="Gender" id="optradioFemale" value="Female">Female
@@ -300,7 +297,15 @@
     </div>
 </div>
 
+    @if (alreadyDoneCourses.Contains(1))
+    {
+        <span style="display:none;" id="addedTenthDetails" data-value="1"></span>
+    }
 
+    @if (alreadyDoneCourses.Contains(2))
+    {
+        <span style="display:none;" id="addedTwelfthDetails" data-value="2"></span>
+    }
 @*Education Details Form*@
 <div id="modalEducationDetails" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -315,7 +320,7 @@
                     <div class="col-md-12">
                         <form method="post">
 
-                            <input type="hidden" name="EducationalDetailsID" />
+                            <input type="hidden" name="EducationalDetailsID" value=""/>
                             <input type="hidden" name="CourseID" />
 
                             @foreach (var course in courses)
@@ -327,8 +332,8 @@
 
                             <div class="stream">
                                 <div class="form-group stream">
-                                    <label>Stream:</label>
-                                    <input type="text" class="form-control" name="Stream" id="Stream">
+                                    <label>Stream(or Degree name if any):</label>
+                                    <input type="text" class="form-control" name="Stream" id="Stream" placeholder="Enter your Stream or degree name.">
                                 </div>
                             </div>
 
@@ -379,7 +384,6 @@
         </div>
     </div>
 </div>
-
 
 @*Project Form*@
 <div id="modalProject" class="modal fade" role="dialog">
@@ -577,7 +581,7 @@
                             <div class="row skill-button">
                                 <div class="col-md-12">
                                     <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
-                                    <button type="button" id="btnSaveSkills" class="btn btn-default pull-right">Save </button>
+                                    <button type="button" id="btnSaveSkills" class="btn btn-default pull-right js-save-skill">Save </button>
                                 </div>
                             </div>
                         </form>

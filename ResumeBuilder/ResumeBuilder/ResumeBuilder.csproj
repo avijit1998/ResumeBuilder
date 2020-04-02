@@ -53,14 +53,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="PdfSharp, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="PdfSharp.Charting, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.Charting.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -187,9 +179,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\PasswordSecurity.cs" />
-    <Compile Include="Migrations\202003301000591_New Database.cs" />
-    <Compile Include="Migrations\202003301000591_New Database.Designer.cs">
-      <DependentUpon>202003301000591_New Database.cs</DependentUpon>
+    <Compile Include="Migrations\202004020418409_created fresh database and filled the seed method.cs" />
+    <Compile Include="Migrations\202004020418409_created fresh database and filled the seed method.Designer.cs">
+      <DependentUpon>202004020418409_created fresh database and filled the seed method.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
@@ -426,9 +418,6 @@
     <Content Include="Scripts\ModelScripts\CommonAjax.js" />
     <Content Include="Scripts\ModelScripts\ResumeFormValidationScript.js" />
     <Content Include="Scripts\ModelScripts\SearchScript.js" />
-    <Content Include="Scripts\Preview_Scripts\jspdf.debug.js" />
-    <Content Include="Scripts\Preview_Scripts\jspdf.min.js" />
-    <Content Include="Scripts\Preview_Scripts\previewDefault.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -597,8 +586,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003301000591_New Database.resx">
-      <DependentUpon>202003301000591_New Database.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202004020418409_created fresh database and filled the seed method.resx">
+      <DependentUpon>202004020418409_created fresh database and filled the seed method.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

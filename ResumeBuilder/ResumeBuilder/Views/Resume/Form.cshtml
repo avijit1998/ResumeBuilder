@@ -1,7 +1,7 @@
-﻿@model ResumeBuilder.Models.User
+﻿@model ResumeBuilder.Models.UserDetails
 @{
     ViewBag.Title = "Form";
-    List<ResumeBuilder.Models.Languages> languages = ViewBag.Languages;
+    List<ResumeBuilder.Models.Language> languages = ViewBag.Languages;
     string str = "test";
     List<ResumeBuilder.Models.Course> courses = ViewBag.Courses;
     List<int> alreadyDoneCourses = ViewBag.AlreadyDoneCourses;
@@ -193,7 +193,7 @@
                                         <label>Date of Birth</label>
                                         @if (@Model.DateOfBirth != null)
                                         {
-                                            @Html.TextBoxFor(model => model.DateOfBirth, new { @type = "date", @Value = Model.DateOfBirth.Value.ToString("yyyy-MM-dd"), @Class = "form-control", @Name = "DateOfBirth", @Id = "dateDOB", style = "color:black;" })
+                                            //@Html.TextBoxFor(model => model.DateOfBirth, new { @type = "date", @Value = Model.DateOfBirth.Value.ToString("yyyy-MM-dd"), @Class = "form-control", @Name = "DateOfBirth", @Id = "dateDOB", style = "color:black;" })
                                         }
 
                                         else
@@ -215,7 +215,7 @@
                                                 <div>
                                                     <label>
                                                         <input type="checkbox" value="@c.LanguageID">
-                                                        @c.Language
+                                                        @c.LanguageName
                                                     </label>
                                                 </div>
                                             }
@@ -307,7 +307,7 @@
                                     @foreach (var course in courses)
                                     {
                                         <label class="radio-inline">
-                                            <input type="radio" name="courseOption" class="radioDisabled" value="@course.CourseId">@course.CourseName
+                                            <input type="radio" name="courseOption" class="radioDisabled" value="@course.CourseID">@course.CourseName
                                         </label>
                                         
                                     }

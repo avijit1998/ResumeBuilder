@@ -20,7 +20,7 @@ namespace ResumeBuilder.Models
 
         public string Stream { get; set; }
 
-        public bool CGPAOrPercentage { get; set; }
+        public string CGPAOrPercentage { get; set; }
 
         public double TotalPercentageOrCGPAValue { get; set; }
 
