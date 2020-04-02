@@ -124,8 +124,8 @@
         var organization = $button.data("organization");
         var role = $button.data("designation");
         var startMonth = $button.data("start-month");
-        var startYear = $button.data("end-month");
-        var endMonth = $button.data("start-year");
+        var startYear = $button.data("start-year");
+        var endMonth = $button.data("end-month");
         var endYear = $button.data("end-year");
         var isWorking = $button.data("isworking");
         console.log(isWorking);
@@ -138,7 +138,7 @@
         $("#selectEndMonth").val(endMonth).change();
         $("#selectEndYear").val(endYear).change();
 
-        if (isWorking) {
+        if (isWorking=="True") {
             $('input[name="IsCurrentlyWorking"]').prop("checked", true);
             $(".hide-if-currently-working").hide();
         }
@@ -153,6 +153,7 @@
     });
 
     $('body').on('click', '.js-save-workex', function (e) {
+        debugger;
         e.preventDefault();
         var formData = {
             "WorkExperienceID": $('input[name="WorkExperienceID"]').val(),
@@ -202,11 +203,8 @@
     });
 
     $('body').on('click', '.js-save-project', function (e) {
-
         var flag = $("#projectDetailsForm").valid();
-
         if (flag) {
-
             var ProjectID = $('input[name="ProjectID"]').val();
             var formData = {
                 "ProjectID": $('input[name="ProjectID"]').val(),
@@ -474,4 +472,3 @@ function clearFields() {
     $('select').val('');
     $('input[type="checkbox"]').prop('checked', false);
 }
-
