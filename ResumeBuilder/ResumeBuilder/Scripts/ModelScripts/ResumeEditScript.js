@@ -414,7 +414,7 @@
             if (result) {
                 var params = $.extend({}, params);
                 params['url'] = '/Delete/DeleteProject?id=' + id;
-                params['requestType'] = 'POST';
+                params['requestType'] = 'DELETE';
                 params['successCallbackFunction'] = function (resultfinal) {
                    
                 };
@@ -564,7 +564,7 @@ function removeBackdrop()
 }
 
 function clearFields() {
-    $('input[type="text"]').val('');
+    $("input:not(:hidden)").val();
     $('select').val('');
     $('input[type="checkbox"]').prop('checked', false);
 }
