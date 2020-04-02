@@ -13,23 +13,23 @@ namespace ResumeBuilder.ViewModels
         public string UserRole { get; set; }
         public string Summary { get; set; }
         // Language
-        public int LanguageStatus { get; set; }
+        public bool LanguageStatus { get; set; }
         public List<string> Languages { get; set; }
 
         // Educational Details
-        public int EducationStatus { get; set; }
+        public bool EducationStatus { get; set; }
         public List<EducationUIModel> EducationList { get; set; }
 
         // Skills
-        public int SkillStatus { get; set; }
+        public bool SkillStatus { get; set; }
         public List<string> SkillList { get; set; }
 
         // Projects
-        public int ProjectStatus { get; set; }
+        public bool ProjectStatus { get; set; }
         public List<ProjectUIModel> ProjectList { get; set; }
 
         // Work Experience
-        public int WorkExperienceStatus { get; set; }
+        public bool WorkExperienceStatus { get; set; }
         public List<WorkExUIModel> WorkExList { get; set; }
 
         // Error Message
