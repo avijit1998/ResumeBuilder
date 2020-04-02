@@ -15,6 +15,11 @@
         $('#modalSkills').modal('show');
     });
 
+    $("body").on("click", "#btnCloseSkills", function () {
+        debugger;
+        $('#skillMenu').empty();
+    });
+
     $("body").on('change', 'input[type=radio][name=CGPAOrPercentage]', function () {
         if ($(this).val() == 'CGPA') {
             $('.marks').attr('placeholder', 'Enter CGPA');
@@ -359,7 +364,13 @@
 
         //disable radio button for client-side
 
-        if (formData.CourseID == 1 || formData.CourseID == 2) {
+        if (formData.CourseID == 1) {
+            $("input[type=radio][value=" + formData.CourseID + "]").prop("disabled", true);
+            $("input[type=radio][value=" + formData.CourseID + "]").prop("checked", false);
+            $(".all-other").hide();
+        }
+
+        if (formData.CourseID == 2) {
             $("input[type=radio][value=" + formData.CourseID + "]").prop("disabled", true);
             $("input[type=radio][value=" + formData.CourseID + "]").prop("checked", false);
             $(".all-other").hide();
@@ -391,7 +402,7 @@
             bootbox.alert("<p style='color:black;'>Error!</p>");
         }
         commonAjax(params);
-
+        $('ul').empty();
         return false;
     });
 
@@ -481,6 +492,7 @@
         e.preventDefault();
         var $button = $(this);
         var educationId = $button.data("education-id");
+        var courseId = $button.data("courseid");
         var formData = {
             "educationId": educationId,
         };
@@ -499,7 +511,15 @@
                 }
                 commonAjax(params);
             }
+            if (courseId == 1) {
+                $("input[type=radio][value=" + courseId + "]").prop("disabled", false);
+            }
+
+            if (courseId == 2) {
+                $("input[type=radio][value=" + courseId + "]").prop("disabled", false);
+            }
         });
+
     });
 
     var selector = 'input#txtSearch';
