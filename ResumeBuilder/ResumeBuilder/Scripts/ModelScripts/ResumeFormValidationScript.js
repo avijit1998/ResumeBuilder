@@ -131,7 +131,7 @@ $(document).ready(function () {
             return this.optional(element) || value.match(/^\d\d\d\d?\-\d\d?\-\d\d$/) && !(myDate > now || myDate < past);
         }, "Please enter a valid date.");
 
-        $('#formBasicInfo').validate({
+        $('#basicInfoForm').validate({
             rules: {
                 Name: {
                     required: true,
