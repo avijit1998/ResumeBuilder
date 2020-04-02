@@ -42,13 +42,25 @@ $(document).ready(function () {
     //Anil
     $("body").on('click', '.js-save-user', function () {
         console.log('hi u r in validation');
-        debugger;
+        $.validator.addMethod("regex", function (value, element, regexpr) {
+            return this.optional(element) || regexpr.test(value);
+        }, "Please check your input.");
+
         $('#modalBasicInfo').validate({
             rules: {
-
+                Name: {
+                    required: true,
+                    regex: /^[A-Za-z ]+$/
+                },
+                PhoneNumber: {
+                    required: true,
+                    regex: /[0-9\-\(\)]+/,
+                    minlength: 10,
+                    maxlength: 13
+                }
             }
-        })
-    })
+        });
+    });
 
     //Rahul
     $("body").on('click', '.js-save-education', function () {
