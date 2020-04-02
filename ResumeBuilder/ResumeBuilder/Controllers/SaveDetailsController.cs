@@ -184,7 +184,6 @@ namespace ResumeBuilder.Controllers
         [HttpPost]
         public ActionResult SaveEducationalDetails(EducationalDetailsVM educationalDetailsVM)
         {
-
             try
             {
                 if (educationalDetailsVM.EducationalDetailsID == 0)
@@ -209,7 +208,7 @@ namespace ResumeBuilder.Controllers
                         return HttpNotFound();
                     }
 
-                    var educationalDetails = db.EducationalDetails.FirstOrDefault(id => id.EducationalDetailsID == educationalDetailsVM.EducationalDetailsID);
+                    var educationalDetails = db.EducationalDetails.FirstOrDefault(eduId => eduId.EducationalDetailsID == educationalDetailsVM.EducationalDetailsID);
 
                     if (educationalDetails == null)
                     {
