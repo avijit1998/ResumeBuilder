@@ -3,7 +3,7 @@ namespace ResumeBuilder.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class createdfreshdatabaseandfilledtheseedmethod : DbMigration
+    public partial class createddatabase : DbMigration
     {
         public override void Up()
         {

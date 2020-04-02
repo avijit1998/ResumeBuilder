@@ -32,7 +32,7 @@ namespace ResumeBuilder.Controllers
             }
         }
 
-        public ActionResult ShowData()        
+        public ActionResult ShowData()
         {
             if (Session["UserID"] != null)
             {
