@@ -85,28 +85,70 @@ $(document).ready(function () {
         $.validator.addMethod("regex", function (value, element, regexpr) {
             return this.optional(element) || !(regexpr.test(value));
         }, "Please enter valid data.");
+
         $.validator.addMethod("notStartWithNum", function (value, element, regexpr) {
             return this.optional(element) || !(regexpr.test(value[0]));
         }, "Shouldn't start with number.");
+
+        $.validator.addMethod("notFutureDate", function (value, element) {
+            var now = new Date();
+            var myDate = new Date(value);
+            var past = new Date("1800-01-01");
+            var year = value.split('-');
+            return this.optional(element) || value.match(/^\d\d\d\d?\-\d\d?\-\d\d$/) && !(myDate > now || myDate < past);
+        }, "Please enter a valid date.");
 
         $('#formBasicInfo').validate({
             rules: {
                 Name: {
                     required: true,
-                    regex: /[^a-zA-Z 0-9]/,
-                    notStartWithNum : /[\d]/
+                    regex: /[^a-zA-Z. 0-9]/,
+                    notStartWithNum: /[\d/\.]/
                 },
                 PhoneNumber: {
                     required: true,
                     regex: /[^\d]/,
                     minlength: 10,
                     maxlength: 13
+                },
+                Gender: {
+                    required: true
+                },
+                DateOfBirth: {
+                    required : true,
+                    notFutureDate: true
+                },
+                Summary: {
+                    required: true
+                },
+                chkLanguages: {
+                    required: true
                 }
             },
-            messsages : {
+            messages: {
+                Name: {
+                    required: 'Please enter your name',
+                    regex: 'Please enter a valid name'
+                },
                 PhoneNumber: {
-                    minlength: 'Please enter a valid phone number'
+                    required: 'Please enter your phone number.',
+                    regex: 'Please enter a valid phone number.'
+                },
+                Gender: {
+                    required: 'Please select your gender.'
+                },
+                DateOfBirth: {
+                    required : 'Please enter your date of birth.'
+                },
+                Summary: {
+                    required: 'Please enter summaary.'
+                },
+                chkLanguages: {
+                    required: 'One language should be selected.'
                 }
+            },
+            errorPlacement: function(error, element) {
+                error.insertAfter(element.closest('.error-msg'));
             }
         });
     });

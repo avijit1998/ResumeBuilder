@@ -4,8 +4,7 @@
     });
 
     $("body").on("click", ".js-add-project", function () {
-        debugger;
-        $('#modalProject').modal('show');
+       $('#modalProject').modal('show');
     });
 
     $("body").on("click", ".js-add-workex", function () {
@@ -119,7 +118,6 @@
     });
 
     $('body').on('click', '.js-edit-workex', function (e) {
-        debugger;
         e.preventDefault();
         var $button = $(this);
         var id = $button.data("workex-id");
@@ -132,7 +130,6 @@
         var isWorking = $button.data("isworking");
         console.log(isWorking);
 
-        debugger;
         $('input[name="WorkExperienceID"]').val(id);
         $('input[name="OrganizationName"]').val(organization);
         $('input[name="Designation"]').val(role);
@@ -363,11 +360,8 @@
         var $button = $(this);
         var id = $button.data("project-id");
 
-        
-
         bootbox.confirm("<p style='color:black;'>Are you sure to delete this Project Record?</p>", function (result) {
             if (result) {
-                debugger;
                 var params = $.extend({}, params);
                 params['url'] = '/Resume/DeleteProject?id=' + id;
                 params['requestType'] = 'POST';

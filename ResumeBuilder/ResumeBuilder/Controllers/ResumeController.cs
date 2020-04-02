@@ -221,14 +221,12 @@ namespace ResumeBuilder.Controllers
                             workExFromDb.IsCurrentlyWorking = workExperienceVM.IsCurrentlyWorking;   
 
                             db.SaveChanges();
-                           // return Json("Success", JsonRequestBehavior.AllowGet);
-                        }
+                          }
 
                         else
                         {
                             return HttpNotFound();
                         }
-
 
                     }
 
