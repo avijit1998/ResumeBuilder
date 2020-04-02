@@ -71,13 +71,46 @@ $(document).ready(function () {
     //});
 
     //Abhishek
-    $("body").on('click', '.js-save-workex', function () {
-        $('#modalWorkExperience').validate({
-            rules: {
+   // $("body").on('click', '.js-save-workex', function () {
 
-            }
-        })
-    })
+        //$.validator.addMethod("regex", function (value, element, regexpr) {
+        //    return this.optional(element) || regexpr.test(value);
+        //}, "Invalid input.");
+
+    //    $('#modalWorkExperience').validate({
+    //        rules: {
+    //            OrganizationName: {
+    //                required: true
+    //            },
+    //            Designation: {
+    //                required: true
+    //            },
+    //            StartMonth: {
+    //                required: true
+    //            },
+    //            StartYear: {
+    //                required: true
+    //            }
+
+    //        },
+    //        messages: {
+    //        OrganizationName: {
+    //                required: "Please enter the Organisation name"
+    //        },
+    //        Designation: {
+    //            required: "Please enter the designation"
+    //        },
+    //        StartMonth: {
+    //            required: "Please enter the starting month"
+    //        },
+    //        StartYear: {
+    //            required: "Please enter the starting year"
+    //        }
+
+    //        }
+
+    //    })
+    //})
 
     //Anil
     $("body").on('click', '.js-edit-user, .js-save-user', function () {
@@ -98,7 +131,7 @@ $(document).ready(function () {
             return this.optional(element) || value.match(/^\d\d\d\d?\-\d\d?\-\d\d$/) && !(myDate > now || myDate < past);
         }, "Please enter a valid date.");
 
-        $('#formBasicInfo').validate({
+        $('#basicInfoForm').validate({
             rules: {
                 Name: {
                     required: true,
