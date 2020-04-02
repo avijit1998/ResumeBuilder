@@ -101,7 +101,7 @@ $(document).ready(function () {
             var past = new Date("1800-01-01")
             var x = !(myDate > now || myDate < past);
             return x;
-        }, "Please add a valid date.");
+        }, "Please enter a valid date.");
 
         $('#formBasicInfo').validate({
             rules: {
@@ -120,6 +120,7 @@ $(document).ready(function () {
                     required: true
                 },
                 DateOfBirth: {
+                    required : true,
                     notFutureDate: true,
                     birth: true
                 },
@@ -127,7 +128,29 @@ $(document).ready(function () {
                     required: true
                 },
                 chkLanguages: {
-                    required: true,
+                    required: true
+                }
+            },
+            messages: {
+                Name: {
+                    required: 'Please enter your name',
+                    regex: 'Please enter a valid name'
+                },
+                PhoneNumber: {
+                    required: 'Please enter your phone number.',
+                    regex: 'Please enter a valid phone number.'
+                },
+                Gender: {
+                    required: 'Please select your gender.'
+                },
+                DateOfBirth: {
+                    required : 'Please enter your date of birth.'
+                },
+                Summary: {
+                    required: 'Please enter summaary.'
+                },
+                chkLanguages: {
+                    required: 'One language should be selected.'
                 }
             }
         });
