@@ -134,9 +134,8 @@ $(document).ready(function () {
     $("body").on("click", ".js-save-user", function (e) {
         e.preventDefault();
         var flag = $("#basicInfoForm").valid();
-        if (flag)
-        {
-             var userData = {
+        if (flag) {
+            var userData = {
                 "UserID": $.trim($("#userId").val()),
                 "Name": $.trim($("#txtFullName").val()),
                 "Gender": $.trim($('input[name="Gender"]:checked').val()),
@@ -162,7 +161,7 @@ $(document).ready(function () {
 
             };
             params['errorCallBackFunction'] = function () {
-                
+
             }
             commonAjax(params);
 
@@ -211,30 +210,34 @@ $(document).ready(function () {
     $('body').on('click', '.js-save-workex', function (e) {
         debugger;
         e.preventDefault();
-        var formData = {
-            "WorkExperienceID": $('input[name="WorkExperienceID"]').val(),
-            "OrganizationName": $('input[name="OrganizationName"]').val(),
-            "Designation": $('input[name="Designation"]').val(),
-            "StartMonth": $("#selectStartMonth").val(),
-            "StartYear": $("#selectStartYear").val(),
-            "EndMonth": $("#selectEndMonth").val(),
-            "EndYear": $("#selectEndYear").val(),
-            "IsCurrentlyWorking": $('#checkWorking').is(":checked")
-        };
+
+        var flag = $("#workExperienceForm").valid();
+
+        if (flag) {
+            var formData = {
+                "WorkExperienceID": $('input[name="WorkExperienceID"]').val(),
+                "OrganizationName": $('input[name="OrganizationName"]').val(),
+                "Designation": $('input[name="Designation"]').val(),
+                "StartMonth": $("#selectStartMonth").val(),
+                "StartYear": $("#selectStartYear").val(),
+                "EndMonth": $("#selectEndMonth").val(),
+                "EndYear": $("#selectEndYear").val(),
+                "IsCurrentlyWorking": $('#checkWorking').is(":checked")
+            };
 
 
-        var params = $.extend({}, params);
-        params['url'] = '/SaveDetails/SaveWorkExperience';
-        params['data'] = formData;
-        params['requestType'] = 'POST';
-        params['successCallbackFunction'] = function (result) {
-            $("#modalWorkExperience").modal("hide");
+            var params = $.extend({}, params);
+            params['url'] = '/SaveDetails/SaveWorkExperience';
+            params['data'] = formData;
+            params['requestType'] = 'POST';
+            params['successCallbackFunction'] = function (result) {
+                $("#modalWorkExperience").modal("hide");
 
-        };
-        params['errorCallBackFunction'] = function (result) {
-            
-        }
-        commonAjax(params)
+            };
+            params['errorCallBackFunction'] = function (result) {
+
+            }
+            commonAjax(params);
         }
         else {
             bootbox.alert("<p style='color:red;'>Fill the Fields with * Mark!</p>");
@@ -287,7 +290,7 @@ $(document).ready(function () {
                 $("#modalProject").modal("hide");
             };
             params['errorCallBackFunction'] = function (result) {
-                
+
             }
             commonAjax(params);
         }
@@ -345,10 +348,9 @@ $(document).ready(function () {
     });
 
     $('body').on('click', '.js-save-education', function (e) {
- e.preventDefault();
+        e.preventDefault();
         var flag = $("#educationDetailsForm").valid();
-        if (flag)
-        {
+        if (flag) {
             var id = $.trim($('input[name="EducationalDetailsID"]').val());
             var formData = {
                 "EducationalDetailsID": id,
@@ -360,20 +362,20 @@ $(document).ready(function () {
                 "CGPAOrPercentage": $.trim($('input[name="CGPAOrPercentage"]:checked').val()),
                 "BoardOrUniversity": $.trim($('#boardType option:selected').text())
             };
-        if (formData.CourseID == 1) {
-            formData.Stream = 'N/A';
-        }
-        var params = $.extend({}, params);
-        params['url'] = '/SaveDetails/SaveEducationalDetails';
-        params['data'] = formData;
-        params['requestType'] = 'POST';
-        params['successCallbackFunction'] = function () {
-            $("#modalEducationDetails").modal("hide");
-            bootbox.alert("<p style='color:black;'>Education Details updated sucessfully</p>");
-        };
-        params['errorCallBackFunction'] = function () {
-        }
-        commonAjax(params);
+            if (formData.CourseID == 1) {
+                formData.Stream = 'N/A';
+            }
+            var params = $.extend({}, params);
+            params['url'] = '/SaveDetails/SaveEducationalDetails';
+            params['data'] = formData;
+            params['requestType'] = 'POST';
+            params['successCallbackFunction'] = function () {
+                $("#modalEducationDetails").modal("hide");
+                bootbox.alert("<p style='color:black;'>Education Details updated sucessfully</p>");
+            };
+            params['errorCallBackFunction'] = function () {
+            }
+            commonAjax(params);
             //disable radio button for client-side
 
             if (formData.CourseID == 1 || formData.CourseID == 2) {
@@ -400,8 +402,7 @@ $(document).ready(function () {
         })
 
 
-        if ($(".skillItem").text() !== "")
-        {
+        if ($(".skillItem").text() !== "") {
             var params = $.extend({}, params);
             params['url'] = '/SaveDetails/SaveUserSkills';
             params['data'] = skillDetails;
@@ -416,7 +417,7 @@ $(document).ready(function () {
         else {
             bootbox.alert("<p style='color:red;'>Fill the fields with * mark!</p>");
         }
-      
+
         $('ul').empty();
         return false;
     });
@@ -436,7 +437,7 @@ $(document).ready(function () {
 
                 };
                 params['errorCallBackFunction'] = function () {
-                  
+
                 }
 
                 commonAjax(params);
@@ -523,7 +524,7 @@ $(document).ready(function () {
                 params['requestType'] = 'POST';
                 params['data'] = formData;
                 params['successCallbackFunction'] = function () {
-                    
+
                 };
                 params['errorCallBackFunction'] = function () {
                     bootbox.alert("<p style='color:black;'>Error!</p>");
