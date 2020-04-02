@@ -115,7 +115,7 @@ namespace ResumeBuilder.Controllers
             if (dbContext.Logins.Any(m => m.Username == registrationDetails.UserName))
             {
                 ModelState.AddModelError("", "User already exists.");
-                return View(registrationDetails);
+                return View();
             }
             else
             {

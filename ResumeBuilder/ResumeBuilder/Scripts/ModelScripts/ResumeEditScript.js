@@ -4,8 +4,7 @@
     });
 
     $("body").on("click", ".js-add-project", function () {
-        debugger;
-        $('#modalProject').modal('show');
+       $('#modalProject').modal('show');
     });
 
     $("body").on("click", ".js-add-workex", function () {
@@ -119,7 +118,6 @@
     });
 
     $('body').on('click', '.js-edit-workex', function (e) {
-        debugger;
         e.preventDefault();
         var $button = $(this);
         var id = $button.data("workex-id");
@@ -132,7 +130,6 @@
         var isWorking = $button.data("isworking");
         console.log(isWorking);
 
-        debugger;
         $('input[name="WorkExperienceID"]').val(id);
         $('input[name="OrganizationName"]').val(organization);
         $('input[name="Designation"]').val(role);
@@ -206,11 +203,8 @@
     });
 
     $('body').on('click', '.js-save-project', function (e) {
-        debugger;
-        //$("#projectDetailsForm").valid();
-        var isValid=validateForm();
-        e.preventDefault();
-        if (isValid) {
+        var flag = $("#projectDetailsForm").valid();
+        if (flag) {
             var ProjectID = $('input[name="ProjectID"]').val();
             var formData = {
                 "ProjectID": $('input[name="ProjectID"]').val(),
@@ -227,8 +221,9 @@
             params['requestType'] = 'POST';
 
             params['successCallbackFunction'] = function () {
+                debugger;
                 bootbox.alert("<p style='color:black;'>Project Details updated sucessfully</p>");
-                $("#modalBasicInfo").modal("hide");
+                $("#modalProject").modal("hide");
             };
             params['errorCallBackFunction'] = function (result) {
                 bootbox.alert("<p style='color:black;'>Error!</p>");
@@ -238,7 +233,6 @@
         else {
             bootbox.alert("<p style='color:black;'>Error!</p>");
         }
-
         return false;
     });
 
@@ -364,11 +358,8 @@
         var $button = $(this);
         var id = $button.data("project-id");
 
-        
-
         bootbox.confirm("<p style='color:black;'>Are you sure to delete this Project Record?</p>", function (result) {
             if (result) {
-                debugger;
                 var params = $.extend({}, params);
                 params['url'] = '/Resume/DeleteProject?id=' + id;
                 params['requestType'] = 'POST';

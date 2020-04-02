@@ -100,7 +100,7 @@ else
                     @Html.Partial("_BasicPreviewPartialView")
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success js-print-btn" onclick="location.href = '@Url.Action("ConvertHtmlPageToPdf", "Resume", new {targetPreview = "_BasicPreviewPartialView"})'"><i class=" fa fa-download"> Download</i></button>
+                    <button type="button" class="btn btn-success js-print-btn" onclick="location.href = '@Url.Action("ConvertHtmlPageToPdf", "Profile", new {targetPreview = "_BasicPreviewPartialView"})'"><i class=" fa fa-download"> Download</i></button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -120,7 +120,7 @@ else
                     @Html.Partial("_TabularPreviewPartialView")
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success js-print-btn" onclick="location.href = '@Url.Action("ConvertHtmlPageToPdf", "Resume", new {targetPreview = "_TabularPreviewPartialView"})'"><i class="fa fa-download"> Download</i></button>
+                    <button type="button" class="btn btn-success js-print-btn" onclick="location.href = '@Url.Action("ConvertHtmlPageToPdf", "Profile", new {targetPreview = "_TabularPreviewPartialView"})'"><i class="fa fa-download"> Download</i></button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>

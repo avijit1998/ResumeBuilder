@@ -179,10 +179,6 @@ namespace ResumeBuilder.Migrations
                     SkillName = "MySQL"
                 });
 
-                context.Skills.Add(new Models.Skill
-                {
-                    SkillName = "JAVA"
-                });
             }
 
             if (!context.Courses.Any())

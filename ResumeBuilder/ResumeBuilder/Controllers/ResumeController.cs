@@ -32,7 +32,7 @@ namespace ResumeBuilder.Controllers
             }
         }
 
-        public ActionResult ShowData()        
+        public ActionResult ShowData()
         {
             if (Session["UserID"] != null)
             {
@@ -221,14 +221,12 @@ namespace ResumeBuilder.Controllers
                             workExFromDb.IsCurrentlyWorking = workExperienceVM.IsCurrentlyWorking;   
 
                             db.SaveChanges();
-                           // return Json("Success", JsonRequestBehavior.AllowGet);
-                        }
+                          }
 
                         else
                         {
                             return HttpNotFound();
                         }
-
 
                     }
 
