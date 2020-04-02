@@ -20,7 +20,7 @@ namespace ResumeBuilder.Controllers
         private ProfileViewModel GetUserDetails()
         {
             var uiModel = new ProfileViewModel();
-            int id = 1;
+            int id = 2;
             //var result = Int32.TryParse(Session["UserID"] as String, out id);
             if (true)
             {

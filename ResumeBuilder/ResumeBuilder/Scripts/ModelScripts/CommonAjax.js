@@ -1,6 +1,4 @@
 ﻿function commonAjax(params) {
-
-    debugger;
     var url = params['url'];
     var requestType = params['requestType'];
     var contentType = params['contentType'];
@@ -11,11 +9,6 @@
     var completeCallbackFunction = params['completeCallbackFunction'];
     var errorCallBackFunction = params['errorCallBackFunction'];
 
-    //make sure that url ends with '/'
-    /*if(!url.endsWith("/")){
-     url = url + "/";
-    }*/
-    debugger;
     $.ajax({
         url: url,
         crossDomain: true,
@@ -28,13 +21,13 @@
                 beforeSendCallbackFunction();
             }
         },
-        success: function (textStatus, jqXHR) {
+        success: function (data, textStatus, jqXHR) {
             if (typeof successCallbackFunction === "function") {
-                successCallbackFunction();
+                successCallbackFunction(data);
+                bootbox.hideAll();
                 removeBackdrop();
                 var url = $("#ajaxEditForm").data('url');
                 $.get(url, function (data) {
-                    debugger;
                     $('#editPage').html(data);
                 });
             }

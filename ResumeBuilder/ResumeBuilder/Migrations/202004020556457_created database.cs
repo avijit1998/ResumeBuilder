@@ -3,7 +3,7 @@ namespace ResumeBuilder.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class NewDatabase : DbMigration
+    public partial class createddatabase : DbMigration
     {
         public override void Up()
         {
@@ -26,7 +26,7 @@ namespace ResumeBuilder.Migrations
                         BoardOrUniversity = c.String(),
                         PassingYear = c.Int(nullable: false),
                         Stream = c.String(),
-                        CGPAOrPercentage = c.Boolean(nullable: false),
+                        CGPAOrPercentage = c.String(),
                         TotalPercentageOrCGPAValue = c.Double(nullable: false),
                     })
                 .PrimaryKey(t => t.EducationalDetailsID)

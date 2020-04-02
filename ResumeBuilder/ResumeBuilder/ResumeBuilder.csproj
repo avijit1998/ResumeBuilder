@@ -179,9 +179,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\PasswordSecurity.cs" />
-    <Compile Include="Migrations\202003301000591_New Database.cs" />
-    <Compile Include="Migrations\202003301000591_New Database.Designer.cs">
-      <DependentUpon>202003301000591_New Database.cs</DependentUpon>
+    <Compile Include="Migrations\202004020556457_created database.cs" />
+    <Compile Include="Migrations\202004020556457_created database.Designer.cs">
+      <DependentUpon>202004020556457_created database.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
@@ -196,6 +196,7 @@
     <Compile Include="Models\WorkExperience.cs" />
     <Compile Include="ViewModels\EducationalDetailsVM.cs" />
     <Compile Include="ViewModels\ProjectInfoVM.cs" />
+    <Compile Include="ViewModels\SettingsDetailsVM.cs" />
     <Compile Include="ViewModels\SkillsVM.cs" />
     <Compile Include="ViewModels\UserInfoVM.cs" />
     <Compile Include="ViewModels\EditUserLanguageViewModel.cs" />
@@ -586,8 +587,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003301000591_New Database.resx">
-      <DependentUpon>202003301000591_New Database.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202004020556457_created database.resx">
+      <DependentUpon>202004020556457_created database.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
