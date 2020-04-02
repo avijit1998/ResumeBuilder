@@ -1,8 +1,53 @@
 ﻿$(document).ready(function () {
 
-         $(document).on("click", "#settingsBtn", function () {
-        $.ajax({
-            url: "/Resume/SetUserSettingStatus",
+    $(document).on("click", "#settingsBtn", function () {
+
+        //var params = $.extend({}, params);
+        //params['url'] = '/Settings/SetUserSettingStatus';
+        //params['requestType'] = 'GET';
+        ////params['data'] = formData;
+        //params['successCallbackFunction'] = function () {
+        //    if (userSettingsStatus.WorkExperienceStatus == true) {
+        //        $("#cbWorkex").prop('checked', true);
+        //    }
+        //    else {
+        //        $("#cbWorkex").prop('checked', false);
+        //    }
+
+        //    if (userSettingsStatus.LanguagesStatus == true) {
+        //        $("#cbLanguage").prop('checked', true);
+        //    }
+        //    else {
+        //        $("#cbLanguage").prop('checked', false);
+        //    }
+        //    if (userSettingsStatus.SkillsDetailsStatus == true) {
+        //        $("#cbSkills").prop('checked', true);
+        //    }
+        //    else {
+        //        $("#cbSkills").prop('checked', false);
+        //    }
+        //    if (userSettingsStatus.ProjectDetailsStatus == true) {
+        //        $("#cbProjects").prop('checked', true);
+        //    }
+        //    else {
+        //        $("#cbProjects").prop('checked', false);
+        //    }
+        //    if (userSettingsStatus.EducationalDetailsStatus == true) {
+        //        $("#cbEducation").prop('checked', true);
+        //    }
+        //    else {
+        //        $("#cbEducation").prop('checked', false);
+        //    }
+
+        //    $("#settingsModal").modal("show");
+
+        //};
+        //params['errorCallBackFunction'] = function () {
+        //    bootbox.alert("<p style='color:black;'>Error!</p>");
+        //}
+        //commonAjax(params);
+         $.ajax({
+            url: "/Settings/SetUserSettingStatus",
             type: 'GET',
             success: function (userSettingsStatus) {
 
@@ -57,7 +102,7 @@
             "LanguagesStatus": $("#cbLanguage").prop("checked")
         };
         $.ajax({
-            url: "/Resume/SaveSettingStatus",
+            url: "/Settings/SaveSettingStatus",
             type: 'post',
             data: settingStatus,
             success: function () {

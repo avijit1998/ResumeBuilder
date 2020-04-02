@@ -361,7 +361,7 @@
         bootbox.confirm("<p style='color:black;'>Are you sure to delete this Project Record?</p>", function (result) {
             if (result) {
                 var params = $.extend({}, params);
-                params['url'] = '/Resume/DeleteProject?id=' + id;
+                params['url'] = '/Delete/DeleteProject?id=' + id;
                 params['requestType'] = 'POST';
                 params['successCallbackFunction'] = function (resultfinal) {
                    
@@ -389,7 +389,7 @@
             if (result) {
 
                 var params = $.extend({}, params);
-                params['url'] = '/Resume/DeleteWorkExperience?id=' + id;
+                params['url'] = '/Delete/DeleteWorkExperience?id=' + id;
                 params['requestType'] = 'POST';
                 params['successCallbackFunction'] = function (resultfinal) {
                     
@@ -420,7 +420,7 @@
             if (result) {
 
                 var params = $.extend({}, params);
-                params['url'] = '/Resume/DeleteSkill';
+                params['url'] = '/Delete/DeleteSkill';
                 params['requestType'] = 'POST';
                 params['data'] = formData;
                 params['successCallbackFunction'] = function () {
@@ -445,7 +445,7 @@
             if (result) {
 
                 var params = $.extend({}, params);
-                params['url'] = '/Resume/DeleteEducation';
+                params['url'] = '/Delete/DeleteEducation';
                 params['requestType'] = 'POST';
                 params['data'] = formData;
                 params['successCallbackFunction'] = function () {
