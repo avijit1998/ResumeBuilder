@@ -268,14 +268,14 @@
                                 <label>Language</label>
                                 <div class="checkbox">
                                     @foreach (var c in languages)
-                                            {
-                                            <div>
-                                                <label>
-                                                    <input type="checkbox" value="@c.LanguageID">
-                                                    @c.LanguageName
-                                                </label>
-                                            </div>
-                                            }
+                                    {
+                                        <div>
+                                            <label>
+                                                <input type="checkbox" value="@c.LanguageID">
+                                                @c.LanguageName
+                                            </label>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                             <div class="row">
@@ -285,6 +285,8 @@
                                 </div>
                             </div>
                         </form>
+
+
 
                     </div>
                 </div>
@@ -309,15 +311,18 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <form method="post">
+                        <form id="educationDetailsForm" method="post">
 
                             <input type="hidden" name="EducationalDetailsID" />
                             <input type="hidden" name="CourseID" />
-
+                            @{var count = 0;
+                            var courseId = "";}
                             @foreach (var course in courses)
                             {
+                                count = count + 1;
+                                courseId = "course" + count;
                                 <label class="radio-inline">
-                                    <input type="radio" name="courseOption" value="@course.CourseID">@course.CourseName
+                                    <input id="@courseId" type="radio" name="courseOption" value="@course.CourseID">@course.CourseName
                                 </label>
                             }
 
@@ -346,10 +351,10 @@
 
                                 <div class="form-group">
                                     <label class="radio-inline">
-                                        <input type="radio" name="CGPAOrPercentage" value="CGPA" checked>CGPA Scored
+                                        <input id="cgpa" type="radio" name="CGPAOrPercentage" value="CGPA" checked>CGPA Scored
                                     </label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="CGPAOrPercentage" value="Percentage">Percentage Scored
+                                        <input id="percentage" type="radio" name="CGPAOrPercentage" value="Percentage">Percentage Scored
                                     </label>
                                 </div>
                                 <div>
@@ -366,6 +371,7 @@
                                 </div>
                             </div>
                         </form>
+
                     </div>
                 </div>
 
