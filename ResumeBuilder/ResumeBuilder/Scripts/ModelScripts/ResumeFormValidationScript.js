@@ -1,21 +1,10 @@
-﻿// avijit
-// first check whether modal/div exists and for that modal/div choose a "selector" and provide 
-// an event and only when that event is triggered 
-// the validate function should be called
-//$(document/body).on("event","selector",function())
-//$('#projectFormId').validate({
-//    rules: {
-
-//    }
-//})
-
-
-$(document).ready(function () {
+﻿$(document).ready(function () {
 
     //avijeet
     $("body").on('click', '.js-add-project, .js-edit-project', function () {
 
         $("#modalProject").on('shown.bs.modal', function () {
+
             $.validator.addMethod("regex", function (value, element, regexpr) {
                 return this.optional(element) || regexpr.test(value);
             }, "Invalid input.");
@@ -56,63 +45,91 @@ $(document).ready(function () {
                     }
                 }
             });
+
+            $("#projectDetailsForm").removeAttr("novalidate");
+
         });
     });
 
-    //avijeet
-    //$("body").on('click', '.js-add-skill', function () {
-
-    //    $("#modalSkills").on('shown.bs.modal', function () {
-
-            
-    //    });
-    //});
-
     //Abhishek
-   // $("body").on('click', '.js-save-workex', function () {
+    $("body").on('click', '.js-add-workex, .js-edit-workex', function () {
 
-        //$.validator.addMethod("regex", function (value, element, regexpr) {
-        //    return this.optional(element) || regexpr.test(value);
-        //}, "Invalid input.");
+        $("#modalWorkExperience").on('shown.bs.modal', function () {
 
-    //    $('#modalWorkExperience').validate({
-    //        rules: {
-    //            OrganizationName: {
-    //                required: true
-    //            },
-    //            Designation: {
-    //                required: true
-    //            },
-    //            StartMonth: {
-    //                required: true
-    //            },
-    //            StartYear: {
-    //                required: true
-    //            }
+            $.validator.addMethod("regex", function (value, element, regexpr) {
+                return this.optional(element) || regexpr.test(value);
+            }, "Invalid input.");
 
-    //        },
-    //        messages: {
-    //        OrganizationName: {
-    //                required: "Please enter the Organisation name"
-    //        },
-    //        Designation: {
-    //            required: "Please enter the designation"
-    //        },
-    //        StartMonth: {
-    //            required: "Please enter the starting month"
-    //        },
-    //        StartYear: {
-    //            required: "Please enter the starting year"
-    //        }
+            jQuery.validator.addMethod('selectcheck', function (value) {
+                return (value != '0');
+            }, "This field is required.");
 
-    //        }
+            $('#workExperienceForm').validate({
+                rules: {
+                    OrganizationName: {
+                        required: true
+                    },
+                    Designation: {
+                        required: true
+                    },
+                    StartMonth: {
+                        selectcheck: true
+                    },
+                    StartYear: {
+                        selectcheck: true
+                    },
+                    EndMonth: {
+                        selectcheck: function() {
+                            if($("#checkWorking").is(':checked')){
+                                return true;
+                            }
+                            else {
+                                return false;
+                            }
+                        }
+                    },
+                    EndYear: {
+                        selectcheck: function () {
+                            if ($("#checkWorking").is(':checked')) {
+                                return true;
+                            }
+                            else {
+                                return false;
+                            }
+                        }
+                    }
+                },
+                messages: {
+                    OrganizationName: {
+                        required: "Please enter the organisation name."
+                    },
+                    Designation: {
+                        required: "Please enter your designation."
+                    },
+                    StartMonth: {
+                        selectcheck: "Please enter the starting month."
+                    },
+                    StartYear: {
+                        selectcheck: "Please enter the starting year."
+                    },
+                    EndMonth: {
+                        selectcheck: "Please enter the ending month."
+                    },
+                    EndYear: {
+                        selectcheck: "Please enter the ending year."
+                    }
+                }
+            });
 
-    //    })
-    //})
+            $("#workExperienceForm").removeAttr("novalidate");
+
+        });
+    });
 
     //Anil
     $("body").on('click', '.js-edit-user, .js-save-user', function () {
         event.preventDefault();
+
         $.validator.addMethod("regex", function (value, element, regexpr) {
             return this.optional(element) || !(regexpr.test(value));
         }, "Please enter valid data.");
@@ -182,6 +199,8 @@ $(document).ready(function () {
                 error.insertAfter(element.closest('.error-msg'));
             }
         });
+
+        $("#basicInfoForm").removeAttr("novalidate");
     });
 
     //Rahul
@@ -192,21 +211,8 @@ $(document).ready(function () {
                 return this.optional(element) || regexpr.test(value);
             }, "Invalid input.");
 
-
-
             $('#educationDetailsForm').validate({
                 rules: {
-                    //courseOption: {
-                    //    required: function () {
-                    //        var course1 = $("#course1").prop('checked');
-                    //        var course2 = $("#course2").prop('checked');
-                    //        var course3 = $("#course3").prop('checked');
-                    //        var course4 = $("#course4").prop('checked');
-                    //        if (!(course1 || course2 || course3 || course4))
-                    //            return true;
-                    //        return false;
-                    //    }
-                    //},
                     Stream: {
                         required: true,
                         regex: /^[A-Za-z ]+$/
@@ -221,9 +227,6 @@ $(document).ready(function () {
                     }
                 },
                 messages: {
-                    //courseOption: {
-                    //    required: "Please check your Course first."
-                    //},
                     Stream: {
                         required: "Enter your Stream.",
                         regex: "Enter valid Stream."
@@ -243,8 +246,10 @@ $(document).ready(function () {
                         regex: "Enter valid value."
                     }
                 }
-            })
-        })
+            });
+
+            $("#educationDetailsForm").removeAttr("novalidate");
+        });
 
     });
 });
