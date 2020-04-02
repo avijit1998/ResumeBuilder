@@ -40,10 +40,61 @@ namespace ResumeBuilder.Migrations
                 {
                     LanguageName = "Bengali"
                 });
+
+                context.Languages.Add(new Models.Language
+                {
+                    LanguageName = "Tamil"
+                });
+
+                context.Languages.Add(new Models.Language
+                {
+                    LanguageName = "Kannada"
+                });
+
+                context.Languages.Add(new Models.Language
+                {
+                    LanguageName = "Telgu"
+                });
             }
 
             if (!context.Skills.Any())
             {
+                context.Skills.Add(new Models.Skill
+                {
+                    SkillName = "ASP"
+                });
+
+                context.Skills.Add(new Models.Skill
+                {
+                    SkillName = "ASP .NET MVC"
+                });
+
+                context.Skills.Add(new Models.Skill
+                {
+                    SkillName = "C"
+                });
+
+                context.Skills.Add(new Models.Skill
+                {
+                    SkillName = "C++"
+
+                });
+
+                context.Skills.Add(new Models.Skill
+                {
+                    SkillName = "CSS/CSS3"
+                });
+
+                context.Skills.Add(new Models.Skill
+                {
+                    SkillName = "C#"
+                });
+
+                context.Skills.Add(new Models.Skill
+                {
+                    SkillName = "Design Patterns"
+                });
+
                 context.Skills.Add(new Models.Skill
                 {
                     SkillName = "HTML/HTML5"
@@ -51,7 +102,7 @@ namespace ResumeBuilder.Migrations
 
                 context.Skills.Add(new Models.Skill
                 {
-                    SkillName = "CSS/CSS3"
+                    SkillName = "Hibernate"
                 });
 
                 context.Skills.Add(new Models.Skill
@@ -66,17 +117,71 @@ namespace ResumeBuilder.Migrations
 
                 context.Skills.Add(new Models.Skill
                 {
-                    SkillName = "C#"
+                    SkillName = "JAVA"
                 });
 
                 context.Skills.Add(new Models.Skill
                 {
-                    SkillName = "ASP .NET MVC"
+                    SkillName = "JDBC"
+                });
+
+                context.Skills.Add(new Models.Skill
+                {
+                    SkillName = "JSP"
+                });
+
+                context.Skills.Add(new Models.Skill
+                {
+                    SkillName = "Perl"
+                });
+
+                context.Skills.Add(new Models.Skill
+                {
+                    SkillName = "Python"
+                });
+
+                context.Skills.Add(new Models.Skill
+                {
+                    SkillName = "PHP"
+                });
+
+                context.Skills.Add(new Models.Skill
+                {
+                    SkillName = "Servlet"
+                });
+
+                context.Skills.Add(new Models.Skill
+                {
+                    SkillName = "Spring"
                 });
 
                 context.Skills.Add(new Models.Skill
                 {
                     SkillName = "SQL SERVER"
+                });
+
+                context.Skills.Add(new Models.Skill
+                {
+                    SkillName = "Ruby"
+                });
+
+                context.Skills.Add(new Models.Skill
+                {
+                    SkillName = "R"
+                });
+                context.Skills.Add(new Models.Skill
+                {
+                    SkillName = "MongoDB"
+                });
+
+                context.Skills.Add(new Models.Skill
+                {
+                    SkillName = "MySQL"
+                });
+
+                context.Skills.Add(new Models.Skill
+                {
+                    SkillName = "JAVA"
                 });
             }
 
@@ -101,9 +206,8 @@ namespace ResumeBuilder.Migrations
                 {
                     CourseName = "Post Graduation"
                 });
+
             }
-
         }
-
     }
 }

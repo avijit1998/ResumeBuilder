@@ -179,9 +179,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\PasswordSecurity.cs" />
-    <Compile Include="Migrations\202003301000591_New Database.cs" />
-    <Compile Include="Migrations\202003301000591_New Database.Designer.cs">
-      <DependentUpon>202003301000591_New Database.cs</DependentUpon>
+    <Compile Include="Migrations\202004020418409_created fresh database and filled the seed method.cs" />
+    <Compile Include="Migrations\202004020418409_created fresh database and filled the seed method.Designer.cs">
+      <DependentUpon>202004020418409_created fresh database and filled the seed method.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
@@ -587,8 +587,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003301000591_New Database.resx">
-      <DependentUpon>202003301000591_New Database.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202004020418409_created fresh database and filled the seed method.resx">
+      <DependentUpon>202004020418409_created fresh database and filled the seed method.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

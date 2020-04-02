@@ -7,13 +7,13 @@ namespace ResumeBuilder.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class NewDatabase : IMigrationMetadata
+    public sealed partial class createdfreshdatabaseandfilledtheseedmethod : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(NewDatabase));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(createdfreshdatabaseandfilledtheseedmethod));
         
         string IMigrationMetadata.Id
         {
-            get { return "202003301000591_New Database"; }
+            get { return "202004020418409_created fresh database and filled the seed method"; }
         }
         
         string IMigrationMetadata.Source
