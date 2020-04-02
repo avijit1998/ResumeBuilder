@@ -1,3 +1,8 @@
 ﻿.left-margin {
     padding-left: 10px;
 }
+.error
+{
+color:red;
+font-family:verdana, Helvetica;
+}
