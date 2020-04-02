@@ -12,7 +12,6 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             dataSrc: function (res) {
-                console.log(res);
                 return res;
             }
         },

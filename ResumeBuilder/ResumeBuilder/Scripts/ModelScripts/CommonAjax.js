@@ -8,7 +8,7 @@
     var successCallbackFunction = params['successCallbackFunction'];
     var completeCallbackFunction = params['completeCallbackFunction'];
     var errorCallBackFunction = params['errorCallBackFunction'];
-    //debugger;
+    
     $.ajax({
         url: url,
         crossDomain: true,
