@@ -13,10 +13,12 @@ namespace ResumeBuilder.Controllers
     public class SettingsController : Controller
     {
         private ResumeBuilderDBContext db;
+        
         public SettingsController()
         {
             db = new ResumeBuilderDBContext();
         }
+        
         public ActionResult SetUserSettingStatus()
         {
 

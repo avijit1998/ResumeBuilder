@@ -268,21 +268,5 @@ namespace ResumeBuilder.Controllers
             }
         }
 
-        public ActionResult SaveSettingStatus(SettingsDetailsVM settingStatus)
-        {
-
-            var session = Session["UserID"];
-            int id = (Int32)session;
-
-            var userSettings = db.Settings.SingleOrDefault(user => user.UserID == id);
-            userSettings.WorkExperienceStatus = settingStatus.WorkExperienceStatus;
-            userSettings.SkillsDetailsStatus = settingStatus.SkillsDetailsStatus;
-            userSettings.ProjectDetailsStatus = settingStatus.ProjectDetailsStatus;
-            userSettings.LanguagesStatus = settingStatus.LanguagesStatus;
-            userSettings.EducationalDetailsStatus = settingStatus.EducationalDetailsStatus;
-            TryUpdateModel(userSettings);
-            db.SaveChanges();
-            return Json("success", JsonRequestBehavior.AllowGet);
-        }
     }
 }
