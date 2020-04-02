@@ -1,12 +1,4 @@
-﻿body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: white;
-    background-color: #333;
-}
-
-.left-margin {
+﻿.left-margin {
     padding-left: 10px;
 }
 .error
@@ -14,21 +6,4 @@
     color:red;
     font-family:verdana, Helvetica;
     font-weight:lighter;
-}
-
-textarea{
-    resize:none;
-}
-
-.astreik-mark{
-    color:red;
-    font-size:large;
-}
-
-label{
-    color:black;
-}
-
-.modal-title{
-    color:darkblue;
 }
