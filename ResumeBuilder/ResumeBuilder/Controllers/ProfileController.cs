@@ -31,7 +31,7 @@ namespace ResumeBuilder.Controllers
                 // User Gender
                 uiModel.Gender = userData.Gender;
 
-                // User Gender
+                // User Date of Birth
                 uiModel.DOB = userData.DateOfBirth.ToShortDateString();
 
                 // User Phone

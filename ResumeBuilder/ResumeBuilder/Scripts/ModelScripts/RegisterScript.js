@@ -10,7 +10,7 @@
             $("#passwordErrorText").text("The Password field is required.");
             password = false;
         }
-        else if ((/((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!+-_=]).{8,})/).test($.trim($("#Password").val())) == false) {
+        else if ((/((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!+-_=]).{8,})/).test($.trim($("#Password").val())) === false) {
             $("#passwordErrorText").text("The password must be of at least 8 characters including one upper and lower case letter,one " +
                 "digit and one special character.");
             password = false;

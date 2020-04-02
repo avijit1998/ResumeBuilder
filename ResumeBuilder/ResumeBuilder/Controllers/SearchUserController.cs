@@ -1,4 +1,5 @@
-﻿using ResumeBuilder.Models;
+﻿using ResumeBuilder.Helpers;
+using ResumeBuilder.Models;
 using ResumeBuilder.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace ResumeBuilder.Controllers
 {
+    [AuthorizeIfSessionExists]
     public class SearchUserController : Controller
     {
         private ResumeBuilderDBContext db;
