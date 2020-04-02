@@ -36,6 +36,7 @@
         error: function (jqXHR, textStatus, errorThrown) {
             if (typeof errorCallBackFunction === "function") {
                 errorCallBackFunction(errorThrown);
+                bootbox.hideAll();
             }
 
         },
