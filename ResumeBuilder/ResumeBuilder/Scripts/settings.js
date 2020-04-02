@@ -1,41 +1,37 @@
 ﻿$(document).ready(function () {
 
-    var result = [-1, -1, -1, -1, -1];
-     
-    
-
-    $(document).on("click", "#settingsBtn", function () {
+         $(document).on("click", "#settingsBtn", function () {
         $.ajax({
-            url: "/Resume/settingsValue",
+            url: "/Resume/SetUserSettingStatus",
             type: 'GET',
-            success: function (ob) {
+            success: function (userSettingsStatus) {
 
-                if (ob.setWorkex == 0) {
+                if (userSettingsStatus.WorkExperienceStatus == true) {
                     $("#cbWorkex").prop('checked', true);
                 }
                 else {
                     $("#cbWorkex").prop('checked', false);
                 }
 
-                if (ob.setContact == 0) {
+                if (userSettingsStatus.LanguagesStatus == true) {
                     $("#cbLanguage").prop('checked', true);
                 }
                 else {
                     $("#cbLanguage").prop('checked', false);
                 }
-                if (ob.setSkills == 0) {
+                if (userSettingsStatus.SkillsDetailsStatus == true) {
                     $("#cbSkills").prop('checked', true);
                 }
                 else {
                     $("#cbSkills").prop('checked', false);
                 }
-                if (ob.setProject == 0) {
+                if (userSettingsStatus.ProjectDetailsStatus == true) {
                     $("#cbProjects").prop('checked', true);
                 }
                 else {
                     $("#cbProjects").prop('checked', false);
                 }
-                if (ob.setEducation == 0) {
+                if (userSettingsStatus.EducationalDetailsStatus == true) {
                     $("#cbEducation").prop('checked', true);
                 }
                 else {
@@ -53,24 +49,17 @@
 
 
     $(document).on("click", "#btnSave", function () {
-        result = [-1, -1, -1, -1, -1];
-        if ($("#cbWorkex").prop("checked") == true)
-            result[0] = 0;
-        if ($("#cbProjects").prop("checked") == true)
-            result[1] = 0;
-        if ($("#cbEducation").prop("checked") == true)
-            result[2] = 0;
-        if ($("#cbSkills").prop("checked") == true)
-            result[3] = 0;
-        if ($("#cbLanguage").prop("checked") == true)
-            result[4] = 0;
+        var settingStatus = {
+            "WorkExperienceStatus": $("#cbWorkex").prop("checked"),
+            "EducationalDetailsStatus": $("#cbEducation").prop("checked"),
+            "ProjectDetailsStatus": $("#cbProjects").prop("checked"),
+            "SkillsDetailsStatus": $("#cbSkills").prop("checked"),
+            "LanguagesStatus": $("#cbLanguage").prop("checked")
+        };
         $.ajax({
-            url: "/Resume/DisplayDetails",
+            url: "/Resume/SaveSettingStatus",
             type: 'post',
-            data: {
-               
-                finalresult: result
-            },
+            data: settingStatus,
             success: function () {
                 $("#settingsModal").modal("hide");
             }

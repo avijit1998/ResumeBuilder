@@ -4,6 +4,7 @@
     });
 
     $("body").on("click", ".js-add-project", function () {
+        debugger;
         $('#modalProject').modal('show');
     });
 
@@ -118,6 +119,7 @@
     });
 
     $('body').on('click', '.js-edit-workex', function (e) {
+        debugger;
         e.preventDefault();
         var $button = $(this);
         var id = $button.data("workex-id");
@@ -128,21 +130,23 @@
         var endMonth = $button.data("start-year");
         var endYear = $button.data("end-year");
         var isWorking = $button.data("isworking");
+        console.log(isWorking);
 
-        $('input[name="WorkExperienceid"]').val(id);
+        debugger;
+        $('input[name="WorkExperienceID"]').val(id);
         $('input[name="OrganizationName"]').val(organization);
-        $('input[name="Role"]').val(role);
+        $('input[name="Designation"]').val(role);
         $("#selectStartMonth").val(startMonth).change();
         $("#selectStartYear").val(startYear).change();
         $("#selectEndMonth").val(endMonth).change();
         $("#selectEndYear").val(endYear).change();
 
         if (isWorking) {
-            $('input[name="CurrentlyWorking"]').prop("checked", true);
+            $('input[name="IsCurrentlyWorking"]').prop("checked", true);
             $(".hide-if-currently-working").hide();
         }
         else {
-            $('input[name="CurrentlyWorking"]').prop("checked", false);
+            $('input[name="IsCurrentlyWorking"]').prop("checked", false);
             $(".hide-if-currently-working").show();
         }
 
@@ -152,7 +156,6 @@
     });
 
     $('body').on('click', '.js-save-workex', function (e) {
-
         e.preventDefault();
         var formData = {
             "WorkExperienceID": $('input[name="WorkExperienceID"]').val(),
@@ -165,24 +168,23 @@
             "IsCurrentlyWorking": $('#checkWorking').is(":checked")
         };
 
+       
         var params = $.extend({}, params);
         params['url'] = '/Resume/SaveWorkExperience';
         params['data'] = formData;
         params['requestType'] = 'POST';
-        params['successCallbackFunction'] = function () {
-            bootbox.alert("<p style='color:black;'>Work Experience Successfully saved.</p>");
+        params['successCallbackFunction'] = function (result) {
             $("#modalWorkExperience").modal("hide");
-            
+
         };
-        params['errorCallBackFunction'] = function () {
+        params['errorCallBackFunction'] = function (result) {
             bootbox.alert("<p style='color:black;'>Error!</p>");
         }
-        commonAjax(params);
-
-        
+        commonAjax(params)
     });
 
     $('body').on('click', '.js-edit-project', function (e) {
+
         e.preventDefault();
         var $button = $(this);
         var projectId = $button.data("project-id");
@@ -191,10 +193,10 @@
         var duration = $button.data("duration");
         var description = $button.data("description");
 
-        $('input[name="ProjectId"]').val(projectId);
-        $('input[name="Title"]').val(result.Title);
+        $('input[name="ProjectID"]').val(projectId);
+        $('input[name="ProjectTitle"]').val(title);
         $('input[name="ProjectRole"]').val(role);
-        $('input[name="Duration"]').val(duration);
+        $('input[name="DurationInMonth"]').val(duration);
         $('textarea[name="Description"]').val(description);
 
         $('#modalProject').find('.modal-title').html('UPDATE PROJECT DETAILS');
@@ -203,6 +205,7 @@
     });
 
     $('body').on('click', '.js-save-project', function (e) {
+        debugger;
         e.preventDefault();
         var ProjectID = $('input[name="ProjectID"]').val();
         var formData = {
@@ -213,23 +216,22 @@
             "Description": $('textarea[name="Description"]').val()
         };
 
+      
         var params = $.extend({}, params);
         params['url'] = '/Resume/SaveProjectDetails';
         params['data'] = formData;
         params['requestType'] = 'POST';
+
         params['successCallbackFunction'] = function () {
             bootbox.alert("<p style='color:black;'>Project Details updated sucessfully</p>");
             $("#modalBasicInfo").modal("hide");
-            
         };
-        params['errorCallBackFunction'] = function () {
+        params['errorCallBackFunction'] = function (result) {
             bootbox.alert("<p style='color:black;'>Error!</p>");
         }
         commonAjax(params);
 
         return false;
-
-        
     });
 
     $('body').on('click', '.js-edit-education', function (e) {
@@ -352,22 +354,30 @@
     $('body').on('click', '.js-delete-project', function (e) {
         e.preventDefault();
         var $button = $(this);
-        var projectID = $button.data("project-id");
+        var id = $button.data("project-id");
+
+        
+
         bootbox.confirm("<p style='color:black;'>Are you sure to delete this Project Record?</p>", function (result) {
             if (result) {
-
+                debugger;
                 var params = $.extend({}, params);
-                params['url'] = '/Resume/DeleteProject' + projectID;
+                params['url'] = '/Resume/DeleteProject?id=' + id;
                 params['requestType'] = 'POST';
-                params['successCallbackFunction'] = function () {
-
+                params['successCallbackFunction'] = function (resultfinal) {
+                   
                 };
                 params['errorCallBackFunction'] = function () {
                     bootbox.alert("<p style='color:black;'>Error!</p>");
                 }
+
                 commonAjax(params);
-                return false;
-             }
+
+            }
+            else {
+                bootbox.hideAll();
+            }
+            return false;
         });
     });
 
@@ -375,15 +385,15 @@
         e.preventDefault();
         var $button = $(this);
 
-        var workExId = $button.data("workex-id");
+        var id = $button.data("workex-id");
         bootbox.confirm("<p style='color:black;'>Are you sure to delete this Work Experience Record?</p>", function (result) {
             if (result) {
 
                 var params = $.extend({}, params);
-                params['url'] = '/Resume/DeleteWorkExperience' + workExId;
+                params['url'] = '/Resume/DeleteWorkExperience?id=' + id;
                 params['requestType'] = 'POST';
-                params['successCallbackFunction'] = function () {
-
+                params['successCallbackFunction'] = function (resultfinal) {
+                    
                 };
                 params['errorCallBackFunction'] = function () {
                     bootbox.alert("<p style='color:black;'>Error!</p>");
@@ -391,6 +401,10 @@
                 commonAjax(params);
 
             }
+            else {
+                bootbox.hideAll();
+            }
+            return false;
         });
     });
 

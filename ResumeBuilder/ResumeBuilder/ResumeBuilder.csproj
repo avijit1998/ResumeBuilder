@@ -196,6 +196,7 @@
     <Compile Include="Models\WorkExperience.cs" />
     <Compile Include="ViewModels\EducationalDetailsVM.cs" />
     <Compile Include="ViewModels\ProjectInfoVM.cs" />
+    <Compile Include="ViewModels\SettingsDetailsVM.cs" />
     <Compile Include="ViewModels\SkillsVM.cs" />
     <Compile Include="ViewModels\UserInfoVM.cs" />
     <Compile Include="ViewModels\EditUserLanguageViewModel.cs" />
