@@ -10,14 +10,12 @@
 //})
 
 
-
 $(document).ready(function () {
 
     //avijeet
     $("body").on('click', '.js-add-project, .js-edit-project', function () {
 
         $("#modalProject").on('shown.bs.modal', function () {
-            
             $.validator.addMethod("regex", function (value, element, regexpr) {
                 return this.optional(element) || regexpr.test(value);
             }, "Invalid input.");
@@ -58,6 +56,8 @@ $(document).ready(function () {
                     }
                 }
             });
+
+            $("#projectDetailsForm").removeAttr("novalidate");
         });
     });
 
