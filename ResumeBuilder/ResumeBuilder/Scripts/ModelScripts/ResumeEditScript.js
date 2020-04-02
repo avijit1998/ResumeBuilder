@@ -136,18 +136,17 @@
             params['data'] = userData;
             params['requestType'] = 'POST';
             params['successCallbackFunction'] = function () {
-                bootbox.alert("<p style='color:black;'>Basic information successfully saved.</p>");
                 $("#modalBasicInfo").modal("hide");
 
             };
             params['errorCallBackFunction'] = function () {
-                bootbox.alert("<p style='color:black;'>Error!</p>");
+                
             }
             commonAjax(params);
 
         }
         else {
-            bootbox.alert("<p style='color:black;'>Fill The Fields Properly!</p>");
+            bootbox.alert("<p style='color:black;'>Fill The Fields with * mark!</p>");
         }
         return false;
     });
@@ -214,12 +213,12 @@
 
         };
         params['errorCallBackFunction'] = function (result) {
-            bootbox.alert("<p style='color:black;'>Error!</p>");
+            
         }
         commonAjax(params)
         }
         else {
-            bootbox.alert("<p style='color:black;'>Fill the Fields Properly!</p>");
+            bootbox.alert("<p style='color:red;'>Fill the Fields with * Mark!</p>");
         }
         return false;
         
@@ -267,7 +266,7 @@
                 $("#modalProject").modal("hide");
             };
             params['errorCallBackFunction'] = function (result) {
-                bootbox.alert("<p style='color:black;'>Error!</p>");
+                
             }
             commonAjax(params);
         }
@@ -353,7 +352,6 @@
             bootbox.alert("<p style='color:black;'>Education Details updated sucessfully</p>");
         };
         params['errorCallBackFunction'] = function () {
-            bootbox.alert("<p style='color:black;'>Error!</p>");
         }
         commonAjax(params);
             //disable radio button for client-side
@@ -365,7 +363,7 @@
             }
         }
         else {
-            bootbox.alert("<p style='color:black;'>Fill the Fields Properly!</p>");
+            bootbox.alert("<p style='color:red;'>Fill the fields with * mark!</p>");
         }
         return false;
         
@@ -393,12 +391,11 @@
                 $("#modalSkills").modal("hide");
             };
             params['errorCallBackFunction'] = function () {
-                bootbox.alert("<p style='color:black;'>Error!</p>");
             }
             commonAjax(params);
         }
         else {
-            bootbox.alert("<p style='color:black;'>Fill the fields properly!</p>");
+            bootbox.alert("<p style='color:red;'>Fill the fields with * mark!</p>");
         }
 
         return false;
@@ -414,12 +411,12 @@
             if (result) {
                 var params = $.extend({}, params);
                 params['url'] = '/Delete/DeleteProject?id=' + id;
-                params['requestType'] = 'DELETE';
+                params['requestType'] = 'POST';
                 params['successCallbackFunction'] = function (resultfinal) {
                    
                 };
                 params['errorCallBackFunction'] = function () {
-                    bootbox.alert("<p style='color:black;'>Error!</p>");
+                  
                 }
 
                 commonAjax(params);
@@ -483,6 +480,10 @@
                 }
                 commonAjax(params);
             }
+            else {
+                bootbox.hideAll();
+            }
+            return false;
         });
     })
 
@@ -501,13 +502,17 @@
                 params['requestType'] = 'POST';
                 params['data'] = formData;
                 params['successCallbackFunction'] = function () {
-                    bootbox.alert("<p style='color:black;'>Skill succesfully deleted.</p>");
+                    
                 };
                 params['errorCallBackFunction'] = function () {
                     bootbox.alert("<p style='color:black;'>Error!</p>");
                 }
                 commonAjax(params);
             }
+            else {
+                bootbox.hideAll();
+            }
+            return false;
         });
     });
 

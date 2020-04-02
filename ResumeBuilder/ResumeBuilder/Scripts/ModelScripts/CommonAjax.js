@@ -27,6 +27,8 @@
                 successCallbackFunction(data);
                 bootbox.hideAll();
                 removeBackdrop();
+                bootbox.alert("<p style='color:black;'>Successfully Updated Your Profile</p>");
+
                 var url = $("#ajaxEditForm").data('url');
                 $.get(url, function (data) {
                     $('#editPage').html(data);
@@ -37,12 +39,14 @@
             if (typeof errorCallBackFunction === "function") {
                 errorCallBackFunction(errorThrown);
                 bootbox.hideAll();
+                bootbox.alert("<p style='color:black;'>Error!</p>");
             }
 
         },
         complete: function (jqXHR, textStatus) {
             if (typeof completeCallbackFunction === "function") {
                 completeCallbackFunction();
+                
             }
         }
     });
