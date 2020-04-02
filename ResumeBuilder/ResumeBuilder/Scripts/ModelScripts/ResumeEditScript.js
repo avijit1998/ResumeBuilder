@@ -48,6 +48,20 @@
         });
     });
 
+    $("body").on("click", "#educationDetails", function () {
+        $('input[type=radio][name=courseOption]').change(function () {
+
+            if ($(this).val() == '1') {
+                $(".all-other").show();
+                $(".stream").hide();
+            }
+            else {
+                $(".stream").show();
+                $(".all-other").show();
+            }
+        });
+    });
+
     //add and edit operations
     $("body").on("click", ".js-edit-user", function (e) {
         e.preventDefault();
@@ -82,38 +96,46 @@
         $('#modalBasicInfo').modal('show');
     });
 
-    $("body").on("click", ".js-save-user", function () {
-        var userData = {
-            "UserID": $("#userId").val(),
-            "Name": $("#txtFullName").val(),
-            "Gender": $('input[name="Gender"]:checked').val(),
-            "DateOfBirth": $("#dateDOB").val(),
-            "PhoneNumber": $("#txtPhoneNumber").val(),
-            "LanguageIds": [],
-            "Summary": $("#txtSummary").val()
-        };
+    $("body").on("click", ".js-save-user", function (e) {
+        e.preventDefault();
+        var flag = $("#basicInfoForm").valid();
+        if (flag)
+        {
+            var userData = {
+                "UserID": $.trim($("#userId").val()),
+                "Name": $.trim($("#txtFullName").val()),
+                "Gender": $.trim($('input[name="Gender"]:checked').val()),
+                "DateOfBirth": $.trim($("#dateDOB").val()),
+                "PhoneNumber": $.trim($("#txtPhoneNumber").val()),
+                "LanguageIds": [],
+                "Summary": $.trim($("#txtSummary").val())
+            };
 
-        $('input[type="checkbox"]:checked').each(function (e, el) {
-            userData.LanguageIds.push($(el).val());
-        });
+            $('input[type="checkbox"]:checked').each(function (e, el) {
+                userData.LanguageIds.push($(el).val());
+            });
 
-        if (userData.LanguageIds[userData.LanguageIds.length - 1] == "on") {
-            userData.LanguageIds.pop();
+            if (userData.LanguageIds[userData.LanguageIds.length - 1] == "on") {
+                userData.LanguageIds.pop();
+            }
+            var params = $.extend({}, params);
+            params['url'] = '/Resume/SaveBasicInformation';
+            params['data'] = userData;
+            params['requestType'] = 'POST';
+            params['successCallbackFunction'] = function () {
+                bootbox.alert("<p style='color:black;'>Basic information successfully saved.</p>");
+                $("#modalBasicInfo").modal("hide");
+
+            };
+            params['errorCallBackFunction'] = function () {
+                bootbox.alert("<p style='color:black;'>Error!</p>");
+            }
+            commonAjax(params);
+
         }
-        var params = $.extend({}, params);
-        params['url'] = '/Resume/SaveBasicInformation';
-        params['data'] = userData;
-        params['requestType'] = 'POST';
-        params['successCallbackFunction'] = function () {
-            bootbox.alert("<p style='color:black;'>Basic information successfully saved.</p>");
-            $("#modalBasicInfo").modal("hide");
-            
-        };
-        params['errorCallBackFunction'] = function () {
-            bootbox.alert("<p style='color:black;'>Error!</p>");
+        else {
+            bootbox.alert("<p style='color:black;'>Fill The Fields Properly!</p>");
         }
-        commonAjax(params);
-
         return false;
     });
 
@@ -155,15 +177,18 @@
     $('body').on('click', '.js-save-workex', function (e) {
         debugger;
         e.preventDefault();
-        var formData = {
-            "WorkExperienceID": $('input[name="WorkExperienceID"]').val(),
-            "OrganizationName": $('input[name="OrganizationName"]').val(),
-            "Designation": $('input[name="Designation"]').val(),
-            "StartMonth": $("#selectStartMonth").val(),
-            "StartYear": $("#selectStartYear").val(),
-            "EndMonth": $("#selectEndMonth").val(),
-            "EndYear": $("#selectEndYear").val(),
-            "IsCurrentlyWorking": $('#checkWorking').is(":checked")
+        var flag = $("#workExperienceForm").valid();
+        if (flag)
+        {
+            var formData = {
+            "WorkExperienceID": $.trim($('input[name="WorkExperienceID"]').val()),
+        "OrganizationName": $.trim($('input[name="OrganizationName"]').val()),
+        "Designation": $.trim($('input[name="Designation"]').val()),
+        "StartMonth": $.trim($("#selectStartMonth").val()),
+        "StartYear": $.trim($("#selectStartYear").val()),
+        "EndMonth": $.trim($("#selectEndMonth").val()),
+        "EndYear": $.trim($("#selectEndYear").val()),
+        "IsCurrentlyWorking": $.trim($('#checkWorking').is(":checked"))
         };
 
        
@@ -179,6 +204,12 @@
             bootbox.alert("<p style='color:black;'>Error!</p>");
         }
         commonAjax(params)
+        }
+        else {
+            bootbox.alert("<p style='color:black;'>Fill the Fields Properly!</p>");
+        }
+        return false;
+        
     });
 
     $('body').on('click', '.js-edit-project', function (e) {
@@ -205,15 +236,14 @@
     $('body').on('click', '.js-save-project', function (e) {
         var flag = $("#projectDetailsForm").valid();
         if (flag) {
-            var ProjectID = $('input[name="ProjectID"]').val();
+            var ProjectID =$.trim( $('input[name="ProjectID"]').val());
             var formData = {
-                "ProjectID": $('input[name="ProjectID"]').val(),
-                "ProjectTitle": $('input[name="ProjectTitle"]').val(),
-                "ProjectRole": $('input[name="ProjectRole"]').val(),
-                "DurationInMonth": $('input[name="DurationInMonth"]').val(),
-                "Description": $('textarea[name="Description"]').val()
+                "ProjectID": $.trim($('input[name="ProjectID"]').val()),
+                "ProjectTitle": $.trim($('input[name="ProjectTitle"]').val()),
+                "ProjectRole": $.trim($('input[name="ProjectRole"]').val()),
+                "DurationInMonth": $.trim($('input[name="DurationInMonth"]').val()),
+                "Description": $.trim($('textarea[name="Description"]').val())
             };
-
 
             var params = $.extend({}, params);
             params['url'] = '/Resume/SaveProjectDetails';
@@ -221,8 +251,6 @@
             params['requestType'] = 'POST';
 
             params['successCallbackFunction'] = function () {
-                debugger;
-                bootbox.alert("<p style='color:black;'>Project Details updated sucessfully</p>");
                 $("#modalProject").modal("hide");
             };
             params['errorCallBackFunction'] = function (result) {
@@ -231,7 +259,7 @@
             commonAjax(params);
         }
         else {
-            bootbox.alert("<p style='color:black;'>Error!</p>");
+            bootbox.alert("<p style='color:black;'>Fill the fields properly!</p>");
         }
         return false;
     });
@@ -286,42 +314,49 @@
     $('body').on('click', '.js-save-education', function (e) {
         
         e.preventDefault();
-        var id = $('input[name="EducationalDetailsID"]').val();
-        var formData = {
-            "EducationalDetailsID": id,
-            "UserID": $("#userId").val(),
-            "CourseID": $('input[name="courseOption"]:checked').val(),
-            "Stream": $('input[name="Stream"]').val(),
-            "PassingYear": $('input[name="PassingYear"]').val(),
-            "TotalPercentageOrCGPAValue": $('input[name="TotalPercentageOrCGPAValue"]').val(),
-            "CGPAOrPercentage": $('input[name="CGPAOrPercentage"]:checked').val(),
-            "BoardOrUniversity": $('#boardType option:selected').text()
-        };
+        var flag = $("#educationDetailsForm").valid();
+        if (flag)
+        {
+            var id = $.trim($('input[name="EducationalDetailsID"]').val());
+            var formData = {
+                "EducationalDetailsID": id,
+                "UserID": $.trim($("#userId").val()),
+                "CourseID": $.trim($('input[name="courseOption"]:checked').val()),
+                "Stream": $.trim($('input[name="Stream"]').val()),
+                "PassingYear": $.trim($('input[name="PassingYear"]').val()),
+                "TotalPercentageOrCGPAValue": $.trim($('input[name="TotalPercentageOrCGPAValue"]').val()),
+                "CGPAOrPercentage": $.trim($('input[name="CGPAOrPercentage"]:checked').val()),
+                "BoardOrUniversity": $.trim($('#boardType option:selected').text())
+            };
 
-        if (formData.CourseID == 1) {
-            formData.Stream = 'N/A';
+            if (formData.CourseID == 1) {
+                formData.Stream = 'N/A';
+            }
+            var params = $.extend({}, params);
+            params['url'] = '/Resume/SaveEducationalDetails';
+            params['data'] = formData;
+            params['requestType'] = 'POST';
+            params['successCallbackFunction'] = function () {
+                $("#modalEducationDetails").modal("hide");
+            };
+            params['errorCallBackFunction'] = function () {
+                bootbox.alert("<p style='color:black;'>Error!</p>");
+            }
+            commonAjax(params);
+
+            //disable radio button for client-side
+
+            if (formData.CourseID == 1 || formData.CourseID == 2) {
+                $("input[type=radio][value=" + formData.CourseID + "]").prop("disabled", true);
+                $("input[type=radio][value=" + formData.CourseID + "]").prop("checked", false);
+                $(".all-other").hide();
+            }
         }
-        var params = $.extend({}, params);
-        params['url'] = '/Resume/SaveEducationalDetails';
-        params['data'] = formData;
-        params['requestType'] = 'POST';
-        params['successCallbackFunction'] = function () {
-            $("#modalEducationDetails").modal("hide");
-            bootbox.alert("<p style='color:black;'>Education Details updated sucessfully</p>");
-        };
-        params['errorCallBackFunction'] = function () {
-            bootbox.alert("<p style='color:black;'>Error!</p>");
+        else {
+            bootbox.alert("<p style='color:black;'>Fill the Fields Properly!</p>");
         }
-        commonAjax(params);
-
-        //disable radio button for client-side
-
-        if (formData.CourseID == 1 || formData.CourseID == 2) {
-            $("input[type=radio][value=" + formData.CourseID + "]").prop("disabled", true);
-            $("input[type=radio][value=" + formData.CourseID + "]").prop("checked", false);
-            $(".all-other").hide();
-        }
-
+        return false;
+        
     });
 
     $("body").on("click", "#btnSaveSkills", function (e) {
@@ -332,22 +367,27 @@
         };
 
         $(".skillItem").each(function (index) {
-            skillDetails.SkillNames.push($(this).text());
+            skillDetails.SkillNames.push($.trim($(this).text()));
         })
 
-        var params = $.extend({}, params);
-        params['url'] = '/Resume/SaveUserSkills';
-        params['data'] = skillDetails;
-        params['requestType'] = 'POST';
-        params['successCallbackFunction'] = function () {
-            $("#modalSkills").modal("hide");
-            bootbox.alert("<p style='color:black;'>Skills successfully saved.</p>");
-            
-        };
-        params['errorCallBackFunction'] = function () {
-            bootbox.alert("<p style='color:black;'>Error!</p>");
+
+        if ($(".skillItem").text() !== "")
+        {
+            var params = $.extend({}, params);
+            params['url'] = '/Resume/SaveUserSkills';
+            params['data'] = skillDetails;
+            params['requestType'] = 'POST';
+            params['successCallbackFunction'] = function () {
+                $("#modalSkills").modal("hide");
+            };
+            params['errorCallBackFunction'] = function () {
+                bootbox.alert("<p style='color:black;'>Error!</p>");
+            }
+            commonAjax(params);
         }
-        commonAjax(params);
+        else {
+            bootbox.alert("<p style='color:black;'>Fill the fields properly!</p>");
+        }
 
         return false;
     });
