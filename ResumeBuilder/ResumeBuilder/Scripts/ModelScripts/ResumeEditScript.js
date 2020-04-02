@@ -205,32 +205,39 @@
     });
 
     $('body').on('click', '.js-save-project', function (e) {
-        debugger;
-        e.preventDefault();
-        var ProjectID = $('input[name="ProjectID"]').val();
-        var formData = {
-            "ProjectID": $('input[name="ProjectID"]').val(),
-            "ProjectTitle": $('input[name="ProjectTitle"]').val(),
-            "ProjectRole": $('input[name="ProjectRole"]').val(),
-            "DurationInMonth": $('input[name="DurationInMonth"]').val(),
-            "Description": $('textarea[name="Description"]').val()
-        };
 
-      
-        var params = $.extend({}, params);
-        params['url'] = '/Resume/SaveProjectDetails';
-        params['data'] = formData;
-        params['requestType'] = 'POST';
+        var flag = $("#projectDetailsForm").valid();
 
-        params['successCallbackFunction'] = function () {
-            bootbox.alert("<p style='color:black;'>Project Details updated sucessfully</p>");
-            $("#modalBasicInfo").modal("hide");
-        };
-        params['errorCallBackFunction'] = function (result) {
+        if (flag) {
+
+            var ProjectID = $('input[name="ProjectID"]').val();
+            var formData = {
+                "ProjectID": $('input[name="ProjectID"]').val(),
+                "ProjectTitle": $('input[name="ProjectTitle"]').val(),
+                "ProjectRole": $('input[name="ProjectRole"]').val(),
+                "DurationInMonth": $('input[name="DurationInMonth"]').val(),
+                "Description": $('textarea[name="Description"]').val()
+            };
+
+
+            var params = $.extend({}, params);
+            params['url'] = '/Resume/SaveProjectDetails';
+            params['data'] = formData;
+            params['requestType'] = 'POST';
+
+            params['successCallbackFunction'] = function () {
+                debugger;
+                bootbox.alert("<p style='color:black;'>Project Details updated sucessfully</p>");
+                $("#modalProject").modal("hide");
+            };
+            params['errorCallBackFunction'] = function (result) {
+                bootbox.alert("<p style='color:black;'>Error!</p>");
+            }
+            commonAjax(params);
+        }
+        else {
             bootbox.alert("<p style='color:black;'>Error!</p>");
         }
-        commonAjax(params);
-
         return false;
     });
 
