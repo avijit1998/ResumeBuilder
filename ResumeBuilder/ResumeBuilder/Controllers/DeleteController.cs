@@ -20,31 +20,44 @@ namespace ResumeBuilder.Controllers
         [HttpPost]
         public ActionResult DeleteProject(int id)
         {
-            var proj = db.Projects.FirstOrDefault(x => x.ProjectID == id);
-            if (proj != null)
+            try
             {
-                db.Projects.Remove(proj);
-                db.SaveChanges();
-                return Json("Successfully Deleted");
+                var proj = db.Projects.FirstOrDefault(x => x.ProjectID == id);
+                if (proj != null)
+                {
+                    db.Projects.Remove(proj);
+                    db.SaveChanges();
+                    return Json("Successfully Deleted");
+                }
+                else
+                {
+                    return HttpNotFound();
+                }
             }
-            else
+            catch (Exception)
             {
                 return HttpNotFound();
             }
-
         }
 
         [HttpPost]
         public ActionResult DeleteWorkExperience(int id)
         {
-            var workEx = db.WorkExperiences.FirstOrDefault(x => x.WorkExperienceID == id);
-            if (workEx != null)
+            try
             {
-                db.WorkExperiences.Remove(workEx);
-                db.SaveChanges();
-                return Json("Successfully Deleted");
+                var workEx = db.WorkExperiences.FirstOrDefault(x => x.WorkExperienceID == id);
+                if (workEx != null)
+                {
+                    db.WorkExperiences.Remove(workEx);
+                    db.SaveChanges();
+                    return Json("Successfully Deleted");
+                }
+                else
+                {
+                    return HttpNotFound();
+                }
             }
-            else
+            catch (Exception)
             {
                 return HttpNotFound();
             }
@@ -54,14 +67,21 @@ namespace ResumeBuilder.Controllers
         [HttpPost]
         public ActionResult DeleteEducation(int educationId)
         {
-            var educationDetails = db.EducationalDetails.FirstOrDefault(x => x.EducationalDetailsID == educationId);
-            if (educationDetails != null)
+            try
             {
-                db.EducationalDetails.Remove(educationDetails);
-                db.SaveChanges();
-                return Json("Successfully Deleted");
+                var educationDetails = db.EducationalDetails.FirstOrDefault(x => x.EducationalDetailsID == educationId);
+                if (educationDetails != null)
+                {
+                    db.EducationalDetails.Remove(educationDetails);
+                    db.SaveChanges();
+                    return Json("Successfully Deleted");
+                }
+                else
+                {
+                    return HttpNotFound();
+                }
             }
-            else
+            catch (Exception)
             {
                 return HttpNotFound();
             }
@@ -71,17 +91,24 @@ namespace ResumeBuilder.Controllers
         [HttpPost]
         public ActionResult DeleteSkill(int userID, int skillID)
         {
-            var user = db.UserDetails.FirstOrDefault(x => x.UserID == userID);
-            var skill = db.Skills.FirstOrDefault(x => x.SkillID == skillID);
-
-            if (user != null && skill != null)
+            try
             {
-                user.Skills.Remove(skill);
+                var user = db.UserDetails.FirstOrDefault(x => x.UserID == userID);
+                var skill = db.Skills.FirstOrDefault(x => x.SkillID == skillID);
 
-                db.SaveChanges();
-                return Json("Successfully Deleted");
+                if (user != null && skill != null)
+                {
+                    user.Skills.Remove(skill);
+
+                    db.SaveChanges();
+                    return Json("Successfully Deleted");
+                }
+                else
+                {
+                    return HttpNotFound();
+                }
             }
-            else
+            catch (Exception)
             {
                 return HttpNotFound();
             }
