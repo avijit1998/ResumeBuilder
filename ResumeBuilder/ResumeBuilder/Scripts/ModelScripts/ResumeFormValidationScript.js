@@ -85,27 +85,49 @@ $(document).ready(function () {
         $.validator.addMethod("regex", function (value, element, regexpr) {
             return this.optional(element) || !(regexpr.test(value));
         }, "Please enter valid data.");
+
         $.validator.addMethod("notStartWithNum", function (value, element, regexpr) {
             return this.optional(element) || !(regexpr.test(value[0]));
         }, "Shouldn't start with number.");
+
+        $.validator.addMethod("birth", function (value, element) {
+            var year = value.split('-');
+            return value.match(/^\d\d\d\d?\-\d\d?\-\d\d$/) && parseInt(year[0]) <= 2002;
+        }, "Minimum age is 18 Years.");
+
+        $.validator.addMethod("notFutureDate", function (value, element) {
+            var now = new Date();
+            var myDate = new Date(value);
+            var past = new Date("1800-01-01")
+            var x = !(myDate > now || myDate < past);
+            return x;
+        }, "Please add a valid date.");
 
         $('#formBasicInfo').validate({
             rules: {
                 Name: {
                     required: true,
                     regex: /[^a-zA-Z 0-9]/,
-                    notStartWithNum : /[\d]/
+                    notStartWithNum: /[\d]/
                 },
                 PhoneNumber: {
                     required: true,
                     regex: /[^\d]/,
                     minlength: 10,
                     maxlength: 13
-                }
-            },
-            messsages : {
-                PhoneNumber: {
-                    minlength: 'Please enter a valid phone number'
+                },
+                Gender: {
+                    required: true
+                },
+                DateOfBirth: {
+                    notFutureDate: true,
+                    birth: true
+                },
+                Summary: {
+                    required: true
+                },
+                chkLanguages: {
+                    required: true,
                 }
             }
         });
