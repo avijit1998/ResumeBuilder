@@ -14,7 +14,12 @@
         email = (string)Session["Username"];
         userId = (int)Session["UserID"];
     }
-    
+    List<string> languageList = new List<string>();
+    foreach (var language in Model.Languages)
+    {
+        languageList.Add(language.LanguageName);
+    }
+    String withoutLastComma = String.Join(", ", languageList);
 }
  
 @using Newtonsoft.Json;
@@ -28,7 +33,7 @@
             <button type="button" value="Edit" class="btn btn-info pull-right js-edit-user" 
                     data-user-id="@Model.UserID"
                     data-name="@Model.Name"
-                    data-dob="@Model.DateOfBirth"
+                    data-dob="@Model.DateOfBirth.Value.Date.ToShortDateString()"
                     data-phone="@Model.PhoneNumber"
                     data-gender="@Model.Gender"
                     data-summary="@Model.Summary"
@@ -37,17 +42,13 @@
             </button>
         </p>
         
-        <p><span>@Model.DateOfBirth</span></p>
+        <p><span>@Model.DateOfBirth.Value.ToShortDateString()</span></p>
         <p><span>@Model.PhoneNumber</span></p>
         <p><span>@Model.Gender</span></p>
         <p><span>@Model.Summary</span></p>
         <p>
-            Languages Known:
-            @foreach (var language in @Model.Languages)
-            {
-            <span>@language.LanguageName</span>
-            <span>,</span>
-            }
+            Languages Known:@withoutLastComma
+           
         </p>
     </div>
     <hr />
@@ -265,14 +266,13 @@
                             </div>
 
                             <div class="form-check">
-                                <label>Language</label>
+                                <label>Language known:</label>
                                 <div class="checkbox">
                                     @foreach (var c in languages)
                                             {
                                             <div>
                                                 <label>
-                                                    <input type="checkbox" value="@c.LanguageID">
-                                                    @c.LanguageName
+                                                    <input type="checkbox" value="@c.LanguageID">@c.LanguageName
                                                 </label>
                                             </div>
                                             }
@@ -348,7 +348,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Year Of Passing:</label>
+                                    <label>Year Of Passing(if pursuing enter expected year):</label>
                                     <input type="text" class="form-control" name="PassingYear" id="PassingYear" placeholder="Enter year of passing">
                                 </div>
 

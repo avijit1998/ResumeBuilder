@@ -55,11 +55,11 @@ namespace ResumeBuilder.Controllers
                     AllInformation allinfo = new AllInformation();
                     {
                         allinfo.UserID = id;
-                        allinfo.Name = user.Name==null ? "Your name" : user.Name;
-                        allinfo.Gender = user.Gender==null ? "Your gender" :user.Gender;
-                        allinfo.PhoneNumber = user.Phone==null? "Your phone number" : user.Phone;
+                        allinfo.Name = user.Name==null ? "" : user.Name;
+                        allinfo.Gender = user.Gender==null ? "" :user.Gender;
+                        allinfo.PhoneNumber = user.Phone==null? "" : user.Phone;
                         allinfo.DateOfBirth = user.DateOfBirth;
-                        allinfo.Summary = user.Summary==null? "Your profile summary" : user.Summary;
+                        allinfo.Summary = user.Summary==null? "" : user.Summary;
                         allinfo.Languages = user.Languages==null? new List<Language>() :  user.Languages;
                         allinfo.WorkExperiences = user.WorkExperiences==null? new List<WorkExperience>() : user .WorkExperiences;
                         allinfo.Projects = user.Projects==null ? new List<Project>() : user.Projects ;
