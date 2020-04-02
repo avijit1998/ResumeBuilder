@@ -1,4 +1,4 @@
-﻿using HiQPdf;
+using HiQPdf;
 using ResumeBuilder.Helpers;
 using ResumeBuilder.Models;
 using ResumeBuilder.Models.ViewModels;

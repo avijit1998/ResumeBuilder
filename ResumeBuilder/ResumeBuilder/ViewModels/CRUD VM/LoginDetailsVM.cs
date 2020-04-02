@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ResumeBuilder.ViewModels
 {
-    public class LoginDetailsViewModel
+    public class LoginDetailsVM
     {
         [Required]
         public string UserName { get; set; }
