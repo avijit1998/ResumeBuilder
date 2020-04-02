@@ -238,7 +238,7 @@ namespace ResumeBuilder.Controllers
             }
             catch (Exception)
             {
-                return null;
+                return HttpNotFound(); ;
             }
         }
 
@@ -272,7 +272,7 @@ namespace ResumeBuilder.Controllers
             }
             catch (Exception)
             {
-                return null;
+                return HttpNotFound(); 
             }
         }       
         
