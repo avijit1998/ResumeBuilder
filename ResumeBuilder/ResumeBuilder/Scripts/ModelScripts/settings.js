@@ -108,7 +108,6 @@
             success: function () {
                 $("#settingsModal").modal("hide");
             }
-
         });
     });
 
