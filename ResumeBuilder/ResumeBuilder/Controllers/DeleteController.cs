@@ -17,7 +17,7 @@ namespace ResumeBuilder.Controllers
             db = new ResumeBuilderDBContext();
         }
 
-        [HttpPost]
+        [HttpDelete]
         public ActionResult DeleteProject(int id)
         {
             try
@@ -40,7 +40,7 @@ namespace ResumeBuilder.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpDelete]
         public ActionResult DeleteWorkExperience(int id)
         {
             try
@@ -64,7 +64,7 @@ namespace ResumeBuilder.Controllers
         }
 
 
-        [HttpPost]
+        [HttpDelete]
         public ActionResult DeleteEducation(int educationId)
         {
             try
@@ -88,7 +88,7 @@ namespace ResumeBuilder.Controllers
 
         }
 
-        [HttpPost]
+        [HttpDelete]
         public ActionResult DeleteSkill(int userID, int skillID)
         {
             try

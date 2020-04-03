@@ -48,7 +48,7 @@ namespace ResumeBuilder.Controllers
 
             try
             {
-                 var session = Session["UserID"];
+                var session = Session["UserID"];
                 int id = (Int32)session;
 
                 var userSettings = db.Settings.SingleOrDefault(user => user.UserID == id);
