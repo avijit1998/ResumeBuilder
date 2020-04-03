@@ -216,6 +216,13 @@
                         required: true,
                         regex: /^[A-Za-z \W]+$/
                     },
+                    BoardOrUniversity:{
+                        required:function(){
+                            if($("#boardType").val()==="")
+                                return true;
+                            return false;
+                        }
+                    },
                     PassingYear: {
                         required: true,
                         regex: /^[12][0-9]{3}$/
@@ -227,22 +234,25 @@
                 },
                 messages: {
                     Stream: {
-                        required: "Enter your Stream.",
-                        regex: "Enter valid Stream."
+                        required: "Please enter your Stream.",
+                        regex: "Please enter valid Stream."
+                    },
+                    BoardOrUniversity:{
+                        required:"Please select your Board/University."
                     },
                     PassingYear: {
-                        required: "Enter your passing year.",
-                        regex: "Enter valid year of passing."
+                        required: "Please enter your passing year.",
+                        regex: "Please enter valid year of passing."
                     },
                     TotalPercentageOrCGPAValue: {
                         required: function () {
                             var cgpa = $("#cgpa").prop('checked');
 
                             if (cgpa)
-                                return "Enter CGPA.";
-                            return "Enter Percentage.";
+                                return "Please enter CGPA.";
+                            return "Please enter Percentage.";
                         },
-                        regex: "Enter valid value."
+                        regex: "Please enter valid value."
                     }
                 }
             });
