@@ -1,9 +1,43 @@
 ﻿.left-margin {
     padding-left: 10px;
 }
+
 .error
 {
     color:red;
     font-family:verdana, Helvetica;
     font-weight:lighter;
 }
+
+.astreik-mark{
+    color:red;
+}
+
+#userDetailsModal{
+    height: 350px;
+    overflow-y: auto;
+}
+
+.modal-dialog{
+    overflow-y: initial !important
+}
+
+textarea{
+    resize:none;
+}
+
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: white;
+    background-color: #333;
+}
+
+label{
+    color:black;
+}
+.modal-title{
+    color:darkblue;
+}
+
