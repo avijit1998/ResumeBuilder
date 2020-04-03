@@ -41,6 +41,7 @@ namespace ResumeBuilder.Controllers
                     userFromDb.Phone = userInfoVM.PhoneNumber;
                     userFromDb.DateOfBirth = userInfoVM.DateOfBirth;
                     userFromDb.Summary = userInfoVM.Summary;
+                    userFromDb.Languages.Clear();
 
                     if (userInfoVM.LanguageIds.Any())
                     {

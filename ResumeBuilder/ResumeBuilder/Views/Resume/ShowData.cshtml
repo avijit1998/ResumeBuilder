@@ -444,28 +444,63 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">ADD WORK EXPERIENCE</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" id="workExModal">
                 <div class="row">
                     <div class="col-lg-12">
                         <form id="workExperienceForm">
                             <input type="hidden" name="WorkExperienceID" />
+                            <div class="form-group">
+                                <label>Company Name:<span class="astreik-mark">*</span></label>
+                                <input type="text" class="form-control" name="OrganizationName" id="txtCompanyName">
+                            </div>
+                            <div class="form-group">
+                                <label>Designation:<span class="astreik-mark">*</span></label>
+                                <input type="text" class="form-control" name="Designation" id="txtRole">
+                            </div>
+                            <div class="form-group">
+                                <label>Duration:<span class="astreik-mark">*</span></label>
+                            </div>
+                            <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label>Company Name:<span class="astreik-mark">*</span></label>
-                                    <input type="text" class="form-control" name="OrganizationName" id="txtCompanyName">
-                                </div>
-                                <div class="form-group">
-                                    <label>Designation:<span class="astreik-mark">*</span></label>
-                                    <input type="text" class="form-control" name="Designation" id="txtRole">
-                                </div>
-                                <div class="form-group">
-                                    <label>Duration:<span class="astreik-mark">*</span></label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Start Month:</label>
-                                        <select class="form-control" name="StartMonth" id="selectStartMonth">
-                                            <option class="form-control" value="0">Select Month</option>
+                                    <label>Start Month:</label>
+                                    <select class="form-control" name="StartMonth" id="selectStartMonth">
+                                        <option class="form-control" value="0">Select Month</option>
 
+                                        <option class="form-control" value="1">1</option>
+                                        <option class="form-control" value="2">2</option>
+                                        <option class="form-control" value="3">3</option>
+                                        <option class="form-control" value="4">4</option>
+                                        <option class="form-control" value="5">5</option>
+                                        <option class="form-control" value="6">6</option>
+                                        <option class="form-control" value="7">7</option>
+                                        <option class="form-control" value="8">8</option>
+                                        <option class="form-control" value="9">9</option>
+                                        <option class="form-control" value="10">10</option>
+                                        <option class="form-control" value="11">11</option>
+                                        <option class="form-control" value="12">12</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Start Year:</label>
+                                    <select class="form-control" name="StartYear" id="selectStartYear">
+                                        <option class="form-control" value="0">Select Year</option>
+                                        <option class="form-control" value="2015">2015</option>
+                                        <option class="form-control" value="2016">2016</option>
+                                        <option class="form-control" value="2017">2017</option>
+                                        <option class="form-control" value="2018">2018</option>
+                                        <option class="form-control" value="2019">2019</option>
+                                        <option class="form-control" value="2020">2020</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="hide-if-currently-working">
+                                <div class="col-lg-6 end-duration">
+                                    <div class="form-group">
+                                        <label>End Month:</label>
+                                        <select class="form-control" name="EndMonth" id="selectEndMonth">
+                                            <option class="form-control" value="0">Select Month</option>
                                             <option class="form-control" value="1">1</option>
                                             <option class="form-control" value="2">2</option>
                                             <option class="form-control" value="3">3</option>
@@ -481,10 +516,10 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 end-duration">
                                     <div class="form-group">
-                                        <label>Start Year:</label>
-                                        <select class="form-control" name="StartYear" id="selectStartYear">
+                                        <label>End Year:</label>
+                                        <select class="form-control" name="EndYear" id="selectEndYear">
                                             <option class="form-control" value="0">Select Year</option>
                                             <option class="form-control" value="2015">2015</option>
                                             <option class="form-control" value="2016">2016</option>
@@ -495,56 +530,21 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="hide-if-currently-working">
-                                    <div class="col-lg-6 end-duration">
-                                        <div class="form-group">
-                                            <label>End Month:</label>
-                                            <select class="form-control" name="EndMonth" id="selectEndMonth">
-                                                <option class="form-control" value="0">Select Month</option>
-                                                <option class="form-control" value="1">1</option>
-                                                <option class="form-control" value="2">2</option>
-                                                <option class="form-control" value="3">3</option>
-                                                <option class="form-control" value="4">4</option>
-                                                <option class="form-control" value="5">5</option>
-                                                <option class="form-control" value="6">6</option>
-                                                <option class="form-control" value="7">7</option>
-                                                <option class="form-control" value="8">8</option>
-                                                <option class="form-control" value="9">9</option>
-                                                <option class="form-control" value="10">10</option>
-                                                <option class="form-control" value="11">11</option>
-                                                <option class="form-control" value="12">12</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 end-duration">
-                                        <div class="form-group">
-                                            <label>End Year:</label>
-                                            <select class="form-control" name="EndYear" id="selectEndYear">
-                                                <option class="form-control" value="0">Select Year</option>
-                                                <option class="form-control" value="2015">2015</option>
-                                                <option class="form-control" value="2016">2016</option>
-                                                <option class="form-control" value="2017">2017</option>
-                                                <option class="form-control" value="2018">2018</option>
-                                                <option class="form-control" value="2019">2019</option>
-                                                <option class="form-control" value="2020">2020</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="checkbox-inline" name="IsCurrentlyWorking" id="checkWorking">
+                                <label for="checkWorking">Currently Working</label>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-success pull-right js-save-workex">Save </button>
                                 </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="checkbox-inline" name="IsCurrentlyWorking" id="checkWorking">
-                                    <label for="checkWorking">Currently Working</label>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-success pull-right js-save-workex">Save </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
+            </div>
             </div>
             <div class="modal-footer"></div>
         </div>
@@ -564,6 +564,7 @@
                         <div class="col-md-12">
 
                             <form id="autoComplete">
+                                <input type="hidden" value="@Model.UserID"/>
 
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="SearchTerm" id="txtSearch" placeholder="Search">
