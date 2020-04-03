@@ -104,12 +104,20 @@ namespace ResumeBuilder.Controllers
         [AuthorizeIfSessionExists]
         public ActionResult Preview()
         {
-            var sessionId = Session["UserID"];
-            int id = (Int32)sessionId;
-            var uiModel = GetUserDetails(id);
-            if (uiModel == null)
+            ProfileVM uiModel = new ProfileVM();
+            try
             {
-                return HttpNotFound();
+                var sessionId = Session["UserID"];
+                int id = (Int32)sessionId;
+                uiModel = GetUserDetails(id);
+                if (uiModel == null)
+                {
+                    throw new Exception();
+                }
+            }
+            catch (Exception)
+            {
+                uiModel.ErrorMsg = "Unexpected error occured, try again...";
             }
             return PartialView(uiModel);
         }
@@ -117,25 +125,32 @@ namespace ResumeBuilder.Controllers
         [NonAction]
         public string RenderViewAsString(string viewName, ProfileVM model)
         {
-            // create a string writer to receive the HTML code
-            StringWriter stringWriter = new StringWriter();
+            try
+            {
+                // create a string writer to receive the HTML code
+                StringWriter stringWriter = new StringWriter();
 
-            // get the view to render
-            ViewEngineResult viewResult = ViewEngines.Engines.FindView(ControllerContext, viewName, null);
-            // create a context to render a view based on a model
-            ViewContext viewContext = new ViewContext(
-                ControllerContext,
-                viewResult.View,
-                new ViewDataDictionary(model),
-                new TempDataDictionary(),
-                stringWriter
-            );
+                // get the view to render
+                ViewEngineResult viewResult = ViewEngines.Engines.FindView(ControllerContext, viewName, null);
+                // create a context to render a view based on a model
+                ViewContext viewContext = new ViewContext(
+                    ControllerContext,
+                    viewResult.View,
+                    new ViewDataDictionary(model),
+                    new TempDataDictionary(),
+                    stringWriter
+                );
 
-            // render the view to a HTML code
-            viewResult.View.Render(viewContext, stringWriter);
+                // render the view to a HTML code
+                viewResult.View.Render(viewContext, stringWriter);
 
-            // return the HTML code
-            return stringWriter.ToString();
+                // return the HTML code
+                return stringWriter.ToString();
+            }
+            catch (Exception)
+            {
+                return "";
+            }
         }
 
         // Get: Profile/ConvertHtmlPageToPdf/targetPreview
@@ -143,36 +158,47 @@ namespace ResumeBuilder.Controllers
         [AuthorizeIfSessionExists]
         public ActionResult ConvertHtmlPageToPdf(string targetPreview)
         {
-            var sessionId = Session["UserID"];
-            int id = (Int32)sessionId;
-            var uiModel = GetUserDetails(id);
-            if (uiModel == null)
+            try
+            {
+                var sessionId = Session["UserID"];
+                int id = (Int32)sessionId;
+                var uiModel = GetUserDetails(id);
+                if (uiModel != null)
+                {
+                    throw new Exception();
+                }
+                // get the HTML code of this view
+                string htmlToConvert = RenderViewAsString(targetPreview, uiModel);
+                if (htmlToConvert == "")
+                {
+                    throw new Exception();
+                }
+
+                // the base URL to resolve relative images and css
+                String thisPageUrl = this.ControllerContext.HttpContext.Request.Url.AbsoluteUri;
+                String baseUrl = thisPageUrl.Substring(0, thisPageUrl.Length - "Home/ConvertThisPageToPdf".Length);
+
+                // instantiate the HiQPdf HTML to PDF converter
+                HtmlToPdf htmlToPdfConverter = new HtmlToPdf();
+
+                // set PDF page margins 
+                htmlToPdfConverter.Document.Margins = new PdfMargins(20, 20, 20, 20);
+
+                // set browser width
+                htmlToPdfConverter.BrowserWidth = 740;
+
+                // render the HTML code as PDF in memory
+                byte[] pdfBuffer = htmlToPdfConverter.ConvertHtmlToMemory(htmlToConvert, baseUrl);
+
+                // send the PDF file to browser
+                FileResult fileResult = new FileContentResult(pdfBuffer, "application/pdf");
+                fileResult.FileDownloadName = "Resume.pdf";
+                return fileResult;
+            }
+            catch (Exception)
             {
                 return HttpNotFound();
             }
-            // get the HTML code of this view
-            string htmlToConvert = RenderViewAsString(targetPreview, uiModel);
-
-            // the base URL to resolve relative images and css
-            String thisPageUrl = this.ControllerContext.HttpContext.Request.Url.AbsoluteUri;
-            String baseUrl = thisPageUrl.Substring(0, thisPageUrl.Length - "Home/ConvertThisPageToPdf".Length);
-
-            // instantiate the HiQPdf HTML to PDF converter
-            HtmlToPdf htmlToPdfConverter = new HtmlToPdf();
-
-            // set PDF page margins 
-            htmlToPdfConverter.Document.Margins = new PdfMargins(20, 20, 20, 20);
-
-            // set browser width
-            htmlToPdfConverter.BrowserWidth = 740;
-
-            // render the HTML code as PDF in memory
-            byte[] pdfBuffer = htmlToPdfConverter.ConvertHtmlToMemory(htmlToConvert, baseUrl);
-
-            // send the PDF file to browser
-            FileResult fileResult = new FileContentResult(pdfBuffer, "application/pdf");
-            fileResult.FileDownloadName = "Resume.pdf";
-            return fileResult;
         }
         
         // Get: Profile/PublicProfile/id
