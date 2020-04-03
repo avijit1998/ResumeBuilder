@@ -283,7 +283,7 @@ $(document).ready(function () {
             params['requestType'] = 'POST';
 
             params['successCallbackFunction'] = function () {
-                
+
                 $("#modalProject").modal("hide");
             };
             params['errorCallBackFunction'] = function (result) {
@@ -371,7 +371,7 @@ $(document).ready(function () {
             params['requestType'] = 'POST';
             params['successCallbackFunction'] = function () {
                 $("#modalEducationDetails").modal("hide");
-                
+
             };
             params['errorCallBackFunction'] = function () {
             }
@@ -590,17 +590,19 @@ function removeBackdrop() {
 }
 
 function clearFields() {
-    $("input:not(:hidden)").val("");
-    $('select').val("");
+    $(":input([type='text']):not([readonly]):not([type='submit']):not([type='date']):not([type='hidden'])").val('');
+    $('select').val('');
     $('input[type="checkbox"]').prop('checked', false);
-    $('input').removeClass("error");
+    $('input').removeClass("error valid");
     $('select').removeClass("error valid");
-    $("label").remove(".error, .valid");
+    $('textarea').removeClass("error valid");
+    $("label").remove(".error,.valid");
 }
 
 function displaySearchButtonIfAdmin() {
     var checkadmin = $("#checkIsAdmin").data("checkadmin");
-    if (checkadmin) {
+    debugger;
+    if (checkadmin === "True") {
         $("#btnSearchNav").css("display", "block");
     }
 }

@@ -14,7 +14,7 @@
     font-size:large;
 }
 
-#userDetailsModal{
+#userDetailsModal, #workExModal{
     height: 350px;
     overflow-y: auto;
 }

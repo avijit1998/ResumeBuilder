@@ -26,7 +26,7 @@ namespace ResumeBuilder.Controllers
                 // user details
                 var userData = db.UserDetails.FirstOrDefault(a => a.UserID == id);
 
-                if(userData != null)
+                if (userData != null)
                 {
                     // User Name
                     uiModel.Name = userData.Name;
@@ -112,7 +112,7 @@ namespace ResumeBuilder.Controllers
                 uiModel = GetUserDetails(id);
                 if (uiModel == null)
                 {
-                    throw new Exception();
+                    uiModel.ErrorMsg = "Unexpected error occured, try again...";
                 }
             }
             catch (Exception)
@@ -165,13 +165,13 @@ namespace ResumeBuilder.Controllers
                 var uiModel = GetUserDetails(id);
                 if (uiModel == null)
                 {
-                    throw new Exception();
+                    return HttpNotFound();
                 }
                 // get the HTML code of this view
                 string htmlToConvert = RenderViewAsString(targetPreview, uiModel);
                 if (htmlToConvert == "")
                 {
-                    throw new Exception();
+                    return HttpNotFound();
                 }
 
                 // the base URL to resolve relative images and css
@@ -200,7 +200,7 @@ namespace ResumeBuilder.Controllers
                 return HttpNotFound();
             }
         }
-        
+
         // Get: Profile/PublicProfile/id
         [HttpGet]
         public ActionResult PublicProfile(int id)
