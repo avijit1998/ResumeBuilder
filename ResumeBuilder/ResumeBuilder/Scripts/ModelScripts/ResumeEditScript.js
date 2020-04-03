@@ -433,7 +433,7 @@ $(document).ready(function () {
             if (result) {
                 var params = $.extend({}, params);
                 params['url'] = '/Delete/DeleteProject?id=' + id;
-                params['requestType'] = 'POST';
+                params['requestType'] = 'DELETE';
                 params['successCallbackFunction'] = function (resultfinal) {
 
                 };
@@ -461,7 +461,7 @@ $(document).ready(function () {
 
                 var params = $.extend({}, params);
                 params['url'] = '/Delete/DeleteWorkExperience?id=' + id;
-                params['requestType'] = 'POST';
+                params['requestType'] = 'DELETE';
                 params['successCallbackFunction'] = function (resultfinal) {
 
                 };
@@ -492,7 +492,7 @@ $(document).ready(function () {
 
                 var params = $.extend({}, params);
                 params['url'] = '/Delete/DeleteSkill';
-                params['requestType'] = 'POST';
+                params['requestType'] = 'DELETE';
                 params['data'] = formData;
                 params['successCallbackFunction'] = function () {
 
@@ -522,7 +522,7 @@ $(document).ready(function () {
 
                 var params = $.extend({}, params);
                 params['url'] = '/Delete/DeleteEducation';
-                params['requestType'] = 'POST';
+                params['requestType'] = 'DELETE';
                 params['data'] = formData;
                 params['successCallbackFunction'] = function () {
 
