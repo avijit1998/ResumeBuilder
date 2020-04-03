@@ -126,7 +126,7 @@ $(document).ready(function () {
                 }
             })
         }
-        $('#modalBasicInfo').find('.modal-title').html('UPDATE BASIC INFORMATION DETAILS');
+        $('#modalBasicInfo').find('.modal-title').html('UPDATE BASIC INFORMATION');
         $('#modalBasicInfo').modal('show');
     });
 
