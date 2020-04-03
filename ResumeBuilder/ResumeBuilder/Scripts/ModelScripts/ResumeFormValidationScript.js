@@ -212,8 +212,9 @@ $(document).ready(function () {
                         regex: "Enter valid value."
                     }
                 }
-            })
-        })
+            });
+            $("#educationDetailsForm").removeAttr("novalidate");
+        });
 
     });
 });
