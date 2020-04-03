@@ -129,8 +129,8 @@ else
         {
             <div class="container">
                 <div id="workExperience" class="pseudo-element">
-                    <div class="p-2 text-primary bg-blue-design">
-                        <i class="fa fa-folder fa-2x text-primary pl-4"> Work Experiences</i>
+                    <div class="p-2 text-primary bg-blue-design text-center">
+                        <i class="fa fa-folder fa-2x text-primary"> Work Experiences</i>
                     </div>
                     <div class="p-3 bg-white">
                         <div id="workExTimelineId" class="timeline bg-white">
@@ -140,13 +140,18 @@ else
                                 {
                                     <div class="container-timeline">
                                         <div class="content text-center">
-                                            <h2>@data.OrganizationName</h2>
-                                            <div>Role : @data.Role</div>
                                             @if (@data.CurrentlyWorking == true)
                                             {
-                                                <h5>Currently Working Here...</h5>
+                                                <h3><b>@data.OrganizationName</b> <small>(Currently Working)</small></h3>
+                                                <div><b>Role : </b>@data.Role</div>
+                                                <div>From <b>@data.StartMonth/@data.StartYear</b></div>
                                             }
-                                            <h4>@data.StartMonth/@data.StartYear - @data.EndMonth/@data.EndYear</h4>
+                                            else
+                                            {
+                                                <h3><b>@data.OrganizationName</b></h3>
+                                                <div><b>Role : </b>@data.Role</div>
+                                                <div>From <b>@data.StartMonth/@data.StartYear</b> To <b>@data.EndMonth/@data.EndYear</b></div>
+                                            }
                                         </div>
                                     </div>
                                 }
@@ -162,8 +167,8 @@ else
         {
             <div class="container">
                 <div id="projects" class="pseudo-element">
-                    <div class="p-2 text-primary bg-blue-design">
-                        <i class="fa fa-tasks fa-2x text-primary pl-4"> Projects</i>
+                    <div class="p-2 text-primary bg-blue-design text-center">
+                        <i class="fa fa-tasks fa-2x text-primary"> Projects</i>
                     </div>
                     <div class="p-3 bg-white">
                         <div id="projectTimelineId" class="timeline bg-white">
@@ -173,10 +178,10 @@ else
                                 {
                                     <div class="container-timeline">
                                         <div class="content text-center">
-                                            <h4>@data.Title</h4>
-                                            <h5>Role : @data.projectRole</h5>
+                                            <h3><b>@data.Title</b></h3>
+                                            <div><b>Role : </b>@data.projectRole</div>
                                             <p>@data.Description</p>
-                                            <h6>Duration : @data.Duration Months</h6>
+                                            <div><b>Duration : </b>@data.Duration Months</div>
                                         </div>
                                     </div>
                                 }
@@ -191,9 +196,9 @@ else
         @if (Model.SkillList.Count != 0)
         {
             <div class="container">
-                <div id="skills" class="pseudo-element">
-                    <div class="d-flex p-2 flex-fill bg-blue-design text-center">
-                        <i class="fa fa-line-chart fa-2x text-primary pl-4"> Skills</i>
+                <div id="skills" class="pseudo-element text-center">
+                    <div class="p-2 flex-fill bg-blue-design text-center">
+                        <i class="fa fa-line-chart fa-2x text-primary"> Skills</i>
                     </div>
                     <div class="d-flex flex-wrap align-items-stretch align-content-center justify-content-around bg-white">
                         @if (Model.SkillList != null)
@@ -201,7 +206,7 @@ else
                             foreach (var data in Model.SkillList)
                             {
                                 <div class="mb-3 mt-4 ml-2 mr-2 text-center bg-card">
-                                    <div class="card-header education-text-header-size">@data</div>
+                                    <div class="card-header education-text-header-size"><b>@data</b></div>
                                 </div>
                             }
                         }
@@ -214,9 +219,9 @@ else
         @if (Model.EducationList.Count != 0)
         {
             <div class="container">
-                <div id="education" class="pseudo-element">
-                    <div class="d-flex p-2 flex-fill bg-blue-design text-center">
-                        <i class="fa fa-graduation-cap fa-2x text-primary pl-4"> Educational Details</i>
+                <div id="education" class="pseudo-element text-center">
+                    <div class="p-2 flex-fill bg-blue-design text-center">
+                        <i class="fa fa-graduation-cap fa-2x text-primary"> Educational Details</i>
                     </div>
                     <div class="d-flex flex-wrap align-items-stretch align-content-center justify-content-around bg-white">
                         @if (Model.EducationList != null)
@@ -224,12 +229,12 @@ else
                             foreach (var data in Model.EducationList)
                             {
                                 <div class="mb-3 mt-4 ml-2 mr-2 text-center bg-card">
-                                    <div class="card-header education-text-header-size">@data.CourseName @data.Stream</div>
+                                    <div class="card-header education-text-header-size"><b>@data.CourseName @data.Stream</b></div>
                                     <div class="card-body">
-                                        <h4>Board : @data.Board</h4>
-                                        <h5>@data.CGPAOrPercentage : <label>@data.TotalPercentorCGPAValue</label></h5>
+                                        <div><b>Board : </b>@data.Board</div>
+                                        <div><b>@data.CGPAOrPercentage : </b><label>@data.TotalPercentorCGPAValue</label></div>
                                     </div>
-                                    <div class="card-footer">Passing Year - @data.PassingYear</div>
+                                    <div class="card-footer"><b>Passing Year - </b>@data.PassingYear</div>
                                 </div>
                             }
                         }
@@ -244,8 +249,8 @@ else
         {
             <div class="container">
                 <div id="languages" class="pseudo-element">
-                    <div class="d-flex p-2 flex-fill bg-blue-design text-center">
-                        <i class="fa fa-language fa-2x text-primary pl-4"> Language Known</i>
+                    <div class="p-2 flex-fill bg-blue-design text-center">
+                        <i class="fa fa-language fa-2x text-primary"> Language Known</i>
                     </div>
                     <div class="d-flex flex-wrap align-items-stretch align-content-center justify-content-around bg-white">
                         @if (Model.Languages != null)
@@ -253,12 +258,12 @@ else
                             foreach (var data in Model.Languages)
                             {
                                 <div class="mb-3 mt-4 ml-2 mr-2 text-center bg-card">
-                                    <div class="card-header education-text-header-size">@data</div>
+                                    <div class="card-header education-text-header-size"><b>@data</b></div>
                                 </div>
                             }
                         }
+                        </div>
                     </div>
-                </div>
             </div>
         }
 

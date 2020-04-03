@@ -105,7 +105,7 @@
                         <div>
                             <h5><b>@data.Title</b></h5>
                             <p>@data.Description</p>
-                            <h6>Duration : @data.Duration Months</h6>
+                            <h6><b>Duration : </b>@data.Duration Months</h6>
                         </div>
                     </li>
                 }
@@ -125,14 +125,16 @@
                             <div>
                                 @if (@data.CurrentlyWorking == true)
                                 {
-                                    <h5><b>@data.OrganizationName</b> (Currently Working Here)</h5>
+                                    <h5><b>@data.OrganizationName</b> (Currently Working)</h5>
+                                    <div><b>Role : </b>@data.Role</div>
+                                    <h6>From <b>@data.StartMonth/@data.StartYear</b></h6>
                                 }
                                 else
                                 {
                                     <h5><b>@data.OrganizationName</b></h5>
+                                    <div><b>Role : </b>@data.Role</div>
+                                    <h6>From <b>@data.StartMonth/@data.StartYear</b> To <b>@data.EndMonth/@data.EndYear</b></h6>
                                 }
-                                <div>Role : @data.Role</div>
-                                <h6>@data.StartMonth/@data.StartYear - @data.EndMonth/@data.EndYear</h6>
                             </div>
                         </li>
                     }

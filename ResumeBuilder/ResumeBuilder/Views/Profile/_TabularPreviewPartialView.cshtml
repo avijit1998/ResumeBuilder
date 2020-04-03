@@ -134,14 +134,16 @@
                             <td>
                                 @if (data.CurrentlyWorking == true)
                                 {
-                                    <b class="small-heading">@data.OrganizationName (Currently Working Here)</b><br />
+                                    <b class="small-heading">@data.OrganizationName (Currently Working)</b><br />
+                                    <b>Role : </b>@data.Role<br />
+                                    <div>From <b>@data.StartMonth/@data.StartYear</b></div>
                                 }
                                 else
                                 {
                                     <b class="small-heading">@data.OrganizationName</b><br />
+                                    <b>Role : </b>@data.Role<br />
+                                    <div>From <b>@data.StartMonth/@data.StartYear</b> To <b>@data.EndMonth/@data.EndYear</b></div>
                                 }
-                                <b>Role : </b>@data.Role<br />
-                                <b>@data.StartMonth/@data.StartYear - @data.EndMonth/@data.EndYear</b>
                             </td>
                         </tr>
                     }
