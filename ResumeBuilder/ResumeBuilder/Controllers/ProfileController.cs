@@ -99,7 +99,7 @@ namespace ResumeBuilder.Controllers
             return uiModel;
         }
 
-        // GET: Resume/Preview
+        // GET: Profile/Preview
         [HttpGet]
         [AuthorizeIfSessionExists]
         public ActionResult Preview()
@@ -138,6 +138,7 @@ namespace ResumeBuilder.Controllers
             return stringWriter.ToString();
         }
 
+        // Get: Profile/ConvertHtmlPageToPdf/targetPreview
         [HttpGet]
         [AuthorizeIfSessionExists]
         public ActionResult ConvertHtmlPageToPdf(string targetPreview)
@@ -173,7 +174,8 @@ namespace ResumeBuilder.Controllers
             fileResult.FileDownloadName = "Resume.pdf";
             return fileResult;
         }
-
+        
+        // Get: Profile/PublicProfile/id
         [HttpGet]
         public ActionResult PublicProfile(int id)
         {

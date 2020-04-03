@@ -156,7 +156,7 @@
                     required: true,
                     regex: /[^\d]/,
                     minlength: 10,
-                    maxlength: 13
+                    maxlength: 10
                 },
                 Gender: {
                     required: true
