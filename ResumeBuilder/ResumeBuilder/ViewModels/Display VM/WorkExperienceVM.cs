@@ -2,7 +2,7 @@
 
 namespace ResumeBuilder.ViewModels
 {
-    public class WorkExUIModel
+    public class WorkExperienceVM
     {
         public string OrganizationName { get; set; }
 

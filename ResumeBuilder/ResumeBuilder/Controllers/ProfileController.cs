@@ -18,9 +18,9 @@ namespace ResumeBuilder.Controllers
         }
 
         [NonAction]
-        private ProfileViewModel GetUserDetails(int id)
+        private ProfileVM GetUserDetails(int id)
         {
-            var uiModel = new ProfileViewModel();
+            var uiModel = new ProfileVM();
             try
             {
                 // user details
@@ -47,7 +47,7 @@ namespace ResumeBuilder.Controllers
                 // Education Details
                 uiModel.EducationStatus = (userData.Setting.EducationalDetailsStatus) ? 1 : 0;
                 uiModel.EducationList = (from user in userData.EducationalDetails
-                                         select new EducationUIModel
+                                         select new EducationVM
                                          {
                                              CourseName = user.Course.CourseName,
                                              CGPAOrPercentage = user.CGPAOrPercentage,
@@ -64,7 +64,7 @@ namespace ResumeBuilder.Controllers
                 // Project Details
                 uiModel.ProjectStatus = (userData.Setting.ProjectDetailsStatus) ? 1 : 0;
                 uiModel.ProjectList = (from user in userData.Projects
-                                       select new ProjectUIModel
+                                       select new ProjectVM
                                        {
                                            Title = user.ProjectTitle,
                                            Description = user.Description,
@@ -74,7 +74,7 @@ namespace ResumeBuilder.Controllers
                 // Work Experience
                 uiModel.WorkExperienceStatus = (userData.Setting.WorkExperienceStatus) ? 1 : 0;
                 uiModel.WorkExList = (from user in userData.WorkExperiences
-                                      select new WorkExUIModel
+                                      select new WorkExperienceVM
                                       {
                                           OrganizationName = user.OrganizationName,
                                           StartMonth = (user.StartMonth <= 9) ? "0" + user.StartMonth : user.StartMonth.ToString(),
@@ -109,7 +109,7 @@ namespace ResumeBuilder.Controllers
         }
 
         [NonAction]
-        public string RenderViewAsString(string viewName, ProfileViewModel model)
+        public string RenderViewAsString(string viewName, ProfileVM model)
         {
             // create a string writer to receive the HTML code
             StringWriter stringWriter = new StringWriter();

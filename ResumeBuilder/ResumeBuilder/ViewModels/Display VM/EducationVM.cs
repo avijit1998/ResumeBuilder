@@ -1,7 +1,7 @@
 ﻿
 namespace ResumeBuilder.ViewModels
 {
-    public class EducationUIModel
+    public class EducationVM
     {
         public string CourseName { get; set; }
 
