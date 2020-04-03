@@ -10,22 +10,21 @@ using System.Web.Mvc;
 namespace ResumeBuilder.Controllers
 {
     [AuthorizeIfSessionExists]
-    public class SearchUserController : Controller
+    public class SearchController : Controller
     {
         private ResumeBuilderDBContext db;
-        public SearchUserController()
+        public SearchController()
         {
             db = new ResumeBuilderDBContext();
         }
 
-        public ActionResult Search()
+        public ActionResult GetSearchPartialView()
         {
-            return PartialView();
+            return PartialView("Search");
         }
 
-        public ActionResult GetUser()
+        public ActionResult GetUserSkills()
         {
-            //db.Configuration.ProxyCreationEnabled = false;
             List<UserSkillVM> listUserSkills = new List<UserSkillVM>();
             listUserSkills = (from user in db.UserDetails.Include("Skills").ToList()
                               select new UserSkillVM
