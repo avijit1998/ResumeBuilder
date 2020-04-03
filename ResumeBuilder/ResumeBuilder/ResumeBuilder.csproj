@@ -197,7 +197,7 @@
     <Compile Include="Models\Skill.cs" />
     <Compile Include="Models\UserDetails.cs" />
     <Compile Include="Models\WorkExperience.cs" />
-    <Compile Include="ViewModels\CRUD VM\EducationalDetailsVM.cs" />
+    <Compile Include="ViewModels\CRUD VM\EducationInfoVM.cs" />
     <Compile Include="ViewModels\CRUD VM\ProjectInfoVM.cs" />
     <Compile Include="ViewModels\CRUD VM\SettingsDetailsVM.cs" />
     <Compile Include="ViewModels\CRUD VM\SkillsVM.cs" />
@@ -206,12 +206,12 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CRUD VM\AllInformationVM.cs" />
     <Compile Include="ViewModels\CRUD VM\LoginDetailsVM.cs" />
-    <Compile Include="ViewModels\Display VM\ProfileViewModel.cs" />
-    <Compile Include="ViewModels\Display VM\EducationUIModel.cs" />
-    <Compile Include="ViewModels\Display VM\ProjectUIModel.cs" />
-    <Compile Include="ViewModels\Display VM\WorkExUIModel.cs" />
+    <Compile Include="ViewModels\Display VM\ProfileVM.cs" />
+    <Compile Include="ViewModels\Display VM\EducationVM.cs" />
+    <Compile Include="ViewModels\Display VM\ProjectVM.cs" />
+    <Compile Include="ViewModels\Display VM\WorkExperienceVM.cs" />
     <Compile Include="ViewModels\CRUD VM\UserSkillVM.cs" />
-    <Compile Include="ViewModels\CRUD VM\WorkExperienceVM.cs" />
+    <Compile Include="ViewModels\CRUD VM\WorkExperienceInfoVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-lumen-v3.css" />

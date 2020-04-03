@@ -120,7 +120,7 @@ namespace ResumeBuilder.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveWorkExperience(WorkExperienceVM workExperienceVM)
+        public ActionResult SaveWorkExperience(WorkExperienceInfoVM workExperienceVM)
         {
             var session = Session["UserID"];
             int id = (Int32)session;
@@ -182,7 +182,7 @@ namespace ResumeBuilder.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveEducationalDetails(EducationalDetailsVM educationalDetailsVM)
+        public ActionResult SaveEducationalDetails(EducationInfoVM educationalDetailsVM)
         {
             try
             {

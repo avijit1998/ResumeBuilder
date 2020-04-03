@@ -2,7 +2,7 @@
 
 namespace ResumeBuilder.ViewModels
 {
-    public class ProjectUIModel
+    public class ProjectVM
     {
         public string Title { get; set; }
 
