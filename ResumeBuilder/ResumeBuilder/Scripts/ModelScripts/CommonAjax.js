@@ -29,9 +29,11 @@
                 removeBackdrop();
                 bootbox.alert("<p style='color:black;'>Successfully Updated Your Profile</p>");
 
+                $('body').css('padding-right', '0px');
+
                 var url = $("#ajaxEditForm").data('url');
                 $.get(url, function (data) {
-                    $('#editPage').html(data);
+                    $('#pageContent').html(data);
                 });
             }
         },

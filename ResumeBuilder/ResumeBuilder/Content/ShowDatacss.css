@@ -42,3 +42,11 @@ label{
     color:darkblue;
 }
 
+body:not(.modal-open){
+    padding-right: 0px !important;
+}
+
+.modal-open {
+    padding-right: 0px !important;
+    overflow-y: scroll;
+}
