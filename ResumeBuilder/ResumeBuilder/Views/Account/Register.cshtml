@@ -1,4 +1,4 @@
-﻿@model ResumeBuilder.ViewModels.LoginDetailsViewModel
+﻿@model ResumeBuilder.ViewModels.LoginDetailsVM
 @{
     ViewBag.Title = "Register";
     Layout = null;
@@ -47,7 +47,6 @@
                         </div>
                     </div>
                     <div style="color:#A94442" id="passwordErrorText" class="divValidationErrorText">
-                        @*@Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger registerError" })*@
                     </div>
                     <div class="form-group">
                         <label for="confirmPassword" class="col-md-2 control-label registerLabelSpacing">Confirm</label>
@@ -56,7 +55,6 @@
                         </div>
                     </div>
                     <div style="color:#A94442" id="confirmPasswordErrorText" class="divValidationErrorText">
-                        @*@Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger registerError" })*@
                     </div>
                     <div class="form-group">
                         <div class="col-md-10">

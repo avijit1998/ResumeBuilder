@@ -21,6 +21,8 @@
     }
     String languageListWithoutLastComma = String.Join(", ", languageList);
 }
+    
+<span style="display:none;" id="checkIsAdmin" data-checkadmin="@Model.IsAdmin"></span>
 
 @using Newtonsoft.Json;
 
@@ -242,8 +244,7 @@
                                 <label>Date of Birth</label>
                                 @if (@Model.DateOfBirth != null)
                                 {
-                                    <input type="date" class="form-control" name="Name" id="txtFullName" value="@Model.DateOfBirth">
-                                    //@Html.TextBoxFor(model => model.DateOfBirth.Value.ToShortDateString(), new { @type = "date", @Value = Model.DateOfBirth.Value.ToString("yyyy-MM-dd"), @Class = "form-control", @Name = "DateOfBirth", @Id = "dateDOB", style = "color:black;" })
+                                   @Html.TextBoxFor(m => m.DateOfBirth, new { @type = "date", @Value = Model.DateOfBirth.Value.ToString("yyyy-MM-dd"), @Class = "form-control", @Name = "DateofBirth", @Id = "dateDOB", style = "color:black;" })
                                 }
 
                                 else

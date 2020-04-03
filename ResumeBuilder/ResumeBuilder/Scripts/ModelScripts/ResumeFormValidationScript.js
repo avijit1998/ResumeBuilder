@@ -214,7 +214,7 @@
                 rules: {
                     Stream: {
                         required: true,
-                        regex: /^[A-Za-z ]+$/
+                        regex: /^[A-Za-z \W]+$/
                     },
                     PassingYear: {
                         required: true,
@@ -246,7 +246,6 @@
                     }
                 }
             });
-
             $("#educationDetailsForm").removeAttr("novalidate");
         });
 

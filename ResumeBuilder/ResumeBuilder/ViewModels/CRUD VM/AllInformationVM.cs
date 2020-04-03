@@ -34,6 +34,8 @@ namespace ResumeBuilder.ViewModels
         public List<Skill> Skills { get; set; }
 
         public List<Language> Languages { get; set; }
+
+        public bool IsAdmin { get; set; }
       
     }
 

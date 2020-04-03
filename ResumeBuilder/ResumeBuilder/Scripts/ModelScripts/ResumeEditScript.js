@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     $("body").on("click", ".js-add-education", function () {
         $('#modalEducationDetails').modal('show');
     });
@@ -16,7 +17,6 @@ $(document).ready(function () {
     });
 
     $("body").on("click", "#btnCloseSkills", function () {
-        debugger;
         $('#skillMenu').empty();
     });
 
@@ -153,7 +153,7 @@ $(document).ready(function () {
                 userData.LanguageIds.pop();
             }
             var params = $.extend({}, params);
-            params['url'] = '/Resume/SaveBasicInformation';
+            params['url'] = '/SaveDetails/SaveBasicInformation';
             params['data'] = userData;
             params['requestType'] = 'POST';
             params['successCallbackFunction'] = function () {
@@ -208,7 +208,6 @@ $(document).ready(function () {
     });
 
     $('body').on('click', '.js-save-workex', function (e) {
-        debugger;
         e.preventDefault();
 
         var flag = $("#workExperienceForm").valid();
@@ -285,7 +284,6 @@ $(document).ready(function () {
             params['requestType'] = 'POST';
 
             params['successCallbackFunction'] = function () {
-                debugger;
                 bootbox.alert("<p style='color:black;'>Project Details updated sucessfully</p>");
                 $("#modalProject").modal("hide");
             };
@@ -604,4 +602,12 @@ function clearFields() {
     $('input[type="text"]').val('');
     $('select').val('');
     $('input[type="checkbox"]').prop('checked', false);
+}
+
+function displaySearchButtonIfAdmin() {
+    
+    var checkadmin = $("#checkIsAdmin").data("checkadmin");
+    if (checkadmin) {
+        $("#btnSearchNav").css("display", "block");
+    }
 }
