@@ -13,6 +13,10 @@
             contentType: 'application/json; charset=utf-8',
             dataSrc: function (res) {
                 return res;
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                bootbox.alert("<p style='color:black;'>No data found!!!</p>");
+                
             }
         },
         columns: [
