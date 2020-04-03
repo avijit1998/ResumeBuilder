@@ -25,17 +25,26 @@ namespace ResumeBuilder.Controllers
 
         public ActionResult GetUserSkills()
         {
-            List<UserSkillVM> listUserSkills = new List<UserSkillVM>();
-            listUserSkills = (from user in db.UserDetails.Include("Skills").ToList()
-                              select new UserSkillVM
-                              {
-                                  UserID = user.UserID,                               
-                                  UserName = user.Name,
-                                  SkillNames = user.Skills.Select(x => x.SkillName).ToList()
-                              }).ToList();
+            try
+            {
+                List<UserSkillVM> listUserSkills = new List<UserSkillVM>();
+                listUserSkills = (from user in db.UserDetails.ToList()
+                                  select new UserSkillVM
+                                  {
+                                      UserID = user.UserID,
+                                      UserName = user.Name,
+                                      SkillNames = user.Skills.Select(x => x.SkillName).ToList()
+                                  }).ToList();
 
+                throw new Exception();
 
-            return Json(listUserSkills, JsonRequestBehavior.AllowGet);
+                return Json(listUserSkills, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception)
+            {
+                return new HttpNotFoundResult();
+            }
         }
     }
 }
