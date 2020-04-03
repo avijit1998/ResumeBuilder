@@ -163,7 +163,7 @@ namespace ResumeBuilder.Controllers
                 var sessionId = Session["UserID"];
                 int id = (Int32)sessionId;
                 var uiModel = GetUserDetails(id);
-                if (uiModel != null)
+                if (uiModel == null)
                 {
                     throw new Exception();
                 }
