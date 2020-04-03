@@ -1,4 +1,5 @@
 ﻿using HiQPdf;
+using ResumeBuilder.Helpers;
 using ResumeBuilder.Models;
 using ResumeBuilder.ViewModels;
 using System;
@@ -15,7 +16,7 @@ namespace ResumeBuilder.Controllers
         {
             db = new ResumeBuilderDBContext();
         }
-       
+
         [NonAction]
         private ProfileViewModel GetUserDetails(int id)
         {
@@ -31,7 +32,7 @@ namespace ResumeBuilder.Controllers
                 // User Gender
                 uiModel.Gender = userData.Gender;
 
-                // User Date of Birth
+                // User Gender
                 uiModel.DOB = userData.DateOfBirth.ToShortDateString();
 
                 // User Phone
@@ -44,48 +45,48 @@ namespace ResumeBuilder.Controllers
                 uiModel.Summary = userData.Summary;
 
                 // Education Details
-                uiModel.EducationStatus = userData.Setting.EducationalDetailsStatus;
+                uiModel.EducationStatus = (userData.Setting.EducationalDetailsStatus) ? 1 : 0;
                 uiModel.EducationList = (from user in userData.EducationalDetails
-                                            select new EducationUIModel
-                                            {
-                                                CourseName = user.Course.CourseName,
-                                                CGPAOrPercentage = user.CGPAOrPercentage,
-                                                Board = user.BoardOrUniversity,
-                                                Stream = (user.Stream == null) ? "N/A" : user.Stream,
-                                                TotalPercentorCGPAValue = user.TotalPercentageOrCGPAValue,
-                                                PassingYear = user.PassingYear
-                                            }).OrderByDescending(x => x.PassingYear).ToList();
+                                         select new EducationUIModel
+                                         {
+                                             CourseName = user.Course.CourseName,
+                                             CGPAOrPercentage = user.CGPAOrPercentage,
+                                             Board = user.BoardOrUniversity,
+                                             Stream = (user.Stream == null) ? "N/A" : user.Stream,
+                                             TotalPercentorCGPAValue = user.TotalPercentageOrCGPAValue,
+                                             PassingYear = user.PassingYear
+                                         }).OrderByDescending(x => x.PassingYear).ToList();
 
                 // Skills
-                uiModel.SkillStatus = userData.Setting.SkillsDetailsStatus;
+                uiModel.SkillStatus = (userData.Setting.SkillsDetailsStatus) ? 1 : 0;
                 uiModel.SkillList = userData.Skills.Select(a => a.SkillName).ToList();
 
                 // Project Details
-                uiModel.ProjectStatus = userData.Setting.ProjectDetailsStatus;
+                uiModel.ProjectStatus = (userData.Setting.ProjectDetailsStatus) ? 1 : 0;
                 uiModel.ProjectList = (from user in userData.Projects
-                                        select new ProjectUIModel
-                                        {
-                                            Title = user.ProjectTitle,
-                                            Description = user.Description,
-                                            Duration = user.DurationInMonth
-                                        }).ToList();
+                                       select new ProjectUIModel
+                                       {
+                                           Title = user.ProjectTitle,
+                                           Description = user.Description,
+                                           Duration = user.DurationInMonth
+                                       }).ToList();
 
                 // Work Experience
-                uiModel.WorkExperienceStatus = userData.Setting.WorkExperienceStatus;
+                uiModel.WorkExperienceStatus = (userData.Setting.WorkExperienceStatus) ? 1 : 0;
                 uiModel.WorkExList = (from user in userData.WorkExperiences
-                                        select new WorkExUIModel
-                                        {
-                                            OrganizationName = user.OrganizationName,
-                                            StartMonth = (user.StartMonth <= 9) ? "0" + user.StartMonth : user.StartMonth.ToString(),
-                                            StartYear = user.StartYear,
-                                            EndMonth = (user.EndMonth <= 9) ? "0" + user.EndMonth : user.EndMonth.ToString(),
-                                            EndYear = user.EndYear,
-                                            Role = user.Designation,
-                                            CurrentlyWorking = user.IsCurrentlyWorking
-                                        }).OrderByDescending(x => x.StartYear).OrderByDescending(y => y.StartMonth).ToList();
+                                      select new WorkExUIModel
+                                      {
+                                          OrganizationName = user.OrganizationName,
+                                          StartMonth = (user.StartMonth <= 9) ? "0" + user.StartMonth : user.StartMonth.ToString(),
+                                          StartYear = user.StartYear,
+                                          EndMonth = (user.EndMonth <= 9) ? "0" + user.EndMonth : user.EndMonth.ToString(),
+                                          EndYear = user.EndYear,
+                                          Role = user.Designation,
+                                          CurrentlyWorking = user.IsCurrentlyWorking
+                                      }).OrderByDescending(x => x.StartYear).OrderByDescending(y => y.StartMonth).ToList();
 
                 // Languages 
-                uiModel.LanguageStatus = userData.Setting.LanguagesStatus;
+                uiModel.LanguageStatus = (userData.Setting.LanguagesStatus) ? 1 : 0;
                 uiModel.Languages = userData.Languages.Select(a => a.LanguageName).ToList();
 
             }
@@ -98,23 +99,17 @@ namespace ResumeBuilder.Controllers
 
         // GET: Resume/Preview
         [HttpGet]
+        [AuthorizeIfSessionExists]
         public ActionResult Preview()
         {
-            if (Session["UserID"] != null)
-            {
-                int id = 1;
-                var result = Int32.TryParse(Session["UserID"] as String, out id);
-                if(result)
-                {
-                    var uiModel = GetUserDetails(id);
-                    return PartialView(uiModel);
-                }
-            }
-            return RedirectToAction("Login", "Account");
+            var sessionId = Session["UserID"];
+            int id = (Int32)sessionId;
+            var uiModel = GetUserDetails(id);
+            return PartialView(uiModel);
         }
 
         [NonAction]
-        public string RenderViewAsString(string viewName, object model)
+        public string RenderViewAsString(string viewName, ProfileViewModel model)
         {
             // create a string writer to receive the HTML code
             StringWriter stringWriter = new StringWriter();
@@ -138,41 +133,35 @@ namespace ResumeBuilder.Controllers
         }
 
         [HttpGet]
+        [AuthorizeIfSessionExists]
         public ActionResult ConvertHtmlPageToPdf(string targetPreview)
         {
-            if (Session["UserID"] != null)
-            {
-                int id = 1;
-                var result = Int32.TryParse(Session["UserID"] as String, out id);
-                if (result)
-                {
-                    var uiModel = GetUserDetails(id);
-                    // get the HTML code of this view
-                    string htmlToConvert = RenderViewAsString(targetPreview, uiModel);
+            var sessionId = Session["UserID"];
+            int id = (Int32)sessionId;
+            var uiModel = GetUserDetails(id);
+            // get the HTML code of this view
+            string htmlToConvert = RenderViewAsString(targetPreview, uiModel);
 
-                    // the base URL to resolve relative images and css
-                    String thisPageUrl = this.ControllerContext.HttpContext.Request.Url.AbsoluteUri;
-                    String baseUrl = thisPageUrl.Substring(0, thisPageUrl.Length - "Home/ConvertThisPageToPdf".Length);
+            // the base URL to resolve relative images and css
+            String thisPageUrl = this.ControllerContext.HttpContext.Request.Url.AbsoluteUri;
+            String baseUrl = thisPageUrl.Substring(0, thisPageUrl.Length - "Home/ConvertThisPageToPdf".Length);
 
-                    // instantiate the HiQPdf HTML to PDF converter
-                    HtmlToPdf htmlToPdfConverter = new HtmlToPdf();
+            // instantiate the HiQPdf HTML to PDF converter
+            HtmlToPdf htmlToPdfConverter = new HtmlToPdf();
 
-                    // set PDF page margins 
-                    htmlToPdfConverter.Document.Margins = new PdfMargins(20, 20, 20, 20);
+            // set PDF page margins 
+            htmlToPdfConverter.Document.Margins = new PdfMargins(20, 20, 20, 20);
 
-                    // set browser width
-                    htmlToPdfConverter.BrowserWidth = 740;
+            // set browser width
+            htmlToPdfConverter.BrowserWidth = 740;
 
-                    // render the HTML code as PDF in memory
-                    byte[] pdfBuffer = htmlToPdfConverter.ConvertHtmlToMemory(htmlToConvert, baseUrl);
+            // render the HTML code as PDF in memory
+            byte[] pdfBuffer = htmlToPdfConverter.ConvertHtmlToMemory(htmlToConvert, baseUrl);
 
-                    // send the PDF file to browser
-                    FileResult fileResult = new FileContentResult(pdfBuffer, "application/pdf");
-                    fileResult.FileDownloadName = "Resume.pdf";
-                    return fileResult;
-                }
-            }
-            return RedirectToAction("Login", "Account");
+            // send the PDF file to browser
+            FileResult fileResult = new FileContentResult(pdfBuffer, "application/pdf");
+            fileResult.FileDownloadName = "Resume.pdf";
+            return fileResult;
         }
 
         [HttpGet]
