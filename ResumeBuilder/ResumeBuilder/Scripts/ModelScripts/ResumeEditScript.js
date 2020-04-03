@@ -157,13 +157,9 @@ $(document).ready(function () {
             params['requestType'] = 'POST';
             params['successCallbackFunction'] = function () {
                 $("#modalBasicInfo").modal("hide");
-
             };
-            params['errorCallBackFunction'] = function () {
-
-            }
+            params['errorCallBackFunction'] = function () { }
             commonAjax(params);
-
         }
         else {
             bootbox.alert("<p style='color:red;'>Fill The Fields with * mark!</p>");
@@ -182,8 +178,7 @@ $(document).ready(function () {
         var endMonth = $button.data("end-month");
         var endYear = $button.data("end-year");
         var isWorking = $button.data("isworking");
-        console.log(isWorking);
-
+       
         $('input[name="WorkExperienceID"]').val(id);
         $('input[name="OrganizationName"]').val(organization);
         $('input[name="Designation"]').val(role);
@@ -230,11 +225,8 @@ $(document).ready(function () {
             params['requestType'] = 'POST';
             params['successCallbackFunction'] = function (result) {
                 $("#modalWorkExperience").modal("hide");
-
             };
-            params['errorCallBackFunction'] = function (result) {
-
-            }
+            params['errorCallBackFunction'] = function (result) {};
             commonAjax(params);
         }
         else {
@@ -275,20 +267,15 @@ $(document).ready(function () {
                 "DurationInMonth": $('input[name="DurationInMonth"]').val(),
                 "Description": $('textarea[name="Description"]').val()
             };
-
-
             var params = $.extend({}, params);
             params['url'] = '/SaveDetails/SaveProjectDetails';
             params['data'] = formData;
             params['requestType'] = 'POST';
 
             params['successCallbackFunction'] = function () {
-
                 $("#modalProject").modal("hide");
             };
-            params['errorCallBackFunction'] = function (result) {
-
-            }
+            params['errorCallBackFunction'] = function (result) { };
             commonAjax(params);
         }
         else {
@@ -373,8 +360,7 @@ $(document).ready(function () {
                 $("#modalEducationDetails").modal("hide");
 
             };
-            params['errorCallBackFunction'] = function () {
-            }
+            params['errorCallBackFunction'] = function () { };
             commonAjax(params);
             //disable radio button for client-side
 
@@ -410,14 +396,12 @@ $(document).ready(function () {
             params['successCallbackFunction'] = function () {
                 $("#modalSkills").modal("hide");
             };
-            params['errorCallBackFunction'] = function () {
-            }
+            params['errorCallBackFunction'] = function () { };
             commonAjax(params);
         }
         else {
             bootbox.alert("<p style='color:red;'>Fill the fields with * mark!</p>");
         }
-
         $('ul').empty();
         return false;
     });
@@ -433,15 +417,9 @@ $(document).ready(function () {
                 var params = $.extend({}, params);
                 params['url'] = '/Delete/DeleteProject?id=' + id;
                 params['requestType'] = 'DELETE';
-                params['successCallbackFunction'] = function (resultfinal) {
-
-                };
-                params['errorCallBackFunction'] = function () {
-
-                }
-
+                params['successCallbackFunction'] = function (resultfinal) { };
+                params['errorCallBackFunction'] = function () { };
                 commonAjax(params);
-
             }
             else {
                 bootbox.hideAll();
@@ -461,14 +439,11 @@ $(document).ready(function () {
                 var params = $.extend({}, params);
                 params['url'] = '/Delete/DeleteWorkExperience?id=' + id;
                 params['requestType'] = 'DELETE';
-                params['successCallbackFunction'] = function (resultfinal) {
-
-                };
+                params['successCallbackFunction'] = function (resultfinal) { };
                 params['errorCallBackFunction'] = function () {
                     bootbox.alert("<p style='color:black;'>Error!</p>");
                 }
                 commonAjax(params);
-
             }
             else {
                 bootbox.hideAll();
@@ -493,9 +468,7 @@ $(document).ready(function () {
                 params['url'] = '/Delete/DeleteSkill';
                 params['requestType'] = 'DELETE';
                 params['data'] = formData;
-                params['successCallbackFunction'] = function () {
-
-                };
+                params['successCallbackFunction'] = function () { };
                 params['errorCallBackFunction'] = function () {
                     bootbox.alert("<p style='color:black;'>Error!</p>");
                 }
@@ -523,9 +496,7 @@ $(document).ready(function () {
                 params['url'] = '/Delete/DeleteEducation';
                 params['requestType'] = 'DELETE';
                 params['data'] = formData;
-                params['successCallbackFunction'] = function () {
-
-                };
+                params['successCallbackFunction'] = function () { };            
                 params['errorCallBackFunction'] = function () {
                     bootbox.alert("<p style='color:black;'>Error!</p>");
                 }
@@ -551,11 +522,10 @@ $(document).ready(function () {
                         term: request.term
                     },
                     success: function (data) {
-                        console.log("data");
                         response(data);
                     },
                     error: function (data) {
-                        console.log("error");
+
                     }
                 });
             },
@@ -601,7 +571,6 @@ function clearFields() {
 
 function displaySearchButtonIfAdmin() {
     var checkadmin = $("#checkIsAdmin").data("checkadmin");
-    debugger;
     if (checkadmin === "True") {
         $("#btnSearchNav").css("display", "block");
     }

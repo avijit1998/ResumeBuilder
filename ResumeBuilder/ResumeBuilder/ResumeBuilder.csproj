@@ -406,10 +406,10 @@
     <Content Include="Content\Profile_Data\bootstrap-4.3.1-dist\js\bootstrap.min.js" />
     <Content Include="Content\Profile_Data\css\style.css" />
     <Content Include="Content\Images\logo_img.jpg" />
-    <Content Include="Content\ResumeIndex.css" />
+    <Content Include="Content\resume-indexstyle.css" />
     <Content Include="Content\settings.css" />
     <Content Include="Content\register.css" />
-    <Content Include="Content\ShowDatacss.css" />
+    <Content Include="Content\showdatastyle.css" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -525,6 +525,9 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
+    <Content Include="Scripts\DataTables\buttons.flash.min.js.map">
+      <DependentUpon>buttons.flash.min.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-ui.js" />
