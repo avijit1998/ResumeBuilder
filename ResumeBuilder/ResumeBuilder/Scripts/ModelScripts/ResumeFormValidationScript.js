@@ -246,7 +246,6 @@
                     }
                 }
             });
-
             $("#educationDetailsForm").removeAttr("novalidate");
         });
 
