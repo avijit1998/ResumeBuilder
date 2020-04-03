@@ -36,8 +36,6 @@ namespace ResumeBuilder.Controllers
                                       SkillNames = user.Skills.Select(x => x.SkillName).ToList()
                                   }).ToList();
 
-                throw new Exception();
-
                 return Json(listUserSkills, JsonRequestBehavior.AllowGet);
 
             }
