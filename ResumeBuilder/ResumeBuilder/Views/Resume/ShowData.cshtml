@@ -244,9 +244,7 @@
                                 <label>Date of Birth</label>
                                 @if (@Model.DateOfBirth != null)
                                 {
-                                    @*@Html.TextBoxFor(m => m.DateOfBirth, new { @type = "date", @Value = Model.DateOfBirth.Value.ToString("yyyy-MM-dd"), @Class = "form-control", @Name = "DateOfBirth", @Id = "dateDOB", style = "color:black;" })*@
-                                    @Html.TextBoxFor(m => m.DateOfBirth, new { @type = "date", @Value = Model.DateOfBirth.Value.ToString("yyyy-MM-dd"), @Class = "form-control", @Name = "DateofBirth", @Id = "dateDOB", style = "color:black;" })
-                                    
+                                   @Html.TextBoxFor(m => m.DateOfBirth, new { @type = "date", @Value = Model.DateOfBirth.Value.ToString("yyyy-MM-dd"), @Class = "form-control", @Name = "DateofBirth", @Id = "dateDOB", style = "color:black;" })
                                 }
 
                                 else
@@ -336,7 +334,7 @@
                                 <div class="stream">
                                     <div class="form-group stream">
                                         <label>Stream(or Degree name if any):</label>
-                                        <input type="text" class="form-control" name="Stream" id="Stream" placeholder="Enter your Stream or degree name.">
+                                        <input type="text" class="form-control" name="Stream" id="Stream" value="" placeholder="Enter your Stream or degree name.">
                                     </div>
                                 </div>
 
@@ -344,9 +342,9 @@
                                     <div class="form-group">
                                         <label>Board or University:</label>
                                         <select id="boardType" class="form-control" name="BoardOrUniversity">
-
-                                            <option value="CBSE" selected>CBSE</option>
-                                            <option value="CBSE">ICSE</option>
+                                            <option value="" selected>select board</option>
+                                            <option value="CBSE">CBSE</option>
+                                            <option value="ICSE">ICSE</option>
                                             <option value="State Board">State Board</option>
                                             <option value="Others">Others</option>
                                         </select>

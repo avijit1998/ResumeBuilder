@@ -311,7 +311,7 @@ $(document).ready(function () {
 
         $('input[name="EducationalDetailsID"]').val(id);
         $('input[name="CourseId"]').val(courseid);
-        $('input[name="Stream"]').val(stream);
+        $('input[name="BoardOrUniversity"]').val(stream);
         $('input[name="PassingYear"]').val(passingyear);
         $('#boardType').val(board).change();
         $('input[name="TotalPercentageOrCGPAValue"]').val(marks);
@@ -320,6 +320,9 @@ $(document).ready(function () {
                 $(el).prop('checked', true);
             }
         })
+        $('[name=BoardOrUniversity] option').filter(function () {
+            return ($(this).text() == stream);
+        }).prop('selected', true);
 
         if (courseid == "1") {
             $(".all-other").show();
