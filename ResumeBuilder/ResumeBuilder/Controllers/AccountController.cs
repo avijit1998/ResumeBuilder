@@ -11,6 +11,12 @@ namespace ResumeBuilder.Controllers
 {
     public class AccountController : Controller
     {
+        private ResumeBuilderDBContext dbContext;
+        public AccountController()
+        {
+            dbContext = new ResumeBuilderDBContext();
+        }
+
         [HttpGet]
         [AuthorizeIfSessionExists]
         public ActionResult LogOff()
@@ -37,15 +43,13 @@ namespace ResumeBuilder.Controllers
         //POST: /Account/Login
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginDetailsViewModel loginData)
+        public ActionResult Login(LoginDetailsVM loginData)
         {
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("", "Invalid Username or Password.");
                 return View(loginData);
             }
-
-            ResumeBuilderDBContext dbContext = new ResumeBuilderDBContext();
 
             if (!dbContext.Logins.Any(m => m.Username == loginData.UserName))
             {
@@ -57,28 +61,37 @@ namespace ResumeBuilder.Controllers
                 try
                 {
                     var userLoginDetails = dbContext.Logins.FirstOrDefault(m => m.Username == loginData.UserName);
-                    var salt = userLoginDetails.Salt;
-                    string enterPassword = loginData.Password;
-                    string savedPassword = userLoginDetails.Password;
-
-                    if (PasswordSecurity.IsValid(enterPassword, salt, savedPassword))
+                    if (userLoginDetails != null)
                     {
-                        if (Session.Count == 0)
+                        var salt = userLoginDetails.Salt;
+                        string enterPassword = loginData.Password;
+                        string savedPassword = userLoginDetails.Password;
+
+                        if (PasswordSecurity.IsValid(enterPassword, salt, savedPassword))
                         {
-                            Session["UserID"] = userLoginDetails.UserID;
-                            Session["Username"] = userLoginDetails.Username;
-                            return RedirectToAction("Index", "Resume");
+                            if (Session.Count == 0)
+                            {
+                                Session["UserID"] = userLoginDetails.UserID;
+                                Session["Username"] = userLoginDetails.Username;
+                                return RedirectToAction("Index", "Resume");
+                            }
+                            else
+                            {
+                                ModelState.AddModelError("", "Session already exists. Try Again.");
+                                return View(loginData);
+                            }
                         }
                         else
                         {
-                            ModelState.AddModelError("", "Session already exists. Try Again.");
-                            return View(loginData);
+                            throw new UnauthorizedAccessException();
                         }
                     }
                     else
                     {
-                        throw new UnauthorizedAccessException();
+                        ModelState.AddModelError("", "User not found.");
+                        return View(loginData);
                     }
+                    
                 }
                 catch (UnauthorizedAccessException)
                 {
@@ -96,21 +109,27 @@ namespace ResumeBuilder.Controllers
         // GET: /Account/Register
         public ActionResult Register()
         {
-            return View();
+            if (Session.Count == 0)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+            
         }
 
         // POST: /Account/Register
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(LoginDetailsViewModel registrationDetails)
+        public ActionResult Register(LoginDetailsVM registrationDetails)
         {
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("", "Either username or password is empty.");
                 return View(registrationDetails);
             }
-
-            ResumeBuilderDBContext dbContext = new ResumeBuilderDBContext();
 
             if (dbContext.Logins.Any(m => m.Username == registrationDetails.UserName))
             {
@@ -152,8 +171,6 @@ namespace ResumeBuilder.Controllers
 
             }
 
-            // If we got this far, something failed, redisplay form
-            return View(registrationDetails);
         }
 
         protected override void Dispose(bool disposing)

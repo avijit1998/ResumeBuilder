@@ -8,7 +8,7 @@
     var successCallbackFunction = params['successCallbackFunction'];
     var completeCallbackFunction = params['completeCallbackFunction'];
     var errorCallBackFunction = params['errorCallBackFunction'];
-
+    
     $.ajax({
         url: url,
         crossDomain: true,
@@ -21,11 +21,14 @@
                 beforeSendCallbackFunction();
             }
         },
+      
         success: function (data, textStatus, jqXHR) {
             if (typeof successCallbackFunction === "function") {
                 successCallbackFunction(data);
                 bootbox.hideAll();
                 removeBackdrop();
+                bootbox.alert("<p style='color:black;'>Successfully Updated Your Profile</p>");
+
                 var url = $("#ajaxEditForm").data('url');
                 $.get(url, function (data) {
                     $('#editPage').html(data);
@@ -35,12 +38,15 @@
         error: function (jqXHR, textStatus, errorThrown) {
             if (typeof errorCallBackFunction === "function") {
                 errorCallBackFunction(errorThrown);
+                bootbox.hideAll();
+                bootbox.alert("<p style='color:black;'>Error!</p>");
             }
 
         },
         complete: function (jqXHR, textStatus) {
             if (typeof completeCallbackFunction === "function") {
                 completeCallbackFunction();
+                
             }
         }
     });

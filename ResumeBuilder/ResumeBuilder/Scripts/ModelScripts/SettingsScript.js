@@ -1,8 +1,9 @@
 ﻿$(document).ready(function () {
 
-         $(document).on("click", "#settingsBtn", function () {
-        $.ajax({
-            url: "/Resume/SetUserSettingStatus",
+    $(document).on("click", "#settingsBtn", function () {
+
+         $.ajax({
+            url: "/Settings/SetUserSettingStatus",
             type: 'GET',
             success: function (userSettingsStatus) {
 
@@ -46,8 +47,6 @@
 
     });
 
-
-
     $(document).on("click", "#btnSave", function () {
         var settingStatus = {
             "WorkExperienceStatus": $("#cbWorkex").prop("checked"),
@@ -57,16 +56,13 @@
             "LanguagesStatus": $("#cbLanguage").prop("checked")
         };
         $.ajax({
-            url: "/Resume/SaveSettingStatus",
+            url: "/Settings/SaveSettingStatus",
             type: 'post',
             data: settingStatus,
             success: function () {
                 $("#settingsModal").modal("hide");
             }
-
         });
     });
-
-
 
 });

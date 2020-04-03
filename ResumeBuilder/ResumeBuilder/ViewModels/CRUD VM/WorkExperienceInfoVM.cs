@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ResumeBuilder.ViewModels
 {
-    public class WorkExperienceVM
+    public class WorkExperienceInfoVM
     {
         
         public int WorkExperienceID { get; set; }

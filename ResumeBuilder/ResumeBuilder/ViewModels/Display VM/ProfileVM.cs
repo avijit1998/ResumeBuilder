@@ -2,7 +2,7 @@
 
 namespace ResumeBuilder.ViewModels
 {
-    public class ProfileViewModel
+    public class ProfileVM
     {
         // Basic Details
         public string Name { get; set; }
@@ -13,24 +13,24 @@ namespace ResumeBuilder.ViewModels
         public string UserRole { get; set; }
         public string Summary { get; set; }
         // Language
-        public bool LanguageStatus { get; set; }
+        public int LanguageStatus { get; set; }
         public List<string> Languages { get; set; }
 
         // Educational Details
-        public bool EducationStatus { get; set; }
-        public List<EducationUIModel> EducationList { get; set; }
+        public int EducationStatus { get; set; }
+        public List<EducationVM> EducationList { get; set; }
 
         // Skills
-        public bool SkillStatus { get; set; }
+        public int SkillStatus { get; set; }
         public List<string> SkillList { get; set; }
 
         // Projects
-        public bool ProjectStatus { get; set; }
-        public List<ProjectUIModel> ProjectList { get; set; }
+        public int ProjectStatus { get; set; }
+        public List<ProjectVM> ProjectList { get; set; }
 
         // Work Experience
-        public bool WorkExperienceStatus { get; set; }
-        public List<WorkExUIModel> WorkExList { get; set; }
+        public int WorkExperienceStatus { get; set; }
+        public List<WorkExperienceVM> WorkExList { get; set; }
 
         // Error Message
         public string ErrorMsg { get; set; }

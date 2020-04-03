@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ResumeBuilder.ViewModels
 {
-    public class EducationalDetailsVM
+    public class EducationInfoVM
     {
         public int EducationalDetailsID { get; set; }
 
