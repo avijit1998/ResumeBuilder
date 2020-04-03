@@ -217,8 +217,8 @@ namespace ResumeBuilder.Controllers
 
                     educationalDetails.UserID = educationalDetailsVM.UserID;
                     educationalDetails.CourseID = educationalDetailsVM.CourseID;
-                    educationalDetails.BoardOrUniversity = educationalDetails.BoardOrUniversity;
-                    educationalDetails.PassingYear = educationalDetails.PassingYear;
+                    educationalDetails.BoardOrUniversity = educationalDetailsVM.BoardOrUniversity;
+                    educationalDetails.PassingYear = educationalDetailsVM.PassingYear;
                     educationalDetails.Stream = educationalDetailsVM.Stream;
                     educationalDetails.CGPAOrPercentage = educationalDetailsVM.CGPAOrPercentage;
                     educationalDetails.TotalPercentageOrCGPAValue = educationalDetailsVM.TotalPercentageOrCGPAValue;
