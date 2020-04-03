@@ -220,17 +220,17 @@
                             <input type="hidden" name="UserID" id="userId" value="@userId" />
 
                             <div class="form-group error-msg">
-                                <label>Full Name:</label>
+                                <label>Full Name:<span class="astreik-mark">*</span></label>
                                 <input type="text" class="form-control" name="Name" id="txtFullName">
                             </div>
 
                             <div class="form-group error-msg">
-                                <label>Email ID:</label>
+                                <label>Email ID:<span class="astreik-mark">*</span></label>
                                 <input type="text" class="form-control" name="Username" id="txtEmail" value="@email" readonly>
                             </div>
 
                             <div class="form-group error-msg">
-                                <label>Gender</label>
+                                <label>Gender<span class="astreik-mark">*</span></label>
                                 <label class="radio-inline">
                                     <input type="radio" name="Gender" id="optradioMale" value="Male" checked>Male
                                 </label>
@@ -241,7 +241,7 @@
 
 
                             <div class="form-group error-msg">
-                                <label>Date of Birth</label>
+                                <label>Date of Birth<span class="astreik-mark">*</span></label>
                                 @if (@Model.DateOfBirth != null)
                                 {
                                    @Html.TextBoxFor(m => m.DateOfBirth, new { @type = "date", @Value = Model.DateOfBirth.Value.ToString("yyyy-MM-dd"), @Class = "form-control", @Name = "DateofBirth", @Id = "dateDOB", style = "color:black;" })
@@ -255,16 +255,16 @@
                             </div>
 
                             <div class="form-group error-msg">
-                                <label>Phone Number</label>
+                                <label>Phone Number<span class="astreik-mark">*</span></label>
                                 <input type="text" class="form-control" name="PhoneNumber" id="txtPhoneNumber">
                             </div>
 
                             <div class="form-group error-msg">
-                                <label>Summary:</label>
+                                <label>Summary:<span class="astreik-mark">*</span></label>
                                 <textarea class="form-control" name="Summary" id="txtSummary"></textarea>
                             </div>
                             <div class="form-check error-msg">
-                                <label>Languages known:</label>
+                                <label>Languages known:<span class="astreik-mark">*</span></label>
                                 <div class="checkbox">
                                     @foreach (var c in languages)
                                     {
@@ -280,8 +280,8 @@
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-default pull-right js-save-user">Save </button>
+                                    <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-success pull-right js-save-user">Save </button>
                                 </div>
                             </div>
                         </form>
@@ -333,14 +333,14 @@
 
                                 <div class="stream">
                                     <div class="form-group stream">
-                                        <label>Stream(or Degree name if any):</label>
+                                        <label>Stream(or Degree name if any):<span class="astreik-mark">*</span></label>
                                         <input type="text" class="form-control" name="Stream" id="Stream" value="" placeholder="Enter your Stream or degree name.">
                                     </div>
                                 </div>
 
                                 <div class="all-other">
                                     <div class="form-group">
-                                        <label>Board or University:</label>
+                                        <label>Board or University:<span class="astreik-mark">*</span></label>
                                         <select id="boardType" class="form-control" name="BoardOrUniversity">
                                             <option value="" selected>select board</option>
                                             <option value="CBSE">CBSE</option>
@@ -350,7 +350,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label>Year Of Passing(if pursuing enter expected year):</label>
+                                        <label>Year Of Passing(if pursuing enter expected year):<span class="astreik-mark">*</span></label>
                                         <input type="text" class="form-control" name="PassingYear" id="PassingYear" placeholder="Enter year of passing">
                                     </div>
 
@@ -363,7 +363,7 @@
                                         </label>
                                     </div>
                                     <div>
-                                        <label>Marks Scored:</label>
+                                        <label>Marks Scored:<span class="astreik-mark">*</span></label>
                                         <input type="text" class="form-control marks" id="txtMarks" name="TotalPercentageOrCGPAValue" placeholder="Enter CGPA">
                                     </div>
                                 </div>
@@ -371,8 +371,8 @@
 
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-default pull-right js-save-education">Save </button>
+                                        <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-success pull-right js-save-education">Save </button>
                                     </div>
                                 </div>
                             </form>
@@ -403,24 +403,24 @@
                                 <input type="hidden" name="ProjectID" />
 
                                 <div class="form-group">
-                                    <label>Project Title:</label>
+                                    <label>Project Title:<span class="astreik-mark">*</span></label>
                                     <input type="text" class="form-control" name="ProjectTitle" id="txtTitle">
                                 </div>
                                 <div class="form-group">
-                                    <label>Role</label>
+                                    <label>Role:<span class="astreik-mark">*</span></label>
                                     <input type="text" class="form-control" name="ProjectRole" id="txtProjectRole">
                                 </div>
                                 <div class="form-group">
-                                    <label>Duration(In Months)</label>
+                                    <label>Duration(In Months):<span class="astreik-mark">*</span></label>
                                     <input type="text" class="form-control" name="DurationInMonth" id="txtDuration">
                                 </div>
                                 <div class="form-group">
-                                    <label>Description</label>
+                                    <label>Description:<span class="astreik-mark">*</span></label>
                                     <textarea class="form-control" name="Description" id="txtDescription"></textarea>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
                                         <input type="submit" value="Save" class="btn btn-success pull-right js-save-project" />
                                     </div>
                                 </div>
@@ -450,15 +450,15 @@
                         <form id="workExperienceForm">
                             <input type="hidden" name="WorkExperienceID" />
                                 <div class="form-group">
-                                    <label>Company Name:</label>
+                                    <label>Company Name:<span class="astreik-mark">*</span></label>
                                     <input type="text" class="form-control" name="OrganizationName" id="txtCompanyName">
                                 </div>
                                 <div class="form-group">
-                                    <label>Designation</label>
+                                    <label>Designation:<span class="astreik-mark">*</span></label>
                                     <input type="text" class="form-control" name="Designation" id="txtRole">
                                 </div>
                                 <div class="form-group">
-                                    <label>Duration</label>
+                                    <label>Duration:<span class="astreik-mark">*</span></label>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
@@ -537,8 +537,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-default pull-right js-save-workex">Save </button>
+                                        <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-success pull-right js-save-workex">Save </button>
                                     </div>
                                 </div>
                             </form>
@@ -580,8 +580,8 @@
                                 </div>
                                 <div class="row skill-button">
                                     <div class="col-md-12">
-                                        <button type="button" class="btn btn-default pull-right" id="btnCloseSkills" data-dismiss="modal">Close</button>
-                                        <button type="button" id="btnSaveSkills" class="btn btn-default pull-right js-save-skill">Save </button>
+                                        <button type="button" class="btn btn-danger pull-right" id="btnCloseSkills" data-dismiss="modal">Close</button>
+                                        <button type="button" id="btnSaveSkills" class="btn btn-success pull-right js-save-skill">Save </button>
                                     </div>
                                 </div>
                             </form>

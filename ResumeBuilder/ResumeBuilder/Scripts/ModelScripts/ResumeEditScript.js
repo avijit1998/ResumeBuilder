@@ -167,7 +167,7 @@ $(document).ready(function () {
 
         }
         else {
-            bootbox.alert("<p style='color:black;'>Fill The Fields with * mark!</p>");
+            bootbox.alert("<p style='color:red;'>Fill The Fields with * mark!</p>");
         }
         return false;
     });
@@ -284,7 +284,7 @@ $(document).ready(function () {
             params['requestType'] = 'POST';
 
             params['successCallbackFunction'] = function () {
-                bootbox.alert("<p style='color:black;'>Project Details updated sucessfully</p>");
+                
                 $("#modalProject").modal("hide");
             };
             params['errorCallBackFunction'] = function (result) {
@@ -372,7 +372,7 @@ $(document).ready(function () {
             params['requestType'] = 'POST';
             params['successCallbackFunction'] = function () {
                 $("#modalEducationDetails").modal("hide");
-                bootbox.alert("<p style='color:black;'>Education Details updated sucessfully</p>");
+                
             };
             params['errorCallBackFunction'] = function () {
             }
