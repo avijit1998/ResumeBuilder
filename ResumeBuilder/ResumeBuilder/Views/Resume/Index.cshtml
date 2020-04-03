@@ -9,7 +9,7 @@
     <a href="#pageContent" data-url="/Profile/Preview" class="ajaxLink">Preview</a>
     <a href="#" data-toggle="modal" data-target="#settingsModal" id="settingsBtn">Settings</a>
     @Html.ActionLink("Public Profile", "PublicProfile", new { controller = "Profile", id = Session["UserID"], target = "_blank" })
-    <a href="#pageContent" data-url="/Resume/Search" class="ajaxLink" id="btnSearchNav" style="display:none;">Search</a>
+    <a href="#pageContent" data-url="/Search/GetSearchPartialView" class="ajaxLink" id="btnSearchNav" style="display:none;">Search</a>
     @Html.ActionLink("Log Out", "LogOff", "Account")
 </div>
 

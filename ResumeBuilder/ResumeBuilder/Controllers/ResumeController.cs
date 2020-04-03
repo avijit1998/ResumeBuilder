@@ -68,6 +68,7 @@ namespace ResumeBuilder.Controllers
                             allinfo.Skills = user.Skills==null ? new List<Skill>() : user.Skills;
                             allinfo.EducationalDetail = user.EducationalDetails==null?new List<EducationalDetails>() : user.EducationalDetails;
                             allinfo.LanguageIds = langIds.Count()==0 ? new List<int>() : langIds;
+                            allinfo.IsAdmin = user.IsAdmin;
                         }
                         return PartialView(allinfo);
                     }
