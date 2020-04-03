@@ -100,7 +100,6 @@ $(document).ready(function () {
     $("body").on("click", ".js-edit-user", function (e) {
         e.preventDefault();
         var $button = $(this);
-
         var userId = $button.data("user-id");
         var name = $button.data("name");
         var emailId = $button.data("emailid");
@@ -538,7 +537,6 @@ $(document).ready(function () {
             $("input[type=radio][value=" + courseId + "]").prop("disabled", false);
             return false;
         });
-
     });
 
     var selector = 'input#txtSearch';
@@ -584,7 +582,6 @@ $(document).ready(function () {
             bootbox.alert("<b style='color:black;'>" + item + " already added.</b>");
         }
     });
-
 });
 
 function removeBackdrop() {
@@ -593,13 +590,15 @@ function removeBackdrop() {
 }
 
 function clearFields() {
-    $('input[type="text"]').val('');
-    $('select').val('');
+    $("input:not(:hidden)").val("");
+    $('select').val("");
     $('input[type="checkbox"]').prop('checked', false);
+    $('input').removeClass("error");
+    $('select').removeClass("error valid");
+    $("label").remove(".error, .valid");
 }
 
 function displaySearchButtonIfAdmin() {
-    
     var checkadmin = $("#checkIsAdmin").data("checkadmin");
     if (checkadmin) {
         $("#btnSearchNav").css("display", "block");
